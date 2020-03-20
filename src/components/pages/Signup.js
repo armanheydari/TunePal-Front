@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../../style/Signup.css';
+
 
 // function maxDate() {
 //     const today = new Date();
@@ -98,7 +100,7 @@ class Signup extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <form onSubmit={this.onSubmit}>
+                <form style={{textAlign: 'center'}} onSubmit={this.onSubmit}>
                     
                     <label>First Name:</label> <br />
                     <input 

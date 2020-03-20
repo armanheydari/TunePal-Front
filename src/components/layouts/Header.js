@@ -1,5 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+// import Signup from '../pages/Signup';
+// import Login from '../pages/Login';
+// import About from '../pages/About';
+
 
 import '../../style/Header.css';
 
@@ -11,9 +15,10 @@ function Header() {
             <header>
                 <h1>TunePal</h1>
                 <p>Description!</p>
-                <Link style={linkStyle} to = "/">Home</Link> | <Link style={linkStyle} to = "/signup">Signup</Link> | <Link style={linkStyle} to = "/login">Login</Link> | <Link style={linkStyle} to = "/about">About</Link>
+                <Link style={linkStyle} to = "/">Home</Link> | <Link style={linkStyle} to = "/about">About</Link>
             </header>
         </React.Fragment>
+
     )
 }
 

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../../style/Login.css';
+
 class Login extends React.Component {
 
     state = {
@@ -9,7 +11,7 @@ class Login extends React.Component {
 
     onChange = (e) => {
         //this.setState({[e.target.name]: e.target.value});
-        this.state.username = e.target.value;
+        //this.state.username = e.target.value;
         console.log(this.state.username);
     }
 
