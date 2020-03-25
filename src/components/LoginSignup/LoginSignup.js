@@ -1,7 +1,10 @@
 import React from 'react';
-import '../../style/Login_Signup.css'
+import axios from 'axios';
 
-class Login_Signup extends React.Component {
+import './styles/LoginSignup.css';
+
+class LoginSignup extends React.Component {
+
     state = {
         loginUsername: '',
         loginPassword: '',
@@ -20,29 +23,78 @@ class Login_Signup extends React.Component {
         this.setState({[field]: newValue});
     }
 
-    onSubmitSignup = (e) =>{
+     onSubmitSignup = (e) => {
         e.preventDefault();
-        let signup = {
-            name: this.state.name,
-            gender: this.state.gender,
-            birthday: this.state.birthday,
+        const signup = {
+            birthdate: this.state.birthday,
             email: this.state.email,
-            username: this.state.signupUsername,
-            password: this.state.signupPassword
+            gender: this.state.gender,
+            nickname: this.state.name,
+            password: this.state.signupPassword,
+            username: this.state.signupUsername
+        };
+        const signupJSON = JSON.stringify(signup);
+        const config = 
+        {
+            mode: "cors",
+            headers: 
+            {
+            'Content-Type': 'application/json'
+            }
         }
-        if (signup.gender === "") {
-            signup.gender = "female";
-        }
-        console.log(signup);
+
+        const a = axios.post('http://tunepal.pythonanywhere.com/account/sign_up/',
+            signupJSON, 
+            config
+            );
+            // .then(res => {
+            //     console.log(res.response.data.message);
+            // })
+            // .catch(err => {
+            //     console.log(err.response.data.message);
+            // });
+
+            //case1 succcccc    "your account have been created successfuly"
+            //case2 username already exist  response.data.username[0] :"Username already exists."
+            //case3 email already exist response.data.email[0] :"Email already exists."
+            //case4 user email already exist both 2 above
+            //case5 pass >=8    response.data.password[0]: "Password should be atleast 8 characters long."
+            console.log(a);
     }
 
     onSubmitLogin = (e) => {
         e.preventDefault();
-        let login = {
+        const login = {
             username: this.state.loginUsername,
             password: this.state.loginPassword
-        }
-        console.log(login);
+        };
+        const loginJSON = JSON.stringify(login);
+        const config = 
+        {
+            mode: "cors",
+            headers: 
+            {
+            'Content-Type': 'application/json'
+            }
+        };
+
+        const a = axios.post('http://tunepal.pythonanywhere.com/account/login/',
+            loginJSON,
+            config
+            );
+            // .then(
+            //     res => {
+            //         console.log(res.data.message);
+            //     }
+            // )
+            // .catch(err => {
+            //     console.log(err.response.data.message);
+            // });
+            console.log(a);
+
+            //cases 1. succex   "Your account info is correct"
+            //case 2. username wrong (password dont care)   "There is not any account with this username"
+            //case 3.username correct  pass wrong
     }
 
     legalAge = () => {
@@ -61,22 +113,22 @@ class Login_Signup extends React.Component {
     }
 
     onClickLogin = () => {
-        const container = document.getElementById('container');
+        const container = document.getElementById('LoginSignup_container');
         container.classList.remove("right-panel-active");
     }
 
     onClickSignup = () => {
-        const container = document.getElementById('container');
+        const container = document.getElementById('LoginSignup_container');
         container.classList.add("right-panel-active");
     }
 
     render() {
         return (
-            <div className="container" id="container">
+            <div className="LoginSignup_container" id="LoginSignup_container">
 
-	            <div className="form-container signup-container">
+	            <div className="LoginSignup_form-container LoginSignup_signup-container">
 
-		            <form onSubmit={this.onSubmitSignup} action="#">
+		            <form className="LoginSignup_form" onSubmit={this.onSubmitSignup} action="#">
 
 			            <h1>Create Account</h1>
 			            {/* <div class="social-container">
@@ -88,6 +140,7 @@ class Login_Signup extends React.Component {
 			            {/* <span>or use your email for registration</span> */}
 
                         <input
+                            className="LoginSignup_input"
                             type="text"
                             name="name" 
                             placeholder="Name" 
@@ -96,20 +149,20 @@ class Login_Signup extends React.Component {
                             required
                         />
 
-                        <div className="gender-container">
-                            <label className="gender-label">Gender:</label>
-                            <select name="gender" id="gender" placeholder="Gender" onChange={this.onChange} required>
+                        <div className="LoginSignup_gender-container">
+                            <label className="LoginSignup_gender-label">Gender:</label>
+                            {/* <select name="gender" id="gender" placeholder="Gender" onChange={this.onChange} required>
                                 <option value="female">Female</option>
                                 <option value="male">Male</option>
-                            </select>
-                            {/* <input className="gender-input" type="radio" name="sex" value="f"/> Male
-                            <input className="gender-input" type="radio" name="sex" value="m"/> Female */}
+                            </select> */}
+                            <input className="LoginSignup_input LoginSignup_gender-input" type="radio" name="gender" value="Male" onChange={this.onChange} required/>Male
+                            <input className="LoginSignup_input LoginSignup_gender-input" type="radio" name="gender" value="Female" onChange={this.onChange} required/>Female
                         </div>
 
-                        <div className="birthday-container">
-                        <label className="birthday-label">Birthday:</label>
+                        <div className="LoginSignup_birthday-container">
+                        <label className="LoginSignup_birthday-label">Birthday:</label>
                             <input 
-                                className="birthday-input"
+                                className="LoginSignup_input LoginSignup_birthday-input"
                                 type="date"
                                 name="birthday"
                                 min="1900-01-01"
@@ -120,6 +173,7 @@ class Login_Signup extends React.Component {
                         </div>
 
                         <input 
+                            className="LoginSignup_input"
                             type="email" 
                             name="email" 
                             placeholder="Email" 
@@ -128,6 +182,7 @@ class Login_Signup extends React.Component {
                         />
 
                         <input 
+                            className="LoginSignup_input"
                             type="text" 
                             name="signupUsername" 
                             placeholder="Username" 
@@ -137,6 +192,7 @@ class Login_Signup extends React.Component {
                         />
 
                         <input 
+                            className="LoginSignup_input"
                             type="password" 
                             name="signupPassword" 
                             placeholder="Password" 
@@ -145,15 +201,15 @@ class Login_Signup extends React.Component {
                             required
                         />
 
-			            <button>Sign Up</button>
+			            <button className="LoginSignup_button">Sign Up</button>
 
 		            </form>
 
 	            </div>
 
-	            <div className="form-container login-container">
+	            <div className="LoginSignup_form-container LoginSignup_login-container">
 
-		            <form onSubmit={this.onSubmitLogin} action="#">
+		            <form className="LoginSignup_form" onSubmit={this.onSubmitLogin} action="#">
 
 			            <h1>Login</h1>
 			            {/* <div class="social-container">
@@ -164,6 +220,7 @@ class Login_Signup extends React.Component {
 
 			            {/* <span>or use your account</span> */}
                         <input 
+                            className="LoginSignup_input"
                             type="text" 
                             name="loginUsername" 
                             placeholder="Username" 
@@ -171,6 +228,7 @@ class Login_Signup extends React.Component {
                             required
                         />
                         <input 
+                            className="LoginSignup_input"
                             type="password" 
                             name="loginPassword" 
                             placeholder="Password" 
@@ -179,33 +237,33 @@ class Login_Signup extends React.Component {
                         />
 
 			            {/* <a href="#">Forgot your password?</a> */}
-			            <button>Login</button>
+			            <button className="LoginSignup_button">Login</button>
 
 		            </form>
 
 	            </div>
 
-	            <div className="overlay-container">
+	            <div className="LoginSignup_overlay-container">
 
-		            <div className="overlay">
+		            <div className="LoginSignup_overlay">
 
-			            <div className="overlay-panel overlay-left">
+			            <div className="LoginSignup_overlay-panel LoginSignup_overlay-left">
 				            <h1>Welcome Back!</h1>
-				            <p className="login-p">To keep connected with us please login with your personal info</p>
-				            <button className="ghost" id="signIn" onClick={this.onClickLogin}>Login</button>
+				            <p className="LoginSignup_login-p">To keep connected with us please login with your personal info</p>
+				            <button className="LoginSignup_button ghost" id="LoginSignup_signIn" onClick={this.onClickLogin}>Login</button>
 			            </div>
 
-			            <div className="overlay-panel overlay-right">
-				            <h1>Hello, Friend!</h1>
-				            <p className="feature-p">
+			            <div className="LoginSignup_overlay-panel LoginSignup_overlay-right">
+				            <h1>TunePal</h1>
+				            <p className="LoginSignup_feature-p">
                                 In TunePal you can find and chat your music mate
                                 based on your music taste.<br/> <br/>
                                 
                                 TunePal also has a great number of music fan clubs<br/> <br/>
                                 Also you can challenge your music knowledge.
                             </p>
-                            <p className="signup-p">If you don't have an account</p>
-				            <button className="ghost" id="signUp" onClick={this.onClickSignup}>Sign Up</button>
+                            <p className="LoginSignup_signup-p">If you don't have an account</p>
+				            <button className="LoginSignup_button ghost" id="LoginSignup_signUp" onClick={this.onClickSignup}>Sign Up</button>
 			            </div>
 
 		            </div>
@@ -217,4 +275,4 @@ class Login_Signup extends React.Component {
     }
 }
 
-export default Login_Signup;
+export default LoginSignup;
