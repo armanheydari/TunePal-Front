@@ -1,0 +1,16 @@
+.Header_container {
+    background-color: #000;
+}
+
+.Header_title {
+    color: white;
+}
+
+.Header_description {
+    color: white;
+}
+
+.Sidebar_container {
+    width: 70px;
+    background-color: blue !important;
+}
