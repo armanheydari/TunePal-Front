@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import Location from './Location.js';
 import './styles/LoginSignup.css';
 
 function legalAge() {
@@ -25,12 +25,12 @@ const config = {
     }
 }
 
+
 class LoginSignup extends React.Component {
     state = {
         loginUsername: '',
         loginPassword: '',
         showLoginResult: false,
-        authorized: false,
 
         name: '',
         gender: '',
@@ -40,7 +40,8 @@ class LoginSignup extends React.Component {
         signupPassword: '',
         showSignupResult: false,
         validEmail: false,
-        validUsername: false
+        validUsername: false,
+        gotoLocation: false
     }
 
     onChange = (e) => {
@@ -65,15 +66,15 @@ class LoginSignup extends React.Component {
             config
             )
             .then(res => {
-                this.setState({showSignupResult: true});
-                this.setState({validEmail: true});
-                this.setState({validUsername: true});
-                console.log(res.data.data.token);
                 localStorage.setItem('token', res.data.data.token);
+                this.setState(() => {
+                    return {
+                        gotoLocation: true
+                    }
+                });
             })
             .catch(err => {
                 this.setState({showSignupResult: true});
-                console.log(err.response.data);
                 if (err.response.data.hasOwnProperty('email')) {
                     this.setState({validEmail: false});
                 }
@@ -86,7 +87,7 @@ class LoginSignup extends React.Component {
                 else {
                     this.setState({validUsername: true});
                 }
-            })
+            });
     }
 
     onSubmitLogin = (e) => {
@@ -96,20 +97,40 @@ class LoginSignup extends React.Component {
             password: this.state.loginPassword
         };
         const loginJSON = JSON.stringify(login);
-
         axios.post('http://tunepal.pythonanywhere.com/account/login/',
             loginJSON,
             config
             )
             .then(res => {
-                this.setState({showLoginResult: true});
-                this.setState({authorized: true});
-                console.log(res.data.data.token);
                 localStorage.setItem('token', res.data.data.token);
+                const configGetUserInfo = {
+                    mode: "cors",
+                    headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${localStorage.getItem('token')}`
+                    }
+                };
+                axios.get('http://tunepal.pythonanywhere.com/account/get_user_info/', configGetUserInfo)
+                .then(res => {
+                    const userInfo = {
+                        name: res.data.nickname,
+                        gender: res.data.gender,
+                        birthday: res.data.birthdate,
+                        email: res.data.email,
+                        username: res.data.username,
+                        latitude: undefined,
+                        longitude: undefined,
+                        country: undefined,
+                        province: undefined,
+                        neighbourhood: undefined,
+                        bio: undefined,
+                        favourite: undefined
+                    };
+                    this.props.setUserInfo(userInfo);
+                })
             })
             .catch(err => {
                 this.setState({showLoginResult: true});
-                this.setState({authorized: false});
             });
     }
 
@@ -117,20 +138,21 @@ class LoginSignup extends React.Component {
         const container = document.getElementById('LoginSignup_container');
         container.classList.remove("right-panel-active");
     }
-
     onClickSignup = () => {
         const container = document.getElementById('LoginSignup_container');
         container.classList.add("right-panel-active");
     }
 
     render() {
+        if (this.state.gotoLocation) {
+            return <Location name={this.state.name} />
+        }
         return (
             <div className="LoginSignup_container" id="LoginSignup_container">
 
+                {/* SIGNUP FORM */}
 	            <div className="LoginSignup_form-container LoginSignup_signup-container">
-
 		            <form className="LoginSignup_form" onSubmit={this.onSubmitSignup} action="#">
-
 			            <h1>Create Account</h1>
                         <input
                             className="LoginSignup_input"
@@ -141,13 +163,11 @@ class LoginSignup extends React.Component {
                             // pattern="" 
                             required
                         />
-
                         <div className="LoginSignup_gender-container">
                             <label className="LoginSignup_gender-label">Gender:</label>
                             <input className="LoginSignup_input LoginSignup_gender-input" type="radio" name="gender" value="Male" onChange={this.onChange} required/>Male
                             <input className="LoginSignup_input LoginSignup_gender-input" type="radio" name="gender" value="Female" onChange={this.onChange} required/>Female
                         </div>
-
                         <div className="LoginSignup_birthday-container">
                         <label className="LoginSignup_birthday-label">Birthday:</label>
                             <input 
@@ -160,7 +180,6 @@ class LoginSignup extends React.Component {
                                 onChange={this.onChange}
                             />
                         </div>
-
                         <input 
                             className="LoginSignup_input"
                             type="email" 
@@ -170,7 +189,6 @@ class LoginSignup extends React.Component {
                             required
                         />
                         <div className="LoginSignup_validation-email">{(this.state.showSignupResult && !this.state.validEmail) && "Email already exists."}</div>
-
                         <input 
                             className="LoginSignup_input"
                             type="text" 
@@ -181,8 +199,6 @@ class LoginSignup extends React.Component {
                             required
                         />
                         <div className="LoginSignup_validation-username">{(this.state.showSignupResult && !this.state.validUsername) && "Username already exists."}</div>
-
-
                         <input 
                             className="LoginSignup_input"
                             type="password" 
@@ -193,17 +209,13 @@ class LoginSignup extends React.Component {
                             title="Password must be at least 8 characters."
                             required
                         />
-
 			            <button className="LoginSignup_button">Sign Up</button>
-
 		            </form>
-
 	            </div>
 
+                {/* LOGIN FORM */}
 	            <div className="LoginSignup_form-container LoginSignup_login-container">
-
 		            <form className="LoginSignup_form" onSubmit={this.onSubmitLogin} action="#">
-
 			            <h1>Login</h1>
                         <input 
                             className="LoginSignup_input"
@@ -221,33 +233,25 @@ class LoginSignup extends React.Component {
                             onChange={this.onChange} 
                             required
                         />
-
 			            <button className="LoginSignup_button">Login</button>
                         <div>
-                            {(this.state.showLoginResult && !this.state.authorized) && "Username or Password is incorrect."}
-                        </div>
-
-                        <div>
-                            {(this.state.showLoginResult && this.state.authorized) && "Succceed."}
+                            {this.state.showLoginResult && "Username or Password is incorrect."}
                         </div>
 		            </form>
-
-
-
-                    }
-
 	            </div>
 
+                {/* WRAPPER SECTION */}
 	            <div className="LoginSignup_overlay-container">
-
 		            <div className="LoginSignup_overlay">
 
+                        {/* LOGIN WRAPPER */}
 			            <div className="LoginSignup_overlay-panel LoginSignup_overlay-left">
 				            <h1>Welcome Back!</h1>
 				            <p className="LoginSignup_login-p">To keep connected with us please login with your personal info</p>
 				            <button className="LoginSignup_button ghost" id="LoginSignup_signIn" onClick={this.onClickLogin}>Login</button>
 			            </div>
 
+                        {/* SIGNUP WRAPPER */}
 			            <div className="LoginSignup_overlay-panel LoginSignup_overlay-right">
 				            <h1>TunePal</h1>
 				            <p className="LoginSignup_feature-p">
@@ -262,7 +266,6 @@ class LoginSignup extends React.Component {
 			            </div>
 
 		            </div>
-
 	            </div>
 
             </div>
