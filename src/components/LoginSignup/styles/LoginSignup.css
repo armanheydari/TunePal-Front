@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-/* @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'); */
 
 /* * {
 	box-sizing: border-box;
@@ -224,7 +223,7 @@
 .LoginSignup_validation-email {
 	color: red;
 	text-align: left;
-	font-size: 0.75rem;
+	font-size: 1rem;
 	margin-right: 179px;
 	margin-bottom: 10px;
 }
@@ -232,7 +231,7 @@
 .LoginSignup_validation-username {
 	color: red;
 	text-align: left;
-	font-size: 0.75rem;
+	font-size: 1rem;
 	margin-right: 154px;
 	margin-bottom: 10px;
 }

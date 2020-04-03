@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import Location from './Location.js';
-import './styles/LoginSignup.css';
 
 function legalAge() {
     const today = new Date();
@@ -118,13 +117,13 @@ class LoginSignup extends React.Component {
                         birthday: res.data.birthdate,
                         email: res.data.email,
                         username: res.data.username,
-                        latitude: undefined,
-                        longitude: undefined,
-                        country: undefined,
-                        province: undefined,
-                        neighbourhood: undefined,
-                        bio: undefined,
-                        favourite: undefined
+                        latitude: res.data.location ? res.data.location.latitude : undefined,
+                        longitude: res.data.location ? res.data.location.longitude : undefined,
+                        country: res.data.location ? res.data.location.country : undefined,
+                        province: res.data.location ? res.data.location.province : undefined,
+                        neighbourhood: res.data.location ? res.data.location.neighbourhood : undefined,
+                        bio: res.data.bio,
+                        favourite: res.data.intersts
                     };
                     this.props.setUserInfo(userInfo);
                 })
