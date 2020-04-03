@@ -1,45 +1,66 @@
 .Profile_General_container {
-    background-color: #f6f6f6;
-    width: 60%;
-    height: 100%;
-    /* align-items: center;
-    justify-content: center;
     display: flex;
-    align-items: center; */
-	border-radius: 10px;
-      box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-      margin: auto;
-}
-
-.Profile_General_image-container {
-    margin: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-content: stretch;
 }
 
 .Profile_General_info-container {
-    margin: 5px auto 0 auto;;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 2rem 0;
+    border-bottom: 1px solid;
+}
+
+.Profile_General_info-field{
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 1rem;
+    border-style: none none ridge none;
+    border-width: 1px;
+    border-color: #EEEEEE;
+}
+
+.Profile_General_info-label {
+    color: grey;
 }
 
 .Profile_General_bio-container {
-    margin: 4px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 2rem 0;
+    border-bottom: 1px solid;
+}
+
+.Profile_General_bio {
+    padding: 2rem 1rem;
 }
 
 .Profile_General_fav-container {
-    margin: 4px auto 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 2rem 0;
+    border-bottom: 1px solid;
 }
 
-.Profile_General_status {
-    text-align: center;
+.Profile_General_fav {
+    padding: 2rem 1rem;
+}
+
+/* .Profile_General_image-container {
+    margin: 3;
+    padding: 0;
 }
 
 .Profile_General_image {
-    margin: 5px auto auto auto;
-    width: 85%;
-    height: 85%;
-    border-radius: 100%;
-}
+    width: 100%;
+    height: 100%;
+} */
 
-.Profile_General_table {
-    margin: auto;
+/* .Profile_General_table {
     text-align: left;
 }
 
@@ -47,7 +68,6 @@
     border-style: none none ridge none;
     border-width: 1px;
     border-color: #EEEEEE;
-    height: 40px;
 }
 
 .Profile_Genral_table-head {
@@ -55,38 +75,30 @@
     font-family: Circular, Helvetica, Arial, sans-serif;
     font-size: 14px;
     font-weight: 400;
+    padding: 1rem 10rem 1rem 0;
 }
 
 .Profile_Genral_table-data {
-    padding-left: 10px;
+    padding: 1rem 0 1rem 10rem;
     font-family: Circular, Helvetica, Arial, sans-serif;
     font-size: 14px;
     font-weight: 400;
-}
+} */
 
-.Profile_General_bio {
-    margin: 10px 20px 0 20px;
-    padding-bottom: 5px;
-    text-align: left;
-    border-style: none none ridge none;
-    border-width: 1px;
-    border-color: #EEEEEE;
-}
+/* .Profile_General_status {
+    text-align: center;
+} */
 
-.Profile_General_fav {
-    margin: 10px 20px 0 20px;
-    padding-bottom: 5px;
-    text-align: left;
-    border-style: none none ridge none;
-    border-width: 1px;
-    border-color: #EEEEEE;
-}
-
-.Profile_General_label {
+/* .Profile_General_label {
     margin: auto auto 5px auto;
     display: block;
     color: #9e9e9e;
     font-family: Circular, Helvetica, Arial, sans-serif;
     font-size: 14px;
     font-weight: 400;
-}
+} */
+
+
+
+
+
