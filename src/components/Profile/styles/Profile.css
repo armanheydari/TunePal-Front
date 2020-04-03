@@ -1,0 +1,9 @@
+.Profile_container {
+    padding: 3rem;
+}
+
+.Profile_title {
+    font-family: Circular,Helvetica,Arial,sans-serif,iosfallbackfix!important;
+    font-size: 4rem;
+    font-weight: 900;
+}
