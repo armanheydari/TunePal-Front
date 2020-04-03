@@ -1,7 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import Spotify from './Spotify.js';
-import './styles/Location.css';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faMapMarkerAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
+// import AppLogo from '../../assets/app-logo.png';
+import LocationPhoto from '../../assets/Location.jpg';
+
 
 const getAddressConfig = {
     mode: "cors",
@@ -118,16 +122,23 @@ class Location extends React.Component {
         return (
             <div className="Location_container">
                 <div className="Location_title">Location</div>
+                {/* <img className="Location_logo" alt="app-logo-img" width="80px" height="80px" src={AppLogo}></img>
+                <div className="Location_plus">
+                    <FontAwesomeIcon icon={faPlus} />
+                </div>
+                <div className="Location_marker">
+                    <FontAwesomeIcon icon={faMapMarkerAlt} />
+                </div> */}
+
+                <img alt="app-logo-img" src={LocationPhoto}></img>
                 <div className="Location_greeting">{`Hi ${this.props.name}.`}</div>
                 <div className="Location_description">
                     For finding people near you we need your location. <br/>
-                    You can hide it from other users. <br/>
-                    But still we need your coordinates to calculate your distance from other users. <br/>
-                    You can relocate any time in setting.
+                    You can set/hide it from other users in Setting.
                 </div>
-                <button className="Location_button" onClick={this.getLocation}>Find My Location</button>
+                <button className="Location_button" onClick={this.getLocation}><span>Find Me </span></button>
                 <div>{this.state.showMessage && this.state.message}</div>
-                <button className="Location_button" disabled={!this.state.showMessage} onClick={this.onSubmitNext}>Next</button>
+                <button className="Location_button" disabled={!this.state.showMessage} style={{display: this.state.showMessage ? "inline-block" : "none"}} onClick={this.onSubmitNext}><span>Next </span></button>
             </div>
         );
     }
