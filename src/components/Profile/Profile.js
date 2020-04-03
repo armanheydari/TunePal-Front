@@ -1,9 +1,5 @@
 import React from 'react';
 import General from './General';
-import SongTable from './SongTable';
-import ArtistTable from './ArtistTable';
-import AlbumTable from './AlbumTable';
-import GenreTable from './GenreTable';
 
 class Profile extends React.Component {
     state = {
