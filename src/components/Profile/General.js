@@ -1,5 +1,4 @@
 import React from 'react';
-import ProfilePicture from '../../assets/maxresdefault.jpg';
 
 class General extends React.Component {
     state = {

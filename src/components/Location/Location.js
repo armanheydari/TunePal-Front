@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Spotify from './Spotify.js';
+import Spotify from '../Spotify/Spotify.js';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faMapMarkerAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
 // import AppLogo from '../../assets/app-logo.png';

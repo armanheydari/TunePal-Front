@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Location from './Location.js';
+import Location from '../Location/Location.js';
 
 function legalAge() {
     const today = new Date();
