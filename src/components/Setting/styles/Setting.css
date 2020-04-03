@@ -1,0 +1,78 @@
+.Setting_container {
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+}
+
+.Setting_title {
+    font-family: Circular,Helvetica,Arial,sans-serif,iosfallbackfix!important;
+    font-size: 4rem;
+    font-weight: 900;
+}
+
+.Setting_form > h2 {
+    margin: 0;
+}
+
+.Setting_form {
+    margin: 1rem 3rem;
+    padding: 3.5rem 5rem 5rem 5rem;
+    background-color: white;
+}
+
+@media (max-width: 768px) {
+    .Setting_form {
+        margin: 1rem 0;
+    }
+}
+
+.Setting_field {
+    display: flex;
+    flex-direction: column;
+    margin: 3rem 0;
+}
+
+.Setting_input {
+    background-color: #eee;
+    padding: 1.5rem;
+    border: none;
+}
+
+.Setting_field > textarea {
+    resize: none;
+}
+
+.Setting_gender-input-container {
+    display: flex;
+    background-color: #eee;
+    padding: 1.5rem;
+    border: none;
+}
+
+.Setting_male-container {
+    margin-right: 2rem;
+}
+
+.Setting_female-container {
+    margin-left: 2rem;
+}
+
+.Setting_male-container > input {
+    margin-right: .5rem;
+}
+
+.Setting_female-container > input {
+    margin-right: .5rem;
+}
+
+.Setting_error {
+    color: red;
+}
+.Setting_response {
+    color: green;
+    margin-left: 1rem;
+}
+
+/* .Setting_label {
+    color: #919496;
+} */
