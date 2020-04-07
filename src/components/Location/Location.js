@@ -1,19 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Spotify from '../Spotify/Spotify.js';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faMapMarkerAlt, faPlus } from '@fortawesome/free-solid-svg-icons';
-// import AppLogo from '../../assets/app-logo.png';
 import LocationPhoto from '../../assets/Location.jpg';
-
-
-const getAddressConfig = {
-    mode: "cors",
-    headers: {
-    'Content-Type': 'application/json',
-    'x-api-key': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjdmYzVjNmRlMTY4ZDZiNzdiNWMxMmE2MjEwODEyMjEyNmQ3MzI5YWE1YzFlMDQ4YWNhZTRlN2U2M2Y1NWUzYWYxOTk1YTUzMDNiYjJjY2I5In0.eyJhdWQiOiI4Mzg4IiwianRpIjoiN2ZjNWM2ZGUxNjhkNmI3N2I1YzEyYTYyMTA4MTIyMTI2ZDczMjlhYTVjMWUwNDhhY2FlNGU3ZTYzZjU1ZTNhZjE5OTVhNTMwM2JiMmNjYjkiLCJpYXQiOjE1ODQ5NzQzOTMsIm5iZiI6MTU4NDk3NDM5MywiZXhwIjoxNTg3NTY2MzkzLCJzdWIiOiIiLCJzY29wZXMiOlsiYmFzaWMiXX0.GUpfC8cQ1bWyTcVhz1lW8lR5rWll2wAOSmjxY5sTyEn2iHSsPWMhMMcsbNDTlV_Iz3HctjaAJFny3YdCdFMMSsWshe-gx8CHRQKkjGqgJRs691uPGVeLSOPe4iJjbD0_dkWRUGIiP5NrRyb0ZvJoZUDuNK39l5JGo699LCL66xIUrSlMR4tAD8RCv2bnmES6I_5jtMSRciaM9rN9orcrsy8BRZeit7MJvwuNlFtDZq-sVIHQH9fzRWX3bKeOqcU1LXJh1YtuZnBXA-kdDrHXCRDbGoUV8NexTGEH_Jrtol-CXsLOTniwX3V6YqB3ZtZi-hgdPEJ8lYtwGqY3nTKNng'
-    }
-};
 
 class Location extends React.Component {
     state = {
@@ -50,21 +38,22 @@ class Location extends React.Component {
             }
         });
         if ((this.state.latitude !== "") && (this.state.longitude !== "")) {
-            const url = `https://map.ir/reverse/no?lat=${this.state.latitude}&lon=${this.state.longitude}`;
-            axios.get(url, getAddressConfig)
+            const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${this.state.latitude}&lon=${this.state.longitude}`;
+            axios.get(url)
             .then(res => {
                 this.setState(() => {
                     return {
-                        country: res.data.country,
-                        province: res.data.province,
-                        neighbourhood: res.data.neighbourhood,
-                        message: `${res.data.country} , ${res.data.province} , ${res.data.neighbourhood}`,
+                        country: res.data.address.country,
+                        province: res.data.address.city,
+                        neighbourhood: res.data.address.suburb,
+                        message: `${res.data.address.country} , ${res.data.address.city} , ${res.data.address.suburb}`,
                         showMessage: true,
                         readyToPost: true
-                    }
+                    };
                 });
             })
             .catch(err => {
+                console.log(err.data);
                 this.setState(() => {
                     return {
                         message: "We've got your coordinate but there was a problem in getting your address.",
@@ -109,8 +98,7 @@ class Location extends React.Component {
                 });
             })
             .catch(err => {
-                console.log(err);
-                //handle if there was error in sending location to back
+                console.log(err.data);
             });
         }
     }
@@ -122,14 +110,6 @@ class Location extends React.Component {
         return (
             <div className="Location_container">
                 <div className="Location_title">Location</div>
-                {/* <img className="Location_logo" alt="app-logo-img" width="80px" height="80px" src={AppLogo}></img>
-                <div className="Location_plus">
-                    <FontAwesomeIcon icon={faPlus} />
-                </div>
-                <div className="Location_marker">
-                    <FontAwesomeIcon icon={faMapMarkerAlt} />
-                </div> */}
-
                 <img alt="app-logo-img" src={LocationPhoto}></img>
                 <div className="Location_greeting">{`Hi ${this.props.name}.`}</div>
                 <div className="Location_description">
