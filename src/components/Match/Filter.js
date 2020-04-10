@@ -25,9 +25,9 @@ class Filter extends React.Component {
                         <input
                             className=""
                             type="checkbox"
-                            name="male"
-                            value="male"
-                            checked={showMale}
+                            name="female"
+                            value="female"
+                            checked={showFemale}
                             onChange={this.onChange}
                         />
                         <span>Female</span>
@@ -36,9 +36,9 @@ class Filter extends React.Component {
                         <input
                             className=""
                             type="checkbox"
-                            name="female"
-                            value="female"
-                            checked={showFemale}
+                            name="male"
+                            value="male"
+                            checked={showMale}
                             onChange={this.onChange}
                         />
                         <span>Male</span>

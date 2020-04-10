@@ -15,19 +15,82 @@ function tokenConfig() {
 
 class Match extends React.Component {
     state = {
-        male:[],
-        female:[],
+        items:[
+            {
+                username: "ALi3TR",
+                name: "Ali Sedaghi",
+                gender: "male",
+                age: 20,
+                distance: "19"
+            },
+            {
+                username: "Rman",
+                name: "Arman Heydari",
+                gender: "male",
+                age: 30,
+                distance: "119"
+            },
+            {
+                username: "SabaRoh",
+                name: "Saba Rohande",
+                gender: "female",
+                age: 40,
+                distance: "171"
+            },
+            {
+                username: "Masut",
+                name: "Masoud Golestane",
+                gender: "male",
+                age: 50,
+                distance: "67"
+            },
+            {
+                username: "RezaMan",
+                name: "Reza Mansoori",
+                gender: "male",
+                age: 60,
+                distance: "211"
+            },
+            {
+                username: "iammobina",
+                name: "Mobina",
+                gender: "female",
+                age: 70,
+                distance: "181"
+            },
+            {
+                username: "dimo",
+                name: "Omid",
+                gender: "male",
+                age: 80,
+                distance: "67"
+            },
+            {
+                username: "Navido",
+                name: "Navid",
+                gender: "male",
+                age: 90,
+                distance: "287"
+            },
+            {
+                username: "meliw",
+                name: "Melika",
+                gender: "female",
+                age: 25,
+                distance: "79"
+            }
+        ],
         showMale: true,
         showFemale: true,
         minAge: 18,
         maxAge: 100,
         minDistance: 0,
-        maxDistance: 100
+        maxDistance: 300
     }
 
     genderFilter = (gender) => {
         if (gender === "male") {
-            this.setState((prevState) => {
+            this.setState(prevState => {
                 return {
                     showMale: !prevState.showMale
                 };
@@ -35,7 +98,7 @@ class Match extends React.Component {
         }
 
         if (gender === "female") {
-            this.setState((prevState) => {
+            this.setState(prevState => {
                 return {
                     showFemale: !prevState.showFemale
                 };
@@ -73,21 +136,27 @@ class Match extends React.Component {
         return filter;
     }
 
-    componentDidMount() {
-        axios.get('http://tunepal.pythonanywhere.com/spotify/match/', tokenConfig())
-        .then(res => {
-            console.log(res);
-        })
-        .catch(err => {
-            console.log(err.data);
-        });
-    }
+    // componentDidMount() {
+    //     axios.get('http://tunepal.pythonanywhere.com/spotify/match/', tokenConfig())
+    //     .then(res => {
+    //         console.log(res);
+    //         this.setState(() => {
+    //             return {
+    //                 male: res.data.MALE,
+    //                 female: res.data.FEMALE
+    //             };
+    //         });
+    //     })
+    //     .catch(err => {
+    //         console.log(err.data);
+    //     });
+    // }
 
     render() {
         return (
             <div>
                 <Filter setGender={this.genderFilter} setDistance={this.distanceFilter} setAge={this.ageFilter} filter={this.createFilterObject()} />
-                <SuggestList male={this.state.male} female={this.state.female} filter={this.createFilterObject()} />
+                <SuggestList items={this.state.items} filter={this.createFilterObject()} />
             </div>
 
         );
