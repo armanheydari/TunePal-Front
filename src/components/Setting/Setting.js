@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import ProfilePicture from '../../assets/maxresdefault.jpg';
 
 function legalAge() {
     const today = new Date();
@@ -21,8 +22,8 @@ function genderToBool(gender) {
 }
 
 function isEmpty(obj) {
-    for(var prop in obj) {
-        if(obj.hasOwnProperty(prop))
+    for (var prop in obj) {
+        if (obj.hasOwnProperty(prop))
             return false;
     }
     return true;
@@ -35,6 +36,8 @@ class Setting extends React.Component {
         birthday: this.props.user.birthday,
         bio: this.props.user.bio,
         favorites: this.props.user.favorites,
+        picture: this.props.picture,
+        imagePreviewUrl: null,
 
         username: this.props.user.username,
         email: this.props.user.email,
@@ -113,13 +116,13 @@ class Setting extends React.Component {
             }
             const toBackJSON = JSON.stringify(toBack);
             axios.put('http://tunepal.pythonanywhere.com/account/sign_up/', toBackJSON, this.requestConfig())
-            .then(res => {
-                this.setState(() => {
-                    return {
-                        generalResponse: true
-                    };
+                .then(res => {
+                    this.setState(() => {
+                        return {
+                            generalResponse: true
+                        };
+                    });
                 });
-            });
         }
     }
 
@@ -162,49 +165,49 @@ class Setting extends React.Component {
         if (!isEmpty(toBack)) {
             const toBackJSON = JSON.stringify(toBack);
             axios.put('http://tunepal.pythonanywhere.com/account/sign_up/', toBackJSON, this.requestConfig())
-            .then(res => {
-                this.props.user.username = this.state.username;
-                this.props.user.email = this.state.email;
-                this.setState(() => {
-                    return {
-                        securityResponse: true
-                    };
+                .then(res => {
+                    this.props.user.username = this.state.username;
+                    this.props.user.email = this.state.email;
+                    this.setState(() => {
+                        return {
+                            securityResponse: true
+                        };
+                    });
+                })
+                .catch(err => {
+                    if (err.response.data.hasOwnProperty('username')) {
+                        this.lastUnvalidSecurity.username = this.state.username;
+                        this.setState(() => {
+                            return {
+                                usernameError: true
+                            };
+                        });
+                    }
+                    else {
+                        this.setState(() => {
+                            return {
+                                usernameError: false
+                            };
+                        });
+                    }
+                    if (err.response.data.hasOwnProperty('email')) {
+                        this.lastUnvalidSecurity.email = this.state.email;
+                        this.setState(() => {
+                            return {
+                                emailError: true
+                            };
+                        });
+                    }
+                    else {
+                        this.setState(() => {
+                            return {
+                                emailError: false
+                            };
+                        });
+                    }
                 });
-            })
-            .catch(err => {
-                if (err.response.data.hasOwnProperty('username')) {
-                    this.lastUnvalidSecurity.username = this.state.username;
-                    this.setState(() => {
-                        return {
-                            usernameError: true
-                        };
-                    });
-                }
-                else {
-                    this.setState(() => {
-                        return {
-                            usernameError: false
-                        };
-                    });
-                }
-                if (err.response.data.hasOwnProperty('email')) {
-                    this.lastUnvalidSecurity.email = this.state.email;
-                    this.setState(() => {
-                        return {
-                            emailError: true
-                        };
-                    });
-                }
-                else {
-                    this.setState(() => {
-                        return {
-                            emailError: false
-                        };
-                    });
-                }
-            });
         }
-        
+
     }
 
     onSavePassword = (e) => {
@@ -215,15 +218,58 @@ class Setting extends React.Component {
         }
     }
 
+    onFormSubmit = (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('picture', this.state.picture);
+        console.log(formData);
+        const config = {
+           // mode: "cors",
+            headers: {
+                'Authorization': `Token ${localStorage.getItem('token')}`,
+                'content-type': 'multipart/form-data'
+            }
+        };
+
+        const a = axios.put("http://tunepal.pythonanywhere.com/account/profile/", formData, config)
+            // .then((response) => {
+            //    console.log(response)
+            // })
+            // .catch((error) => {
+            //     console.log(error.data);
+            // });
+            console.log(a);
+    }
+    onChangeFile = (e) => {
+        e.preventDefault();
+        let reader = new FileReader();
+        let picture = e.target.files[0];
+        reader.onloadend = () => {
+            this.setState({
+                picture: picture,
+                imagePreviewUrl: reader.result
+            });
+        }
+        reader.readAsDataURL(picture)
+    }
+
     render() {
         return (
             <div className="Setting_container">
                 <h1 className="Setting_title">Setting</h1>
+
+                <form className="Setting_form" onSubmit={this.onFormSubmit}>
+                    <img className="Settings_Picture" alt="avatar" src={this.state.imagePreviewUrl}></img>
+                    <input className="Settings_picture-button" type="file" name="picture" id="file" onChange={this.onChangeFile} />
+                    <button className="Settings_picture-button" type="submit">Submit</button>
+                </form>
+
                 <form className="Setting_form" onSubmit={this.onSaveGeneral}>
                     <h2>General Info</h2>
+
                     <div className="Setting_field">
                         <label className="Setting_label">Name</label>
-                        <input 
+                        <input
                             className="Setting_input"
                             type="text"
                             name="name"
@@ -237,7 +283,7 @@ class Setting extends React.Component {
                         <label className="Setting_label">Gender</label>
                         <div className="Setting_gender-input-container">
                             <div className="Setting_male-container">
-                                <input 
+                                <input
                                     type="radio"
                                     name="gender"
                                     value="Male"
@@ -247,7 +293,7 @@ class Setting extends React.Component {
                                 /><span>Male</span>
                             </div>
                             <div className="Setting_female-container">
-                                <input 
+                                <input
                                     type="radio"
                                     name="gender"
                                     value="Female"
@@ -261,7 +307,7 @@ class Setting extends React.Component {
 
                     <div className="Setting_field">
                         <label className="Setting_label">Birthday</label>
-                        <input 
+                        <input
                             className="Setting_input"
                             type="date"
                             name="birthday"
@@ -273,36 +319,36 @@ class Setting extends React.Component {
                         />
                     </div>
 
-                        <div className="Setting_field">
-                            <label className="Setting_label">Biography</label>
-                            <textarea 
-                                className="Setting_input"
-                                name="bio"
-                                rows="2"
-                                maxLength="150"
-                                value={this.state.bio}
-                                onChange={this.onChange}
-                            >
-                            </textarea>
-                        </div>
+                    <div className="Setting_field">
+                        <label className="Setting_label">Biography</label>
+                        <textarea
+                            className="Setting_input"
+                            name="bio"
+                            rows="2"
+                            maxLength="150"
+                            value={this.state.bio}
+                            onChange={this.onChange}
+                        >
+                        </textarea>
+                    </div>
 
-                        <div className="Setting_field">
-                            <label className="Setting_label">Favorites</label>
-                            <textarea 
-                                className="Setting_input"
-                                name="favorites"
-                                rows="2"
-                                maxLength="30"
-                                value={this.state.favorites}
-                                onChange={this.onChange}
-                            >
-                            </textarea>
-                        </div>
+                    <div className="Setting_field">
+                        <label className="Setting_label">Favorites</label>
+                        <textarea
+                            className="Setting_input"
+                            name="favorites"
+                            rows="2"
+                            maxLength="30"
+                            value={this.state.favorites}
+                            onChange={this.onChange}
+                        >
+                        </textarea>
+                    </div>
 
-                        <button disabled={isEmpty(this.changes())}>Save Changes</button>
-                        <span className="Setting_response">{(this.state.generalResponse && isEmpty(this.changes())) && "Saved."}</span>
-                    </form>   
-                
+                    <button disabled={isEmpty(this.changes())}>Save Changes</button>
+                    <span className="Setting_response">{(this.state.generalResponse && isEmpty(this.changes())) && "Saved."}</span>
+                </form>
+
 
                 {/* <div className="Setting_privacy">
                     <h2>Privacy</h2>
@@ -313,7 +359,7 @@ class Setting extends React.Component {
                     <h2>Security</h2>
                     <div className="Setting_field">
                         <label className="Setting_label">Username</label>
-                        <input 
+                        <input
                             className="Setting_input"
                             type="text"
                             name="username"
@@ -326,7 +372,7 @@ class Setting extends React.Component {
 
                     <div className="Setting_field">
                         <label className="Setting_label">Email</label>
-                        <input 
+                        <input
                             className="Setting_input"
                             type="email"
                             name="email"
@@ -345,7 +391,7 @@ class Setting extends React.Component {
                     <h2>Password</h2>
                     <div className="Setting_field">
                         <label className="Setting_label">Current Password</label>
-                        <input 
+                        <input
                             className="Setting_input"
                             type="password"
                             name="currentPassword"
@@ -357,7 +403,7 @@ class Setting extends React.Component {
 
                     <div className="Setting_field">
                         <label className="Setting_label">New Password</label>
-                        <input 
+                        <input
                             className="Setting_input"
                             type="password"
                             name="newPassword"
@@ -369,7 +415,7 @@ class Setting extends React.Component {
 
                     <div className="Setting_field">
                         <label className="Setting_label">Confirm Password</label>
-                        <input 
+                        <input
                             className="Setting_input"
                             type="password"
                             name="confirmPassword"
@@ -378,10 +424,10 @@ class Setting extends React.Component {
                             required
                         /><span className="Setting_error">{this.state.newPassword !== this.state.confirmPassword && "Passwords does not match."}</span>
                     </div>
-                    
+
                     <button>Save Change</button>
                 </form>
-                     
+
             </div>
         );
     };

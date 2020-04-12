@@ -73,6 +73,28 @@
     margin-left: 1rem;
 }
 
+.Settings_Picture{
+    width: 40%;
+    height: 100%;
+    border-radius: 50%;
+    margin: auto;
+    padding: 1.5rem 0rem;
+    text-align: center;
+    display: block;
+}
+
+.Settings_picture-button{
+    margin-left: 20rem;
+    margin-bottom:10rem ;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
 /* .Setting_label {
     color: #919496;
 } */

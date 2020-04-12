@@ -38,8 +38,26 @@ class Main extends React.Component {
                 'Authorization': `Token ${localStorage.getItem('token')}`
                 }
             }
+            
+           const b= axios.get('http://tunepal.pythonanywhere.com/spotify/friends/',config)
+           console.log(b) 
+           // .then(res => {
+            //     console.log(res)
+            // })
+            // .catch(err => {
+            //     console.log(err.data)
+            // });
+
+            axios.get('http://tunepal.pythonanywhere.com/spotify/topsong/',config)
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err.data)
+            });
             axios.get('http://tunepal.pythonanywhere.com/account/get_user_info/', config)
             .then(res => {
+                console.log(res)
                 const userInfo = {
                     name: res.data.nickname,
                     gender: res.data.gender,
@@ -52,7 +70,10 @@ class Main extends React.Component {
                     province: res.data.location ? res.data.location.province : undefined,
                     neighbourhood: res.data.location ? res.data.location.neighbourhood : undefined,
                     bio: res.data.biography,
-                    favorites: res.data.interests
+                    favorites: res.data.interests,
+                    //songs: res.data.songs,
+                    artists: res.data.artists,
+                    score: res.data.score,
                 };
                 this.setUserInfo(userInfo);
                 this.setState(() => {
@@ -158,7 +179,10 @@ class Main extends React.Component {
                     province: undefined,
                     neighbourhood: undefined,
                     bio: undefined,
-                    favorites: undefined
+                    favorites: undefined,
+                    //songs: undefined,
+                    artists: undefined,
+                    score: undefined,
                 }
             }
         });
