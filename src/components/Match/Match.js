@@ -155,12 +155,12 @@ class Match extends React.Component {
   render() {
     return (
       <div className="matchList">
-        <Filter
-          setGender={this.genderFilter}
-          setDistance={this.distanceFilter}
-          setAge={this.ageFilter}
-          filter={this.createFilterObject()}
-        />
+          <Filter
+            setGender={this.genderFilter}
+            setDistance={this.distanceFilter}
+            setAge={this.ageFilter}
+            filter={this.createFilterObject()}
+          />
         <SuggestList
           items={this.state.items}
           filter={this.createFilterObject()}
