@@ -8,6 +8,7 @@ import LoginSignup from './LoginSignup/LoginSignup.js';
 import SpotifyResult from './Spotify/SpotifyResult.js';
 import Profile from './Profile/Profile.js';
 import Setting from './Setting/Setting.js';
+import Quiz from './Quiz/Quiz.js';
 
 class Main extends React.Component {
     state = {
@@ -60,6 +61,7 @@ class Main extends React.Component {
                         show: true,
                     };
                 });
+                console.log(res)
             })
             .catch(err => {
                 this.setState(() => {
@@ -68,6 +70,7 @@ class Main extends React.Component {
                     };
                 });
             });
+           
         }
         else {
             this.setState(() => {
@@ -97,6 +100,7 @@ class Main extends React.Component {
                                 <Route path="/profile"><Profile user={this.state.userInfo} /></Route>
                                 <Route path="/setting"><Setting user={this.state.userInfo} /></Route>
                                 <Route path="/logout"></Route>
+                                <Route path="/quiz"><Quiz/></Route>
                                 <Route path="/spotifyresult"><SpotifyResult name={this.state.userInfo.name} /></Route>
                                 <Route path='/404'>404</Route>
                                 <Redirect to='/404' />
