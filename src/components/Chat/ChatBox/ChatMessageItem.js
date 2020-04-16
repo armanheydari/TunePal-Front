@@ -8,7 +8,7 @@ class ChatMessageItem extends React.Component {
             return (
                 <li className="clearfix">
                 <div className="message-data align-right">
-                    <span className="message-data-time">{this.props.date}</span> &nbsp; &nbsp;
+                    <span className="message-data-time">{dateParser(this.props.date)}</span> &nbsp; &nbsp;
                     <span className="message-data-name">{this.props.name} </span>
                     <FontAwesomeIcon icon={faCircle} className="me" />
                 </div>
@@ -21,7 +21,7 @@ class ChatMessageItem extends React.Component {
             <li>
                 <div className="message-data">
                     <span className="message-data-name"><FontAwesomeIcon icon={faCircle} className="online" /> {this.props.name}</span>
-                    <span className="message-data-time">{this.props.date}</span>
+                    <span className="message-data-time">{dateParser(this.props.date)}</span>
                 </div>
 
                 <div className="message my-message">{this.props.message}</div>
@@ -32,39 +32,22 @@ class ChatMessageItem extends React.Component {
 
 export default ChatMessageItem;
 
-function liStyle(isMe) {
-    if (isMe) {
-        return "clearfix";
+function dateParser(timeStamp) {
+    const date = timeStamp.split("T")[0];
+    const dateArray = date.split("-"); //0:year 1:month 2:day
+    const timeArray = timeStamp.split("T")[1].split(":"); //0:hour 1:minute
+    const today = new Date();
+    const todayYear = today.getFullYear();
+    let todayMonth = today.getMonth() + 1;
+    if (todayMonth < 10) {
+        todayMonth = "0" + todayMonth;
     }
-    return "";
-}
-
-function divStyle(isMe) {
-    if (isMe) {
-        return "message-data align-right";
+    let todayDay = today.getDate();
+    if (todayDay < 10) {
+        todayDay = "0" + todayDay;
     }
-    return "message-data";
-}
-
-function divMessageStyle(isMe) {
-    if (isMe) {
-        return "message my-message";
+    if (`${dateArray[0]}` === `${todayYear}` && `${dateArray[1]}` === `${todayMonth}` && `${dateArray[2]}` === `${todayDay}`) {
+        return timeArray[0] + ":" + timeArray[1] + ", " + "Today";
     }
-    return "message other-message float-right";
-}
-
-
-
-
-function messageStyle(isMe) {
-    if (isMe) {
-        return {
-            color: "red"
-        };
-    }
-    else {
-        return {
-            color: "blue"
-        };
-    }
+    return timeArray[0] + ":" + timeArray[1] + ", " + date;
 }

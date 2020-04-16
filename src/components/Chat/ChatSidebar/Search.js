@@ -9,10 +9,16 @@ class Search extends React.Component {
                 <input
                     type="text"
                     placeholder="search"
+                    onChange={this.onChange}
                 />
                 <FontAwesomeIcon icon={faSearch} />
             </div>
         );
+    }
+
+    onChange = (e) => {
+        const searchField = e.target.value;
+        this.props.getFieldSearch(searchField);
     }
 }
 

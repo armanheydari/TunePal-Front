@@ -19,7 +19,8 @@ class Chat extends React.Component {
     state = {
         chatList: [],
         header: {},
-        messages: []
+        messages: [],
+        show: false
     }
 
     componentDidMount() {
@@ -50,7 +51,12 @@ class Chat extends React.Component {
                 name: this.state.chatList[0].members[0].nickname,
                 conversationID: this.state.chatList[0].conversationID
             };
-            this.openChat(firstConversationHeader)
+            this.openChat(firstConversationHeader);
+            this.setState(prevState => {
+                return {
+                    show: true
+                };
+            });
         })
         .catch(err => {
             console.log(err.data)
@@ -58,13 +64,15 @@ class Chat extends React.Component {
     }
 
     render() {
-        // setInterval(this.openChat(this.state.header), 100000);
-        return (
-            <div className="chat-container clearfix">
-                <ChatSidebar chatID={this.state.header.conversationID} chatList={this.state.chatList} openChat={this.openChat} />
-                <ChatBox header={this.state.header} messages={this.state.messages} send={this.sendMessage} />
-            </div>
-        );
+        if (this.state.show) {
+            return (
+                <div className="chat-container clearfix">
+                    <ChatSidebar chatID={this.state.header.conversationID} chatList={this.state.chatList} openChat={this.openChat} />
+                    <ChatBox header={this.state.header} messages={this.state.messages} send={this.sendMessage} />
+                </div>
+            );
+        }
+        return null;
     }
 
     openChat = (header) => {
@@ -85,7 +93,6 @@ class Chat extends React.Component {
                     messages
                 };
             });
-            console.log(this.state.currentChat.messages)
         })
         .catch(err => {
             console.log(err.data);
@@ -93,15 +100,29 @@ class Chat extends React.Component {
     }
 
     sendMessage = (message) => {
+        const latestMessageIndex = this.state.messages.length - 1;
         const conversationID = this.state.header.conversationID;
         const toBack = {
-            message
+            text: message
         };
         const toBackJSON = JSON.stringify(toBack);
-        const a = Axios.post(`http://tunepal.pythonanywhere.com/chat/${conversationID}/`, {toBackJSON}, tokenConfig());
-        console.log(a);
-
-        //send new message to back and update the messages
+        Axios.post(`http://tunepal.pythonanywhere.com/chat/${conversationID}/`, toBackJSON, tokenConfig())
+        .then(res => {
+            const allMessages = res.data.messages;
+            let newMessages = [];
+            for (let i = latestMessageIndex + 1; i < allMessages.length; i++) {
+                newMessages.push(allMessages[i]);
+            }
+            this.setState(prevState => {
+                const messages = prevState.messages.concat(newMessages);
+                return {
+                    messages
+                };
+            });
+        })
+        .catch(err => {
+            console.log(err.data);
+        });
     }
 }
 

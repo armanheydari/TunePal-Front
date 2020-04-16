@@ -35,7 +35,7 @@ class ChatSend extends React.Component {
     }
 
     handleSend = () => {
-        if (this.state.messageToSend) {
+        if (this.state.messageToSend.trim() !== '') {
             this.props.send(this.state.messageToSend);
             this.setState(prevState => {
                 return {

@@ -49,6 +49,7 @@ $gray: #92959E;
   img {
     float: left;
     border-radius: 100%;
+    border: 3px solid #73788c;
   }
   
   .about {
@@ -107,7 +108,7 @@ $gray: #92959E;
     }
   }
   
-  .chat-history {
+  #chat-history {
     padding: 30px 30px 20px;
     border-bottom: 2px solid white;
     overflow-y: scroll;

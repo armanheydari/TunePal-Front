@@ -2,11 +2,23 @@ import React from 'react';
 import ChatItem from './ChatItem';
 
 class ChatList extends React.Component {
+
+    // componentDidUpdate(prevProps) {
+    //     if (prevProps.searchField !== this.props.searchField) {
+    //         this.setState(prevState => {
+    //             return {
+    //                 filtered: this.props.chatList.filter(this.filterChatList)
+    //             };
+    //         });
+    //     }
+    // }
+
     render() {
+        let filtered = this.props.chatList.filter(this.filterChatList);
         return (
             <ul>
                 {
-                    this.props.chatList.map(item => {
+                    filtered.map(item => {
                         return (
                             <ChatItem 
                                 key={item.conversationID}
@@ -24,6 +36,14 @@ class ChatList extends React.Component {
         );
     }
 
+    filterChatList = (item) => {
+        if (this.props.searchField === "") {
+            return true;
+        }
+        if (item.members[0].nickname.includes(this.props.searchField)) {
+            return true;
+        }
+    }
 }
 
 export default ChatList;
