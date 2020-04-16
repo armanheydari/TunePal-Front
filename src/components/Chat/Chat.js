@@ -2,6 +2,7 @@ import React from 'react';
 import ChatSidebar from './ChatSidebar/ChatSidebar';
 import ChatBox from './ChatBox/ChatBox';
 import Axios from 'axios';
+import './styles/Chat.scss';
 
 function tokenConfig() {
     const config = {
