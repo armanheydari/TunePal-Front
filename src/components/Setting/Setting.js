@@ -36,8 +36,8 @@ class Setting extends React.Component {
         birthday: this.props.user.birthday,
         bio: this.props.user.bio,
         favorites: this.props.user.favorites,
-        picture: this.props.picture,
-        imagePreviewUrl: null,
+        picture: null,
+        imagePreviewUrl: this.props.user.avatar,
 
         username: this.props.user.username,
         email: this.props.user.email,
@@ -221,7 +221,7 @@ class Setting extends React.Component {
     onFormSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData();
-        formData.append('picture', this.state.picture);
+        formData.append('user_avatar', this.state.picture);
         console.log(formData);
         const config = {
            // mode: "cors",
@@ -231,14 +231,14 @@ class Setting extends React.Component {
             }
         };
 
-        const a = axios.put("http://tunepal.pythonanywhere.com/account/profile/", formData, config)
+        const a = axios.put("http://tunepal.pythonanywhere.com/account/sign_up/", formData, config)
             // .then((response) => {
-            //    console.log(response)
+            //     axios.get('http://tunepal.pythonanywhere.com/account/get_user_info/', config)
             // })
             // .catch((error) => {
             //     console.log(error.data);
             // });
-            console.log(a);
+            // //console.log(a);
     }
     onChangeFile = (e) => {
         e.preventDefault();

@@ -16,7 +16,7 @@ class General extends React.Component {
                 <div className="Profile_General_info-container">
                     <h2>General Info</h2>
                     <div>
-                        <img className="General_Picture" alt="profile-picture" src={ProfilePicture}></img>
+                        <img className="General_Picture" alt="profile-picture" src={this.props.user.avatar}></img>
                     </div>
                     <div className="Profile_General_info-field">
                         <span className="Profile_General_info-label">Name</span>

@@ -13,6 +13,7 @@ class Main extends React.Component {
     state = {
         show: false,
         isLoggedIn: false,
+        //profile_avatar: undefined,
         userInfo: {
             name: undefined,
             gender: undefined,
@@ -25,7 +26,8 @@ class Main extends React.Component {
             province: undefined,
             neighbourhood: undefined,
             bio: undefined,
-            favorites: undefined
+            favorites: undefined,
+            avatar: undefined
         }
     };
 
@@ -39,22 +41,23 @@ class Main extends React.Component {
                 }
             }
             
-           const b= axios.get('http://tunepal.pythonanywhere.com/spotify/friends/',config)
-           console.log(b) 
-           // .then(res => {
+        //     const b= axios.get('http://tunepal.pythonanywhere.com/account/get_user_info/',config)
+        //     //console.log(b) 
+        //    .then(res => {
+        //         console.log(res)
+        //       //const profile_avatar = res.data.user-profile_avatar
+        //     })
+        //     .catch(err => {
+        //         console.log(err.data)
+        //     });
+
+            // axios.get('http://tunepal.pythonanywhere.com/spotify/topsong/',config)
+            // .then(res => {
             //     console.log(res)
             // })
             // .catch(err => {
             //     console.log(err.data)
             // });
-
-            axios.get('http://tunepal.pythonanywhere.com/spotify/topsong/',config)
-            .then(res => {
-                console.log(res)
-            })
-            .catch(err => {
-                console.log(err.data)
-            });
             axios.get('http://tunepal.pythonanywhere.com/account/get_user_info/', config)
             .then(res => {
                 console.log(res)
@@ -71,10 +74,11 @@ class Main extends React.Component {
                     neighbourhood: res.data.location ? res.data.location.neighbourhood : undefined,
                     bio: res.data.biography,
                     favorites: res.data.interests,
-                    //songs: res.data.songs,
-                    artists: res.data.artists,
-                    score: res.data.score,
+                    avatar:res.data.user_avatar
+                    // artists: res.data.artists,
+                    // score: res.data.score,
                 };
+                console.log(userInfo);
                 this.setUserInfo(userInfo);
                 this.setState(() => {
                     return {
@@ -167,6 +171,7 @@ class Main extends React.Component {
         this.setState(() => {
             return {
                 isLoggedIn: false,
+                //profile_avatar:undefined,
                 userInfo: {
                     name: undefined,
                     gender: undefined,
@@ -180,9 +185,9 @@ class Main extends React.Component {
                     neighbourhood: undefined,
                     bio: undefined,
                     favorites: undefined,
-                    //songs: undefined,
-                    artists: undefined,
-                    score: undefined,
+                    avatar: undefined
+                    //artists: undefined,
+                    //score: undefined,
                 }
             }
         });

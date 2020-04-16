@@ -86,13 +86,14 @@
 .Settings_picture-button{
     margin-left: 20rem;
     margin-bottom:10rem ;
-    background-color: #4CAF50; /* Green */
+    background-color: gray; /* Green */
     border: none;
     color: white;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    border: 10px black;
 }
 
 /* .Setting_label {
