@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import 'bootstrap/dist/css/bootstrap.css';
-// import 'normalize.css';
 import './style-container.css';
 import Main from './components/Main.js';
 
