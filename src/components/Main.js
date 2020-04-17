@@ -39,6 +39,8 @@ class Main extends React.Component {
                 'Authorization': `Token ${localStorage.getItem('token')}`
                 }
             }
+           
+            
             axios.get('http://tunepal.pythonanywhere.com/account/get_user_info/', config)
             .then(res => {
                 const userInfo = {
@@ -61,7 +63,7 @@ class Main extends React.Component {
                         show: true,
                     };
                 });
-                console.log(res)
+                //console.log(res)
             })
             .catch(err => {
                 this.setState(() => {

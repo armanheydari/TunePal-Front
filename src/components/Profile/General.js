@@ -11,7 +11,6 @@ class General extends React.Component {
     render() {
         return (
             <div className="Profile_General_container">
-
                 <div className="Profile_General_info-container">
                     <h2>General Info</h2>
                     <div className="Profile_General_info-field">
