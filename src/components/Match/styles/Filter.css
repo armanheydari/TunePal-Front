@@ -1,0 +1,70 @@
+.Match_Filter-container {
+    border-bottom: 2px solid #c5cbc8;
+    display: flex;
+    flex-direction: row;
+    padding: 2rem 4rem;
+}
+
+@media screen and (max-width: 768px) {
+    .Match_Filter-container {
+        flex-direction: column;
+    }
+}
+
+.Match_Filter-gender {
+    margin: 0 1rem;
+    flex: 10%;
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 768px) {
+    .Match_Filter-gender {
+        justify-content: center;
+        margin: 0 1rem 1rem 1rem;
+    }
+}
+
+.Match_Filter-gender-icon {
+    font-size: 5rem;
+}
+
+@media screen and (max-width: 768px) {
+    .Match_Filter-gender-icon {
+        margin: 0 2rem;
+    }
+}
+
+.Match_Filter-age {
+    flex: 40%;
+    align-items: center;
+    margin: 0 3rem 0 0;
+}
+
+@media screen and (max-width: 768px) {
+    .Match_Filter-age {
+        justify-content: center;
+        margin: 2rem 1rem;
+    }
+}
+
+.Match_Filter-distance {
+    flex: 50%;
+    align-items: center;
+    margin: 0 0 0 3rem;
+}
+
+@media screen and (max-width: 768px) {
+    .Match_Filter-distance {
+        justify-content: center;
+        margin: 2rem 1rem;
+    }
+}
+
+.Match_Filter-slider {
+    display: block;
+}
+
+.Match_Filter-slider-title {
+    margin-right: 1.5rem;
+}

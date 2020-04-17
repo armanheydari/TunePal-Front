@@ -1,5 +1,6 @@
 import React from "react";
 import SuggestItem from "./SuggestItem.js";
+import NoMatchFound from "./NoMatchFound";
 
 class SuggestList extends React.Component {
   filterItemGender = (gender) => {
@@ -23,23 +24,27 @@ class SuggestList extends React.Component {
       item.distance <= maxDistance
     );
   };
+
   render() {
     let filtered = this.props.items.filter(this.filterItem);
-    return (
-      <ul className="matchList-firstList">
-        {filtered.map((item) => {
-          return (
-            <SuggestItem
-              username={item.username}
-              name={item.name}
-              gender={item.gender}
-              age={item.age}
-              distance={item.distance}
-            />
-          );
-        })}
-      </ul>
-    );
+    if (filtered.length !== 0) {
+      return (
+        <ul className="matchList-firstList">
+          {filtered.map((item) => {
+            return (
+              <SuggestItem
+                username={item.username}
+                name={item.name}
+                gender={item.gender}
+                age={item.age}
+                distance={item.distance}
+              />
+            );
+          })}
+        </ul>
+      );
+    }
+    return (<NoMatchFound />)
   }
 }
 
