@@ -1,0 +1,48 @@
+.Quiz_image{
+    width: 20rem;
+    height: 20rem;
+    border-radius: 100%;
+    display: inline-block;
+    float: right;
+    margin-top: 1rem;
+    margin-right: 15rem;
+}
+
+.Quiz-question{
+    font-size: xx-large;
+    margin-bottom: 2rem;
+}
+
+.Quiz_form{
+    background-color: honeydew;
+    /* text-align: center; */
+}
+
+.Quiz_submit-button{
+    text-align: center;
+    padding: 1rem;
+}
+
+.Quiz_next-button{
+    background-color: honeydew;
+    padding: 0rem 23.1rem;
+}
+
+.ui.right.labeled.icon.button{
+    font-size: large;
+    background-color: greenyellow;
+    border-radius: 12px;
+}
+
+.ui.left.labeled.icon.button{
+    font-size: large;
+    background-color: greenyellow;
+    border-radius: 12px;
+}
+
+.ui.radio{
+    font-style: normal;
+    font-size: x-large;
+    margin-bottom: 1.5rem;
+    margin-left: 0.5rem;
+}

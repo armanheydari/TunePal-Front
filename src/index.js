@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import 'semantic-ui-css/semantic.min.css';
 import './style-container.scss';
 import Main from './components/Main.js';
+//import Quiz from './components/Quiz/Quiz.js';
 
 import * as serviceWorker from "./serviceWorker";
 

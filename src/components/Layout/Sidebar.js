@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faHeart, faAddressCard, faUserCog, faPowerOff, faComments } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faHeart, faAddressCard, faUserCog, faPowerOff, faComments, faQuestion } from '@fortawesome/free-solid-svg-icons';
 import ProfilePicture from '../../assets/maxresdefault.jpg';
 
 function Sidebar(props) {
@@ -13,6 +13,7 @@ function Sidebar(props) {
             <Link to="/chat" className="w3-bar-item w3-button Sidebar_item"><FontAwesomeIcon icon={faComments} /><span className="Sidebar_item-name">Chat</span></Link> 
             <Link to="/profile" className="w3-bar-item w3-button Sidebar_item"><FontAwesomeIcon icon={faAddressCard} /><span className="Sidebar_item-name">Profile</span></Link> 
             <Link to="/setting" className="w3-bar-item w3-button Sidebar_item"><FontAwesomeIcon icon={faUserCog} /><span className="Sidebar_item-name">Setting</span></Link>
+            <Link to="/quiz" className="w3-bar-item w3-button Sidebar_item"><FontAwesomeIcon icon={faQuestion} /><span className="Sidebar_item-name">Quiz</span></Link>
             <button className="w3-bar-item w3-button Sidebar_item" onClick={props.logout}><FontAwesomeIcon icon={faPowerOff} /><span className="Sidebar_item-name">Logout</span></button>
         </div>
         

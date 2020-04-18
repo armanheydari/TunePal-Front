@@ -10,8 +10,9 @@ import Profile from './Profile/Profile.js';
 import Setting from './Setting/Setting.js';
 import Requests from './Requests/Requests';
 import Match from './Match/Match';
-
+import Quiz from './Quiz/Quiz.js';
 import Chat from './Chat/Chat';
+
 
 class Main extends React.Component {
     state = {
@@ -55,9 +56,9 @@ class Main extends React.Component {
                         }
                     })
                 })
-                .catch(err => {
-                    console.log(err)
-                });
+            .catch(err => {
+                console.log(err)
+            });
             axios.get('http://tunepal.pythonanywhere.com/account/get_user_info/', config)
                 .then(res => {
                     const userInfo = {
@@ -82,7 +83,6 @@ class Main extends React.Component {
                             show: true,
                         };
                     });
-
                 })
                 .catch(err => {
                     this.setState(() => {
@@ -139,6 +139,7 @@ class Main extends React.Component {
                                 <Route path="/profile"><Profile user={this.state.userInfo} topSong={this.state.topSong} topArtist={this.state.topArtist} /></Route>
                                 <Route path="/setting"><Setting user={this.state.userInfo} /></Route>
                                 <Route path="/logout"></Route>
+                                <Route path="/quiz"><Quiz/></Route>
                                 <Route path="/spotifyresult"><SpotifyResult name={this.state.userInfo.name} /></Route>
                                 <Route path='/404'>404</Route>
                                 <Redirect to='/404' />
