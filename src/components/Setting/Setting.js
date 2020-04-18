@@ -222,7 +222,6 @@ class Setting extends React.Component {
         e.preventDefault();
         const formData = new FormData();
         formData.append('user_avatar', this.state.picture);
-        console.log(formData);
         const config = {
            // mode: "cors",
             headers: {
@@ -259,9 +258,11 @@ class Setting extends React.Component {
                 <h1 className="Setting_title">Setting</h1>
 
                 <form className="Setting_form" onSubmit={this.onFormSubmit}>
-                    <img className="Settings_Picture" alt="avatar" src={this.state.imagePreviewUrl}></img>
-                    <input className="Settings_picture-button" type="file" name="picture" id="file" onChange={this.onChangeFile} />
-                    <button className="Settings_picture-button" type="submit">Submit</button>
+                    <div className="Settings_Picture-container">
+                        <img className="Settings_Picture" alt="avatar" src={this.state.imagePreviewUrl}></img>
+                        <input className="Settings_picture-firstbutton" type="file" name="picture" id="file" onChange={this.onChangeFile} />
+                        <button className="Settings_picture-secondbutton" type="submit">Submit</button>
+                    </div>
                 </form>
 
                 <form className="Setting_form" onSubmit={this.onSaveGeneral}>

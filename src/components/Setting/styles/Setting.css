@@ -73,27 +73,46 @@
     margin-left: 1rem;
 }
 
-.Settings_Picture{
-    width: 40%;
-    height: 100%;
-    border-radius: 50%;
-    margin: auto;
-    padding: 1.5rem 0rem;
-    text-align: center;
-    display: block;
+.Settings_Picture-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1rem 0;
+    align-items: center;
 }
 
-.Settings_picture-button{
-    margin-left: 20rem;
+.Settings_Picture{
+    width: 250px;
+    height: 250px;
+    border-radius: 100%;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
+.Settings_picture-firstbutton{
+    /* margin-left: 20rem;
     margin-bottom:10rem ;
-    background-color: gray; /* Green */
-    border: none;
-    color: white;
+    background-color: gray;*/
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    border: 10px black;
+    margin: auto;
+    margin-bottom: 2rem;
+    margin-left: 32rem;
+    /* border: 10px black; */
+}
+
+.Settings_picture-secondbutton{
+    /* margin-left: 20rem;
+    margin-bottom:10rem ;
+    background-color: gray;*/
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: auto;
+    /* border: 10px black; */
 }
 
 /* .Setting_label {

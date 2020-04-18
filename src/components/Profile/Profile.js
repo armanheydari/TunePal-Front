@@ -10,7 +10,7 @@ class Profile extends React.Component {
         return (
             <div className="Profile_container">
                 <h1 className="Profile_title">Profile</h1>
-                <General user={this.props.user} />
+                <General user={this.props.user} topSong={this.props.topSong} topArtist={this.props.topArtist} />
                 {/* <div className="Profile_tables-container">
                     <div className="row">
                         <div className="col-lg-6 col-md-12 col-sm-12">

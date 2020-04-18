@@ -13,7 +13,6 @@ class Main extends React.Component {
     state = {
         show: false,
         isLoggedIn: false,
-        //profile_avatar: undefined,
         userInfo: {
             name: undefined,
             gender: undefined,
@@ -27,8 +26,11 @@ class Main extends React.Component {
             neighbourhood: undefined,
             bio: undefined,
             favorites: undefined,
-            avatar: undefined
-        }
+            avatar: undefined,
+            score: undefined
+        },
+        topSong: [],
+        topArtist: []
     };
 
     componentDidMount() {
@@ -36,63 +38,55 @@ class Main extends React.Component {
             const config = {
                 mode: "cors",
                 headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Token ${localStorage.getItem('token')}`
+                    'Content-Type': 'application/json',
+                    'Authorization': `Token ${localStorage.getItem('token')}`
                 }
             }
-            
-        //     const b= axios.get('http://tunepal.pythonanywhere.com/account/get_user_info/',config)
-        //     //console.log(b) 
-        //    .then(res => {
-        //         console.log(res)
-        //       //const profile_avatar = res.data.user-profile_avatar
-        //     })
-        //     .catch(err => {
-        //         console.log(err.data)
-        //     });
-
-            // axios.get('http://tunepal.pythonanywhere.com/spotify/topsong/',config)
-            // .then(res => {
-            //     console.log(res)
-            // })
-            // .catch(err => {
-            //     console.log(err.data)
-            // });
-            axios.get('http://tunepal.pythonanywhere.com/account/get_user_info/', config)
+            axios.get('http://tunepal.pythonanywhere.com/spotify/topartist/', config)    
             .then(res => {
                 console.log(res)
-                const userInfo = {
-                    name: res.data.nickname,
-                    gender: res.data.gender,
-                    birthday: res.data.birthdate,
-                    email: res.data.email,
-                    username: res.data.username,
-                    latitude: res.data.location ? res.data.location.latitude : undefined,
-                    longitude: res.data.location ? res.data.location.longitude : undefined,
-                    country: res.data.location ? res.data.location.country : undefined,
-                    province: res.data.location ? res.data.location.province : undefined,
-                    neighbourhood: res.data.location ? res.data.location.neighbourhood : undefined,
-                    bio: res.data.biography,
-                    favorites: res.data.interests,
-                    avatar:res.data.user_avatar
-                    // artists: res.data.artists,
-                    // score: res.data.score,
-                };
-                console.log(userInfo);
-                this.setUserInfo(userInfo);
-                this.setState(() => {
-                    return {
-                        show: true,
-                    };
+                    this.setState(() => {
+                        return {
+                            topArtist: res.data
+                        }
+                    })
+                })
+                .catch(err => {
+                    console.log(err)
                 });
-            })
-            .catch(err => {
-                this.setState(() => {
-                    return {
-                        show: true
+            axios.get('http://tunepal.pythonanywhere.com/account/get_user_info/', config)
+                .then(res => {
+                    const userInfo = {
+                        name: res.data.nickname,
+                        gender: res.data.gender,
+                        birthday: res.data.birthdate,
+                        email: res.data.email,
+                        username: res.data.username,
+                        latitude: res.data.location ? res.data.location.latitude : undefined,
+                        longitude: res.data.location ? res.data.location.longitude : undefined,
+                        country: res.data.location ? res.data.location.country : undefined,
+                        province: res.data.location ? res.data.location.province : undefined,
+                        neighbourhood: res.data.location ? res.data.location.neighbourhood : undefined,
+                        bio: res.data.biography,
+                        favorites: res.data.interests,
+                        avatar: res.data.user_avatar,
+                        score: res.data.score
                     };
+                    this.setUserInfo(userInfo);
+                    this.setState(() => {
+                        return {
+                            show: true,
+                        };
+                    });
+
+                })
+                .catch(err => {
+                    this.setState(() => {
+                        return {
+                            show: true
+                        };
+                    });
                 });
-            });
         }
         else {
             this.setState(() => {
@@ -101,6 +95,24 @@ class Main extends React.Component {
                 };
             });
         }
+        const config = {
+            mode: "cors",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${localStorage.getItem('token')}`
+            }
+        }
+        axios.get('http://tunepal.pythonanywhere.com/spotify/topsong/', config)
+            .then(res => {
+                this.setState(() => {
+                    return {
+                        topSong: res.data
+                    }
+                })
+            })
+            .catch(err => {
+                console.log(err)
+            });
     }
 
     render() {
@@ -119,7 +131,7 @@ class Main extends React.Component {
                             <Switch>
                                 <Route exact path="/"><p>This is main page.</p></Route>
                                 <Route path="/match"></Route>
-                                <Route path="/profile"><Profile user={this.state.userInfo} /></Route>
+                                <Route path="/profile"><Profile user={this.state.userInfo} topSong={this.state.topSong} topArtist={this.state.topArtist} /></Route>
                                 <Route path="/setting"><Setting user={this.state.userInfo} /></Route>
                                 <Route path="/logout"></Route>
                                 <Route path="/spotifyresult"><SpotifyResult name={this.state.userInfo.name} /></Route>
@@ -143,7 +155,7 @@ class Main extends React.Component {
     }
 
     getUserInfo = () => {
-        
+
     }
 
     setUserInfo = (userInfo) => {
@@ -159,19 +171,18 @@ class Main extends React.Component {
         const config = {
             mode: "cors",
             headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Token ${localStorage.getItem('token')}`
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${localStorage.getItem('token')}`
             }
         }
         axios.get('http://tunepal.pythonanywhere.com/account/logout/', config)
-        .then(() => {
-            
-        })
+            .then(() => {
+
+            })
         localStorage.clear();
         this.setState(() => {
             return {
                 isLoggedIn: false,
-                //profile_avatar:undefined,
                 userInfo: {
                     name: undefined,
                     gender: undefined,
@@ -185,14 +196,13 @@ class Main extends React.Component {
                     neighbourhood: undefined,
                     bio: undefined,
                     favorites: undefined,
-                    avatar: undefined
-                    //artists: undefined,
-                    //score: undefined,
+                    avatar: undefined,
+                    score: undefined
                 }
             }
         });
     }
-    
+
 }
 
 export default Main;

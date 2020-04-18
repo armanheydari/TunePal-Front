@@ -56,6 +56,7 @@
     justify-content: space-between;
     margin: 2rem 0rem;
     border-bottom: 1px solid;
+    font-size: 20;
 }
 
 .Profile_General_artist {
@@ -71,7 +72,6 @@
 .Profile_General_song {
     float: left;
 	height: 20rem;
-	width: 80rem;
 	overflow-y: scroll;
     scroll-behavior: smooth;
     padding: 1rem 1rem;
@@ -91,14 +91,23 @@
     background-color: #f2f2f2;
     width: 50%;
 }
+
+.Profile_General-Picture-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1rem 0;
+    align-items: center;
+}
+
 .General_Picture{
-    width: 30%;
-    height: 30%;
+    width: 250px;
+    height: 250px;
     border-radius: 100%;
-    margin: auto;
-    padding: 1rem 0;
+    /* margin: auto;
+    padding: 0.5rem 0;
     text-align: center;
-    display: block;
+    display: block; */
 }
 
 /* .Profile_General_image-container {
