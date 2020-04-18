@@ -2,10 +2,22 @@ import React from 'react';
 import ProfilePicture from '../../assets/Default-Profile-Picture.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPeopleArrows, faVenusMars, faMale, faFemale, faBirthdayCake } from '@fortawesome/free-solid-svg-icons';
+import Axios from 'axios';
+
+function tokenConfig() {
+    const config = {
+      mode: "cors",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${localStorage.getItem('token')}`
+      }
+    };
+    return config;
+  }
 
 class RequestItem extends React.Component {
     render() {
-        const { username, name, gender, age, distance } = this.props;
+        const { name, gender, age, distance, imgURL } = this.props;
         return (
             <li className="Requests_List_Item">
 
@@ -13,7 +25,7 @@ class RequestItem extends React.Component {
                     <img
                         className="Requests_List_Item-img"
                         alt="profile-img"
-                        src={this.props.picture || ProfilePicture}
+                        src={imgURL || ProfilePicture}
                     />
                     <h2 className="Requests_List_Item-name">{name}</h2>
                 </div>
@@ -22,7 +34,7 @@ class RequestItem extends React.Component {
                     <div className="ui label">
                         <FontAwesomeIcon icon={faVenusMars} />
                         <div className="detail">
-                            {gender === "male" ? <FontAwesomeIcon icon={faMale} /> : <FontAwesomeIcon icon={faFemale} />}
+                            {gender === "Male" ? <FontAwesomeIcon icon={faMale} /> : <FontAwesomeIcon icon={faFemale} />}
                         </div>
                     </div>
                     <div className="ui label">
@@ -46,11 +58,25 @@ class RequestItem extends React.Component {
     }
 
     onClickAccept = () => {
-
+        Axios.get(`http://tunepal.pythonanywhere.com/spotify/response/?verb=accept&username=${this.props.username}`, tokenConfig())
+        .then(res => {
+            console.log(res);
+            this.props.updateItems(this.props.username);
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 
     onClickReject = () => {
-
+        Axios.get(`http://tunepal.pythonanywhere.com/spotify/response/?verb=decline&username=${this.props.username}`, tokenConfig())
+        .then(res => {
+            console.log(res);
+            this.props.updateItems(this.props.username);
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 }
 

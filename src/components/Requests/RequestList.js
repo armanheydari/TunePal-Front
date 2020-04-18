@@ -6,14 +6,17 @@ class RequestList extends React.Component {
         return (
             <ul className="Requests_List">
                 {
-                    this.props.items.map((item) => {
+                    this.props.items.map((item, index) => {
                         return (
                             <RequestItem
-                                username={item.username}
-                                name={item.name}
-                                gender={item.gender}
-                                age={item.age}
-                                distance={item.distance}
+                                key={index}
+                                username={item.from_user.username}
+                                name={item.from_user.nickname}
+                                gender={item.from_user.gender}
+                                age={item.from_user.age}
+                                distance={item.from_user.location}
+                                imgURL={item.from_user.user_avatar}
+                                updateItems={this.props.updateItems}
                             />
                         );
                     })
