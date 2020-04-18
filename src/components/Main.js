@@ -8,6 +8,8 @@ import LoginSignup from './LoginSignup/LoginSignup.js';
 import SpotifyResult from './Spotify/SpotifyResult.js';
 import Profile from './Profile/Profile.js';
 import Setting from './Setting/Setting.js';
+import Requests from './Requests/Requests';
+
 
 class Main extends React.Component {
     state = {
@@ -92,7 +94,7 @@ class Main extends React.Component {
                         </div>
                         <div className="Main_content-container">
                             <Switch>
-                                <Route exact path="/"><p>This is main page.</p></Route>
+                                <Route exact path="/"><Requests /></Route>
                                 <Route path="/match"></Route>
                                 <Route path="/profile"><Profile user={this.state.userInfo} /></Route>
                                 <Route path="/setting"><Setting user={this.state.userInfo} /></Route>

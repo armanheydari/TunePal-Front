@@ -8,4 +8,7 @@
 @import './components/Profile/styles/Profile.css';
 @import './components/Profile/styles/General.css';
 @import './components/Setting/styles/Setting.css';
+@import './components/Requests/styles/Requests.css';
+@import './components/Requests/styles/RequestList.css';
+@import './components/Requests/styles/RequestItem.css';
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import RequestList from './RequestList';
+import Axios from 'axios';
 
 class Requests extends React.Component {
     state = {
@@ -70,14 +71,18 @@ class Requests extends React.Component {
           ],
     }
 
+    componentDidMount() {
+      //Send request to back to get the user requests
+    }
+
     render() {
-        return (
-            <div className="Requests">
-                <RequestList
-                    items={this.state.items}
-                />
-            </div>
-        );
+      return (
+          <div className="Requests">
+              <RequestList
+                  items={this.state.items}
+              />
+          </div>
+      );
     }
 }
 
