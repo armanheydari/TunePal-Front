@@ -11,6 +11,7 @@ import Setting from './Setting/Setting.js';
 import Requests from './Requests/Requests';
 import Match from './Match/Match';
 
+import Chat from './Chat/Chat';
 
 class Main extends React.Component {
     state = {
@@ -97,6 +98,7 @@ class Main extends React.Component {
                             <Switch>
                                 <Route exact path="/"><Requests /></Route>
                                 <Route path="/match"><Match /></Route>
+                                <Route path="/chat"><Chat /></Route>
                                 <Route path="/profile"><Profile user={this.state.userInfo} /></Route>
                                 <Route path="/setting"><Setting user={this.state.userInfo} /></Route>
                                 <Route path="/logout"></Route>
