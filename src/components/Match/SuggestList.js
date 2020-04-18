@@ -5,10 +5,10 @@ import NoMatchFound from "./NoMatchFound";
 class SuggestList extends React.Component {
   filterItemGender = (gender) => {
     const { showMale, showFemale } = this.props.filter;
-    if (gender === "male" && showMale) {
+    if (gender === "Male" && showMale) {
       return true;
     }
-    if (gender === "female" && showFemale) {
+    if (gender === "Female" && showFemale) {
       return true;
     }
     return false;
@@ -20,8 +20,8 @@ class SuggestList extends React.Component {
       this.filterItemGender(item.gender) &&
       item.age >= minAge &&
       item.age <= maxAge &&
-      item.distance >= minDistance &&
-      item.distance <= maxDistance
+      item.location >= minDistance &&
+      item.location <= maxDistance
     );
   };
 
@@ -30,14 +30,18 @@ class SuggestList extends React.Component {
     if (filtered.length !== 0) {
       return (
         <ul className="matchList-firstList">
-          {filtered.map((item) => {
+          {filtered.map((item, index) => {
             return (
               <SuggestItem
+                key={index}
                 username={item.username}
-                name={item.name}
+                name={item.nickname}
                 gender={item.gender}
                 age={item.age}
-                distance={item.distance}
+                distance={item.location}
+                imgURL={item.user_avatar}
+                pending={item.pendding}
+                updatePending={this.props.updatePending}
               />
             );
           })}

@@ -68,3 +68,53 @@
 .Match_Filter-slider-title {
     margin-right: 1.5rem;
 }
+
+.pending {
+    color: white;
+    background-color: grey;
+    margin-top: 30px;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0px 3px 0px 0px grey;
+    letter-spacing: 0.07em;
+    transition: all 0.4s ease;
+}
+
+@media screen and (max-width: 768px) {
+    .pending {
+        margin: 1.5rem 0 0 2rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .pending {
+        width: 50%;
+        margin: 10px auto;
+        padding: 10px;
+    }
+}
+
+.pending:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 40px 29px -19px grey;
+}
+
+@media screen and (max-width: 768px) {
+    .pending:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+.pending:active {
+    box-shadow: inset 0 0 10px 1px grey,
+      0px 40px 29px -19px grey;
+    transform: scale(0.95) translateY(-9px);
+}
+
+@media screen and (max-width: 768px) {
+    .pending:active {
+        transform: scale(0.95) translateY(0);
+        box-shadow: none;
+    }
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import Axios from "axios";
 import Filter from "./Filter.js";
 import SuggestList from "./SuggestList";
 
@@ -15,71 +15,8 @@ function tokenConfig() {
 
 class Match extends React.Component {
   state = {
-    items: [
-      {
-        username: "ALi3TR",
-        name: "Ali",
-        gender: "male",
-        age: 20,
-        distance: "19",
-      },
-      {
-        username: "Rman",
-        name: "Arman",
-        gender: "male",
-        age: 30,
-        distance: "119",
-      },
-      {
-        username: "SabaRoh",
-        name: "Saba",
-        gender: "female",
-        age: 40,
-        distance: "171",
-      },
-      {
-        username: "Masut",
-        name: "Masoud",
-        gender: "male",
-        age: 50,
-        distance: "67",
-      },
-      {
-        username: "RezaMan",
-        name: "Reza",
-        gender: "male",
-        age: 60,
-        distance: "211",
-      },
-      {
-        username: "iammobina",
-        name: "Mobina",
-        gender: "female",
-        age: 70,
-        distance: "181",
-      },
-      {
-        username: "dimo",
-        name: "Omid",
-        gender: "male",
-        age: 80,
-        distance: "67",
-      },
-      {
-        username: "Navido",
-        name: "Navid",
-        gender: "male",
-        age: 90,
-        distance: "287",
-      },
-      {
-        username: "meliw",
-        name: "Melika",
-        gender: "female",
-        age: 25,
-        distance: "79",
-      },
-    ],
+    items: [],
+    render: false,
     showMale: true,
     showFemale: true,
     minAge: 18,
@@ -87,6 +24,22 @@ class Match extends React.Component {
     minDistance: 0,
     maxDistance: 300,
   };
+
+  componentDidMount() {
+    Axios.get("http://tunepal.pythonanywhere.com/spotify/suggestions/", tokenConfig())
+    .then(res => {
+      console.log(res);
+      this.setState(prevState => {
+        return {
+          items: res.data.s_users,
+          render: true
+        };
+      });
+    })
+    .catch(err => {
+      console.log(err.data);
+    });
+  }
 
   genderFilter = (gender) => {
     if (gender === "male") {
@@ -136,37 +89,39 @@ class Match extends React.Component {
     return filter;
   };
 
-  // componentDidMount() {
-  //     axios.get('http://tunepal.pythonanywhere.com/spotify/match/', tokenConfig())
-  //     .then(res => {
-  //         console.log(res);
-  //         this.setState(() => {
-  //             return {
-  //                 male: res.data.MALE,
-  //                 female: res.data.FEMALE
-  //             };
-  //         });
-  //     })
-  //     .catch(err => {
-  //         console.log(err.data);
-  //     });
-  // }
-
   render() {
-    return (
-      <div className="matchList">
-          <Filter
-            setGender={this.genderFilter}
-            setDistance={this.distanceFilter}
-            setAge={this.ageFilter}
+    if (this.state.render) {
+      return (
+        <div className="matchList">
+            <Filter
+              setGender={this.genderFilter}
+              setDistance={this.distanceFilter}
+              setAge={this.ageFilter}
+              filter={this.createFilterObject()}
+            />
+          <SuggestList
+            items={this.state.items}
             filter={this.createFilterObject()}
+            updatePending={this.updatePending}
           />
-        <SuggestList
-          items={this.state.items}
-          filter={this.createFilterObject()}
-        />
-      </div>
-    );
+        </div>
+      );
+    }
+    return null;
+  }
+
+  updatePending = (username) => {
+    this.setState(prevState => {
+      const items = prevState.items.map(item => {
+        if (item.username === username) {
+          item.pendding = true;
+        }
+        return item;
+      });
+      return {
+        items
+      }
+    })
   }
 }
 
