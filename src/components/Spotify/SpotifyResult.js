@@ -19,7 +19,6 @@ class SpotifyResult extends React.Component {
         }
         axios.get(serverURL, config)
         .then(res => {
-            console.log(res);
             this.setState(() => {
                 return {
                     show: true,

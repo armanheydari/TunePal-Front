@@ -1,5 +1,9 @@
 import React from 'react';
-
+import axios from 'axios'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMusic, faMicrophone, faTrophy } from '@fortawesome/free-solid-svg-icons';
+import ProfilePicture from '../../assets/maxresdefault.jpg';
+import TopSongItem from './TopSongItem'
 class General extends React.Component {
     state = {
     }
@@ -7,11 +11,16 @@ class General extends React.Component {
     location = () => {
         return `${this.props.user.country} , ${this.props.user.province} , ${this.props.user.neighbourhood}`
     }
+    componentDidMount(){
+        console.log(this.props.topArtist)
+    }
 
     render() {
         return (
             <div className="Profile_General_container">
-
+                <div className="Profile_General-Picture-container">
+                    <img className="General_Picture" alt="profile-picture" src={this.props.user.avatar}></img>
+                </div>
                 <div className="Profile_General_info-container">
                     <h2>General Info</h2>
                     <div className="Profile_General_info-field">
@@ -21,6 +30,7 @@ class General extends React.Component {
                     <div className="Profile_General_info-field">
                         <span className="Profile_General_info-label">Gender</span>
                         <span>{this.props.user.gender}</span>
+
                     </div>
                     <div className="Profile_General_info-field">
                         <span className="Profile_General_info-label">Birthday</span>
@@ -33,6 +43,10 @@ class General extends React.Component {
                     <div className="Profile_General_info-field">
                         <span className="Profile_General_info-label">Username</span>
                         <span>{this.props.user.username}</span>
+                    </div>
+                    <div className="Profile_General_info-field">
+                        <span className="Profile_General_info-label">Score <FontAwesomeIcon icon={faTrophy} /></span>
+                        <span>{this.props.user.score}</span>
                     </div>
                 </div>
 
@@ -50,6 +64,35 @@ class General extends React.Component {
                     </div>
                 </div>
 
+                <div className="Profile_General_artist-container">
+                    <h2>Favourite Artists <FontAwesomeIcon icon={faMusic} /> </h2>
+                    <div className="Profile_General_artist">
+                        {this.props.topArtist[0].name} , {this.props.topArtist[1].name} , {this.props.topArtist[2].name}
+                    </div>
+                </div>
+
+                <div className="Profile_General_song-container">
+                    <h2>Top Songs <FontAwesomeIcon icon={faMicrophone} /></h2>
+                    <div className="Profile_General_song">
+                        <table className="Profile_General_song-table">
+                            <tr>
+                                <th className="Profile_General_song-table-header">Song</th>
+                                <th className="Profile_General_song-table-header">Artist</th>
+                            </tr>
+                            {
+                                this.props.topSong.map((e, index) => {
+                                    return (
+                                        <TopSongItem
+                                            key={index}
+                                            artist={e.artist_name}
+                                            song={e.music_name}
+                                        />
+                                    )
+                                })
+                            }
+                        </table>
+                    </div>
+                </div>
             </div>
         )
     }
