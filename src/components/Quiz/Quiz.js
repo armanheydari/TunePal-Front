@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { PropTypes } from 'react';
-import ProfilePicture from '../../assets/maxresdefault.jpg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //import ReactDOM from 'react-dom';
 //import { string } from 'prop-types';
 //import 'jquery';
 import 'semantic-ui-css/semantic.min.css';
-
+import ThinkingPicture from '../../assets/think.jpg';
+import "./styles/Quiz.css"
 class Quiz extends React.Component {
 
     state = {
@@ -18,7 +19,8 @@ class Quiz extends React.Component {
         choise4: undefined,
         userChoise: undefined,
         correctAnswer: undefined,
-        isPicture: true
+        isPicture: true,
+        show:false
     };
 
     onChange = (e) => {
@@ -42,25 +44,37 @@ class Quiz extends React.Component {
         };
         const quizAnswer = {
             quiz_id: this.state.id.toString(),
-            answer: this.state.userChoise.toString()
+            answer: this.state.userChoise
         }
         const JsonToBack = JSON.stringify(quizAnswer);
-        const a1 = axios.post("http://tunepal.pythonanywhere.com/quiz/checkimageanswer/", JsonToBack, config)
-            // .then((response) => {
-            //     alert("The file is successfully uploaded");
-            //     console.log(response);
-            //     this.setState(() => {
-            //         return {
-            //             correctAnswer: response.data.answer
-            //         };
-            //     });
-            // }).catch((error) => {
-            //     console.log(error);
-            // });
-            console.log(a1)
+        if (!this.state.isPicture) {
+            axios.post("http://tunepal.pythonanywhere.com/quiz/checkimageanswer/", JsonToBack, config)
+                .then((response) => {
+                    console.log(response);
+                    this.setState(() => {
+                        return {
+                            correctAnswer: response.data
+                        };
+                    });
+                }).catch((error) => {
+                    console.log(error);
+                });
+        } else {
+            axios.post("http://tunepal.pythonanywhere.com/quiz/checkpssageanswer/", JsonToBack, config)
+                .then((response) => {
+                    console.log(response);
+                    this.setState(() => {
+                        return {
+                            correctAnswer: response.data
+                        };
+                    });
+                }).catch((error) => {
+                    console.log(error);
+                });
+        }
     }
 
-    getQuestion=()=> {
+    getQuestion = () => {
         const config = {
             mode: "cors",
             headers: {
@@ -69,18 +83,19 @@ class Quiz extends React.Component {
             }
         }
         if (!this.state.isPicture) {
-             axios.get('http://tunepal.pythonanywhere.com/quiz/passagequiz/', config)
+            axios.get('http://tunepal.pythonanywhere.com/quiz/passagequiz/', config)
                 .then(res => {
                     console.log(res)
                     this.setState(() => {
                         return {
                             question: res.data[0].question,
+                            imageURL: ThinkingPicture,
                             choise1: res.data[0].choices1,
                             choise2: res.data[0].choices2,
                             choise3: res.data[0].choices3,
                             choise4: res.data[0].choices4,
                             id: res.data[0].id,
-                            //isPicture:!this.state.isPicture
+                            show:true
                         };
                     });
                 })
@@ -89,25 +104,24 @@ class Quiz extends React.Component {
                 });
         } else {
             axios.get('http://tunepal.pythonanywhere.com/quiz/Imagequiz/', config)
-            .then(res => {
-                console.log(res)
-                this.setState(() => {
-                    return {
-                        question: 'Who is this artist?',
-                        imageURL:res.data[0].question,
-                        choise1: res.data[0].choices1,
-                        choise2: res.data[0].choices2,
-                        choise3: res.data[0].choices3,
-                        choise4: res.data[0].choices4,
-                        id: res.data[0].id
-                    };
+                .then(res => {
+                    console.log(res)
+                    this.setState(() => {
+                        return {
+                            question: 'Who is this artist?',
+                            imageURL: res.data[0].question,
+                            choise1: res.data[0].choices1,
+                            choise2: res.data[0].choices2,
+                            choise3: res.data[0].choices3,
+                            choise4: res.data[0].choices4,
+                            id: res.data[0].id,
+                            show:true
+                        };
+                    });
+                })
+                .catch(err => {
+                    console.log(err)
                 });
-            })
-            .catch(err => {
-                console.log(err)
-            });
-            //console.log(a)
-            console.log('heloooo')
         }
     }
 
@@ -123,63 +137,88 @@ class Quiz extends React.Component {
         this.getQuestion();
     }
 
-    nextPushed=()=>{
-        // this.setState(prevState => {
-        //     return {
-        //         isPicture:!prevState.isPicture
-        //     };
-        // });
+    nextPushed = () => {
+        this.setState(prevState => {
+            return {
+                isPicture: !prevState.isPicture,
+                id: undefined,
+                imageURL: undefined,
+                question: undefined,
+                choise1: undefined,
+                choise2: undefined,
+                choise3: undefined,
+                choise4: undefined,
+                userChoise: undefined,
+                correctAnswer: undefined,
+                show:false
+            };
+        });
         this.getQuestion();
     }
-
     render() {
-        return (
-            <div>
-                <form onSubmit={this.onSubmit}>
-                    <h1>{this.state.question}</h1>
-                    {this.state.isPicture ? <img src={this.state.imageURL}></img> : <div/>}
-                    <div style={(this.state.choise1 === this.state.correctAnswer) ? TrueStyle : {}}>
-                        <input
-                            type="radio"
-                            name="choise"
-                            value={this.state.choise1}
-                            onChange={this.onChange}
-                        /><span>{this.state.choise1}</span>
+        if(this.state.show){
+            return (
+                <div>
+                    <form className="Quiz_form" onSubmit={this.onSubmit}>
+                        
+                        <img src={this.state.imageURL} className="Quiz_image" />
+                        
+                        <h1 className="Quiz-question">{this.state.question}</h1>
+                        
+                        <div style={(this.state.choise2 === this.state.correctAnswer) ? TrueStyle : {}} className="ui radio" >
+                            <input
+                                type="radio"
+                                name="choise"
+                                value={this.state.choise1}
+                                onChange={this.onChange}
+                            //checked={false}
+                            /><span >  {this.state.choise1}</span>
+                        </div>
+                        <div style={(this.state.choise2 === this.state.correctAnswer) ? TrueStyle : {}} className="ui radio">
+                            <input
+                                type="radio"
+                                name="choise"
+                                value={this.state.choise2}
+                                onChange={this.onChange}
+                            //checked={false}
+                            /><span>  {this.state.choise2}</span>
+                        </div>
+                        <div style={(this.state.choise3 === this.state.correctAnswer) ? TrueStyle : {}} className="ui radio">
+                            <input
+                                type="radio"
+                                name="choise"
+                                value={this.state.choise3}
+                                onChange={this.onChange}
+                            //checked={false}
+                            /><span>  {this.state.choise3}</span>
+                        </div>
+                        <div style={(this.state.choise4 === this.state.correctAnswer) ? TrueStyle : {}} className="ui radio">
+                            <input
+                                type="radio"
+                                name="choise"
+                                value={this.state.choise4}
+                                onChange={this.onChange}
+                            //checked={false}
+                            /><span>  {this.state.choise4}</span>
+                        </div>
+    
+                        <div className="Quiz_submit-button">
+                            <button className="ui left labeled icon button" type="submit">
+                                <i className="icon ok" ></i>
+                                submit
+                            </button>
+                        </div>
+                    </form>
+                    <div className="Quiz_next-button">
+                        <button type="toggle" className="ui right labeled icon button" onClick={this.nextPushed}>
+                            <i className="right arrow icon"></i>
+                             Next
+                        </button>
                     </div>
-                    <div style={(this.state.choise2 === this.state.correctAnswer) ? TrueStyle : {}}>
-                        <input
-                            type="radio"
-                            name="choise"
-                            value={this.state.choise2}
-                            onChange={this.onChange}
-                        /><span>{this.state.choise2}</span>
-                    </div>
-                    <div style={(this.state.choise3 === this.state.correctAnswer) ? TrueStyle : {}}>
-                        <input
-                            type="radio"
-                            name="choise"
-                            value={this.state.choise3}
-                            onChange={this.onChange}
-                        /><span>{this.state.choise3}</span>
-                    </div>
-                    <div style={(this.state.choise4 === this.state.correctAnswer) ? TrueStyle : {}}>
-                        <input
-                            type="radio"
-                            name="choise"
-                            value={this.state.choise4}
-                            onChange={this.onChange}
-                        /><span>{this.state.choise4}</span>
-                    </div>
-                    <button type="submit">
-                        submit
-                    </button>
-                    <button onClick={this.nextPushed}>
-                        next
-                    </button>
-
-                </form>
-            </div>
-        );
+                </div>
+            );
+        }
+        return null;
     };
 }
 
