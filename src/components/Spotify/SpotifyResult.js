@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpotify } from '@fortawesome/free-brands-svg-icons';
 
 class SpotifyResult extends React.Component {
     state = {
@@ -40,20 +41,19 @@ class SpotifyResult extends React.Component {
         }
         if (this.state.succeed) {
             return (
-                <div>
-                    <p>{this.props.name}</p>
-                    <p>TunePal + Spotify = Done</p>
-                    <Link to="/">Continue to Homepage.</Link>
+                <div className="SpotifyResult">
+                    <FontAwesomeIcon icon={faSpotify}  className="SpotifyResult-icon-success" />
+                    <h1>Hey {this.props.name},</h1>
+                    <p className="SpotifyResult-text-success">Connected your <strong>Spotify</strong> account to <strong>TunePal</strong></p>
                 </div>
             );
         }
         return (
-            <div>
-                <p>{this.props.name}</p>
-                <p>There was a problem connecting your Spotify account to TunePal.</p>
-                <p>You can connect it any time in Setting.</p>
-                <Link to="/">Continue to Homepage.</Link>
-            </div>
+            <div className="SpotifyResult">
+            <FontAwesomeIcon icon={faSpotify}  className="SpotifyResult-icon-failed" />
+            <h1>Hey {this.props.name},</h1>
+            <p className="SpotifyResult-text-failed">Failed to connect your <strong>Spotify</strong> account to <strong>TunePal</strong></p>
+        </div>
         );
     }
 }
