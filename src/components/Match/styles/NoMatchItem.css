@@ -1,0 +1,22 @@
+.Match_NoItem {
+    padding: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    vertical-align: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+.Match_NoItem-icon {
+    font-size: 20rem;
+}
+
+.Match_NoItem-title {
+    
+}
+
+.Match_NoItem-text {
+
+}
