@@ -1,14 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faSpotify } from '@fortawesome/free-brands-svg-icons';
-// import { faPlus } from '@fortawesome/free-solid-svg-icons';
-// import AppLogo from '../../assets/app-logo.png';
 import SpotifyPhoto from '../../assets/Spotify.png';
 
 class Spotify extends React.Component {
-    state = {
-    }
 
     onClick = () => {
         const config = {
@@ -28,15 +22,6 @@ class Spotify extends React.Component {
 
     render() {
         return (
-            // <div>
-            //     <img className="Location_logo" alt="app-logo-img" width="80px" height="80px" src={AppLogo}></img>
-            //     <div className="Location_plus">
-            //         <FontAwesomeIcon icon={faPlus} />
-            //     </div>
-            //     <div className="Location_marker">
-            //         <FontAwesomeIcon className="Location_marker" icon={faSpotify} />
-            //     </div>
-            // </div>
             <div className="Spotify_container">
                 <div className="Spotify_title">Spotify</div>
                 <img alt="app-logo-img" src={SpotifyPhoto}></img>
@@ -52,16 +37,3 @@ class Spotify extends React.Component {
 }
 
 export default Spotify;
-
-
-{/* <img className="Location_logo" alt="app-logo-img" width="80px" height="80px" src={AppLogo}></img>
-<div className="Location_plus">
-    <FontAwesomeIcon icon={faPlus} />
-</div>
-<div className="Location_marker">
-    <FontAwesomeIcon icon={faMapMarkerAlt} />
-</div> */}
-
-
- {/* <p>{this.props.name}</p>
-<button onClick={this.onClick}>Link To Spotify</button> */}

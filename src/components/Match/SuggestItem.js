@@ -1,5 +1,5 @@
 import React from "react";
-import ProfilePicture from "../../assets/maxresdefault.jpg";
+import ProfilePicture from "../../assets/Default-Profile-Picture.jpg";
 import Axios from 'axios';
 
 function tokenConfig() {

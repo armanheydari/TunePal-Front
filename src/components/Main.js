@@ -35,7 +35,7 @@ class Main extends React.Component {
             score: undefined
         },
         topSong: [],
-        topArtist: []
+        topArtist: undefined
     };
 
     componentDidMount() {
@@ -108,6 +108,7 @@ class Main extends React.Component {
         }
         axios.get('http://tunepal.pythonanywhere.com/spotify/topsong/', config)
             .then(res => {
+                console.log(res);
                 this.setState(() => {
                     return {
                         topSong: res.data

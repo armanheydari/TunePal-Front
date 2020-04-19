@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import ProfilePicture from '../../assets/maxresdefault.jpg';
+import ProfilePicture from "../../assets/Default-Profile-Picture.jpg";
 
 function legalAge() {
     const today = new Date();
@@ -210,13 +210,13 @@ class Setting extends React.Component {
 
     }
 
-    onSavePassword = (e) => {
-        e.preventDefault();
-        const toBack = {
-            currentPassword: this.state.currentPassword,
-            newPassword: this.state.newPassword,
-        }
-    }
+    // onSavePassword = (e) => {
+    //     e.preventDefault();
+    //     const toBack = {
+    //         currentPassword: this.state.currentPassword,
+    //         newPassword: this.state.newPassword,
+    //     }
+    // }
 
     onFormSubmit = (e) => {
         e.preventDefault();
@@ -230,7 +230,7 @@ class Setting extends React.Component {
             }
         };
 
-        const a = axios.put("http://tunepal.pythonanywhere.com/account/sign_up/", formData, config)
+        axios.put("http://tunepal.pythonanywhere.com/account/sign_up/", formData, config)
             // .then((response) => {
             //     axios.get('http://tunepal.pythonanywhere.com/account/get_user_info/', config)
             // })
@@ -259,7 +259,7 @@ class Setting extends React.Component {
 
                 <form className="Setting_form" onSubmit={this.onFormSubmit}>
                     <div className="Settings_Picture-container">
-                        <img className="Settings_Picture" alt="avatar" src={this.state.imagePreviewUrl}></img>
+                        <img className="Settings_Picture" alt="avatar" src={this.state.imagePreviewUrl || ProfilePicture}></img>
                         <input className="Settings_picture-firstbutton" type="file" name="picture" id="file" onChange={this.onChangeFile} />
                         <button className="Settings_picture-secondbutton" type="submit">Submit</button>
                     </div>

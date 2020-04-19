@@ -1,25 +1,19 @@
 import React from 'react';
-import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMusic, faMicrophone, faTrophy } from '@fortawesome/free-solid-svg-icons';
-import ProfilePicture from '../../assets/maxresdefault.jpg';
-import TopSongItem from './TopSongItem'
-class General extends React.Component {
-    state = {
-    }
+import TopSongItem from './TopSongItem';
+import ProfilePicture from '../../assets/Default-Profile-Picture.jpg';
 
+class General extends React.Component {
     location = () => {
         return `${this.props.user.country} , ${this.props.user.province} , ${this.props.user.neighbourhood}`
-    }
-    componentDidMount(){
-        console.log(this.props.topArtist)
     }
 
     render() {
         return (
             <div className="Profile_General_container">
                 <div className="Profile_General-Picture-container">
-                    <img className="General_Picture" alt="profile-picture" src={this.props.user.avatar}></img>
+                    <img className="General_Picture" alt="" src={this.props.user.avatar || ProfilePicture} />
                 </div>
                 <div className="Profile_General_info-container">
                     <h2>General Info</h2>
@@ -67,7 +61,11 @@ class General extends React.Component {
                 <div className="Profile_General_artist-container">
                     <h2>Favourite Artists <FontAwesomeIcon icon={faMusic} /> </h2>
                     <div className="Profile_General_artist">
-                        {this.props.topArtist[0].name} , {this.props.topArtist[1].name} , {this.props.topArtist[2].name}
+                        {
+                            this.props.topArtist &&
+                            `${this.props.topArtist[0].name} , ${this.props.topArtist[1].name} , ${this.props.topArtist[2].name}`
+                        }
+                        
                     </div>
                 </div>
 
@@ -75,21 +73,28 @@ class General extends React.Component {
                     <h2>Top Songs <FontAwesomeIcon icon={faMicrophone} /></h2>
                     <div className="Profile_General_song">
                         <table className="Profile_General_song-table">
-                            <tr>
-                                <th className="Profile_General_song-table-header">Song</th>
-                                <th className="Profile_General_song-table-header">Artist</th>
-                            </tr>
+                            <thead>
+                                <tr>
+                                    <th className="Profile_General_song-table-header">Song</th>
+                                    <th className="Profile_General_song-table-header">Artist</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                             {
+                                
                                 this.props.topSong.map((e, index) => {
                                     return (
-                                        <TopSongItem
-                                            key={index}
-                                            artist={e.artist_name}
-                                            song={e.music_name}
-                                        />
+                                        
+                                            <TopSongItem
+                                                key={index}
+                                                artist={e.artist_name}
+                                                song={e.music_name}
+                                            />
+                                        
                                     )
                                 })
                             }
+                            </tbody>
                         </table>
                     </div>
                 </div>

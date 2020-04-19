@@ -19,13 +19,11 @@
 }
 
 .Quiz_submit-button{
-    text-align: center;
-    padding: 1rem;
+    /* text-align: center; */
 }
 
 .Quiz_next-button{
     background-color: honeydew;
-    padding: 0rem 23.1rem;
 }
 
 .ui.right.labeled.icon.button{
@@ -45,4 +43,18 @@
     font-size: x-large;
     margin-bottom: 1.5rem;
     margin-left: 0.5rem;
+}
+
+.Quiz {
+    background-color: honeydew;
+    padding: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Quiz_button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }

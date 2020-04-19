@@ -1,12 +1,6 @@
 import axios from 'axios';
-import React, { PropTypes } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-//import ReactDOM from 'react-dom';
-//import { string } from 'prop-types';
-//import 'jquery';
-import 'semantic-ui-css/semantic.min.css';
+import React from 'react';
 import ThinkingPicture from '../../assets/think.jpg';
-import "./styles/Quiz.css"
 class Quiz extends React.Component {
 
     state = {
@@ -17,14 +11,18 @@ class Quiz extends React.Component {
         choise2: undefined,
         choise3: undefined,
         choise4: undefined,
+
         userChoise: undefined,
+
         correctAnswer: undefined,
-        isPicture: true,
-        show:false
+
+        currentIsPicture: false,
+        nextIsPicture: true,
+        show:false,
+        isSubmitted: false
     };
 
     onChange = (e) => {
-        const field = e.target.name;
         const newValue = e.target.value;
         this.setState(() => {
             return {
@@ -35,6 +33,11 @@ class Quiz extends React.Component {
 
     onSubmit = (e) => {
         e.preventDefault();
+        this.setState((prevState => {
+            return {
+                isSubmitted: true
+            }
+        }))
         const config = {
             mode: "cors",
             headers: {
@@ -47,7 +50,7 @@ class Quiz extends React.Component {
             answer: this.state.userChoise
         }
         const JsonToBack = JSON.stringify(quizAnswer);
-        if (!this.state.isPicture) {
+        if (this.state.currentIsPicture) {
             axios.post("http://tunepal.pythonanywhere.com/quiz/checkimageanswer/", JsonToBack, config)
                 .then((response) => {
                     console.log(response);
@@ -59,7 +62,8 @@ class Quiz extends React.Component {
                 }).catch((error) => {
                     console.log(error);
                 });
-        } else {
+        } 
+        if (!this.state.currentIsPicture) {
             axios.post("http://tunepal.pythonanywhere.com/quiz/checkpssageanswer/", JsonToBack, config)
                 .then((response) => {
                     console.log(response);
@@ -82,7 +86,7 @@ class Quiz extends React.Component {
                 'Authorization': `Token ${localStorage.getItem('token')}`
             }
         }
-        if (!this.state.isPicture) {
+        if (!this.state.nextIsPicture) {
             axios.get('http://tunepal.pythonanywhere.com/quiz/passagequiz/', config)
                 .then(res => {
                     console.log(res)
@@ -95,14 +99,16 @@ class Quiz extends React.Component {
                             choise3: res.data[0].choices3,
                             choise4: res.data[0].choices4,
                             id: res.data[0].id,
-                            show:true
+                            show:true,
+                            currentIsPicture: false
                         };
                     });
                 })
                 .catch(err => {
                     console.log(err)
                 });
-        } else {
+        } 
+        if (this.state.nextIsPicture) {
             axios.get('http://tunepal.pythonanywhere.com/quiz/Imagequiz/', config)
                 .then(res => {
                     console.log(res)
@@ -115,7 +121,8 @@ class Quiz extends React.Component {
                             choise3: res.data[0].choices3,
                             choise4: res.data[0].choices4,
                             id: res.data[0].id,
-                            show:true
+                            show:true,
+                            currentIsPicture: true
                         };
                     });
                 })
@@ -126,21 +133,21 @@ class Quiz extends React.Component {
     }
 
     componentDidMount() {
-        const config = {
-            mode: "cors",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Token ${localStorage.getItem('token')}`
-            }
-        }
-        axios.get('http://tunepal.pythonanywhere.com/quiz/question/', config)
+        // const config = {
+        //     mode: "cors",
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Authorization': `Token ${localStorage.getItem('token')}`
+        //     }
+        // }
+        // axios.get('http://tunepal.pythonanywhere.com/quiz/question/', config)
         this.getQuestion();
     }
 
     nextPushed = () => {
         this.setState(prevState => {
             return {
-                isPicture: !prevState.isPicture,
+                nextIsPicture: !prevState.nextIsPicture,
                 id: undefined,
                 imageURL: undefined,
                 question: undefined,
@@ -150,7 +157,8 @@ class Quiz extends React.Component {
                 choise4: undefined,
                 userChoise: undefined,
                 correctAnswer: undefined,
-                show:false
+                show:false,
+                isSubmitted: false
             };
         });
         this.getQuestion();
@@ -158,14 +166,14 @@ class Quiz extends React.Component {
     render() {
         if(this.state.show){
             return (
-                <div>
-                    <form className="Quiz_form" onSubmit={this.onSubmit}>
+                <div className="Quiz">
+                    <form className="Quiz_form">
                         
-                        <img src={this.state.imageURL} className="Quiz_image" />
+                        <img src={this.state.imageURL} alt="" className="Quiz_image" />
                         
                         <h1 className="Quiz-question">{this.state.question}</h1>
                         
-                        <div style={(this.state.choise2 === this.state.correctAnswer) ? TrueStyle : {}} className="ui radio" >
+                        <div style={(this.state.choise1 === this.state.correctAnswer) ? TrueStyle : {}} className="ui radio" >
                             <input
                                 type="radio"
                                 name="choise"
@@ -201,19 +209,20 @@ class Quiz extends React.Component {
                             //checked={false}
                             /><span>  {this.state.choise4}</span>
                         </div>
-    
+                    </form>
+                    <div className="Quiz_button-container">
                         <div className="Quiz_submit-button">
-                            <button className="ui left labeled icon button" type="submit">
-                                <i className="icon ok" ></i>
-                                submit
+                            <button className="ui left labeled icon button" onClick={this.onSubmit} disabled={this.state.isSubmitted} >
+                                <i className="checkmark icon" ></i>
+                                Submit
                             </button>
                         </div>
-                    </form>
-                    <div className="Quiz_next-button">
-                        <button type="toggle" className="ui right labeled icon button" onClick={this.nextPushed}>
-                            <i className="right arrow icon"></i>
-                             Next
-                        </button>
+                        <div className="Quiz_next-button">
+                            <button type="toggle" className="ui right labeled icon button" onClick={this.nextPushed}>
+                                <i className="right arrow icon"></i>
+                                Next
+                            </button>
+                        </div>
                     </div>
                 </div>
             );
@@ -223,7 +232,7 @@ class Quiz extends React.Component {
 }
 
 const TrueStyle = {
-    backgroundColor: "green"
+    color: "green"
 }
 
 export default Quiz;

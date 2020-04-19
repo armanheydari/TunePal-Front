@@ -47,7 +47,7 @@ function dateParser(timeStamp) {
         todayDay = "0" + todayDay;
     }
     if (`${dateArray[0]}` === `${todayYear}` && `${dateArray[1]}` === `${todayMonth}` && `${dateArray[2]}` === `${todayDay}`) {
-        return timeArray[0] + ":" + timeArray[1] + ", " + "Today";
+        return timeArray[0] + ":" + timeArray[1] + ", Today";
     }
     return timeArray[0] + ":" + timeArray[1] + ", " + date;
 }
