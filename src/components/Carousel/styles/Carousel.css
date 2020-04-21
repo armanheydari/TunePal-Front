@@ -1,0 +1,34 @@
+.Carousel {
+  padding: 1rem 3rem;
+  background: black;
+  width: 100%;
+}
+
+.Carousel_title {
+  color: white;
+  margin: 0 1rem 1rem 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2rem;
+}
+
+.Carousel_item {
+  position: relative;
+}
+
+.Carousel_item-text {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background-color: black;
+  opacity: 0.8;
+  color: white;
+}
+
+.Carousel_item-text > p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: .8rem 1rem;
+  font-size: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+}
