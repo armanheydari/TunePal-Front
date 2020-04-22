@@ -1,0 +1,92 @@
+.Carousel {
+  padding: 1rem 3rem;
+  background: black;
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.Carousel_title {
+  color: white;
+  margin: 0 1rem 1rem 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2rem;
+}
+
+@media(max-width: 480px) {
+  .Carousel_title {
+    font-size: 1.8rem;
+  }
+}
+
+.Carousel_loading {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.Carousel_loading-icon {
+  font-size: 3rem !important;
+  margin: 1.2rem !important;
+}
+
+.Carousel_loading-text {
+  color: white;
+  margin: 1.3rem;
+}
+
+.Carousel_fail {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.Carousel_fail-icon {
+  color: yellow;
+  font-size: 3rem;
+  margin: 1rem;
+}
+
+.Carousel_fail-text {
+  color: white;
+  margin: 1rem;
+}
+
+@media(max-width: 600px) {
+  .Carousel_fail-text {
+    font-size: 1.2rem;
+  }
+}
+
+@media(max-width: 480px) {
+  .Carousel_fail-text {
+    font-size: 1rem;
+  }
+}
+
+.Carousel_item {
+  position: relative;
+}
+
+.Carousel_item-text {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background-color: black;
+  opacity: 0.8;
+  color: white;
+}
+
+.Carousel_item-text > p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: .8rem 1rem;
+  font-size: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+}
