@@ -4,10 +4,13 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import './styles/Carousel.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+
 
 class CarouselList extends React.Component {
     render() {
-        var settings = {
+        const settings = {
             infinite: false,
             speed: 500,
             slidesToShow: 4,
@@ -38,10 +41,32 @@ class CarouselList extends React.Component {
                     }
                 }
             ]
-          };
+        };
+        if (this.props.isLoading) {
+            return (
+                <div className="Carousel">
+                    <h1 className="Carousel_title">{this.props.title}</h1>
+                    <div className="Carousel_loading">
+                        <div className="ui active centered inline loader Carousel_loading-icon"></div>
+                        <p className="Carousel_loading-text">Loading</p>
+                    </div>
+                </div>
+            );
+        }
+        if (this.props.isEmpty) {
+            return (
+                <div className="Carousel">
+                    <h1 className="Carousel_title">{this.props.title}</h1>
+                    <div className="Carousel_fail">
+                        <FontAwesomeIcon icon={faExclamationTriangle} className="Carousel_fail-icon" />
+                        <p className="Carousel_fail-text">There was a problem connecting to Spotify</p>
+                    </div>
+                </div>
+            );
+        }
         return (
             <div className="Carousel">
-                <h1 className="Carousel_title">Your Top 50 Songs</h1>
+                <h1 className="Carousel_title">{this.props.title}</h1>
                 <Slider {...settings}>
                 {
                     this.props.items.map((item, index) => {

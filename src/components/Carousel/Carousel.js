@@ -2,7 +2,7 @@ import React from 'react';
 import CarouselList from './CarouselList';
 
 /*
-    Carousel Input should be
+    Carousel Input should be like below as props
     title: "",
     items:[
         {
@@ -15,7 +15,9 @@ import CarouselList from './CarouselList';
 
 class Carousel extends React.Component {
     state = {
-        carouselTitle: "Your Top 50 Songs",
+        title: "Your Top 50 Songs",
+        isLoading: false,
+        isEmpty: true,
         items: [
             {
                 title: "Nothing Else Matters",
@@ -66,13 +68,18 @@ class Carousel extends React.Component {
                 title: "Nothing Else Matters",
                 subtitle: "Metallica",
                 imgURL: "https://i.scdn.co/image/ab67616d00001e0299ad1a6dd3c8b95ca4778d34"
-            },
+            }
         ]
     }
 
     render() {
         return (
-            <CarouselList items={this.state.items} />
+            <CarouselList
+                title={this.state.title}
+                isLoading={this.state.isLoading}
+                items={this.state.items}
+                isEmpty={this.state.isEmpty}
+            />
         );
       }
 }
