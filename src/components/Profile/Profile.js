@@ -1,45 +1,103 @@
 import React from 'react';
+import Axios from 'axios';
 import General from './General';
+import About from './About';
+import TopArtists from './TopArtists';
+import TopSongs from './TopSongs';
+
+const tokenConfig = () => {
+    return {
+        mode: "cors",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${localStorage.getItem('token')}`
+        }
+    }
+}
+
+const locationToString = (location) => {
+    if (location) {
+        return `${location.country} ${location.province} ${location.neighbourhood}`;
+    }
+    return "Undefined";
+}
 
 class Profile extends React.Component {
     state = {
+        render: false,
 
-    };
+        imgURL: undefined,
+        name: undefined,
+        gender: undefined,
+        birthdate: undefined,
+        location: undefined,
+        score: undefined,
+        biography: undefined,
+        favorites: undefined,
+    }
+
+    componentDidMount() {
+        Axios.get("http://tunepal.pythonanywhere.com/account/get_user_info/", tokenConfig())
+        .then(res => {
+            const {
+                user_avatar: imgURL,
+                nickname: name,
+                gender,
+                birthdate,
+                location,
+                score,
+                biography,
+                interests: favorites
+            } = res.data
+            this.setState(prevState => {
+                return {
+                    imgURL,
+                    name,
+                    gender,
+                    birthdate,
+                    location: locationToString(location),
+                    score,
+                    biography,
+                    favorites,
+
+                    render: true
+                };
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
 
     render() {
-        return (
-            <div className="Profile_container">
-                <h1 className="Profile_title">Profile</h1>
-                <General user={this.props.user} topSong={this.props.topSong} topArtist={this.props.topArtist} />
-                {/* <div className="Profile_tables-container">
-                    <div className="row">
-                        <div className="col-lg-6 col-md-12 col-sm-12">
-                            <h3>Song</h3>
-                            <SongTable />
-                        </div>
-
-                        <div className="col-lg-6 col-md-12 col-sm-12">
-                            <h3>Artist</h3>
-                            <ArtistTable />
-                        </div>
-
+        if (this.state.render) {
+            const {imgURL, name, gender, birthdate, location, score, biography, favorites} = this.state;
+            return (
+                <div className="Profile">
+                    <div className="Profile_left">
+                        <img src={imgURL} alt="" className="Profile_picture" />
+                        <General
+                            name={name}
+                            gender={gender}
+                            birthdate={birthdate}
+                            location={location}
+                            score={score}
+                        />
                     </div>
-
-                    <div className="row">
-                        <div className="col-lg-6 col-md-12 col-sm-12">
-                            <h3>Album</h3>
-                            <AlbumTable />
+                    <div className="Profile_right">
+                        <About
+                            biography={biography}
+                            favorites={favorites}
+                        />
+                        <div className="Profile_carousel">
+                            <TopArtists />
+                            <TopSongs />
                         </div>
-
-                        <div className="col-lg-6 col-md-12 col-sm-12">
-                            <h3>Genre</h3>
-                            <GenreTable />
-                        </div>
-
                     </div>
-                </div> */}
-            </div>
-        );
+                </div>
+            );
+        }
+        return null;
     };
 }
 
