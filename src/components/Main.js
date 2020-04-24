@@ -137,7 +137,7 @@ class Main extends React.Component {
                                 <Route exact path="/"><Requests /></Route>
                                 <Route path="/match"><Match /></Route>
                                 <Route path="/chat"><Chat /></Route>
-                                <Route path="/profile"><Profile user={this.state.userInfo} topSong={this.state.topSong} topArtist={this.state.topArtist} /></Route>
+                                <Route path="/profile"><Profile /></Route>
                                 <Route path="/setting"><Setting user={this.state.userInfo} /></Route>
                                 <Route path="/logout"></Route>
                                 <Route path="/quiz"><Quiz/></Route>
