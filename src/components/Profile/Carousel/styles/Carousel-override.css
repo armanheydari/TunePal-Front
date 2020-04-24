@@ -1,0 +1,40 @@
+.Carousel-override {
+    background-color: white;
+}
+
+.Carousel_item-text-override {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: white;
+    opacity: 0.8;
+    color: black;
+}
+
+.Carousel_item-text-override > p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: .8rem 1rem;
+    font-size: 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+.Carousel-img-override {
+    width: 100%;
+    height: 100%;
+}
+
+.Carousel_item-override {
+    width: 95%;
+    height: 160px;
+    position: relative;
+}
+
+.Profile_carousel .slick-prev {
+    background-color: #e5e5e5 !important;
+}
+
+.Profile_carousel .slick-next {
+    background-color: #e5e5e5 !important;
+}

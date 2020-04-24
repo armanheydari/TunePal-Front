@@ -1,0 +1,22 @@
+.Profile_About-biography {
+    margin: 2rem 3rem 4rem 3rem;
+}
+
+.Profile_About-favorites {
+    margin: 4rem 3rem 0 3rem;
+}
+
+.Profile_About-title {
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: #353c4e;
+    font-size: 2rem;
+    font-weight: 700;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 1rem;
+}
+
+.Profile_About-text {
+    margin-top: 1.5rem;
+    font-size: 2rem;
+}
