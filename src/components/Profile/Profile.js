@@ -4,6 +4,7 @@ import General from './General';
 import About from './About';
 import TopArtists from './TopArtists';
 import TopSongs from './TopSongs';
+import ProfilePicture from '../../assets/Default-Profile-Picture.jpg';
 
 const tokenConfig = () => {
     return {
@@ -65,7 +66,6 @@ class Profile extends React.Component {
             });
         })
         .catch(err => {
-            console.log(err);
         });
     }
 
@@ -75,7 +75,7 @@ class Profile extends React.Component {
             return (
                 <div className="Profile">
                     <div className="Profile_left">
-                        <img src={imgURL} alt="" className="Profile_picture" />
+                        <img src={imgURL || ProfilePicture} alt="" className="Profile_picture" />
                         <General
                             name={name}
                             gender={gender}
