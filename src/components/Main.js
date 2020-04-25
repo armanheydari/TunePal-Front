@@ -12,6 +12,7 @@ import Requests from './Requests/Requests';
 import Match from './Match/Match';
 import Quiz from './Quiz/Quiz.js';
 import Chat from './Chat/Chat';
+import SidebarOverlay from './Layout/SidebarOverlay';
 
 
 class Main extends React.Component {
@@ -129,6 +130,9 @@ class Main extends React.Component {
                 <Router>
                     <Header name={this.state.userInfo.name} />
                     <div className="Main_row">
+                        <div className="Main_sidebar">
+                            <SidebarOverlay />
+                        </div>
                         <div className="Main_sidebar">
                             <Sidebar logout={this.logout} />
                         </div>
