@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
 
 .Profile {
+    height: 100%;
     font-family: 'Josefin Sans', sans-serif;
     display: flex;
     flex-direction: row;
