@@ -1,0 +1,42 @@
+.Sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: #222326;
+    color: white;
+    text-align: center;
+    width: 10rem;
+    height: 100%;
+}
+  
+@media(max-width: 600px) {
+    .Sidebar {
+      display: none;
+    }
+}
+  
+.Sidebar_item {
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,.2);
+    border-top: 1px solid hsla(0,0%,100%,.05);
+    font-family: Circular,Helvetica,Arial,sans-serif,iosfallbackfix;
+    color: #919496;
+    font-size: 3.2rem;
+    padding: 1.5rem 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.Sidebar_item:hover {
+    background-color: #1c1d1e;
+}
+
+.Sidebar_active {
+    border-left: 3px solid green;
+}
+  
+.Sidebar_item-name {
+    margin-top: 1rem;
+    font-size: 1.6rem;
+    display: block;
+}
+  
