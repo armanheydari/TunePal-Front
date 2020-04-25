@@ -21,12 +21,11 @@ class TopSongs extends React.Component {
     componentDidMount() {
         Axios.get("http://tunepal.pythonanywhere.com/spotify/topsong/", tokenConfig())
         .then(res => {
-            console.log(res)
             res.data.forEach(item => {
                 const temp = {
-                    title: item.music_name,
+                    title: item.track_name,
                     subtitle: item.artist_name,
-                    imgURL: item.url
+                    imgURL: item.image_url
                 };
                 this.setState(prevState => {
                     return {
@@ -43,6 +42,7 @@ class TopSongs extends React.Component {
         .catch(err => {
             this.setState(prevState => {
                 return {
+                    isLoading: false,
                     isEmpty: true
                 };
             });
@@ -50,7 +50,6 @@ class TopSongs extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div className="Profile_Carousel-song">
                 <h3 className="Profile_Carousel-title">Top Songs</h3>

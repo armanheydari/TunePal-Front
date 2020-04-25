@@ -23,9 +23,9 @@ class TopArtists extends React.Component {
         .then(res => {
             res.data.forEach(item => {
                 const temp = {
-                    title: item.name,
+                    title: item.artist_name,
                     subtitle: "",
-                    imgURL: item.url
+                    imgURL: item.image_url
                 };
                 this.setState(prevState => {
                     return {
@@ -42,6 +42,7 @@ class TopArtists extends React.Component {
         .catch(err => {
             this.setState(prevState => {
                 return {
+                    isLoading: false,
                     isEmpty: true
                 };
             });
