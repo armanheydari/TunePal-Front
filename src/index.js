@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'semantic-ui-css/semantic.min.css';
+import 'antd/dist/antd.css';
 import './style-container.scss';
 import Main from './components/Main.js';
 import * as serviceWorker from "./serviceWorker";
