@@ -1,60 +1,84 @@
-.Quiz_image{
-    width: 20rem;
-    height: 20rem;
-    border-radius: 100%;
-    display: inline-block;
-    float: right;
-    margin-top: 1rem;
-    margin-right: 15rem;
-}
-
-.Quiz-question{
-    font-size: xx-large;
-    margin-bottom: 2rem;
-}
-
-.Quiz_form{
-    background-color: honeydew;
-    /* text-align: center; */
-}
-
-.Quiz_submit-button{
-    /* text-align: center; */
-}
-
-.Quiz_next-button{
-    background-color: honeydew;
-}
-
-.ui.right.labeled.icon.button{
-    font-size: large;
-    background-color: greenyellow;
-    border-radius: 12px;
-}
-
-.ui.left.labeled.icon.button{
-    font-size: large;
-    background-color: greenyellow;
-    border-radius: 12px;
-}
-
-.ui.radio{
-    font-style: normal;
-    font-size: x-large;
-    margin-bottom: 1.5rem;
-    margin-left: 0.5rem;
-}
-
 .Quiz {
-    background-color: honeydew;
+    background: url("../../../assets/QB2.jpg");
+    /* background-size: contain; */
+    background-position:top;
+    /* background: cover; */
+    width: 100%;
     padding: 5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
 }
 
-.Quiz_button-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+.Quiz_score-time{
+    /* display: flex; */
+    flex-direction: column-reverse;
 }
+
+.ui.medium.header{
+    margin-right: 30rem;
+    margin-left: 25rem;
+    display: inline-block;
+    color: wheat;
+    font-size: x-large;
+    /* margin-right: 20rem; */
+    /* text-align: left;*/
+} 
+
+.ui.large.header{
+    font-size: 3rem;
+    color: white;
+}
+
+.Quiz_image{
+    width: 45rem;
+    height: 50rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    border-radius: 1rem;
+    /* display: inline-block; */
+    /* border-radius: 100%;
+    float: right; */
+}
+
+.ui.inverted.white.button{
+    display: inline-block;
+    height: 10rem;
+    width: 22.5rem;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    font-size: larger;
+    border-radius: 1rem;
+}
+
+.Quiz_next-button-container {
+    /* display: flex; */
+    /* position: static;
+    right: 60rem; */
+    flex-direction: row;
+}
+
+.ui.right.labeled.icon.button{
+    font-size: large;
+    color: whitesmoke;
+    background-color: green;
+    border-radius: 12px;
+}
+/* .Quiz_form{
+    background-color: honeydew;
+     text-align: center; 
+} */
+
+/* .ui.left.labeled.icon.button{
+    font-size: large;
+    background-color: greenyellow;
+    border-radius: 12px;
+} */
+
+/* .ui.radio{
+    font-style: normal;
+    font-size: x-large;
+    margin-bottom: 1.5rem;
+    margin-left: 0.5rem;
+} */
