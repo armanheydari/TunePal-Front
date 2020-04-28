@@ -101,7 +101,6 @@ class Main extends React.Component {
                                     path="/setting"
                                     component={Setting}
                                 />
-                                <Route path="/logout" />
                                 <Route
                                     path="/quiz"
                                     component={Quiz}
