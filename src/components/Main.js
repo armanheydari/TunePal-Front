@@ -76,10 +76,7 @@ class Main extends React.Component {
                             <SidebarOverlay username={this.state.username} />
                         </div>
                         <div className="Main_sidebar">
-                            <Sidebar
-                                logout={this.logout} 
-                                username={this.state.username}
-                            />
+                            <Sidebar username={this.state.username} />
                         </div>
                         <div className="Main_content-container">
                             <Switch>
@@ -130,43 +127,6 @@ class Main extends React.Component {
             );
         }
     }
-
-    logout = () => {
-        const config = {
-            mode: "cors",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Token ${localStorage.getItem('token')}`
-            }
-        }
-        Axios.get('http://tunepal.pythonanywhere.com/account/logout/', config)
-            .then(() => {
-
-            })
-        localStorage.clear();
-        this.setState(() => {
-            return {
-                isLoggedIn: false,
-                userInfo: {
-                    name: undefined,
-                    gender: undefined,
-                    birthday: undefined,
-                    email: undefined,
-                    username: undefined,
-                    latitude: undefined,
-                    longitude: undefined,
-                    country: undefined,
-                    province: undefined,
-                    neighbourhood: undefined,
-                    bio: undefined,
-                    favorites: undefined,
-                    avatar: undefined,
-                    score: undefined
-                }
-            }
-        });
-    }
-
 }
 
 export default Main;
