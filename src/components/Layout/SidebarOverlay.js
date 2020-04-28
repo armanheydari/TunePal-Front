@@ -39,7 +39,7 @@ class Sidebar extends React.Component {
                         <FontAwesomeIcon icon={faComments} />
                         <span className="SidebarOverlay_item-name">Chat</span>
                     </NavLink> 
-                    <NavLink to="/profile" activeClassName="Sidebar_active" className="SidebarOverlay_item">
+                    <NavLink to={`/profile/${this.props.username}`} activeClassName="Sidebar_active" className="SidebarOverlay_item">
                         <FontAwesomeIcon icon={faAddressCard} />
                         <span className="SidebarOverlay_item-name">Profile</span>
                     </NavLink> 
