@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import Axios from 'axios';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import Header from './Layout/Header.js';
 import Footer from './Layout/Footer.js';
@@ -14,111 +14,53 @@ import Quiz from './Quiz/Quiz.js';
 import Chat from './Chat/Chat';
 import SidebarOverlay from './Layout/SidebarOverlay';
 
+const tokenConfig = () => {
+    return {
+        mode: "cors",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${localStorage.getItem('token')}`
+        }
+    }
+}
+
 
 class Main extends React.Component {
     state = {
+        username: "",
         show: false,
         isLoggedIn: false,
-        userInfo: {
-            name: undefined,
-            gender: undefined,
-            birthday: undefined,
-            email: undefined,
-            username: undefined,
-            latitude: undefined,
-            longitude: undefined,
-            country: undefined,
-            province: undefined,
-            neighbourhood: undefined,
-            bio: undefined,
-            favorites: undefined,
-            avatar: undefined,
-            score: undefined
-        },
-        topSong: [],
-        topArtist: undefined
     };
 
     componentDidMount() {
         if (localStorage.getItem('token')) {
-            const config = {
-                mode: "cors",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Token ${localStorage.getItem('token')}`
-                }
-            }
-            axios.get('http://tunepal.pythonanywhere.com/spotify/topartist/', config)    
+            Axios.get('http://tunepal.pythonanywhere.com/account/get_user_info/', tokenConfig())
             .then(res => {
-                console.log(res)
-                    this.setState(() => {
-                        return {
-                            topArtist: res.data
-                        }
-                    })
-                })
-            .catch(err => {
-                console.log(err)
-            });
-            axios.get('http://tunepal.pythonanywhere.com/account/get_user_info/', config)
-                .then(res => {
-                    const userInfo = {
-                        name: res.data.nickname,
-                        gender: res.data.gender,
-                        birthday: res.data.birthdate,
-                        email: res.data.email,
+                this.setState(prevState => {
+                    return {
                         username: res.data.username,
-                        latitude: res.data.location ? res.data.location.latitude : undefined,
-                        longitude: res.data.location ? res.data.location.longitude : undefined,
-                        country: res.data.location ? res.data.location.country : undefined,
-                        province: res.data.location ? res.data.location.province : undefined,
-                        neighbourhood: res.data.location ? res.data.location.neighbourhood : undefined,
-                        bio: res.data.biography,
-                        favorites: res.data.interests,
-                        avatar: res.data.user_avatar,
-                        score: res.data.score
+                        show: true,
+                        isLoggedIn: true
                     };
-                    this.setUserInfo(userInfo);
-                    this.setState(() => {
-                        return {
-                            show: true,
-                        };
-                    });
-                })
-                .catch(err => {
-                    this.setState(() => {
-                        return {
-                            show: true
-                        };
-                    });
                 });
+            })
+            .catch(err => {
+                this.setState(prevState => {
+                    return {
+                        show: true,
+                        isLoggedIn: false
+                    };
+                });
+            });
         }
         else {
             this.setState(() => {
                 return {
-                    show: true
+                    show: true,
+                    isLoggedIn: false
                 };
             });
         }
-        const config = {
-            mode: "cors",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Token ${localStorage.getItem('token')}`
-            }
-        }
-        axios.get('http://tunepal.pythonanywhere.com/spotify/topsong/', config)
-            .then(res => {
-                console.log(res);
-                this.setState(() => {
-                    return {
-                        topSong: res.data
-                    }
-                })
-            })
-            .catch(err => {
-                console.log(err)
-            });
     }
 
     render() {
@@ -128,27 +70,48 @@ class Main extends React.Component {
         if (this.state.isLoggedIn) {
             return (
                 <Router>
-                    <Header name={this.state.userInfo.name} />
+                    <Header name={this.state.username} />
                     <div className="Main_row">
                         <div className="Main_sidebar">
-                            <SidebarOverlay />
+                            <SidebarOverlay username={this.state.username} />
                         </div>
                         <div className="Main_sidebar">
                             <Sidebar
                                 logout={this.logout} 
-                                username={this.state.userInfo.username}
+                                username={this.state.username}
                             />
                         </div>
                         <div className="Main_content-container">
                             <Switch>
-                                <Route exact path="/"><Requests /></Route>
-                                <Route path="/match"><Match /></Route>
-                                <Route path="/chat"><Chat /></Route>
-                                <Route path="/profile/:username" component={Profile}></Route>
-                                <Route path="/setting"><Setting /></Route>
-                                <Route path="/logout"></Route>
-                                <Route path="/quiz"><Quiz/></Route>
-                                <Route path="/spotifyresult"><SpotifyResult name={this.state.userInfo.name} /></Route>
+                                <Route
+                                    exact
+                                    path="/"
+                                    component={Requests}
+                                />
+                                <Route
+                                    path="/match"
+                                    component={Match}
+                                />
+                                <Route
+                                    path="/chat"
+                                    component={Chat}
+                                />
+                                <Route
+                                    path="/profile/:username"
+                                    component={Profile}
+                                />
+                                <Route
+                                    path="/setting"
+                                    component={Setting}
+                                />
+                                <Route path="/logout" />
+                                <Route
+                                    path="/quiz"
+                                    component={Quiz}
+                                />
+                                <Route path="/spotifyresult">
+                                    <SpotifyResult name={this.state.username} />
+                                </Route>
                                 <Route path='/404'>404</Route>
                                 <Redirect to='/404' />
                             </Switch>
@@ -168,15 +131,6 @@ class Main extends React.Component {
         }
     }
 
-    setUserInfo = (userInfo) => {
-        this.setState(() => {
-            return {
-                isLoggedIn: true,
-                userInfo
-            };
-        });
-    }
-
     logout = () => {
         const config = {
             mode: "cors",
@@ -185,7 +139,7 @@ class Main extends React.Component {
                 'Authorization': `Token ${localStorage.getItem('token')}`
             }
         }
-        axios.get('http://tunepal.pythonanywhere.com/account/logout/', config)
+        Axios.get('http://tunepal.pythonanywhere.com/account/logout/', config)
             .then(() => {
 
             })
