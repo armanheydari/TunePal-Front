@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'normalize.css/normalize.css';
 import 'semantic-ui-css/semantic.min.css';
 import 'antd/dist/antd.css';
 import './style-container.scss';
