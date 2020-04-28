@@ -24,7 +24,7 @@ class Header extends React.Component {
                         <h2 className="Header_subtitle">Music + Dating</h2>
                     </div>
                 </div>
-                <p className="Header_name">{this.props.name}</p>
+                <p className="Header_name">{this.props.username}</p>
             </header>
         );
     }

@@ -70,7 +70,7 @@ class Main extends React.Component {
         if (this.state.isLoggedIn) {
             return (
                 <Router>
-                    <Header name={this.state.username} />
+                    <Header username={this.state.username} />
                     <div className="Main_row">
                         <div className="Main_sidebar">
                             <SidebarOverlay username={this.state.username} />
