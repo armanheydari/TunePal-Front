@@ -2,16 +2,6 @@ import React from 'react';
 import Axios from 'axios';
 import CarouselList from './Carousel/CarouselList';
 
-const tokenConfig = () => {
-    return {
-        mode: "cors",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-    }
-}
-
 class TopSongs extends React.Component {
     state = {
         isLoading: true,
@@ -19,7 +9,7 @@ class TopSongs extends React.Component {
         items: []
     }
     componentDidMount() {
-        Axios.get("http://tunepal.pythonanywhere.com/spotify/topsong/", tokenConfig())
+        Axios.get(`http://tunepal.pythonanywhere.com/spotify/topsong/?username=${this.props.username}`)
         .then(res => {
             res.data.forEach(item => {
                 const temp = {

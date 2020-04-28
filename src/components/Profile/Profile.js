@@ -6,16 +6,6 @@ import TopArtists from './TopArtists';
 import TopSongs from './TopSongs';
 import ProfilePicture from '../../assets/Default-Profile-Picture.jpg';
 
-const tokenConfig = () => {
-    return {
-        mode: "cors",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-    }
-}
-
 const locationToString = (location) => {
     if (location) {
         return `${location.country} ${location.province} ${location.neighbourhood}`;
@@ -38,7 +28,8 @@ class Profile extends React.Component {
     }
 
     componentDidMount() {
-        Axios.get("http://tunepal.pythonanywhere.com/account/get_user_info/", tokenConfig())
+        const username = this.props.match.params.username;
+        Axios.get(`http://tunepal.pythonanywhere.com/account/get_user_info/?username=${username}`)
         .then(res => {
             const {
                 user_avatar: imgURL,
@@ -72,6 +63,7 @@ class Profile extends React.Component {
     render() {
         if (this.state.render) {
             const {imgURL, name, gender, birthdate, location, score, biography, favorites} = this.state;
+            const username = this.props.match.params.username;
             return (
                 <div className="Profile">
                     <div className="Profile_left">
@@ -90,8 +82,12 @@ class Profile extends React.Component {
                             favorites={favorites}
                         />
                         <div className="Profile_carousel">
-                            <TopArtists />
-                            <TopSongs />
+                            <TopArtists
+                                username={username}
+                            />
+                            <TopSongs
+                                username={username}
+                            />
                         </div>
                     </div>
                 </div>

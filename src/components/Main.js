@@ -134,14 +134,17 @@ class Main extends React.Component {
                             <SidebarOverlay />
                         </div>
                         <div className="Main_sidebar">
-                            <Sidebar logout={this.logout} />
+                            <Sidebar
+                                logout={this.logout} 
+                                username={this.state.userInfo.username}
+                            />
                         </div>
                         <div className="Main_content-container">
                             <Switch>
                                 <Route exact path="/"><Requests /></Route>
                                 <Route path="/match"><Match /></Route>
                                 <Route path="/chat"><Chat /></Route>
-                                <Route path="/profile"><Profile /></Route>
+                                <Route path="/profile/:username" component={Profile}></Route>
                                 <Route path="/setting"><Setting /></Route>
                                 <Route path="/logout"></Route>
                                 <Route path="/quiz"><Quiz/></Route>
