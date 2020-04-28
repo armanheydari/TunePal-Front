@@ -112,21 +112,7 @@ class LoginSignup extends React.Component {
                 };
                 axios.get('http://tunepal.pythonanywhere.com/account/get_user_info/', configGetUserInfo)
                 .then(res => {
-                    const userInfo = {
-                        name: res.data.nickname,
-                        gender: res.data.gender,
-                        birthday: res.data.birthdate,
-                        email: res.data.email,
-                        username: res.data.username,
-                        latitude: res.data.location ? res.data.location.latitude : undefined,
-                        longitude: res.data.location ? res.data.location.longitude : undefined,
-                        country: res.data.location ? res.data.location.country : undefined,
-                        province: res.data.location ? res.data.location.province : undefined,
-                        neighbourhood: res.data.location ? res.data.location.neighbourhood : undefined,
-                        bio: res.data.bio,
-                        favourite: res.data.intersts
-                    };
-                    this.props.setUserInfo(userInfo);
+                    window.location.reload(false);
                 })
             })
             .catch(err => {
