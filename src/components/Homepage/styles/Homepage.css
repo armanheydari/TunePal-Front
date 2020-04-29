@@ -1,0 +1,56 @@
+.Homepage {
+    width: 100%;
+    height: 100%;
+    background-color: #f0f4f7;
+}
+
+.Homepage_section {
+    padding: 5rem;
+    display: flex;
+    flex-direction: row;
+    background-color: #191919;
+    width: 100%;
+}
+
+@media(max-width: 600px) {
+    .Homepage_section {
+        padding: 5rem 2rem;
+    }
+}
+
+.Homepage_title {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 5px;
+}
+
+@media(max-width: 480px) {
+    .Homepage_title {
+        font-size: 1.5rem;
+    }
+}
+
+.Homepage_desc {
+    line-height: 2;
+    font-family: 'Sacramento', cursive;
+    margin: 1rem;
+    color: white;
+}
+
+@media(max-width: 480px) {
+    .Homepage_desc {
+        line-height: 1.5;
+    }
+}
+
+.Homepage_pic {
+    width: 15rem;
+    height: 15rem;
+}
+
+.Homepage_img {
+    width: 100%;
+    height: 100%;
+}
