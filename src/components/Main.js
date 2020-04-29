@@ -8,7 +8,6 @@ import LoginSignup from './LoginSignup/LoginSignup.js';
 import SpotifyResult from './Spotify/SpotifyResult.js';
 import Profile from './Profile/Profile.js';
 import Setting from './Setting/Setting.js';
-import Requests from './Requests/Requests';
 import Match from './Match/Match';
 import Quiz from './Quiz/Quiz.js';
 import Chat from './Chat/Chat';
