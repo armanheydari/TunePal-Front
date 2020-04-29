@@ -13,6 +13,7 @@ import Match from './Match/Match';
 import Quiz from './Quiz/Quiz.js';
 import Chat from './Chat/Chat';
 import SidebarOverlay from './Layout/SidebarOverlay';
+import Homepage from './Homepage/Homepage';
 
 const tokenConfig = () => {
     return {
@@ -83,7 +84,7 @@ class Main extends React.Component {
                                 <Route
                                     exact
                                     path="/"
-                                    component={Requests}
+                                    component={Homepage}
                                 />
                                 <Route
                                     path="/match"
