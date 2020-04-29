@@ -180,12 +180,10 @@ class Homepage extends React.Component {
                         requests.length === 0
                         ? requestJSX()
                         : (
-                            <div className="Requests">
-                                <RequestList
-                                    items={this.state.requests}
-                                    updateItems={this.updateItems}
-                                />
-                            </div>
+                            <RequestList
+                                items={this.state.requests}
+                                updateItems={this.updateItems}
+                            />
                         )
                     }
                     <hr />
