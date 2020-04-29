@@ -4,6 +4,7 @@ import SingerPicture from '../../assets/Homepage/Singer.png';
 import SongPicture from '../../assets/Homepage/Song.png';
 import CarouselList from './Carousel/CarouselList';
 import Requests from '../Requests/Requests';
+import RequestPicture from '../../assets/Homepage/Request.png';
 
 
 const tokenConfig = () => {
@@ -16,12 +17,28 @@ const tokenConfig = () => {
     }
 }
 
-const artistJSX = () => {
+const requestJSX = () => {
     return (
         <div className="Homepage_section">
             <div className="Homepage_pic">
-                <img src={SingerPicture} className="Homepage_img" alt="" />
+                <img src={RequestPicture} className="Homepage_img" alt="" />
             </div>
+            <div className="Homepage_text">
+                <h3 className="Homepage_title">Friend Request</h3>
+                <p className="Homepage_desc">
+                    Here you can see your friendship requests from other users.<br/>
+                    You can accept or reject.<br/>
+                    When you accept a request a new chat wil be open with that person.<br />
+                    Right now you don't have any request but be sure you'll get lot.
+                </p>
+            </div>
+        </div>
+    )
+}
+
+const artistJSX = () => {
+    return (
+        <div className="Homepage_section" style={{justifyContent: "flex-end"}}>
             <div className="Homepage_text">
                 <h3 className="Homepage_title">Top Artists</h3>
                 <p className="Homepage_desc">
@@ -31,13 +48,16 @@ const artistJSX = () => {
                     Right now you don't have any request but be sure you'll get lot.
                 </p>
             </div>
+            <div className="Homepage_pic">
+                <img src={SingerPicture} className="Homepage_img" alt="" />
+            </div>
         </div>
     );
 }
 
 const songJSX = () => {
     return (
-        <div className="Homepage_section"  style={{justifyContent: "flex-end"}}>
+        <div className="Homepage_section">
             <div className="Homepage_text">
                 <h3 className="Homepage_title">Top Songs</h3>
                 <p className="Homepage_desc">
@@ -56,6 +76,9 @@ const songJSX = () => {
 
 class Homepage extends React.Component {
     state = {
+        requests: [],
+        isRequestsReady: false,
+
         topArtists: [],
         isTopArtistsEmpty: false,
         isArtistSectionReady: false,
@@ -66,6 +89,23 @@ class Homepage extends React.Component {
     }
 
     componentDidMount() {
+        Axios.get("http://tunepal.pythonanywhere.com/spotify/friend_list/", tokenConfig())
+        .then(res => {
+            this.setState(prevState => {
+                return {
+                    requests: res.data,
+                    isRequestsReady: true
+                };
+            });
+        })
+        .catch(err => {
+            this.setState(prevState => {
+                return {
+                    isRequestsReady: true
+                };
+            });
+        });
+
         Axios.get(`http://tunepal.pythonanywhere.com/spotify/topartist/`, tokenConfig())
         .then(res => {
             res.data.forEach(item => {
@@ -130,6 +170,8 @@ class Homepage extends React.Component {
 
     render() {
         const {
+            requests,
+            isRequestsReady,
             topArtists,
             isTopArtistsEmpty,
             isArtistSectionReady,
@@ -137,9 +179,17 @@ class Homepage extends React.Component {
             isTopSongsEmpty,
             isSongSectionReady
         } = this.state
-        if (isArtistSectionReady && isSongSectionReady) {
+        if (isRequestsReady && isArtistSectionReady && isSongSectionReady) {
             return (
                 <div className="Homepage">
+                    {
+                        requests.length === 0
+                        ? requestJSX()
+                        : (
+                            <p>hi</p>
+                        )
+                    }
+                    <hr />
                     {
                         isTopArtistsEmpty
                         ? artistJSX()
