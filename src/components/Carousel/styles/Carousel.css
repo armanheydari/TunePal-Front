@@ -7,8 +7,10 @@
 .Carousel_title {
   color: white;
   margin: 0 1rem 1rem 1rem;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 5px;
 }
 
 @media(max-width: 480px) {
