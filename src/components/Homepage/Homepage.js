@@ -61,10 +61,10 @@ const songJSX = () => {
             <div className="Homepage_text">
                 <h3 className="Homepage_title">Top Songs</h3>
                 <p className="Homepage_desc">
-                    Here you can see your friendship requests from other users.<br/>
-                    You can accept or reject.<br/>
-                    When you accept a request a new chat wil be open with that person.<br />
-                    Right now you don't have any request but be sure you'll get lot.
+                    Here you can see songs you listened most.<br/>
+                    We will use this in finding similar people to you.<br/>
+                    We give you this data by your spotify account.<br />
+                    You can connect your Spotify account to TunePal in setting.
                 </p>
             </div>
             <div className="Homepage_pic">
