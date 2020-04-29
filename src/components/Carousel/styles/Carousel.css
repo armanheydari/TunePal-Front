@@ -1,8 +1,7 @@
 .Carousel {
   padding: 1rem 3rem;
-  background: black;
+  background: #191919;
   width: 100%;
-  margin: 1rem 0;
 }
 
 .Carousel_title {
@@ -47,7 +46,7 @@
 }
 
 .Carousel_fail-icon {
-  color: yellow;
+  color: orange;
   font-size: 3rem;
   margin: 1rem;
 }
@@ -73,11 +72,21 @@
   position: relative;
 }
 
+.Carousel_pic {
+  width: 95%;
+  height: 200px;
+}
+
+.Carousel_img {
+  height: 100%;
+  width: 100%;
+}
+
 .Carousel_item-text {
   width: 100%;
   position: absolute;
   bottom: 0;
-  background-color: black;
+  background-color: #191919;
   opacity: 0.8;
   color: white;
 }
