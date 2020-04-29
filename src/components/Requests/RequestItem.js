@@ -22,7 +22,7 @@ class RequestItem extends React.Component {
             <div className="card Request_item">
                 <div className="blurring dimmable image">
                     <div className="Request_image">
-                        <img src={imgURL || ProfilePicture} className="Request_img"/>
+                        <img src={imgURL || ProfilePicture} alt="" className="Request_img"/>
                     </div>
                 </div>
                 <div className="content">
