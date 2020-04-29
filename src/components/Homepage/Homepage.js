@@ -139,7 +139,7 @@ class Homepage extends React.Component {
         } = this.state
         if (isArtistSectionReady && isSongSectionReady) {
             return (
-                <div>
+                <div className="Homepage">
                     {
                         isTopArtistsEmpty
                         ? artistJSX()
@@ -152,7 +152,7 @@ class Homepage extends React.Component {
                             />
                         )
                     }
-
+                    <hr />
                     {
                         isTopSongsEmpty
                         ? songJSX()
