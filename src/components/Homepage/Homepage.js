@@ -212,7 +212,11 @@ class Homepage extends React.Component {
                 </div>
             );
         }
-        return null;
+        return (
+            <div className="Homepage_load">
+                <div class="ui active centered inline text loader massive">Loading</div>
+            </div>
+        );
     }
 }
 
