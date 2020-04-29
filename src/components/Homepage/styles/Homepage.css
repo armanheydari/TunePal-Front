@@ -32,16 +32,15 @@
     }
 }
 
-.Homepage_desc {
-    line-height: 2;
+.Homepage_text > p {
     font-family: 'Sacramento', cursive;
-    margin: 1rem;
+    margin: 1rem 1rem 1.5rem 1rem;
     color: white;
 }
 
 @media(max-width: 480px) {
-    .Homepage_desc {
-        line-height: 1.5;
+    .Homepage_text > p {
+        font-size: 1.2rem;
     }
 }
 
