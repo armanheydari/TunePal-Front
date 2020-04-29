@@ -3,7 +3,7 @@ import Axios from 'axios';
 import SingerPicture from '../../assets/Homepage/Singer.png';
 import SongPicture from '../../assets/Homepage/Song.png';
 import CarouselList from './Carousel/CarouselList';
-import Requests from '../Requests/Requests';
+import RequestList from '../Requests/RequestList';
 import RequestPicture from '../../assets/Homepage/Request.png';
 
 
@@ -180,7 +180,12 @@ class Homepage extends React.Component {
                         requests.length === 0
                         ? requestJSX()
                         : (
-                            <p>hi</p>
+                            <div className="Requests">
+                                <RequestList
+                                    items={this.state.requests}
+                                    updateItems={this.updateItems}
+                                />
+                            </div>
                         )
                     }
                     <hr />
@@ -217,6 +222,15 @@ class Homepage extends React.Component {
                 <div class="ui active centered inline text loader massive">Loading</div>
             </div>
         );
+    }
+
+    updateItems = (username) => {
+        this.setState(prevState => {
+            const requests = prevState.requests.filter(item => item.from_user.username !== username);
+            return {
+                requests
+            }
+        });
     }
 }
 
