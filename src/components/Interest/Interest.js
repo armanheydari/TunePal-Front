@@ -14,7 +14,7 @@ import Singing from '../../assets/InterestItems/singer.png';
 import Movies from '../../assets/InterestItems/cinema.png';
 import Nature from '../../assets/InterestItems/plant.png';
 import Makeup from '../../assets/InterestItems/makeup.png';
-import Anime from '../../assets/InterestItems/rickandmorty.jpg';
+import Animation from '../../assets/InterestItems/rickandmorty.jpg';
 import Art from '../../assets/InterestItems/artist.png';
 import Humor from '../../assets/InterestItems/funny.png';
 import Science from '../../assets/InterestItems/scientist.png';
@@ -57,87 +57,87 @@ class Interest extends React.Component {
                 <h1 className="ui header">We know you like music! :) besides that, let's get to know you more:</h1>
                 <div className="Interest_item-container">
                     <div className="Interest_item" onClick={this.onItem1Click}>
-                        <img className="Interest_item-img" src={Cars} />
+                        <img className="Interest_item-img" src={Cars} alt="" />
                         <label className="ui label" style={(this.state.Item1===true)?SelectedStyle:{}}>#Cars</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem2Click}>
-                        <img className="Interest_item-img" src={Fashion} />
+                        <img className="Interest_item-img" src={Fashion} alt="" />
                         <label className="ui label" style={(this.state.Item2===true)?SelectedStyle:{}}>#Fashion</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem3Click}>
-                        <img className="Interest_item-img" src={Books} />
+                        <img className="Interest_item-img" src={Books} alt=""/>
                         <label className="ui label" style={(this.state.Item3===true)?SelectedStyle:{}}>#Books</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem4Click}>
-                        <img className="Interest_item-img" src={Travel} />
+                        <img className="Interest_item-img" src={Travel} alt="" />
                         <label className="ui label" style={(this.state.Item4===true)?SelectedStyle:{}}>#Travel</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem5Click}>
-                        <img className="Interest_item-img" src={Sports} />
+                        <img className="Interest_item-img" src={Sports} alt=""/>
                         <label className="ui label" style={(this.state.Item5===true)?SelectedStyle:{}}>#Sports</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem6Click}>
-                        <img className="Interest_item-img" src={Gaming} />
+                        <img className="Interest_item-img" src={Gaming} alt="" />
                         <label className="ui label" style={(this.state.Item6===true)?SelectedStyle:{}}>#Gaming</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem7Click}>
-                        <img className="Interest_item-img" src={Cooking} />
+                        <img className="Interest_item-img" src={Cooking} alt=""/>
                         <label className="ui label" style={(this.state.Item7===true)?SelectedStyle:{}}>#Cooking</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem8Click}>
-                        <img className="Interest_item-img" src={Photography} />
+                        <img className="Interest_item-img" src={Photography} alt=""/>
                         <label className="ui label" style={(this.state.Item8===true)?SelectedStyle:{}}>#Photography</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem9Click}>
-                        <img className="Interest_item-img" src={History} />
+                        <img className="Interest_item-img" src={History} alt=""/>
                         <label className="ui label" style={(this.state.Item9===true)?SelectedStyle:{}}>#History</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem10Click}>
-                        <img className="Interest_item-img" src={Singing} />
+                        <img className="Interest_item-img" src={Singing} alt=""/>
                         <label className="ui label" style={(this.state.Item10===true)?SelectedStyle:{}}>#Singing</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem11Click}>
-                        <img className="Interest_item-img" src={Movies} />
+                        <img className="Interest_item-img" src={Movies} alt=""/>
                         <label className="ui label" style={(this.state.Item11===true)?SelectedStyle:{}}>#Movies</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem12Click}>
-                        <img className="Interest_item-img" src={Nature} />
+                        <img className="Interest_item-img" src={Nature} alt=""/>
                         <label className="ui label" style={(this.state.Item12===true)?SelectedStyle:{}}>#Nature</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem13Click}>
-                        <img className="Interest_item-img" src={Makeup} />
+                        <img className="Interest_item-img" src={Makeup} alt=""/>
                         <label className="ui label" style={(this.state.Item13===true)?SelectedStyle:{}}>#Makeup</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem14Click}>
-                        <img className="Interest_item-img" src={Anime} />
-                        <label className="ui label" style={(this.state.Item14===true)?SelectedStyle:{}}>#Anime</label>
+                        <img className="Interest_item-img" src={Animation} alt=""/>
+                        <label className="ui label" style={(this.state.Item14===true)?SelectedStyle:{}}>#Animation</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem15Click}>
-                        <img className="Interest_item-img" src={Art} />
+                        <img className="Interest_item-img" src={Art} alt=""/>
                         <label className="ui label" style={(this.state.Item15===true)?SelectedStyle:{}}>#Art</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem16Click}>
-                        <img className="Interest_item-img" src={Humor} />
+                        <img className="Interest_item-img" src={Humor} alt=""/>
                         <label className="ui label" style={(this.state.Item16===true)?SelectedStyle:{}}>#Humor</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem17Click}>
-                        <img className="Interest_item-img" src={Science} />
+                        <img className="Interest_item-img" src={Science} alt=""/>
                         <label className="ui label" style={(this.state.Item17===true)?SelectedStyle:{}}>#Science</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem18Click}>
-                        <img className="Interest_item-img" src={SciFi} />
+                        <img className="Interest_item-img" src={SciFi} alt=""/>
                         <label className="ui label" style={(this.state.Item18===true)?SelectedStyle:{}}>#Sci-fi</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem19Click}>
-                        <img className="Interest_item-img" src={Coding} />
+                        <img className="Interest_item-img" src={Coding} alt=""/>
                         <label className="ui label" style={(this.state.Item19===true)?SelectedStyle:{}}>#Coding</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem20Click}>
-                        <img className="Interest_item-img" src={News} />
+                        <img className="Interest_item-img" src={News} alt=""/>
                         <label className="ui label" style={(this.state.Item20===true)?SelectedStyle:{}}>#News</label>
                     </div>
                     <div className="Interest_item" onClick={this.onItem21Click}>
-                        <img className="Interest_item-img" src={Culture} />
+                        <img className="Interest_item-img" src={Culture} alt=""/>
                         <label className="ui label" style={(this.state.Item21===true)?SelectedStyle:{}}>#Culture</label>
                     </div>
                 </div>
@@ -147,6 +147,12 @@ class Interest extends React.Component {
     };
 
     onNextClick = () => {
+        var result=""
+        var i=0
+        for (i in this.state.choises){
+            result = result.concat("#",this.state.choises[i]," ")
+        }
+        console.log(result)
         const config = {
             mode: "cors",
             headers: {
@@ -154,9 +160,14 @@ class Interest extends React.Component {
                 'Authorization': `Token ${localStorage.getItem('token')}`
             }
         };
-        const JsonToBackInerest = JSON.stringify(this.state.choises);
-        console.log(JsonToBackInerest)
-        axios.post('',JsonToBackInerest, config)
+        const JsonToBackInerest = JSON.stringify(result);
+        axios.put('http://tunepal.pythonanywhere.com/account/sign_up/',JsonToBackInerest, config)
+        .then(()=>{
+            
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
     }
     
     onItem1Click = (e) => {
@@ -188,7 +199,7 @@ class Interest extends React.Component {
         else{
             for( var i = 0; i < this.state.choises.length; i++){ 
                 if ( this.state.choises[i] === "Fashion") { 
-                    this.state.choises.splice(i, 1); 
+                    this.state.choises.splice(i, 1);
                 }
             }
         }
@@ -388,11 +399,11 @@ class Interest extends React.Component {
             };
         })
         if(!this.state.Item14){
-            this.state.choises.push("Anime")
+            this.state.choises.push("Animation")
         }
         else{
             for( var i = 0; i < this.state.choises.length; i++){ 
-                if ( this.state.choises[i] === "Anime") { 
+                if ( this.state.choises[i] === "Animation") { 
                     this.state.choises.splice(i, 1); 
                 }
             }
