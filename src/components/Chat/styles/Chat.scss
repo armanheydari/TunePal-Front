@@ -8,6 +8,7 @@ $gray: #92959E;
 .chat-container {
   display: flex;
   margin: 0 auto;
+  height: 100%;
   font: 14px/20px "Lato", Arial, sans-serif;
 }
 
@@ -73,7 +74,6 @@ $gray: #92959E;
   background: #F2F5F8;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  
   color: #434651;
   
   .chat-header {

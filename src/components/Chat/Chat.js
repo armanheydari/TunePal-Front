@@ -2,6 +2,7 @@ import React from 'react';
 import ChatSidebar from './ChatSidebar/ChatSidebar';
 import ChatBox from './ChatBox/ChatBox';
 import Axios from 'axios';
+import NoChatSVG from '../../assets/sign.svg';
 
 function tokenConfig() {
     const config = {
@@ -58,10 +59,19 @@ class Chat extends React.Component {
 
     render() {
         if (this.state.show) {
+            if (this.state.chatList.length !== 0) {
+                return (
+                    <div className="chat-container clearfix">
+                        <ChatSidebar chatID={this.state.header.conversationID} chatList={this.state.chatList} openChat={this.openChat} />
+                        <ChatBox header={this.state.header} messages={this.state.messages} send={this.sendMessage} />
+                    </div>
+                );
+            }
             return (
-                <div className="chat-container clearfix">
-                    <ChatSidebar chatID={this.state.header.conversationID} chatList={this.state.chatList} openChat={this.openChat} />
-                    <ChatBox header={this.state.header} messages={this.state.messages} send={this.sendMessage} />
+                <div className="Chat_noChat">
+                    <img src={NoChatSVG} alt="" />
+                    <p>You already don't have any chat.</p>
+                    <p>Try to make a new conversation in Match.</p>
                 </div>
             );
         }
