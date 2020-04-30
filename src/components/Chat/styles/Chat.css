@@ -29,6 +29,12 @@
     justify-content: center;
 }
 
+@media(max-width: 768px) {
+    .Chat_noChatSelected {
+        display: none;
+    }
+}
+
 .Chat_noChatSelected > p {
     border: 1px;
     padding: .7rem 1rem;
@@ -43,6 +49,10 @@
 @media(max-width: 768px) {
     .Chat_header-back {
         display: block;
+    }
+    #Chat_list-overlay {
+        display: block;
+        width: 100% !important;
     }
 }
 

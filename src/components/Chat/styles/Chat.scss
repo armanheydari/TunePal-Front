@@ -6,8 +6,8 @@ $orange: #E38968;
 $gray: #92959E;
 
 @media(max-width: 768px) {
-  .people-list {
-    display: none;
+  #people-list {
+    display: none !important;
   }
 
   .chat {

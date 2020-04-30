@@ -14,7 +14,7 @@ class ChatSidebar extends React.Component {
                     <Search getFieldSearch={this.getFieldSearch} />
                     <ChatList chatList={this.props.chatList} openChat={this.props.openChat} chatID={this.props.chatID} searchField={this.state.searchField} />
                 </div>
-                <div className="people-list">
+                <div id="people-list" className="people-list">
                     <Search getFieldSearch={this.getFieldSearch} />
                     <ChatList chatList={this.props.chatList} openChat={this.props.openChat} chatID={this.props.chatID} searchField={this.state.searchField} />
                 </div>
