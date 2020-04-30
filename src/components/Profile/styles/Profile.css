@@ -1,9 +1,55 @@
-.Profile_container {
-    padding: 3rem;
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
+.Profile {
+    height: 100%;
+    font-family: 'Josefin Sans', sans-serif;
+    display: flex;
+    flex-direction: row;
 }
 
-.Profile_title {
-    font-family: Circular,Helvetica,Arial,sans-serif,iosfallbackfix!important;
-    font-size: 4rem;
-    font-weight: 900;
+@media(max-width: 768px) {
+    .Profile {
+        flex-direction: column;
+    }
+}
+
+.Profile_left {
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #00adb5;
+    padding: 3rem 2.5rem;
+    text-align: center;
+    color: #fff;
+}
+
+@media(max-width: 768px) {
+    .Profile_left {
+        width: 100%;
+        flex: 100%;
+        justify-content: center;
+    }
+}
+
+.Profile_right {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 3rem 2.5rem;
+}
+
+@media(max-width: 768px) {
+    .Profile_right {
+        width: 100%;
+        flex: 100%;
+        justify-content: center;
+    }
+}
+
+.Profile_picture {
+    width: 80%;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }

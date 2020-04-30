@@ -1,43 +1,101 @@
 import React from 'react';
+import Axios from 'axios';
 import General from './General';
+import About from './About';
+import TopArtists from './TopArtists';
+import TopSongs from './TopSongs';
+import ProfilePicture from '../../assets/Default-Profile-Picture.jpg';
+
+const locationToString = (location) => {
+    if (location) {
+        return `${location.country} ${location.province} ${location.neighbourhood}`;
+    }
+    return "Undefined";
+}
 
 class Profile extends React.Component {
     state = {
+        render: false,
 
-    };
+        imgURL: undefined,
+        name: undefined,
+        gender: undefined,
+        birthdate: undefined,
+        location: undefined,
+        score: undefined,
+        biography: undefined,
+        favorites: undefined,
+    }
+
+    componentDidMount() {
+        const username = this.props.match.params.username;
+        Axios.get(`http://tunepal.pythonanywhere.com/account/get_user_info/?username=${username}`)
+        .then(res => {
+            const {
+                user_avatar: imgURL,
+                nickname: name,
+                gender,
+                birthdate,
+                location,
+                score,
+                biography,
+                interests: favorites
+            } = res.data
+            this.setState(prevState => {
+                return {
+                    imgURL,
+                    name,
+                    gender,
+                    birthdate,
+                    location: locationToString(location),
+                    score,
+                    biography,
+                    favorites,
+
+                    render: true
+                };
+            });
+        })
+        .catch(err => {
+        });
+    }
 
     render() {
+        if (this.state.render) {
+            const {imgURL, name, gender, birthdate, location, score, biography, favorites} = this.state;
+            const username = this.props.match.params.username;
+            return (
+                <div className="Profile">
+                    <div className="Profile_left">
+                        <img src={imgURL || ProfilePicture} alt="" className="Profile_picture" />
+                        <General
+                            name={name}
+                            gender={gender}
+                            birthdate={birthdate}
+                            location={location}
+                            score={score}
+                        />
+                    </div>
+                    <div className="Profile_right">
+                        <About
+                            biography={biography}
+                            favorites={favorites}
+                        />
+                        <div className="Profile_carousel">
+                            <TopArtists
+                                username={username}
+                            />
+                            <TopSongs
+                                username={username}
+                            />
+                        </div>
+                    </div>
+                </div>
+            );
+        }
         return (
-            <div className="Profile_container">
-                <h1 className="Profile_title">Profile</h1>
-                <General user={this.props.user} topSong={this.props.topSong} topArtist={this.props.topArtist} />
-                {/* <div className="Profile_tables-container">
-                    <div className="row">
-                        <div className="col-lg-6 col-md-12 col-sm-12">
-                            <h3>Song</h3>
-                            <SongTable />
-                        </div>
-
-                        <div className="col-lg-6 col-md-12 col-sm-12">
-                            <h3>Artist</h3>
-                            <ArtistTable />
-                        </div>
-
-                    </div>
-
-                    <div className="row">
-                        <div className="col-lg-6 col-md-12 col-sm-12">
-                            <h3>Album</h3>
-                            <AlbumTable />
-                        </div>
-
-                        <div className="col-lg-6 col-md-12 col-sm-12">
-                            <h3>Genre</h3>
-                            <GenreTable />
-                        </div>
-
-                    </div>
-                </div> */}
+            <div className="Homepage_load">
+                <div class="ui active centered inline text loader massive">Loading</div>
             </div>
         );
     };

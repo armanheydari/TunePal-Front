@@ -1,15 +1,16 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'normalize.css/normalize.css';
 import 'semantic-ui-css/semantic.min.css';
+import 'antd/dist/antd.css';
 import './style-container.scss';
 import Main from './components/Main.js';
-import Interest from './components/Interest/Interest.js';
-
 import * as serviceWorker from "./serviceWorker";
 
-ReactDOM.render(< Interest/>, document.getElementById("root"));
+ReactDOM.render(<Main />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.unregister()

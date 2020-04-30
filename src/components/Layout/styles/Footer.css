@@ -1,0 +1,46 @@
+.Footer_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #000;
+  }
+  
+  @media(max-width: 768px) {
+    .Footer_container {
+      flex-direction: column;
+    }
+  }
+  
+  .Footer_app-container {
+    margin: 2rem 5rem;
+  }
+  
+  .Footer_develop-team {
+    margin: 2rem 5rem;
+  }
+  
+  .Footer_po {
+    margin: 2rem 5rem;
+  }
+  
+  .Footer_scrum {
+    margin: 2rem 5rem;
+  }
+  
+  .Footer_logo {
+    height: 3.2rem;
+    width: 3.2rem;
+  }
+  
+  .Footer_app {
+    display: inline;
+    color: #fff;
+  }
+  
+  .Footer_title {
+    color: #919496;
+  }
+  
+  .Footer_container p {
+    color: #fff;
+  }
