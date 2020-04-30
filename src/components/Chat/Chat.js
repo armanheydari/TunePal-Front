@@ -2,7 +2,6 @@ import React from 'react';
 import ChatSidebar from './ChatSidebar/ChatSidebar';
 import ChatBox from './ChatBox/ChatBox';
 import Axios from 'axios';
-import './styles/Chat.scss';
 
 function tokenConfig() {
     const config = {
@@ -46,17 +45,11 @@ class Chat extends React.Component {
                     };
                 });
             });
-            const firstConversationHeader = {
-                picture: this.state.chatList[0].members[0].user_avatar,
-                name: this.state.chatList[0].members[0].nickname,
-                conversationID: this.state.chatList[0].conversationID
-            };
-            this.openChat(firstConversationHeader);
             this.setState(prevState => {
                 return {
                     show: true
-                };
-            });
+                }
+            })
         })
         .catch(err => {
             console.log(err.data)
