@@ -42,23 +42,23 @@ class Quiz extends React.Component {
             });
         this.getQuestion();
     }
-    
+
     render() {
         if (this.state.show) {
             if (this.state.seconds >= 0) {
                 return (
                     <div className="Quiz">
                         <div className="Quiz_score-time">
-                            <h3 className="ui medium header" style={(this.state.seconds<=10)?lastSecondsStyle:{}}>{this.state.seconds}</h3>
-                            <h3 className="ui medium header">Score: {this.state.score}</h3>
+                            <h1 className="ui medium header" style={(this.state.seconds <= 10) ? lastSecondsStyle : {}}>{this.state.seconds}                </h1>
+                            
+                            <h1 className="ui medium header">Score: {this.state.score}</h1>
                         </div>
-
-                        <h1 className="ui large header">{this.state.question}?</h1>
-
+                        <div>
+                            <h1 className="ui large header">{this.state.question}?</h1>
+                        </div>
                         <div>
                             <img src={this.state.imageURL} className="Quiz_image" />
                         </div>
-
                         <div>
                             <button
                                 className="ui inverted white button"
@@ -113,7 +113,7 @@ class Quiz extends React.Component {
                 return (
                     <div className="Quiz">
                         <h1 className="ui text">Time's Upppp!</h1>
-                        <h1 className="ui text" style={PointsStyle}>You can earn {this.state.score - this.state.firstScore} points!</h1>
+                        <h1 className="ui text" style={PointsStyle}>You got {this.state.score - this.state.firstScore} points!</h1>
                     </div>
                 )
             }
@@ -182,11 +182,11 @@ class Quiz extends React.Component {
             .catch(err => {
                 console.log(err)
             });
-            this.myInterval = setInterval(() => {
-                this.setState(({ seconds }) => ({
-                    seconds: seconds - 1
-                }))
-            }, 1000)
+        this.myInterval = setInterval(() => {
+            this.setState(({ seconds }) => ({
+                seconds: seconds - 1
+            }))
+        }, 1000)
     }
 
     nextPushed = () => {
@@ -203,7 +203,7 @@ class Quiz extends React.Component {
                 correctAnswer: undefined,
                 show: false,
                 isSubmitted: false,
-                isTimer:false
+                isTimer: false
             };
         });
 
@@ -220,8 +220,7 @@ const FalseStyle = {
 }
 
 const PointsStyle = {
-    fontSize: "7rem",
-    marginBottom: "30rem"
+    fontSize: "x-large",
 }
 
 const lastSecondsStyle = {

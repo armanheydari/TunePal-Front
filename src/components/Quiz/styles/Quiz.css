@@ -1,10 +1,14 @@
 .Quiz {
     background: url("../../../assets/QB2.jpg");
-    /* background-size: contain; */
+    background-size: contain;
     background-position:top;
-    /* background: cover; */
+    background: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     width: 100%;
-    padding: 5rem;
+    height: 100%;
+    padding: 1rem;
+    background-color: black;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -12,30 +16,30 @@
 }
 
 .Quiz_score-time{
-    /* display: flex; */
-    flex-direction: column-reverse;
+    /* flex-direction: row; */
+    height: 7rem;
 }
-
 .ui.medium.header{
-    margin-right: 30rem;
-    margin-left: 25rem;
-    display: inline-block;
     color: wheat;
-    font-size: xx-large;
-    /* margin-right: 20rem; */
-    /* text-align: left;*/
+    font-size: large;
+    display: inline-block;
+    margin-right: 15%;
+    margin-left: 15%;
 } 
 
+.Quiz_question-container{
+    margin-top: 1rem;
+    width: 50%;
+    flex-direction: row;
+}
 .ui.large.header{
-    font-size: 3rem;
     color: white;
 }
 
 .Quiz_image{
-    width: 45rem;
-    height: 50rem;
-    margin-bottom: 2rem;
-    margin-top: 2rem;
+    width: 25%;
+    margin-bottom: 1rem;
+    /* margin-top: 2rem; */
     border-radius: 1rem;
     /* display: inline-block; */
     /* border-radius: 100%;
@@ -45,11 +49,11 @@
 .ui.inverted.white.button{
     display: inline-block;
     height: 10rem;
-    width: 22.5rem;
+    width: 12%;
     margin-bottom: 1rem;
-    margin-right: 1rem;
-    font-size: larger;
-    border-radius: 1rem;
+    margin-right: 1%;
+    font-size: small;
+    border-radius: 0.5rem;
 }
 
 .Quiz_next-button-container {
@@ -68,7 +72,7 @@
 
 .ui.text{
     color: wheat;
-    font-size: 10rem;
+    font-size: xx-large;
     margin-bottom: 10rem;
 }
 /* .Quiz_form{
