@@ -49,8 +49,6 @@ $gray: #92959E;
   
   img {
     float: left;
-    border-radius: 100%;
-    border: 3px solid #73788c;
   }
   
   .about {
@@ -62,8 +60,12 @@ $gray: #92959E;
     padding-left: 8px;
   }
   
-  .status {
+  .lastMessage {
     color: $gray;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width:100px;
   }
   
 }

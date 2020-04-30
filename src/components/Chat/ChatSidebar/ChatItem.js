@@ -10,15 +10,16 @@ class ChatItem extends React.Component {
             <Link to={`/chat/${this.props.id}`} onClick={this.onClick}>
                 <li className="clearfix" style={this.styleChatListItem()}>
                     <img
+                        style={this.styleOnline()}
                         src={this.props.picture || ProfilePicture}
-                        alt={`${this.props.name}-avatar`}
+                        alt=""
                         width="55px"
                         height="55px"
                     />
                     <div className="about">
                         <div className="name">{this.props.name}</div>
-                        <div className="status">
-                            <FontAwesomeIcon icon={faCircle} className="online" /> {this.props.status}
+                        <div className="lastMessage">
+                            Hi ali How are you ? i m not good why you hate me ?
                         </div>
                     </div>
                 </li>
@@ -31,6 +32,22 @@ class ChatItem extends React.Component {
             return {
                 backgroundColor: "#c4c6ce"
             };
+        }
+    }
+
+    styleOnline = () => {
+        if (this.props.status === "Online") {
+            return {
+                borderRadius: "100%",
+                border: "4px solid green"
+            }
+        }
+
+        else {
+            return {
+                borderRadius: "100%",
+                border: "4px solid #73788c"
+            }
         }
     }
 
