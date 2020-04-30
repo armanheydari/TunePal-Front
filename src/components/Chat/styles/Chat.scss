@@ -5,17 +5,27 @@ $blue: #94C2ED;
 $orange: #E38968;
 $gray: #92959E;
 
+@media(max-width: 768px) {
+  .people-list {
+    display: none;
+  }
+
+  .chat {
+    display: none;
+  }
+}
+
 .chat-container {
   display: flex;
-  margin: 0 auto;
+  flex-wrap: wrap;
+  width: 100%;
   height: 100%;
   font: 14px/20px "Lato", Arial, sans-serif;
 }
 
 .people-list {
   background: #444753;
-  width:260px;
-  float: left;
+  width:260px !important;
   
   .search {
     padding: 20px;
@@ -52,12 +62,16 @@ $gray: #92959E;
   }
   
   .about {
+    margin-left: 8px;
     float: left;
     margin-top: 8px;
   }
-  
-  .about {
-    padding-left: 8px;
+
+  .name {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 130px;
   }
   
   .lastMessage {
@@ -65,30 +79,34 @@ $gray: #92959E;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    width:100px;
+    width: 130px;
   }
   
 }
 
 .chat {
   flex-grow: 1;
-  float:left;
+  width: 0%;
   background: #F2F5F8;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   color: #434651;
   
   .chat-header {
-    padding: 20px;
+    padding: 10px 20px;
     border-bottom: 2px solid white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
     
     img {
-      float: left;
+      // float: left;
       border-radius: 100%;
     }
     
     .chat-about {
-      float: left;
+      // float: left;
       padding-left: 10px;
       margin-top: 6px;
     }
@@ -112,9 +130,15 @@ $gray: #92959E;
   
   #chat-history {
     padding: 30px 30px 20px;
-    border-bottom: 2px solid white;
     overflow-y: scroll;
-    height: 575px;
+
+    @media(max-width: 600px) {
+      height: 450px;
+    }
+
+    @media(min-width: 600px) {
+      height: 570px;
+    }
     
     .message-data {
       margin-bottom: 15px;
@@ -127,14 +151,13 @@ $gray: #92959E;
     
     .message {      
       color: white;
-      padding: 18px 20px;
+      padding: 14px 16px;
       line-height: 26px;
       font-size: 16px;
       border-radius: 7px;
       margin-bottom: 30px;
-      
       width: 50%;
-      position: relative;
+      word-break: break-all;
       
       &:after {
         bottom: 100%;
@@ -167,15 +190,15 @@ $gray: #92959E;
   }
   
   .chat-message {
-    padding: 30px;
+    position: relative;
+    display: flex;
     
     textarea {
+      flex-grow: 1;
       width: 100%;
       border: none;
       padding: 10px 20px;
       font: 14px/22px "Lato", Arial, sans-serif;
-      margin-bottom: 10px;
-      border-radius: 5px;
       resize: none;
       
     }
@@ -189,16 +212,17 @@ $gray: #92959E;
     
     button {
       float: right;
-      color: $blue;
+      color: darken($blue, 20%);
       font-size: 16px;
       text-transform: uppercase;
       border: none;
       cursor: pointer;
       font-weight: bold;
-      background: #F2F5F8;
+      background: white;
+      padding-right: 2rem;
       
       &:hover {
-        color: darken($blue, 7%);
+        color: darken($blue, 27%);
       }
     }
   }

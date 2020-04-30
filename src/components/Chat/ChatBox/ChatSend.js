@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFile, faFileImage } from '@fortawesome/free-solid-svg-icons';
+import { faFile, faFileImage, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 class ChatSend extends React.Component {
     state = {
@@ -14,12 +14,10 @@ class ChatSend extends React.Component {
                     name="messageToSend"
                     placeholder="Type your message"
                     value={this.state.messageToSend}
-                    rows="3"
+                    rows="1"
                     onChange={this.onChange}
                 ></textarea>
-                <FontAwesomeIcon icon={faFile} className="fa-file-o" /> &nbsp;&nbsp;&nbsp;
-                <FontAwesomeIcon icon={faFileImage} className="fa-file-image-o" />
-                <button onClick={this.handleSend}>Send</button>
+                <button onClick={this.handleSend}><FontAwesomeIcon icon={faPaperPlane} /></button>
             </div>
         );
     }

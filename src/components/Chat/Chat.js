@@ -63,7 +63,7 @@ class Chat extends React.Component {
                 return (
                     <div className="chat-container clearfix">
                         <ChatSidebar chatID={this.state.header.conversationID} chatList={this.state.chatList} openChat={this.openChat} />
-                        <ChatBox header={this.state.header} messages={this.state.messages} send={this.sendMessage} />
+                        <ChatBox header={this.state.header} messages={this.state.messages} send={this.sendMessage} removeChat={this.removeChat} />
                     </div>
                 );
             }
@@ -86,7 +86,17 @@ class Chat extends React.Component {
         this.getMessages(header.conversationID);
         this.setState(prevState => {
             return {
-                header
+                header,
+                messages: []
+            };
+        });
+    }
+
+    removeChat = () => {
+        this.setState(prevState => {
+            return {
+                header: {},
+                messages: []
             };
         });
     }

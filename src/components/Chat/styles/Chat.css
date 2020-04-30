@@ -7,6 +7,7 @@
     justify-content: center;
     align-items: center;
     padding: 6rem 1rem;
+    text-align: center;
 }
 
 .Chat_noChat > img {
@@ -33,4 +34,29 @@
     padding: .7rem 1rem;
     border-radius: 2rem;
     background-color: #d2dce6;
+}
+
+.Chat_header-back {
+    display: none;
+}
+
+@media(max-width: 768px) {
+    .Chat_header-back {
+        display: block;
+    }
+}
+
+@media(min-width: 769px) {
+    .Chat_header-back {
+        display: none;
+    }
+    #Chat_list-overlay {
+        display: none !important;
+    }
+}
+
+#Chat_list-overlay {
+    background: #444753;
+    width:100%;
+    display: block;
 }

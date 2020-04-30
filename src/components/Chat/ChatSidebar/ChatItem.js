@@ -1,7 +1,5 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import ProfilePicture from '../../../assets/Default-Profile-Picture.jpg';
 
 class ChatItem extends React.Component {
@@ -58,6 +56,8 @@ class ChatItem extends React.Component {
             conversationID: this.props.id
         }
         this.props.openChat(header);
+        document.getElementById("Chat_list-overlay").style.display = "none";
+        document.getElementById("chat").style.display = "block";
     }
 }
 
