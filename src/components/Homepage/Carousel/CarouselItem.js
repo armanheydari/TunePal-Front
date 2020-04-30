@@ -4,7 +4,7 @@ class CarouselItem extends React.Component {
     render() {
         const { index, title, subtitle, imgURL } = this.props;
         return (
-            <div className="Carousel_item">
+            <div className="Carousel_item" onClick={this.openSpotify} >
                 <div className="Carousel_pic">
                     <img className="Carousel_img" src={imgURL} alt="" />
                 </div>
@@ -14,6 +14,10 @@ class CarouselItem extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    openSpotify = () => {
+        window.open(`${this.props.spotifyURL}`,'_blank');
     }
 }
 

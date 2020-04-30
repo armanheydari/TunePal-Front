@@ -106,7 +106,8 @@ class Homepage extends React.Component {
                 const temp = {
                     title: item.artist_name,
                     subtitle: "",
-                    imgURL: item.image_url
+                    imgURL: item.image_url,
+                    spotifyURL: item.spotify_url
                 };
                 this.setState(prevState => {
                     return {
@@ -136,7 +137,8 @@ class Homepage extends React.Component {
                 const temp = {
                     title: item.track_name,
                     subtitle: item.artist_name,
-                    imgURL: item.image_url
+                    imgURL: item.image_url,
+                    spotifyURL: item.spotify_url
                 };
                 this.setState(prevState => {
                     return {
