@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Location from '../Location/Location.js';
 import './styles/Interest.css'
 import Cars from '../../assets/InterestItems/car.png';
 import Fashion from '../../assets/InterestItems/birthday-and-party.png';
@@ -26,7 +27,9 @@ import Item from 'antd/lib/list/Item';
 
 class Interest extends React.Component {
     state = {
+        name:this.props.name,
         choises:[],
+        gotoLocation:false,
         Item1:false,
         Item2:false,
         Item3:false,
@@ -52,6 +55,10 @@ class Interest extends React.Component {
     };
     
     render() {
+        if (this.state.gotoLocation) {
+            console.log(this.state.name)
+            return <Location name={this.state.name} />
+        }
         return (
             <div className="Interest">
                 <h1 className="ui header">We know you like music! :) besides that, let's get to know you more:</h1>
@@ -147,12 +154,12 @@ class Interest extends React.Component {
     };
 
     onNextClick = () => {
-        var result=""
+        var interests=""
         var i=0
         for (i in this.state.choises){
-            result = result.concat("#",this.state.choises[i]," ")
+            interests = interests.concat("#",this.state.choises[i]," ")
         }
-        console.log(result)
+        const objInt={interests}
         const config = {
             mode: "cors",
             headers: {
@@ -160,14 +167,20 @@ class Interest extends React.Component {
                 'Authorization': `Token ${localStorage.getItem('token')}`
             }
         };
-        const JsonToBackInerest = JSON.stringify(result);
+        const JsonToBackInerest = JSON.stringify(objInt);
         axios.put('http://tunepal.pythonanywhere.com/account/sign_up/',JsonToBackInerest, config)
-        .then(()=>{
-            
+        .then((response)=>{
+            console.log(response)
+            this.setState(() => {
+                return {
+                    gotoLocation: true
+                }
+            });
         })
         .catch((err)=>{
             console.log(err)
         })
+        // console.log(a)
     }
     
     onItem1Click = (e) => {
