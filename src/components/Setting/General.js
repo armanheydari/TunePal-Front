@@ -143,6 +143,7 @@ class General extends React.Component {
                     >
                         <TextArea
                             autoSize
+                            maxLength={500}
                         />
                     </Form.Item>
 
@@ -153,6 +154,7 @@ class General extends React.Component {
                     >
                         <TextArea
                             autoSize
+                            maxLength={30}
                         />
                     </Form.Item>
                     
