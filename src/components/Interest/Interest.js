@@ -57,7 +57,7 @@ class Interest extends React.Component {
     render() {
         if (this.state.gotoLocation) {
             console.log(this.state.name)
-            return <Location name={this.state.name} />
+            return <Location name={this.state.name}/>
         }
         return (
             <div className="Interest">

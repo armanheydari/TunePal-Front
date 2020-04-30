@@ -48,18 +48,17 @@ class Quiz extends React.Component {
             if (this.state.seconds >= 0) {
                 return (
                     <div className="Quiz">
-                        <div className="Quiz_score-time">
-                            <h1 className="ui medium header" style={(this.state.seconds <= 10) ? lastSecondsStyle : {}}>{this.state.seconds}                </h1>
-                            
-                            <h1 className="ui medium header">Score: {this.state.score}</h1>
+                        <div className="Quiz_score-time-container">
+                            <span className="Quiz_header" style={(this.state.seconds <= 10) ? lastSecondsStyle : {}}>{this.state.seconds}</span>
+                            <span className="Quiz_header">Score: {this.state.score}</span>
                         </div>
                         <div>
-                            <h1 className="ui large header">{this.state.question}?</h1>
+                            <span className="ui large header">{this.state.question}?</span>
                         </div>
                         <div>
                             <img src={this.state.imageURL} className="Quiz_image" />
                         </div>
-                        <div>
+                        <div className="Quiz_button-row">
                             <button
                                 className="ui inverted white button"
                                 type="submit"
@@ -79,7 +78,7 @@ class Quiz extends React.Component {
                                 {this.state.choise2.split('(')[0]}
                             </button>
                         </div>
-                        <div>
+                        <div className="Quiz_button-row">
                             <button
                                 className="ui inverted white button"
                                 type="submit"
@@ -118,7 +117,11 @@ class Quiz extends React.Component {
                 )
             }
         }
-        return null;
+        return (
+            <div className="Quiz_load">
+                <div class="ui active centered inline text loader massive">Loading</div>
+            </div>
+        );
     };
 
     onSubmit = (e) => {
@@ -190,6 +193,7 @@ class Quiz extends React.Component {
     }
 
     nextPushed = () => {
+        clearInterval(this.myInterval)
         this.setState(prevState => {
             return {
                 id: undefined,
