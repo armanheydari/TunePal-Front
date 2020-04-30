@@ -15,7 +15,8 @@ class TopArtists extends React.Component {
                 const temp = {
                     title: item.artist_name,
                     subtitle: "",
-                    imgURL: item.image_url
+                    imgURL: item.image_url,
+                    spotifyURL: item.spotify_url
                 };
                 this.setState(prevState => {
                     return {

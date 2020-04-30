@@ -83,6 +83,7 @@ class CarouselList extends React.Component {
                                 title={item.title}
                                 subtitle={item.subtitle}
                                 imgURL={item.imgURL}
+                                spotifyURL={item.spotifyURL}
                             />
                         );
                     })

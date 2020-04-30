@@ -4,7 +4,7 @@ class CarouselItem extends React.Component {
     render() {
         const { index, title, subtitle, imgURL } = this.props;
         return (
-            <div className="Carousel_item-override">
+            <div className="Carousel_item-override" style={{cursor: 'pointer'}} onClick={this.openSpotify} >
                 <img className="Carousel-img-override" src={imgURL} alt="" />
                 <div className="Carousel_item-text-override">
                     <p>{index + 1}: {title}</p>
@@ -12,6 +12,10 @@ class CarouselItem extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    openSpotify = () => {
+        window.open(`${this.props.spotifyURL}`, '_blank');
     }
 }
 
