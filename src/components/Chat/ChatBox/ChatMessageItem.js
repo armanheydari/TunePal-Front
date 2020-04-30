@@ -7,13 +7,13 @@ class ChatMessageItem extends React.Component {
         if (this.props.isMe) {
             return (
                 <li className="clearfix">
-                <div className="message-data align-right">
-                    <span className="message-data-time">{dateParser(this.props.date)}</span> &nbsp; &nbsp;
-                    <span className="message-data-name">{this.props.name} </span>
-                    <FontAwesomeIcon icon={faCircle} className="me" />
-                </div>
-                <div className="message other-message float-right">{this.props.message}</div>
-            </li>
+                    <div className="message-data align-right">
+                        <span className="message-data-time">{dateParser(this.props.date)}</span> &nbsp; &nbsp;
+                        <span className="message-data-name">{this.props.name} </span>
+                        <FontAwesomeIcon icon={faCircle} className="me" />
+                    </div>
+                    <div className="message other-message float-right">{this.props.message}</div>
+                </li>
             );
         }
 
