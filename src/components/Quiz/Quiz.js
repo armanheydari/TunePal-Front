@@ -11,26 +11,120 @@ class Quiz extends React.Component {
         choise2: undefined,
         choise3: undefined,
         choise4: undefined,
-
+        choisePushed: undefined,
         correctAnswer: undefined,
-
+        firstScore: undefined,
         score: undefined,
-
         show: false,
-        isSubmitted: false
+        isSubmitted: false,
+        isTimer: true,
+        seconds: 60
     };
 
-    onChange = (e) => {
-        const newValue = e.target.value;
-        this.setState(() => {
-            return {
-                userChoise: newValue
-            };
-        });
+    componentDidMount() {
+        const config = {
+            mode: "cors",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${localStorage.getItem('token')}`
+            }
+        }
+        axios.get('http://tunepal.pythonanywhere.com/quiz/score/', config)
+            .then((response) => {
+                this.setState(() => {
+                    return {
+                        firstScore: response.data.score,
+                        score: response.data.score
+                    };
+                });
+            }).catch((error) => {
+                console.log(error);
+            });
+        this.getQuestion();
     }
+    
+    render() {
+        if (this.state.show) {
+            if (this.state.seconds >= 0) {
+                return (
+                    <div className="Quiz">
+                        <div className="Quiz_score-time">
+                            <h3 className="ui medium header" style={(this.state.seconds<=10)?lastSecondsStyle:{}}>{this.state.seconds}</h3>
+                            <h3 className="ui medium header">Score: {this.state.score}</h3>
+                        </div>
+
+                        <h1 className="ui large header">{this.state.question}?</h1>
+
+                        <div>
+                            <img src={this.state.imageURL} className="Quiz_image" />
+                        </div>
+
+                        <div>
+                            <button
+                                className="ui inverted white button"
+                                type="submit"
+                                value={this.state.choise1}
+                                disabled={this.state.isSubmitted}
+                                style={(this.state.choise1 === this.state.correctAnswer) ? TrueStyle : (this.state.choise1 === this.state.choisePushed) ? FalseStyle : {}}
+                                onClick={this.onSubmit}>
+                                {this.state.choise1.split('(')[0]}
+                            </button>
+                            <button
+                                className="ui inverted white button"
+                                type="submit"
+                                value={this.state.choise2}
+                                disabled={this.state.isSubmitted}
+                                style={(this.state.choise2 === this.state.correctAnswer) ? TrueStyle : (this.state.choise2 === this.state.choisePushed) ? FalseStyle : {}}
+                                onClick={this.onSubmit}>
+                                {this.state.choise2.split('(')[0]}
+                            </button>
+                        </div>
+                        <div>
+                            <button
+                                className="ui inverted white button"
+                                type="submit"
+                                value={this.state.choise3}
+                                disabled={this.state.isSubmitted}
+                                style={(this.state.choise3 === this.state.correctAnswer) ? TrueStyle : (this.state.choise3 === this.state.choisePushed) ? FalseStyle : {}}
+                                onClick={this.onSubmit}>
+                                {this.state.choise3.split('(')[0]}
+                            </button>
+                            <button
+                                className="ui inverted white button"
+                                type="submit"
+                                value={this.state.choise4}
+                                disabled={this.state.isSubmitted}
+                                style={(this.state.choise4 === this.state.correctAnswer) ? TrueStyle : (this.state.choise4 === this.state.choisePushed) ? FalseStyle : {}}
+                                onClick={this.onSubmit}>
+                                {this.state.choise4.split('(')[0]}
+                            </button>
+                        </div>
+
+                        <div className="Quiz_next-button-container">
+                            <button type="toggle" className="ui right labeled icon button" onClick={this.nextPushed}>
+                                <i className="right arrow icon"></i>
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                );
+            }
+            else {
+                return (
+                    <div className="Quiz">
+                        <h1 className="ui text">Time's Upppp!</h1>
+                        <h1 className="ui text" style={PointsStyle}>You can earn {this.state.score - this.state.firstScore} points!</h1>
+                    </div>
+                )
+            }
+        }
+        return null;
+    };
 
     onSubmit = (e) => {
+        clearInterval(this.myInterval)
         e.preventDefault();
+        const temp = e.target.value
         const config = {
             mode: "cors",
             headers: {
@@ -40,7 +134,7 @@ class Quiz extends React.Component {
         };
         const quizAnswer = {
             quiz_id: this.state.id.toString(),
-            answer: e.target.value.toString()
+            answer: temp.toString()
         }
         const JsonToBack = JSON.stringify(quizAnswer);
         axios.post("http://tunepal.pythonanywhere.com/quiz/checkanswer/", JsonToBack, config)
@@ -49,6 +143,7 @@ class Quiz extends React.Component {
                     return {
                         correctAnswer: response.data.answer,
                         score: response.data.score,
+                        choisePushed: temp,
                         isSubmitted: true
                     };
                 });
@@ -87,28 +182,11 @@ class Quiz extends React.Component {
             .catch(err => {
                 console.log(err)
             });
-    }
-
-    componentDidMount() {
-        const config = {
-            mode: "cors",
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Token ${localStorage.getItem('token')}`
-            }
-        }
-        axios.get('http://tunepal.pythonanywhere.com/quiz/score/', config)
-            .then((response) => {
-                this.setState(() => {
-                    return {
-                        score: response.data.score
-                    };
-                });
-            }).catch((error) => {
-                console.log(error);
-            });
-
-        this.getQuestion();
+            this.myInterval = setInterval(() => {
+                this.setState(({ seconds }) => ({
+                    seconds: seconds - 1
+                }))
+            }, 1000)
     }
 
     nextPushed = () => {
@@ -121,50 +199,16 @@ class Quiz extends React.Component {
                 choise2: undefined,
                 choise3: undefined,
                 choise4: undefined,
-                userChoise: undefined,
+                choisePushed: undefined,
                 correctAnswer: undefined,
                 show: false,
-                isSubmitted: false
+                isSubmitted: false,
+                isTimer:false
             };
         });
 
         this.getQuestion();
     }
-    render() {
-        if (this.state.show) {
-            return (
-                <div className="Quiz">
-                    <div className="Quiz_score-time">
-                        <h3 className="ui medium header">Time: 60</h3>
-                        <h3 className="ui medium header">Score: {this.state.score}</h3>
-                    </div>
-
-                    <h1 className="ui large header">{this.state.question}?</h1>
-
-                    <div>
-                        <img src={this.state.imageURL} className="Quiz_image" />
-                    </div>
-
-                    <div>
-                        <button className="ui inverted white button" type="submit" value={this.state.choise1} disabled={this.state.isSubmitted} style={(this.state.choise1 === this.state.correctAnswer) ? TrueStyle : {}} onClick={this.onSubmit}>{this.state.choise1.split('(')[0]}</button>
-                        <button className="ui inverted white button" type="submit" value={this.state.choise2} disabled={this.state.isSubmitted} style={(this.state.choise2 === this.state.correctAnswer) ? TrueStyle : {}} onClick={this.onSubmit}>{this.state.choise2.split('(')[0]}</button>
-                    </div>
-                    <div>
-                        <button className="ui inverted white button" type="submit" value={this.state.choise3} disabled={this.state.isSubmitted} style={(this.state.choise3 === this.state.correctAnswer) ? TrueStyle : {}} onClick={this.onSubmit}>{this.state.choise3.split('(')[0]}</button>
-                        <button className="ui inverted white button" type="submit" value={this.state.choise4} disabled={this.state.isSubmitted} style={(this.state.choise4 === this.state.correctAnswer) ? TrueStyle : {}} onClick={this.onSubmit}>{this.state.choise4.split('(')[0]}</button>
-                    </div>
-
-                    <div className="Quiz_next-button-container">
-                        <button type="toggle" className="ui right labeled icon button" onClick={this.nextPushed}>
-                            <i className="right arrow icon"></i>
-                                Next
-                            </button>
-                    </div>
-                </div>
-            );
-        }
-        return null;
-    };
 }
 
 const TrueStyle = {
@@ -173,6 +217,16 @@ const TrueStyle = {
 
 const FalseStyle = {
     backgroundColor: "red"
+}
+
+const PointsStyle = {
+    fontSize: "7rem",
+    marginBottom: "30rem"
+}
+
+const lastSecondsStyle = {
+    color: "#fc5c9c",
+    fontSize: "7rem",
 }
 
 export default Quiz;

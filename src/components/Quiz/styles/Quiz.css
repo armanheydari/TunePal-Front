@@ -21,7 +21,7 @@
     margin-left: 25rem;
     display: inline-block;
     color: wheat;
-    font-size: x-large;
+    font-size: xx-large;
     /* margin-right: 20rem; */
     /* text-align: left;*/
 } 
@@ -64,6 +64,12 @@
     color: whitesmoke;
     background-color: green;
     border-radius: 12px;
+}
+
+.ui.text{
+    color: wheat;
+    font-size: 10rem;
+    margin-bottom: 10rem;
 }
 /* .Quiz_form{
     background-color: honeydew;
