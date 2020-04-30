@@ -12,3 +12,9 @@
 .Match_NoItem-icon {
     font-size: 20rem;
 }
+
+.Match_NoItem > h1 {
+    font-family: fa5-proxima-nova,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 4.8rem;
+    font-weight: 600;
+}
