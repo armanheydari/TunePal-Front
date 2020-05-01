@@ -12,6 +12,7 @@ import Match from './Match/Match';
 import Quiz from './Quiz/Quiz.js';
 import Chat from './Chat/Chat';
 import SidebarOverlay from './Layout/SidebarOverlay';
+import LandingPage from './LandingPage/LandingPage.js';
 import Homepage from './Homepage/Homepage';
 
 const tokenConfig = () => {
@@ -70,6 +71,7 @@ class Main extends React.Component {
         if (this.state.isLoggedIn) {
             return (
                 <Router>
+                    
                     <Header username={this.state.username} />
                     <div className="Main_row">
                         <div className="Main_sidebar">
@@ -120,8 +122,13 @@ class Main extends React.Component {
         else {
             return (
                 <Router>
-                    <Route exact path="/"><LoginSignup setUserInfo={this.setUserInfo} /></Route>
+                    <Switch>
+                    
+                    <Route exact path="/" component = {LandingPage }></Route>
+                   <Route  path="/LoginSignup" component = {LoginSignup }><LoginSignup setUserInfo={this.setUserInfo}/></Route>
+                        
                     <Redirect from='*' to='/' />
+                    </Switch>
                 </Router>
             );
         }

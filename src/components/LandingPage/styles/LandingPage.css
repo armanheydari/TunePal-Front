@@ -1,0 +1,6 @@
+ .LandingPage {
+    background-position :500px, 500px;
+    display:flex;
+    flex-direction: column;
+}
+ 
