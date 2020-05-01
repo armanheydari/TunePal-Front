@@ -3,6 +3,7 @@ import ProfilePicture from '../../assets/Default-Profile-Picture.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPeopleArrows, faVenusMars, faMale, faFemale, faBirthdayCake } from '@fortawesome/free-solid-svg-icons';
 import Axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function tokenConfig() {
     const config = {
@@ -22,7 +23,7 @@ class RequestItem extends React.Component {
             <div className="card Request_item">
                 <div className="blurring dimmable image">
                     <div className="Request_image">
-                        <img src={imgURL || ProfilePicture} alt="" className="Request_img"/>
+                        <Link to={`/profile/${this.props.username}`}><img src={imgURL || ProfilePicture} alt="" className="Request_img"/></Link>
                     </div>
                 </div>
                 <div className="content">
