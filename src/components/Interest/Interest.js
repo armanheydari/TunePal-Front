@@ -23,7 +23,6 @@ import SciFi from '../../assets/InterestItems/alien.png';
 import Coding from '../../assets/InterestItems/programmer.png';
 import News from '../../assets/InterestItems/live-streaming.png';
 import Culture from '../../assets/InterestItems/poem.png';
-import Item from 'antd/lib/list/Item';
 
 class Interest extends React.Component {
     state = {
@@ -298,7 +297,6 @@ class Interest extends React.Component {
         }
     }
     onItem8Click = (e) => {
-        const newValue=e.target.value
         this.setState(() => {
             return {
                 Item8:!this.state.Item8,

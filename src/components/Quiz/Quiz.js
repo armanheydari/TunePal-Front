@@ -55,7 +55,7 @@ class Quiz extends React.Component {
                             <span className="ui large header">{this.state.question}?</span>
                         </div>
                         <div>
-                            <img src={this.state.imageURL} className="Quiz_image" />
+                            <img src={this.state.imageURL} alt="" className="Quiz_image" />
                         </div>
                         <div className="Quiz_button-row">
                             <button
