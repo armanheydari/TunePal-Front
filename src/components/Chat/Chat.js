@@ -33,6 +33,8 @@ class Chat extends React.Component {
                 let conversationTemp = {};
                 let memberTemp = [];
                 conversationTemp.conversationID = conversationID;
+                conversationTemp.newMessages = conversation.new_messages;
+                conversationTemp.lastMessage = conversation.last_message;
                 conversationMembers.forEach(member => {
                     if (member.to_show) {
                         memberTemp.push(member);

@@ -17,7 +17,7 @@ class ChatItem extends React.Component {
                     <div className="about">
                         <div className="name">{this.props.name}</div>
                         <div className="lastMessage">
-                            Hi ali How are you ? i m not good why you hate me ?
+                            {`${this.senderName()}: ${this.props.lastMessage.text}`}
                         </div>
                     </div>
                 </li>
@@ -59,6 +59,13 @@ class ChatItem extends React.Component {
         this.props.openChat(header);
         document.getElementById("Chat_list-overlay").style.display = "none";
         document.getElementById("chat").style.display = "block";
+    }
+
+    senderName = () => {
+        if (this.props.lastMessage.nickname !== this.props.name) {
+            return "You";
+        }
+        return this.props.lastMessage.nickname;
     }
 }
 
