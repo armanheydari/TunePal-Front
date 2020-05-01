@@ -53,7 +53,6 @@ class Location extends React.Component {
                 });
             })
             .catch(err => {
-                console.log(err.data);
                 this.setState(() => {
                     return {
                         message: "We've got your coordinate but there was a problem in getting your address.",
@@ -98,7 +97,6 @@ class Location extends React.Component {
                 });
             })
             .catch(err => {
-                console.log(err.data);
             });
         }
     }
