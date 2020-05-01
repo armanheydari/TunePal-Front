@@ -19,7 +19,7 @@ class ChatItem extends React.Component {
                             {this.props.newMessages > 0 && <span className="Chat_newMessages">{this.props.newMessages}</span>}
                         </div>
                         <div className="lastMessage">
-                            {`${this.senderName()}: ${this.props.lastMessage.text}`}
+                            {this.props.lastMessage.text ? `${this.senderName()}: ${this.props.lastMessage.text}` : "No messages yet"}
                         </div>
                     </div>
                 </li>
