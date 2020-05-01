@@ -70,3 +70,15 @@
     width:100%;
     display: block;
 }
+
+.Chat_newMessages {
+    margin-left: .5rem;
+    background-color: green;
+    border-radius: 50%;
+    padding: 4px;
+    color: white;
+    font-size: 10px;
+    width: .5rem;
+    height: .5rem;
+    text-align: center;
+}

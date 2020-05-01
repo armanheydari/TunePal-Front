@@ -86,9 +86,15 @@ class Chat extends React.Component {
     openChat = (header) => {
         this.getMessages(header.conversationID);
         this.setState(prevState => {
+            const newChatList = prevState.chatList.map(item => {
+                if (item.conversationID === header.conversationID)
+                    return {...item, newMessages: 0};
+                return item;
+            });
             return {
                 header,
-                messages: []
+                messages: [],
+                chatList: newChatList
             };
         });
     }

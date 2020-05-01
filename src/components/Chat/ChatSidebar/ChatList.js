@@ -30,6 +30,7 @@ class ChatList extends React.Component {
                                 chatID={this.props.chatID}
                                 username={item.members[0].username}
                                 lastMessage={item.lastMessage}
+                                newMessages={item.newMessages}
                             />
                         );
                     })
