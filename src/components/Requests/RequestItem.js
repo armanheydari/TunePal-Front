@@ -59,22 +59,18 @@ class RequestItem extends React.Component {
     onClickAccept = () => {
         Axios.get(`http://tunepal.pythonanywhere.com/spotify/response/?verb=accept&username=${this.props.username}`, tokenConfig())
         .then(res => {
-            console.log(res);
             this.props.updateItems(this.props.username);
         })
         .catch(err => {
-            console.log(err);
         });
     }
 
     onClickReject = () => {
         Axios.get(`http://tunepal.pythonanywhere.com/spotify/response/?verb=decline&username=${this.props.username}`, tokenConfig())
         .then(res => {
-            console.log(res);
             this.props.updateItems(this.props.username);
         })
         .catch(err => {
-            console.log(err);
         });
     }
 }

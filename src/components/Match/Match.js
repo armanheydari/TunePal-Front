@@ -28,7 +28,6 @@ class Match extends React.Component {
   componentDidMount() {
     Axios.get("http://tunepal.pythonanywhere.com/spotify/suggestions/", tokenConfig())
     .then(res => {
-      console.log(res);
       this.setState(prevState => {
         return {
           items: res.data.s_users,
@@ -37,7 +36,6 @@ class Match extends React.Component {
       });
     })
     .catch(err => {
-      console.log(err.data);
     });
   }
 
