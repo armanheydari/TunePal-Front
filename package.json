@@ -15,7 +15,6 @@
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.1.5",
     "axios": "^0.19.2",
-    "moment": "^2.24.0",
     "node-sass": "^4.13.1",
     "normalize.css": "^8.0.1",
     "react": "^16.13.0",
