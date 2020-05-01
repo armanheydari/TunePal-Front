@@ -53,7 +53,8 @@ class ChatItem extends React.Component {
         const header = {
             picture: this.props.picture,
             name: this.props.name,
-            conversationID: this.props.id
+            conversationID: this.props.id,
+            username: this.props.username
         }
         this.props.openChat(header);
         document.getElementById("Chat_list-overlay").style.display = "none";

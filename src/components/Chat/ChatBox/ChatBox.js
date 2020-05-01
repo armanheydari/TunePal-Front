@@ -13,6 +13,7 @@ class ChatBox extends React.Component {
                         name={this.props.header.name}
                         description="Description"
                         removeChat={this.props.removeChat}
+                        username={this.props.header.username}
                     />
                     <ChatHistory messages={this.props.messages} />
                     <ChatSend send={this.props.send} />

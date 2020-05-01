@@ -28,6 +28,7 @@ class ChatList extends React.Component {
                                 id={item.conversationID}
                                 openChat={this.props.openChat}
                                 chatID={this.props.chatID}
+                                username={item.members[0].username}
                             />
                         );
                     })

@@ -19,17 +19,18 @@ class ChatHeader extends React.Component {
                         cursor: 'pointer'
                     }}
                 />
-                <Link to={`/profile/${this.props.username}`}>
-                    <img
-                        src={this.props.picture || ProfilePicture}
-                        alt=""
-                        width="55px"
-                        height="55px"
-                    />
+                    <Link to={`/profile/${this.props.username}`}>
+                        <img
+                            src={this.props.picture || ProfilePicture}
+                            alt=""
+                            width="55px"
+                            height="55px"
+                        />
+                    </Link>
                     <div className="chat-about">
                         <div className="chat-with">{this.props.name}</div>
                     </div>
-                </Link>
+                
             </div>
         );
     }
