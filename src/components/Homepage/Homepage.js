@@ -25,9 +25,6 @@ const requestJSX = () => {
             </div>
             <div className="Homepage_text">
                 <h3 className="Homepage_title">Friend Request</h3>
-                    <p>Here you can see your friendship requests from other users.</p>
-                    <p>You can accept or reject.</p>
-                    <p>When you accept a request a new chat wil be open with that person.</p>
                     <p>Right now you don't have any request but be sure you'll get lot.</p>
             </div>
         </div>
@@ -39,10 +36,7 @@ const artistJSX = () => {
         <div className="Homepage_section" style={{justifyContent: "flex-end"}}>
             <div className="Homepage_text">
                 <h3 className="Homepage_title">Top Artists</h3>
-                    <p>Here you can see singers you listened most.</p>
-                    <p>We will use this in finding similar people to you.</p>
-                    <p>We give you this data by your spotify account.</p>
-                    <p>You can connect your Spotify account to TunePal in setting.</p>
+                    <p>We will use your top artists to find similar people to you.</p>
             </div>
             <div className="Homepage_pic">
                 <img src={SingerPicture} className="Homepage_img" alt="" />
@@ -56,10 +50,7 @@ const songJSX = () => {
         <div className="Homepage_section">
             <div className="Homepage_text">
                 <h3 className="Homepage_title">Top Songs</h3>
-                    <p>Here you can see songs you listened most.</p>
-                    <p>We will use this in finding similar people to you.</p>
-                    <p>We give you this data by your spotify account.</p>
-                    <p>You can connect your Spotify account to TunePal in setting.</p>
+                    <p>We will use your top songs to find similar people to you..</p>
             </div>
             <div className="Homepage_pic">
                 <img src={SongPicture} className="Homepage_img" alt="" />
