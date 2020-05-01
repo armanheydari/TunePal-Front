@@ -195,8 +195,8 @@ class General extends React.Component {
         return {
             name,
             gender,
-            birthdate,
-            // biography,
+            // birthdate,
+            biography,
             favorites
         }
     }
