@@ -53,7 +53,6 @@ class Chat extends React.Component {
             })
         })
         .catch(err => {
-            console.log(err.data)
         });
     }
 
@@ -112,7 +111,6 @@ class Chat extends React.Component {
             });
         })
         .catch(err => {
-            console.log(err.data);
         });
     }
 
@@ -138,7 +136,6 @@ class Chat extends React.Component {
             });
         })
         .catch(err => {
-            console.log(err.data);
         });
     }
 }
