@@ -28,6 +28,9 @@ class ChatList extends React.Component {
                                 id={item.conversationID}
                                 openChat={this.props.openChat}
                                 chatID={this.props.chatID}
+                                username={item.members[0].username}
+                                lastMessage={item.lastMessage}
+                                newMessages={item.newMessages}
                             />
                         );
                     })
@@ -37,10 +40,10 @@ class ChatList extends React.Component {
     }
 
     filterChatList = (item) => {
-        if (this.props.searchField === "") {
+        if (this.props.searchField.trim(" ") === "") {
             return true;
         }
-        if (item.members[0].nickname.includes(this.props.searchField)) {
+        if (item.members[0].nickname.toLowerCase().includes(this.props.searchField.trim(" ").toLowerCase())) {
             return true;
         }
     }

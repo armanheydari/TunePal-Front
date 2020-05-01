@@ -1,15 +1,16 @@
 .Carousel {
   padding: 1rem 3rem;
-  background: black;
+  background: #191919;
   width: 100%;
-  margin: 1rem 0;
 }
 
 .Carousel_title {
   color: white;
   margin: 0 1rem 1rem 1rem;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 5px;
 }
 
 @media(max-width: 480px) {
@@ -47,7 +48,7 @@
 }
 
 .Carousel_fail-icon {
-  color: yellow;
+  color: orange;
   font-size: 3rem;
   margin: 1rem;
 }
@@ -71,13 +72,24 @@
 
 .Carousel_item {
   position: relative;
+  cursor: pointer;
+}
+
+.Carousel_pic {
+  width: 95%;
+  height: 200px;
+}
+
+.Carousel_img {
+  height: 100%;
+  width: 100%;
 }
 
 .Carousel_item-text {
   width: 100%;
   position: absolute;
   bottom: 0;
-  background-color: black;
+  background-color: #191919;
   opacity: 0.8;
   color: white;
 }

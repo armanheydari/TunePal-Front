@@ -60,7 +60,7 @@ class CarouselList extends React.Component {
                 <div className="Carousel-override">
                     <div className="Carousel_loading">
                         <div className="ui active centered inline loader Carousel_loading-icon"></div>
-                        <p className="Carousel_loading-text">Loading</p>
+                        <p className="Carousel_loading-text" style={{color: "black"}}>Loading</p>
                     </div>
                 </div>
             );
@@ -70,7 +70,7 @@ class CarouselList extends React.Component {
                 <div className="Carousel-override">
                     <div className="Carousel_fail">
                         <FontAwesomeIcon icon={faExclamationTriangle} className="Carousel_fail-icon" />
-                        <p className="Carousel_fail-text">There was a problem connecting to Spotify</p>
+                        <p className="Carousel_fail-text" style={{color: "black"}}>There was a problem connecting to Spotify</p>
                     </div>
                 </div>
             );
@@ -87,6 +87,7 @@ class CarouselList extends React.Component {
                                 title={item.title}
                                 subtitle={item.subtitle}
                                 imgURL={item.imgURL}
+                                spotifyURL={item.spotifyURL}
                             />
                         );
                     })

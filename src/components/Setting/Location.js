@@ -17,11 +17,11 @@ const tokenConfig = () => {
 
 class Location extends React.Component {
     state = {
-        latitude: this.props.location.latitude,
-        longitude: this.props.location.longitude,
-        country: this.props.location.country,
-        province: this.props.location.province,
-        neighbourhood: this.props.location.neighbourhood,
+        latitude: this.props.location ? this.props.location.latitude : "",
+        longitude: this.props.location ? this.props.location.longitude : "",
+        country: this.props.location ? this.props.location.country : "",
+        province: this.props.location ? this.props.location.province : "",
+        neighbourhood: this.props.location ? this.props.location.neighbourhood : "",
         isFinding: false,
         showErrorFindining: false,
         errorCoords: false,

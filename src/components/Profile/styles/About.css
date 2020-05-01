@@ -19,4 +19,5 @@
 .Profile_About-text {
     margin-top: 1.5rem;
     font-size: 2rem;
+    word-break: break-all;
 }

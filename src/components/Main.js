@@ -8,13 +8,12 @@ import LoginSignup from './LoginSignup/LoginSignup.js';
 import SpotifyResult from './Spotify/SpotifyResult.js';
 import Profile from './Profile/Profile.js';
 import Setting from './Setting/Setting.js';
-import Requests from './Requests/Requests';
 import Match from './Match/Match';
 import Quiz from './Quiz/Quiz.js';
 import Chat from './Chat/Chat';
 import SidebarOverlay from './Layout/SidebarOverlay';
 import LandingPage from './LandingPage/LandingPage.js';
-//import LandingPage from './LandingPage/LandingPage.js';
+import Homepage from './Homepage/Homepage';
 
 const tokenConfig = () => {
     return {
@@ -86,7 +85,7 @@ class Main extends React.Component {
                                 <Route
                                     exact
                                     path="/"
-                                    component={Requests}
+                                    component={Homepage}
                                 />
                                 <Route
                                     path="/match"

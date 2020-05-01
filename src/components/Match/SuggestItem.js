@@ -1,6 +1,7 @@
 import React from "react";
 import ProfilePicture from "../../assets/Default-Profile-Picture.jpg";
 import Axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function tokenConfig() {
   const config = {
@@ -17,11 +18,13 @@ class SuggestItem extends React.Component {
     const { name, age, distance, imgURL, pending } = this.props;
     return (
       <li className="matchList-firstList_list">
-        <img
-          className="matchList-firstList_list__picture"
-          alt="profile-img"
-          src={imgURL || ProfilePicture}
-        />
+        <Link to={`/profile/${this.props.username}`}>
+          <img
+            className="matchList-firstList_list__picture"
+            alt="profile-img"
+            src={imgURL || ProfilePicture}
+          />
+        </Link>
         <h2 className="matchList-firstList_list__name">{name}</h2>
         <div className="matchList-firstList_list__info">
           <p>

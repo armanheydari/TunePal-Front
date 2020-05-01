@@ -1,6 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
-import moment from 'moment';
+// import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Form, Input, Button, Select, DatePicker } from 'antd';
@@ -123,7 +123,7 @@ class General extends React.Component {
                         </Select>
                     </Form.Item>
 
-                    <Form.Item
+                    {/* <Form.Item
                         name="birthdate"
                         label="Birthdate"
                     >
@@ -133,7 +133,7 @@ class General extends React.Component {
                             onChange={this.onBirthdateChange}
                             disabledDate={d => !d || d.isAfter(maxBirthdate()) || d.isSameOrBefore("1900-00-00")}
                         />
-                    </Form.Item>
+                    </Form.Item> */}
 
                     <Form.Item
                         name="biography"
@@ -143,6 +143,7 @@ class General extends React.Component {
                     >
                         <TextArea
                             autoSize
+                            maxLength={500}
                         />
                     </Form.Item>
 
@@ -153,6 +154,7 @@ class General extends React.Component {
                     >
                         <TextArea
                             autoSize
+                            maxLength={30}
                         />
                     </Form.Item>
                     
@@ -189,11 +191,11 @@ class General extends React.Component {
 
     formInitialValues = () => {
         const {name, gender, biography, favorites} = this.props;
-        const birthdate = moment(this.props.birthdate, 'YYYY-MM-DD');
+        // const birthdate = moment(this.props.birthdate, 'YYYY-MM-DD');
         return {
             name,
             gender,
-            birthdate,
+            // birthdate,
             biography,
             favorites
         }

@@ -4,7 +4,7 @@ import RequestItem from './RequestItem';
 class RequestList extends React.Component {
     render() {
         return (
-            <ul className="Requests_List">
+            <div className="ui special cards Requests">
                 {
                     this.props.items.map((item, index) => {
                         return (
@@ -21,7 +21,7 @@ class RequestList extends React.Component {
                         );
                     })
                 }
-            </ul>
+            </div>
         );
     }
 }

@@ -9,10 +9,16 @@ class ChatSidebar extends React.Component {
 
     render() {
         return (
-            <div className="people-list">
-                <Search getFieldSearch={this.getFieldSearch} />
-                <ChatList chatList={this.props.chatList} openChat={this.props.openChat} chatID={this.props.chatID} searchField={this.state.searchField} />
-            </div>
+            <React.Fragment>
+                <div id="Chat_list-overlay" className="people-list">
+                    <Search getFieldSearch={this.getFieldSearch} />
+                    <ChatList chatList={this.props.chatList} openChat={this.props.openChat} chatID={this.props.chatID} searchField={this.state.searchField} />
+                </div>
+                <div id="people-list" className="people-list">
+                    <Search getFieldSearch={this.getFieldSearch} />
+                    <ChatList chatList={this.props.chatList} openChat={this.props.openChat} chatID={this.props.chatID} searchField={this.state.searchField} />
+                </div>
+            </React.Fragment>
         );
     }
 

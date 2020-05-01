@@ -20,8 +20,8 @@
     border-top: 1px solid hsla(0,0%,100%,.05);
     font-family: Circular,Helvetica,Arial,sans-serif,iosfallbackfix;
     color: #919496;
-    font-size: 3.2rem;
-    padding: 1.5rem 0;
+    font-size: 3rem;
+    padding: 1rem 0;
     text-decoration: none;
     cursor: pointer;
 }
@@ -35,7 +35,7 @@
 }
   
 .Sidebar_item-name {
-    margin-top: 1rem;
+    margin-top: .5rem;
     font-size: 1.6rem;
     display: block;
 }

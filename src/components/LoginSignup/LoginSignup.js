@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Location from '../Location/Location.js';
+import Interest from '../Interest/Interest.js';
 
 function legalAge() {
     const today = new Date();
@@ -40,7 +40,7 @@ class LoginSignup extends React.Component {
         showSignupResult: false,
         validEmail: false,
         validUsername: false,
-        gotoLocation: false
+        gotoInterest: false
     }
 
     onChange = (e) => {
@@ -68,7 +68,7 @@ class LoginSignup extends React.Component {
                 localStorage.setItem('token', res.data.data.token);
                 this.setState(() => {
                     return {
-                        gotoLocation: true
+                        gotoInterest: true
                     }
                 });
             })
@@ -130,8 +130,8 @@ class LoginSignup extends React.Component {
     }
 
     render() {
-        if (this.state.gotoLocation) {
-            return <Location name={this.state.name} />
+        if (this.state.gotoInterest) {
+            return <Interest name={this.state.name} />
         }
         return (
             <div className="LoginSignup_container" id="LoginSignup_container">
