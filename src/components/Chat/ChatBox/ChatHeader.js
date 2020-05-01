@@ -2,6 +2,7 @@ import React from 'react';
 import ProfilePicture from '../../../assets/Default-Profile-Picture.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 class ChatHeader extends React.Component {
     render() {
@@ -18,16 +19,17 @@ class ChatHeader extends React.Component {
                         cursor: 'pointer'
                     }}
                 />
-                <img
-                    src={this.props.picture || ProfilePicture}
-                    alt={`${this.props.name}-avatar`}
-                    width="55px"
-                    height="55px"
-                />
-                <div className="chat-about">
-                    <div className="chat-with">{this.props.name}</div>
-                    {/* <div className="chat-num-messages">{this.props.description}</div> */}
-                </div>
+                <Link to={`/profile/${this.props.username}`}>
+                    <img
+                        src={this.props.picture || ProfilePicture}
+                        alt=""
+                        width="55px"
+                        height="55px"
+                    />
+                    <div className="chat-about">
+                        <div className="chat-with">{this.props.name}</div>
+                    </div>
+                </Link>
             </div>
         );
     }
