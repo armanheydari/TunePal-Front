@@ -51,12 +51,10 @@ class Interest extends React.Component {
         Item19:false,
         Item20:false,
         Item21:false
-        //Item:[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
     };
     
     render() {
         if (this.state.gotoLocation) {
-            console.log(this.state.name)
             return <Location name={this.state.name}/>
         }
         return (
@@ -170,7 +168,6 @@ class Interest extends React.Component {
         const JsonToBackInerest = JSON.stringify(objInt);
         axios.put('http://tunepal.pythonanywhere.com/account/sign_up/',JsonToBackInerest, config)
         .then((response)=>{
-            console.log(response)
             this.setState(() => {
                 return {
                     gotoLocation: true
@@ -178,9 +175,7 @@ class Interest extends React.Component {
             });
         })
         .catch((err)=>{
-            console.log(err)
         })
-        // console.log(a)
     }
     
     onItem1Click = (e) => {
