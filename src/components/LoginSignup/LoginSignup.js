@@ -112,7 +112,7 @@ class LoginSignup extends React.Component {
                 };
                 axios.get('http://tunepal.pythonanywhere.com/account/get_user_info/', configGetUserInfo)
                 .then(res => {
-                    window.location.reload(false);
+                    window.location.reload(true);
                 })
             })
             .catch(err => {
