@@ -33,21 +33,16 @@ class ChatMessageItem extends React.Component {
 export default ChatMessageItem;
 
 function dateParser(timeStamp) {
-    const date = timeStamp.split("T")[0];
-    const dateArray = date.split("-"); //0:year 1:month 2:day
-    const timeArray = timeStamp.split("T")[1].split(":"); //0:hour 1:minute
-    const today = new Date();
-    const todayYear = today.getFullYear();
-    let todayMonth = today.getMonth() + 1;
-    if (todayMonth < 10) {
-        todayMonth = "0" + todayMonth;
+    const timeStampGMT = new Date(timeStamp);
+    const date = timeStampGMT.toLocaleDateString().toString();
+    const time = timeStampGMT.toLocaleTimeString().toString();
+    let result = "";
+    if (date === new Date().toLocaleDateString()) {
+        result = result.concat("Today, ");
     }
-    let todayDay = today.getDate();
-    if (todayDay < 10) {
-        todayDay = "0" + todayDay;
+    else {
+        result = result.concat(date + ", ");
     }
-    if (`${dateArray[0]}` === `${todayYear}` && `${dateArray[1]}` === `${todayMonth}` && `${dateArray[2]}` === `${todayDay}`) {
-        return timeArray[0] + ":" + timeArray[1] + ", Today";
-    }
-    return timeArray[0] + ":" + timeArray[1] + ", " + date;
+    result = result.concat(time.split(":")[0] + ":" + time.split(":")[1] + " " + time.split(" ")[1]);
+    return result;
 }
