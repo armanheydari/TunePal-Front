@@ -112,7 +112,7 @@ class Quiz extends React.Component {
                 return (
                     <div className="Quiz">
                         <h1 className="ui text">Time's Upppp!</h1>
-                        <h1 className="ui text" style={PointsStyle}>You got {this.state.score - this.state.firstScore} points!</h1>
+                        <h1 className="ui text">You got {this.state.score - this.state.firstScore} points!</h1>
                     </div>
                 )
             }
@@ -221,10 +221,6 @@ const TrueStyle = {
 
 const FalseStyle = {
     backgroundColor: "red"
-}
-
-const PointsStyle = {
-    fontSize: "x-large",
 }
 
 const lastSecondsStyle = {
