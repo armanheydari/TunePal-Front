@@ -110,8 +110,8 @@ class Main extends React.Component {
                                 <Route path="/spotifyresult">
                                     <SpotifyResult name={this.state.username} />
                                 </Route>
-                                <Route path='/404'>404</Route>
-                                <Redirect to='/404' />
+                                <Route path='/'><Homepage /></Route>
+                                <Redirect to='/' />
                             </Switch>
                         </div>
                     </div>
