@@ -5,16 +5,7 @@ import { faMapMarkerAlt, faPlus, faCheck, faTimes } from '@fortawesome/free-soli
 import Logo from '../../assets/app-logo.png';
 import { Button } from 'antd';
 import { AimOutlined } from '@ant-design/icons';
-
-const tokenConfig = () => {
-    return {
-        mode: "cors",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-    }
-}
+import tokenConfig from '../../utils/tokenConfig';
 
 class Location extends React.Component {
     state = {

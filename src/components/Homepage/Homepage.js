@@ -5,17 +5,7 @@ import SongPicture from '../../assets/Homepage/Song.png';
 import CarouselList from './Carousel/CarouselList';
 import RequestList from '../Requests/RequestList';
 import RequestPicture from '../../assets/Homepage/Request.png';
-
-
-const tokenConfig = () => {
-    return {
-        mode: "cors",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-    }
-}
+import tokenConfig from '../../utils/tokenConfig';
 
 const requestJSX = () => {
     return (

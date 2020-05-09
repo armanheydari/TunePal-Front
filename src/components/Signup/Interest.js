@@ -22,16 +22,7 @@ import News from '../../assets/InterestItems/live-streaming.png';
 import Culture from '../../assets/InterestItems/poem.png';
 import './styles/Interest.css';
 import Axios from 'axios';
-
-const tokenConfig = () => {
-    return {
-        mode: "cors",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-    }
-}
+import tokenConfig from '../../utils/tokenConfig';
 
 class Interest extends React.Component {
     state = {

@@ -3,17 +3,7 @@ import ChatSidebar from './ChatSidebar/ChatSidebar';
 import ChatBox from './ChatBox/ChatBox';
 import Axios from 'axios';
 import NoChatSVG from '../../assets/sign.svg';
-
-function tokenConfig() {
-    const config = {
-        mode: "cors",
-        headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-    }
-    return config;
-}
+import tokenConfig from '../../utils/tokenConfig';
 
 class Chat extends React.Component {
     state = {

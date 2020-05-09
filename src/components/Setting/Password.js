@@ -3,16 +3,7 @@ import Axios from 'axios';
 import { Form, Input, Button } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-
-const tokenConfig = () => {
-    return {
-        mode: "cors",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-    }
-}
+import tokenConfig from '../../utils/tokenConfig';
 
 const formItemLayout = {
     labelCol: {

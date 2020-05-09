@@ -3,22 +3,13 @@ import Axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faHome, faHeart, faAddressCard, faUserCog, faPowerOff, faComments, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import tokenConfig from '../../utils/tokenConfig';
 
 const makeSidebarOff = () => {
     const sidebarOverlay = document.getElementById("SidebarOverlay");
     sidebarOverlay.style.display = "none";
     const headerToggler = document.getElementById("Header_toggle");
     headerToggler.style.display = "flex";
-}
-
-const tokenConfig = () => {
-    return {
-        mode: "cors",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-    }
 }
 
 class Sidebar extends React.Component {

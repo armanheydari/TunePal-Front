@@ -1,17 +1,7 @@
 import React from 'react';
 import RequestList from './RequestList';
 import Axios from 'axios';
-
-function tokenConfig() {
-  const config = {
-    mode: "cors",
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Token ${localStorage.getItem('token')}`
-    }
-  };
-  return config;
-}
+import tokenConfig from '../../utils/tokenConfig';
 
 class Requests extends React.Component {
     state = {

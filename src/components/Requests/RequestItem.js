@@ -4,17 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPeopleArrows, faVenusMars, faMale, faFemale, faBirthdayCake } from '@fortawesome/free-solid-svg-icons';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
-
-function tokenConfig() {
-    const config = {
-      mode: "cors",
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Token ${localStorage.getItem('token')}`
-      }
-    };
-    return config;
-  }
+import tokenConfig from '../../utils/tokenConfig';
 
 class RequestItem extends React.Component {
     render() {

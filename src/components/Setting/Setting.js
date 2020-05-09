@@ -6,16 +6,7 @@ import Location from './Location';
 import Spotify from './Spotify';
 import Security from './Security';
 import Password from './Password';
-
-const tokenConfig = () => {
-    return {
-        mode: "cors",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-    }
-}
+import tokenConfig from '../../utils/tokenConfig';
 
 class Setting extends React.Component {
     state = {
