@@ -113,7 +113,7 @@ class Homepage extends React.Component {
             });
         });
 
-        Axios.get(`${serverURL}/spotify/topsong/`, tokenConfig())
+        Axios.get(`${serverURL()}/spotify/topsong/`, tokenConfig())
         .then(res => {
             res.data.forEach(item => {
                 const temp = {
