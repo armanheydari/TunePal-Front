@@ -1,6 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 import CarouselList from './Carousel/CarouselList';
+import serverURL from '../../utils/serverURL';
 
 class TopSongs extends React.Component {
     state = {
@@ -9,7 +10,7 @@ class TopSongs extends React.Component {
         items: []
     }
     componentDidMount() {
-        Axios.get(`http://tunepal.pythonanywhere.com/spotify/topsong/?username=${this.props.username}`)
+        Axios.get(`${serverURL()}/spotify/topsong/?username=${this.props.username}`)
         .then(res => {
             res.data.forEach(item => {
                 const temp = {

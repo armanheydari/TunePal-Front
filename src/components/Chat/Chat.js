@@ -3,17 +3,8 @@ import ChatSidebar from './ChatSidebar/ChatSidebar';
 import ChatBox from './ChatBox/ChatBox';
 import Axios from 'axios';
 import NoChatSVG from '../../assets/sign.svg';
-
-function tokenConfig() {
-    const config = {
-        mode: "cors",
-        headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-    }
-    return config;
-}
+import tokenConfig from '../../utils/tokenConfig';
+import serverURL from '../../utils/serverURL';
 
 class Chat extends React.Component {
     state = {
@@ -24,7 +15,7 @@ class Chat extends React.Component {
     }
 
     componentDidMount() {
-        Axios.get("http://tunepal.pythonanywhere.com/chat/", tokenConfig())
+        Axios.get(`${serverURL()}/chat/`, tokenConfig())
         .then(res => {
             const conversations = res.data.conversations;
             conversations.forEach(conversation => {
@@ -109,7 +100,7 @@ class Chat extends React.Component {
     }
 
     getMessages = (conversationID) => {
-        Axios.get(`http://tunepal.pythonanywhere.com/chat/${conversationID}/`, tokenConfig())
+        Axios.get(`${serverURL()}/chat/${conversationID}/`, tokenConfig())
         .then(res => {
             const messages = res.data.messages;
             this.setState(prevState => {
@@ -129,7 +120,7 @@ class Chat extends React.Component {
             text: message
         };
         const toBackJSON = JSON.stringify(toBack);
-        Axios.post(`http://tunepal.pythonanywhere.com/chat/${conversationID}/`, toBackJSON, tokenConfig())
+        Axios.post(`${serverURL()}/chat/${conversationID}/`, toBackJSON, tokenConfig())
         .then(res => {
             const allMessages = res.data.messages;
             let newMessages = [];

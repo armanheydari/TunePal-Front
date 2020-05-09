@@ -6,16 +6,8 @@ import Location from './Location';
 import Spotify from './Spotify';
 import Security from './Security';
 import Password from './Password';
-
-const tokenConfig = () => {
-    return {
-        mode: "cors",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-    }
-}
+import tokenConfig from '../../utils/tokenConfig';
+import serverURL from '../../utils/serverURL';
 
 class Setting extends React.Component {
     state = {
@@ -86,7 +78,7 @@ class Setting extends React.Component {
     }
 
     getUserInfo = () => {
-        Axios.get('http://tunepal.pythonanywhere.com/account/get_user_info/', tokenConfig())
+        Axios.get(`${serverURL()}/account/get_user_info/`, tokenConfig())
         .then(res => {
             const {
                 user_avatar: imgURL,

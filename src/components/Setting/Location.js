@@ -4,16 +4,8 @@ import { Button, Input } from 'antd';
 import { AimOutlined } from '@ant-design/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-
-const tokenConfig = () => {
-    return {
-        mode: "cors",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-    }
-}
+import tokenConfig from '../../utils/tokenConfig';
+import serverURL from '../../utils/serverURL';
 
 class Location extends React.Component {
     state = {
@@ -173,7 +165,7 @@ class Location extends React.Component {
             neighbourhood: this.state.neighbourhood
         };
         const toBackJSON = JSON.stringify(location);
-        Axios.post('http://tunepal.pythonanywhere.com/account/get_location/', toBackJSON, tokenConfig())
+        Axios.post(`${serverURL()}/account/get_location/`, toBackJSON, tokenConfig())
         .then(res => {
             this.setState(prevState => {
                 return {

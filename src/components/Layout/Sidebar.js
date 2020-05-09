@@ -3,16 +3,8 @@ import Axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faHeart, faAddressCard, faUserCog, faPowerOff, faComments, faQuestion } from '@fortawesome/free-solid-svg-icons';
-
-const tokenConfig = () => {
-    return {
-        mode: "cors",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-    }
-}
+import tokenConfig from '../../utils/tokenConfig';
+import serverURL from '../../utils/serverURL';
 
 class Sidebar extends React.Component {
     render() {
@@ -51,7 +43,7 @@ class Sidebar extends React.Component {
     }
 
     logout = () => {
-        Axios.get('http://tunepal.pythonanywhere.com/account/logout/', tokenConfig())
+        Axios.get(`${serverURL()}/account/logout/`, tokenConfig())
         .then(res => {
             localStorage.clear();
             window.location.reload(false);

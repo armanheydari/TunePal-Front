@@ -3,22 +3,14 @@ import Axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faHome, faHeart, faAddressCard, faUserCog, faPowerOff, faComments, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import tokenConfig from '../../utils/tokenConfig';
+import serverURL from '../../utils/serverURL';
 
 const makeSidebarOff = () => {
     const sidebarOverlay = document.getElementById("SidebarOverlay");
     sidebarOverlay.style.display = "none";
     const headerToggler = document.getElementById("Header_toggle");
     headerToggler.style.display = "flex";
-}
-
-const tokenConfig = () => {
-    return {
-        mode: "cors",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-    }
 }
 
 class Sidebar extends React.Component {
@@ -61,7 +53,7 @@ class Sidebar extends React.Component {
     }
 
     logout = () => {
-        Axios.get('http://tunepal.pythonanywhere.com/account/logout/', tokenConfig())
+        Axios.get(`${serverURL()}/account/logout/`, tokenConfig())
         .then(res => {
             localStorage.clear();
             window.location.reload(false);

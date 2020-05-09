@@ -2,16 +2,7 @@ import React from "react";
 import ProfilePicture from "../../assets/Default-Profile-Picture.jpg";
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
-
-function tokenConfig() {
-  const config = {
-    headers: {
-      Authorization: `Token ${localStorage.getItem("token")}`,
-      "Content-Type": "application/json",
-    },
-  };
-  return config;
-}
+import tokenConfig from '../../utils/tokenConfig';
 
 class SuggestItem extends React.Component {
   render() {
