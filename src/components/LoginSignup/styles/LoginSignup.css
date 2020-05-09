@@ -154,7 +154,7 @@
 }
 
 .LoginSignup_overlay {
-	background: #FF416C;
+	background: linear-gradient(to right, rgb(255, 65, 108), rgb(255, 75, 43));
 	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
 	background: linear-gradient(to right, #FF4B2B, #FF416C);
 	background-repeat: no-repeat;
