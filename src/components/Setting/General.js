@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Form, Input, Button, Select, DatePicker } from 'antd';
 import tokenConfig from '../../utils/tokenConfig';
+import serverURL from '../../utils/serverURL';
 const { Option } = Select;
 const { TextArea } = Input;
 const dateFormat = 'YYYY-MM-DD';
@@ -262,7 +263,7 @@ class General extends React.Component {
                 showResult: false
             };
         });
-        Axios.put('http://tunepal.pythonanywhere.com/account/sign_up/', toBackJSON, tokenConfig())
+        Axios.put(`${serverURL()}/account/sign_up/`, toBackJSON, tokenConfig())
         .then(res => {
             this.setState(prevState => {
                 return {

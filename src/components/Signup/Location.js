@@ -6,6 +6,7 @@ import Logo from '../../assets/app-logo.png';
 import { Button } from 'antd';
 import { AimOutlined } from '@ant-design/icons';
 import tokenConfig from '../../utils/tokenConfig';
+import serverURL from '../../utils/serverURL';
 
 class Location extends React.Component {
     state = {
@@ -168,7 +169,7 @@ class Location extends React.Component {
             neighbourhood: this.state.neighbourhood
         };
         const toBackJSON = JSON.stringify(location);
-        Axios.post('http://tunepal.pythonanywhere.com/account/get_location/', toBackJSON, tokenConfig())
+        Axios.post(`${serverURL()}/account/get_location/`, toBackJSON, tokenConfig())
         .then(res => {
             this.props.updateLocation(location);
             this.props.updateStage("spotify");

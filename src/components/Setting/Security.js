@@ -4,6 +4,7 @@ import { Form, Input, Button } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import tokenConfig from '../../utils/tokenConfig';
+import serverURL from '../../utils/serverURL';
 
 const formItemLayout = {
     labelCol: {
@@ -194,7 +195,7 @@ class Security extends React.Component {
                 showResult: false
             };
         });
-        Axios.put('http://tunepal.pythonanywhere.com/account/sign_up/', toBackJSON, tokenConfig())
+        Axios.put(`${serverURL()}/account/sign_up/`, toBackJSON, tokenConfig())
         .then(res => {
             this.setState(prevState => {
                 return {

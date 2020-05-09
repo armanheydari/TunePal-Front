@@ -5,6 +5,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import tokenConfig from '../../utils/tokenConfig';
+import serverURL from '../../utils/serverURL';
 
 function getBase64(file) {
     return new Promise((resolve, reject) => {
@@ -131,7 +132,7 @@ class Picture extends React.Component {
                         showResult: false
                     };
                 });
-                Axios.put("http://tunepal.pythonanywhere.com/account/sign_up/", formData, tokenConfig())
+                Axios.put(`${serverURL()}/account/sign_up/`, formData, tokenConfig())
                 .then(res => {
                     this.setState(prevState => {
                         return {

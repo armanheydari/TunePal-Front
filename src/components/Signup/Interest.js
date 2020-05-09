@@ -23,6 +23,7 @@ import Culture from '../../assets/InterestItems/poem.png';
 import './styles/Interest.css';
 import Axios from 'axios';
 import tokenConfig from '../../utils/tokenConfig';
+import serverURL from '../../utils/serverURL';
 
 class Interest extends React.Component {
     state = {
@@ -192,7 +193,7 @@ class Interest extends React.Component {
         });
         interests = interests.trim(" ");
         const toBackJSON = JSON.stringify({interests});
-        Axios.put('http://tunepal.pythonanywhere.com/account/sign_up/', toBackJSON, tokenConfig())
+        Axios.put(`${serverURL()}/account/sign_up/`, toBackJSON, tokenConfig())
         .then(res => {
             this.props.updateFavorites(this.state.favorites);
             this.props.updateStage("location");

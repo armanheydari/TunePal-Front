@@ -6,6 +6,7 @@ import CarouselList from './Carousel/CarouselList';
 import RequestList from '../Requests/RequestList';
 import RequestPicture from '../../assets/Homepage/Request.png';
 import tokenConfig from '../../utils/tokenConfig';
+import serverURL from '../../utils/serverURL';
 
 const requestJSX = () => {
     return (
@@ -64,7 +65,7 @@ class Homepage extends React.Component {
     }
 
     componentDidMount() {
-        Axios.get("http://tunepal.pythonanywhere.com/spotify/friend_list/", tokenConfig())
+        Axios.get(`${serverURL()}/spotify/friend_list/`, tokenConfig())
         .then(res => {
             this.setState(prevState => {
                 return {
@@ -81,7 +82,7 @@ class Homepage extends React.Component {
             });
         });
 
-        Axios.get(`http://tunepal.pythonanywhere.com/spotify/topartist/`, tokenConfig())
+        Axios.get(`${serverURL()}/spotify/topartist/`, tokenConfig())
         .then(res => {
             res.data.forEach(item => {
                 const temp = {
@@ -112,7 +113,7 @@ class Homepage extends React.Component {
             });
         });
 
-        Axios.get(`http://tunepal.pythonanywhere.com/spotify/topsong/`, tokenConfig())
+        Axios.get(`${serverURL}/spotify/topsong/`, tokenConfig())
         .then(res => {
             res.data.forEach(item => {
                 const temp = {

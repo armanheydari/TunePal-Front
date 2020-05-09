@@ -3,6 +3,7 @@ import Axios from "axios";
 import Filter from "./Filter.js";
 import SuggestList from "./SuggestList";
 import tokenConfig from '../../utils/tokenConfig';
+import serverURL from '../../utils/serverURL';
 
 class Match extends React.Component {
   state = {
@@ -17,7 +18,7 @@ class Match extends React.Component {
   };
 
   componentDidMount() {
-    Axios.get("http://tunepal.pythonanywhere.com/spotify/suggestions/", tokenConfig())
+    Axios.get(`${serverURL()}/spotify/suggestions/`, tokenConfig())
     .then(res => {
       console.log(res);
       this.setState(prevState => {
