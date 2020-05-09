@@ -1,0 +1,38 @@
+.Signup > .Steps {
+    width: 60%;
+    padding: 0 1rem;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+@media(max-width: 1200px) {
+    .Signup > .Steps {
+        width: 70%;
+    }
+}
+
+@media(max-width: 992px) {
+    .Signup > .Steps {
+        width: 80%;
+    }
+}
+
+@media(max-width: 768px) {
+    .Signup > .Steps {
+        width: 90%;
+    }
+}
+
+@media(max-width: 600px) {
+    .Signup > .Steps {
+        width: 100%;
+    }
+}
+
+.Steps .ant-steps-item-title {
+    color: white !important;
+}
+
+.Steps .ant-steps-item-description {
+    color: white !important;
+}
