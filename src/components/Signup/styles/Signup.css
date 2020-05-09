@@ -1,0 +1,82 @@
+.Signup {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.Location-Spotify {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.Location-Spotify > .icons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.Location-Spotify > .icons > .icon {
+    width: 100px;
+    height: 100px;
+}
+
+.Location-Spotify > .icons > .plus {
+    color: rgb(255, 75, 43);
+    width: 30px;
+    height: 30px;
+    margin: 0 3rem;
+}
+
+.Location-Spotify > .icons > .location {
+    color: white;
+}
+
+.Location-Spotify > .icons > .spotify {
+    color: white;
+}
+
+.Location-Spotify > p {
+    margin: 2rem 0;
+    color: white;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.Location-Spotify > .find-btn {
+    margin: 2rem 0;
+    background: linear-gradient(to right, rgb(255, 65, 108), rgb(255, 75, 43));
+    color: white;
+}
+
+.Location-Spotify > .result {
+    color: white;
+}
+
+.Location-Spotify > .result > .icon {
+    margin-right: 1rem ;
+}
+
+.Location-Spotify > .result.fail {
+    color: red;
+}
+
+.Location-Spotify > .connect-btn {
+    margin: 2rem 0;
+    background: linear-gradient(to right, rgb(255, 65, 108), rgb(255, 75, 43));
+    color: white;
+}
+
+.Location-Spotify > .connect-btn > .spotify {
+    margin-right: 1rem;
+}
+
+.Signup .Pagination > .link {
+    margin: 0 2rem;
+}
