@@ -4,7 +4,6 @@ import SignupSteps from './SignupSteps';
 import Interest from './Interest';
 import Location from './Location';
 import Spotify from './Spotify';
-import Pagination from './Pagination';
 
 class Signup extends React.Component {
     state = {
