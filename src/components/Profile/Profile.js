@@ -5,6 +5,7 @@ import About from './About';
 import TopArtists from './TopArtists';
 import TopSongs from './TopSongs';
 import ProfilePicture from '../../assets/Default-Profile-Picture.jpg';
+import serverURL from '../../utils/serverURL';
 
 const locationToString = (location) => {
     if (location) {
@@ -29,7 +30,7 @@ class Profile extends React.Component {
 
     componentDidMount() {
         const username = this.props.match.params.username;
-        Axios.get(`http://tunepal.pythonanywhere.com/account/get_user_info/?username=${username}`)
+        Axios.get(`${serverURL()}/account/get_user_info/?username=${username}`)
         .then(res => {
             const {
                 user_avatar: imgURL,

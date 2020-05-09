@@ -1,17 +1,8 @@
 import React from 'react';
 import RequestList from './RequestList';
 import Axios from 'axios';
-
-function tokenConfig() {
-  const config = {
-    mode: "cors",
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Token ${localStorage.getItem('token')}`
-    }
-  };
-  return config;
-}
+import tokenConfig from '../../utils/tokenConfig';
+import serverURL from '../../utils/serverURL';
 
 class Requests extends React.Component {
     state = {
@@ -20,7 +11,7 @@ class Requests extends React.Component {
     }
 
     componentDidMount() {
-      Axios.get("http://tunepal.pythonanywhere.com/spotify/friend_list/", tokenConfig())
+      Axios.get(`${serverURL()}/spotify/friend_list/`, tokenConfig())
       .then(res => {
         console.log(res);
         this.setState(prevState => {

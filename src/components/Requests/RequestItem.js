@@ -4,17 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPeopleArrows, faVenusMars, faMale, faFemale, faBirthdayCake } from '@fortawesome/free-solid-svg-icons';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
-
-function tokenConfig() {
-    const config = {
-      mode: "cors",
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Token ${localStorage.getItem('token')}`
-      }
-    };
-    return config;
-  }
+import tokenConfig from '../../utils/tokenConfig';
+import serverURL from '../../utils/serverURL';
 
 class RequestItem extends React.Component {
     render() {
@@ -57,7 +48,7 @@ class RequestItem extends React.Component {
     }
 
     onClickAccept = () => {
-        Axios.get(`http://tunepal.pythonanywhere.com/spotify/response/?verb=accept&username=${this.props.username}`, tokenConfig())
+        Axios.get(`${serverURL()}/spotify/response/?verb=accept&username=${this.props.username}`, tokenConfig())
         .then(res => {
             console.log(res);
             this.props.updateItems(this.props.username);
@@ -68,7 +59,7 @@ class RequestItem extends React.Component {
     }
 
     onClickReject = () => {
-        Axios.get(`http://tunepal.pythonanywhere.com/spotify/response/?verb=decline&username=${this.props.username}`, tokenConfig())
+        Axios.get(`${serverURL()}/spotify/response/?verb=decline&username=${this.props.username}`, tokenConfig())
         .then(res => {
             console.log(res);
             this.props.updateItems(this.props.username);
