@@ -72,7 +72,6 @@
 
 .Carousel_item {
   position: relative;
-  cursor: pointer;
 }
 
 .Carousel_pic {
@@ -83,6 +82,37 @@
 .Carousel_img {
   height: 100%;
   width: 100%;
+}
+
+.Carousel_imgp {
+  height: 100%;
+  width: 100%;
+  filter: brightness(50%);
+}
+
+.Carousel_play-button{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #191919;
+  color: whitesmoke;
+  font-size: 27px;
+  border: solid whitesmoke;
+  cursor: pointer;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  padding-left: 12px;
+}
+
+.Carousel_artist-iframe{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 }
 
 .Carousel_item-text {
