@@ -72,7 +72,6 @@
 
 .Carousel_item {
   position: relative;
-  /* cursor: pointer; */
 }
 
 .Carousel_pic {
@@ -106,6 +105,14 @@
   height: 6rem;
   border-radius: 50%;
   padding-left: 12px;
+}
+
+.Carousel_artist-iframe{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
 }
 
 .Carousel_item-text {

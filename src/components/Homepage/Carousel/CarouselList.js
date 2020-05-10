@@ -8,6 +8,10 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 
 class CarouselList extends React.Component {
+    state={
+        playURL:"",
+        playIndex:null
+    }
     render() {
         const settings = {
             infinite: false,
@@ -72,6 +76,9 @@ class CarouselList extends React.Component {
         }
         return (
             <div className="Carousel">
+            {this.state.playIndex &&     
+            <audio autoPlay onEnded={this.updatePlay(null,"")}><source type="audio/mpeg" src={this.state.playURL} /></audio>
+            }    
                 <h1 className="Carousel_title">{this.props.title}</h1>
                 <Slider {...settings}>
                 {
@@ -84,6 +91,8 @@ class CarouselList extends React.Component {
                                 subtitle={item.subtitle}
                                 imgURL={item.imgURL}
                                 spotifyURL={item.spotifyURL}
+                                updatePlay={this.updatePlay}
+                                playIndex={this.state.playIndex}
                             />
                         );
                     })
@@ -92,7 +101,16 @@ class CarouselList extends React.Component {
             </div>
         );
     }
-    
+
+    updatePlay=(playIndex,playURL)=>{
+        this.setState(()=>{
+            return{
+                playIndex,
+                playURL
+            }
+        }
+        )
+    }
 }
 
 export default CarouselList;
