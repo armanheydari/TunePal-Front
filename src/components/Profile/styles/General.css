@@ -10,8 +10,9 @@
     }
 }
 
+/* #ff304f */
 .Profile_General .ui.label {
-    background-color: #00a7af;
+    background: linear-gradient(to right, rgb(255, 65, 108), rgb(255, 75, 43));
 }
 
 .Profile_General-name {

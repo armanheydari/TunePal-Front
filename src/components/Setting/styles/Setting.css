@@ -1,13 +1,14 @@
 .Setting {
     display: flex;
     flex-direction: column;
+    background: rgb(240, 240, 240);
 }
 
 .Setting_section {
     background-color: white;
     margin: 1rem 6rem;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
 
 @media(max-width: 600px) {
@@ -46,11 +47,13 @@
 
 .Setting_section-title {
     font-size: 3rem;
-    background-color: #00adb5;
+    /* background:rgb(240, 240, 240); */
     padding: .5rem 2rem;
     text-transform: uppercase;
     letter-spacing: 5px;
     font-weight: 500;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    margin: 0 1rem;
 }
 
 .Setting_result-pass {
