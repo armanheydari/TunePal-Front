@@ -31,20 +31,20 @@ class CarouselItem extends React.Component {
         );
     }
 
-    makeArtistFollowLink=()=>{
-        var newLink = this.props.spotifyURL.replace("https://open.spotify.com/artist/","https://open.spotify.com/follow/1/?uri=spotify:artist:");
+    makeArtistFollowLink = () => {
+        var newLink = this.props.spotifyURL.replace("https://open.spotify.com/artist/", "https://open.spotify.com/follow/1/?uri=spotify:artist:");
         newLink = newLink.concat("&size=detail&theme=light");
         return newLink;
-        }
+    }
 
     playClicked = () => {
-        if(this.props.playIndex !== this.props.index && this.props.playIndex!==null){
-            this.props.updatePlay(null, "");
+        if (this.props.playIndex !== this.props.index && this.props.playIndex !== null) {
+            this.props.updatePlay(this.props.index, this.props.previewURL);
         }
         if (this.props.playIndex === this.props.index) {
             this.props.updatePlay(null, "");
         }
-        if(this.props.playIndex===null) {
+        if (this.props.playIndex === null) {
             this.props.updatePlay(this.props.index, this.props.previewURL);
         }
     }

@@ -100,8 +100,7 @@ class CarouselList extends React.Component {
                         })
                     }
                 </Slider>
-                {(this.state.playIndex || this.state.playIndex === 0) &&
-                    <audio autoPlay onEnded={this.playEnd}><source type="audio/mpeg" src={this.state.playURL} /></audio>}
+                <audio autoPlay id="HomepagePlayingAudio" onEnded={this.playEnd}><source id="HomepagePlayingSrc" type="audio/mpeg" /></audio>
             </div>
         );
     }
@@ -112,7 +111,20 @@ class CarouselList extends React.Component {
                 playIndex,
                 playURL
             }
-        }
+        },
+            () => {
+                if (this.state.playURL) {
+                    const temp1 = document.getElementById("HomepagePlayingSrc");
+                    temp1.src = this.state.playURL;
+                    const temp2 = document.getElementById("HomepagePlayingAudio");
+                    temp2.load();
+                    temp2.play();
+                }
+                else {
+                    const temp2 = document.getElementById("HomepagePlayingAudio");
+                    temp2.pause();
+                }
+            }
         )
     }
 
