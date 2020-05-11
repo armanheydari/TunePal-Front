@@ -38,7 +38,6 @@ class Quiz extends React.Component {
                     };
                 });
             }).catch((error) => {
-                console.log(error);
             });
         this.getQuestion();
     }
@@ -151,7 +150,6 @@ class Quiz extends React.Component {
                     };
                 });
             }).catch((error) => {
-                console.log(error);
             });
     }
 
@@ -183,7 +181,6 @@ class Quiz extends React.Component {
                 });
             })
             .catch(err => {
-                console.log(err)
             });
         this.myInterval = setInterval(() => {
             this.setState(({ seconds }) => ({
