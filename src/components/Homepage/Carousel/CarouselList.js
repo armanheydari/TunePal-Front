@@ -1,16 +1,16 @@
 import React from 'react';
 import CarouselItem from './CarouselItem';
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 
 class CarouselList extends React.Component {
-    state={
-        playURL:"",
-        playIndex:null
+    state = {
+        playURL: "",
+        playIndex: null
     }
     render() {
         const settings = {
@@ -78,32 +78,33 @@ class CarouselList extends React.Component {
             <div className="Carousel">
                 <h1 className="Carousel_title">{this.props.title}</h1>
                 <Slider {...settings}>
-                {
-                    this.props.items.map((item, index) => {
-                        return (
-                            <CarouselItem
-                                key={index}
-                                index={index}
-                                title={item.title}
-                                subtitle={item.subtitle}
-                                imgURL={item.imgURL}
-                                spotifyURL={item.spotifyURL}
-                                updatePlay={this.updatePlay}
-                                playIndex={this.state.playIndex}
-                            />
-                        );
-                    })
-                }
+                    {
+                        this.props.items.map((item, index) => {
+                            return (
+                                <CarouselItem
+                                    key={index}
+                                    index={index}
+                                    title={item.title}
+                                    subtitle={item.subtitle}
+                                    imgURL={item.imgURL}
+                                    spotifyURL={item.spotifyURL}
+                                    updatePlay={this.updatePlay}
+                                    playIndex={this.state.playIndex}
+                                    previewURL={item.previewURL}
+                                />
+                            );
+                        })
+                    }
                 </Slider>
-                {(this.state.playIndex || this.state.playIndex==0)&&
+                {(this.state.playIndex || this.state.playIndex === 0) &&
                     <audio autoPlay onEnded={this.playEnd}><source type="audio/mpeg" src={this.state.playURL} /></audio>}
             </div>
         );
     }
 
-    updatePlay=(playIndex,playURL)=>{
-        this.setState(()=>{
-            return{
+    updatePlay = (playIndex, playURL) => {
+        this.setState(() => {
+            return {
                 playIndex,
                 playURL
             }
@@ -111,11 +112,11 @@ class CarouselList extends React.Component {
         )
     }
 
-    playEnd=()=>{
-        this.setState(()=>{
-            return{
-                playIndex:null,
-                playURL:""
+    playEnd = () => {
+        this.setState(() => {
+            return {
+                playIndex: null,
+                playURL: ""
             }
         }
         )
