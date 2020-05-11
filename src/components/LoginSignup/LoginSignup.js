@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import Interest from '../Interest/Interest.js';
 
 function legalAge() {
     const today = new Date();
@@ -40,7 +39,6 @@ class LoginSignup extends React.Component {
         showSignupResult: false,
         validEmail: false,
         validUsername: false,
-        gotoInterest: false
     }
 
     onChange = (e) => {
@@ -66,11 +64,7 @@ class LoginSignup extends React.Component {
             )
             .then(res => {
                 localStorage.setItem('token', res.data.data.token);
-                this.setState(() => {
-                    return {
-                        gotoInterest: true
-                    }
-                });
+                this.props.isOnAfterSignup(true);
             })
             .catch(err => {
                 this.setState({showSignupResult: true});
@@ -130,9 +124,6 @@ class LoginSignup extends React.Component {
     }
 
     render() {
-        if (this.state.gotoInterest) {
-            return <Interest name={this.state.name} />
-        }
         return (
             <div className="LoginSignup_container" id="LoginSignup_container">
 
