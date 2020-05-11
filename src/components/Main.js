@@ -14,16 +14,9 @@ import Chat from './Chat/Chat';
 import SidebarOverlay from './Layout/SidebarOverlay';
 import LandingPage from './LandingPage/LandingPage.js';
 import Homepage from './Homepage/Homepage';
-
-const tokenConfig = () => {
-    return {
-        mode: "cors",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Token ${localStorage.getItem('token')}`
-        }
-    }
-}
+import Signup from './Signup/Signup';
+import tokenConfig from '../utils/tokenConfig';
+import serverURL from '../utils/serverURL';
 
 
 class Main extends React.Component {
@@ -31,11 +24,12 @@ class Main extends React.Component {
         username: "",
         show: false,
         isLoggedIn: false,
+        onAfterSignup: false
     };
 
     componentDidMount() {
         if (localStorage.getItem('token')) {
-            Axios.get('http://tunepal.pythonanywhere.com/account/get_user_info/', tokenConfig())
+            Axios.get(`${serverURL()}/account/get_user_info/`, tokenConfig())
             .then(res => {
                 this.setState(prevState => {
                     return {
@@ -65,13 +59,16 @@ class Main extends React.Component {
     }
 
     render() {
-        if (!this.state.show) {
-            return null;
+        if (this.state.onAfterSignup) {
+            return (
+                <Signup />
+            );
         }
-        if (this.state.isLoggedIn) {
+
+        if (this.state.isLoggedIn && this.state.show) {
             return (
                 <Router>
-                    
+
                     <Header username={this.state.username} />
                     <div className="Main_row">
                         <div className="Main_sidebar">
@@ -119,19 +116,33 @@ class Main extends React.Component {
                 </Router>
             );
         }
-        else {
+
+        if (!this.state.isLoggedIn  && this.state.show) {
             return (
                 <Router>
                     <Switch>
-                    
-                    <Route exact path="/" component = {LandingPage }></Route>
-                   <Route  path="/LoginSignup" component = {LoginSignup }><LoginSignup setUserInfo={this.setUserInfo}/></Route>
-                        
-                    <Redirect from='*' to='/' />
+                        <Route
+                            exact
+                            path="/"
+                            component={LandingPage}
+                        />
+                        <Redirect from='*' to='/' />
                     </Switch>
                 </Router>
             );
         }
+
+        if (!this.state.show) {
+            return null;
+        }
+    }
+
+    isOnAfterSignup = (bool) => {
+        this.setState(prevState => {
+            return {
+                onAfterSignup: bool
+            };
+        });
     }
 }
 
