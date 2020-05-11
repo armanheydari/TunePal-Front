@@ -76,9 +76,6 @@ class CarouselList extends React.Component {
         }
         return (
             <div className="Carousel">
-            {this.state.playIndex &&     
-            <audio autoPlay onEnded={this.updatePlay(null,"")}><source type="audio/mpeg" src={this.state.playURL} /></audio>
-            }    
                 <h1 className="Carousel_title">{this.props.title}</h1>
                 <Slider {...settings}>
                 {
@@ -98,6 +95,8 @@ class CarouselList extends React.Component {
                     })
                 }
                 </Slider>
+                {(this.state.playIndex || this.state.playIndex==0)&&
+                    <audio autoPlay onEnded={this.playEnd}><source type="audio/mpeg" src={this.state.playURL} /></audio>}
             </div>
         );
     }
@@ -107,6 +106,16 @@ class CarouselList extends React.Component {
             return{
                 playIndex,
                 playURL
+            }
+        }
+        )
+    }
+
+    playEnd=()=>{
+        this.setState(()=>{
+            return{
+                playIndex:null,
+                playURL:""
             }
         }
         )

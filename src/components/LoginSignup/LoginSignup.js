@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Interest from '../Interest/Interest.js';
+import Interest from '../Signup/Interest.js';
 
 function legalAge() {
     const today = new Date();
