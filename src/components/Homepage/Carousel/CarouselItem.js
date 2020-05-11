@@ -14,7 +14,7 @@ class CarouselItem extends React.Component {
                         subtitle ?
                             <div style={{ width: "100%", height: "20rem" }}>
                                 <img className="Carousel_imgp" src={imgURL} alt="" />
-                                <button className="Carousel_play-button" onClick={this.playClicked}>{playIndex!==index ? <i className="play icon" /> : <i className="stop icon" />}</button>
+                                <button className="Carousel_play-button" onClick={this.playClicked}>{playIndex !== index ? <i className="play icon" /> : <i className="stop icon" />}</button>
                             </div>
                             :
                             <div style={{ width: "100%", height: "20rem" }}>
@@ -32,11 +32,11 @@ class CarouselItem extends React.Component {
     }
 
     playClicked = () => {
-        if(this.props.playIndex===this.props.index){
-            this.props.updatePlay(null,"");
+        if (this.props.playIndex === this.props.index) {
+            this.props.updatePlay(null, "");
         }
-        else{
-            this.props.updatePlay(this.props.index,"https://p.scdn.co/mp3-preview/83090a4db6899eaca689ae35f69126dbe65d94c9?cid=null");
+        else {
+            this.props.updatePlay(this.props.index, "https://p.scdn.co/mp3-preview/83090a4db6899eaca689ae35f69126dbe65d94c9?cid=null");
         }
     }
 
