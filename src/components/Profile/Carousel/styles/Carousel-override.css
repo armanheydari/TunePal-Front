@@ -31,6 +31,29 @@
     position: relative;
 }
 
+.Carousel_imgp-override {
+    height: 100%;
+    width: 100%;
+    filter: brightness(50%);
+  }
+  
+.Carousel_play-button-override{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #191919;
+    color: whitesmoke;
+    font-size: 20px;
+    border: solid whitesmoke;
+    cursor: pointer;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    padding-left: 6px;
+}
+
 .Profile_carousel .slick-prev {
     background-color: #e5e5e5 !important;
 }

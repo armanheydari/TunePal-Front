@@ -17,7 +17,8 @@ class TopSongs extends React.Component {
                     title: item.track_name,
                     subtitle: item.artist_name,
                     imgURL: item.image_url,
-                    spotifyURL: item.spotify_url
+                    spotifyURL: item.spotify_url,
+                    previewURL: item.preview_url
                 };
                 this.setState(prevState => {
                     return {
