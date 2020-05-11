@@ -118,7 +118,7 @@ class Quiz extends React.Component {
         }
         return (
             <div className="Quiz_load">
-                <div class="ui active centered inline text loader massive">Loading</div>
+                <div className="ui active centered inline text loader massive">Loading</div>
             </div>
         );
     };
