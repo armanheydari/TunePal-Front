@@ -8,7 +8,7 @@ class CarouselItem extends React.Component {
         const { index, title, subtitle, imgURL, playIndex } = this.props;
         return (
             <div className="Carousel_item-override" onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} >
-                {(this.state.isMouseOnItem == false) ?
+                {(this.state.isMouseOnItem === false) ?
                     <img className="Carousel-img-override" src={imgURL} alt="" />
                     :
                     subtitle ?
@@ -19,7 +19,7 @@ class CarouselItem extends React.Component {
                         :
                         <div style={{ width: "100%", height: "16rem" }}>
                             <img className="Carousel_imgp-override" src={imgURL} alt="" />
-                            <iframe className="Carousel_artist-iframe" src={this.makeArtistFollowLink()} scrolling="no" width="100%" frameBorder="0" style={{ border: "none", overflow: "hidden" }}></iframe>
+                            <iframe title="HomepageIframe" className="Carousel_artist-iframe" src={this.makeArtistFollowLink()} scrolling="no" width="100%" frameBorder="0" style={{ border: "none", overflow: "hidden" }}></iframe>
                         </div>
                 }
 

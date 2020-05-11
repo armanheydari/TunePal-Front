@@ -52,14 +52,14 @@ class Quiz extends React.Component {
                             <span className="Quiz_header">Score: {this.state.score}</span>
                         </div>
                         <div>
-                            <span className="ui large header">{this.state.question}?</span>
+                            <span className="ui large header Quiz_question">{this.state.question}?</span>
                         </div>
                         <div>
                             <img src={this.state.imageURL} alt="" className="Quiz_image" />
                         </div>
                         <div className="Quiz_button-row">
                             <button
-                                className="ui inverted white button"
+                                className="ui inverted white button Quiz_choise"
                                 type="submit"
                                 value={this.state.choise1}
                                 disabled={this.state.isSubmitted}
@@ -68,7 +68,7 @@ class Quiz extends React.Component {
                                 {this.state.choise1.split('(')[0]}
                             </button>
                             <button
-                                className="ui inverted white button"
+                                className="ui inverted white button Quiz_choise"
                                 type="submit"
                                 value={this.state.choise2}
                                 disabled={this.state.isSubmitted}
@@ -79,7 +79,7 @@ class Quiz extends React.Component {
                         </div>
                         <div className="Quiz_button-row">
                             <button
-                                className="ui inverted white button"
+                                className="ui inverted white button Quiz_choise"
                                 type="submit"
                                 value={this.state.choise3}
                                 disabled={this.state.isSubmitted}
@@ -88,7 +88,7 @@ class Quiz extends React.Component {
                                 {this.state.choise3.split('(')[0]}
                             </button>
                             <button
-                                className="ui inverted white button"
+                                className="ui inverted white button Quiz_choise"
                                 type="submit"
                                 value={this.state.choise4}
                                 disabled={this.state.isSubmitted}
@@ -99,7 +99,7 @@ class Quiz extends React.Component {
                         </div>
 
                         <div className="Quiz_next-button-container">
-                            <button type="toggle" className="ui right labeled icon button" onClick={this.nextPushed}>
+                            <button type="toggle" className="ui right labeled icon button Quiz_next" onClick={this.nextPushed}>
                                 <i className="right arrow icon"></i>
                                 Next
                             </button>
@@ -110,8 +110,8 @@ class Quiz extends React.Component {
             else {
                 return (
                     <div className="Quiz">
-                        <h1 className="ui text">Time's Upppp!</h1>
-                        <h1 className="ui text">You got {this.state.score - this.state.firstScore} points!</h1>
+                        <h1 className="ui text Quiz_finish-text">Time's Upppp!</h1>
+                        <h1 className="ui text Quiz_finish-text">You got {this.state.score - this.state.firstScore} points!</h1>
                     </div>
                 )
             }
