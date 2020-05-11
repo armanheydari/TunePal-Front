@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import Header from './Layout/Header.js';
 import Footer from './Layout/Footer.js';
 import Sidebar from './Layout/Sidebar.js';
-import LoginSignup from './LoginSignup/LoginSignup.js';
 import SpotifyResult from './Spotify/SpotifyResult.js';
 import Profile from './Profile/Profile.js';
 import Setting from './Setting/Setting.js';
