@@ -19,7 +19,7 @@ class CarouselItem extends React.Component {
                             :
                             <div style={{ width: "100%", height: "20rem" }}>
                                 <img className="Carousel_imgp" src={imgURL} alt="" />
-                                <iframe className="Carousel_artist-iframe" src="https://open.spotify.com/follow/1/?uri=spotify:artist:6sFIWsNpZYqfjUpaCgueju&size=detail&theme=light" scrolling="no" width="100%" frameBorder="0" style={{ border: "none", overflow: "hidden" }} allowTransparency="true"></iframe>
+                                <iframe className="Carousel_artist-iframe" src={this.makeArtistFollowLink()} scrolling="no" width="100%" frameBorder="0" style={{ border: "none", overflow: "hidden" }}></iframe>
                             </div>
                     }
                 </div>
@@ -31,12 +31,21 @@ class CarouselItem extends React.Component {
         );
     }
 
+    makeArtistFollowLink=()=>{
+        var newLink = this.props.spotifyURL.replace("https://open.spotify.com/artist/","https://open.spotify.com/follow/1/?uri=spotify:artist:");
+        newLink = newLink.concat("&size=detail&theme=light");
+        return newLink;
+        }
+    
     playClicked = () => {
+        if(this.props.playIndex !== this.props.index && this.props.playIndex!==null){
+            this.props.updatePlay(null, "");
+        }
         if (this.props.playIndex === this.props.index) {
             this.props.updatePlay(null, "");
         }
-        else {
-            this.props.updatePlay(this.props.index, "https://p.scdn.co/mp3-preview/83090a4db6899eaca689ae35f69126dbe65d94c9?cid=null");
+        if(this.props.playIndex===null) {
+            this.props.updatePlay(this.props.index, this.props.previewURL);
         }
     }
 

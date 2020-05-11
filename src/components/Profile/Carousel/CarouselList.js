@@ -94,12 +94,13 @@ class CarouselList extends React.Component {
                                     spotifyURL={item.spotifyURL}
                                     updatePlay={this.updatePlay}
                                     playIndex={this.state.playIndex}
+                                    previewURL={item.previewURL}
                                 />
                             );
                         })
                     }
                 </Slider>
-                {(this.state.playIndex || this.state.playIndex == 0) &&
+                {(this.state.playIndex || this.state.playIndex === 0) &&
                     <audio autoPlay onEnded={this.playEnd}><source type="audio/mpeg" src={this.state.playURL} /></audio>}
             </div>
         );
