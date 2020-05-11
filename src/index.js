@@ -1,13 +1,13 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'normalize.css/normalize.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'semantic-ui-css/semantic.min.css';
 import 'antd/dist/antd.css';
+import 'normalize.css/normalize.css';
 import './style-container.scss';
- import Main from './components/Main.js';
+import Main from './components/Main.js';
 import * as serviceWorker from "./serviceWorker";
-import LandingPage from './components/LandingPage/LandingPage.js';
 
 ReactDOM.render(<Main />, document.getElementById("root"));
 

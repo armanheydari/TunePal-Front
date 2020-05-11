@@ -96,7 +96,7 @@ class Profile extends React.Component {
         }
         return (
             <div className="Homepage_load">
-                <div class="ui active centered inline text loader massive">Loading</div>
+                <div className="ui active centered inline text loader massive">Loading</div>
             </div>
         );
     };

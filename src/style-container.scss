@@ -5,7 +5,6 @@
 @import "./components/Layout/styles/SidebarOverlay.css";
 @import "./components/Layout/styles/Footer.css";
 @import "./components/LoginSignup/styles/LoginSignup.css";
-@import "./components/Location/styles/Location.css";
 @import "./components/Spotify/styles/Spotify.css";
 @import "./components/Spotify/styles/SpotifyResult.css";
 @import "./components/Profile/styles/Profile.css";
@@ -20,7 +19,10 @@
 @import "./components/Requests/styles/Requests.css";
 @import "./components/Quiz/styles/Quiz.css";
 @import './components/Carousel/styles/Carousel.css';
-@import "./components/LandingPage/styles/Landingpage.scss";
+@import "./components/LandingPage/styles/LandingPage.scss";
 @import './components/Homepage/styles/Homepage.css';
 @import './components/Chat/styles/Chat.scss';
 @import './components/Chat/styles/Chat.css';
+@import './components/Signup/styles/Signup.css';
+@import './components/Signup/styles/Steps.css';
+@import './components/Signup/styles/Interest.css';

@@ -13,7 +13,6 @@ class Requests extends React.Component {
     componentDidMount() {
       Axios.get(`${serverURL()}/spotify/friend_list/`, tokenConfig())
       .then(res => {
-        console.log(res);
         this.setState(prevState => {
           return {
             items: res.data,
@@ -22,7 +21,6 @@ class Requests extends React.Component {
         });
       })
       .catch(err => {
-        console.log(err);
       });
     }
 

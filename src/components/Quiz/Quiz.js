@@ -38,7 +38,6 @@ class Quiz extends React.Component {
                     };
                 });
             }).catch((error) => {
-                console.log(error);
             });
         this.getQuestion();
     }
@@ -119,7 +118,7 @@ class Quiz extends React.Component {
         }
         return (
             <div className="Quiz_load">
-                <div class="ui active centered inline text loader massive">Loading</div>
+                <div className="ui active centered inline text loader massive">Loading</div>
             </div>
         );
     };
@@ -151,7 +150,6 @@ class Quiz extends React.Component {
                     };
                 });
             }).catch((error) => {
-                console.log(error);
             });
     }
 
@@ -183,7 +181,6 @@ class Quiz extends React.Component {
                 });
             })
             .catch(err => {
-                console.log(err)
             });
         this.myInterval = setInterval(() => {
             this.setState(({ seconds }) => ({

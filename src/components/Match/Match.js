@@ -20,7 +20,6 @@ class Match extends React.Component {
   componentDidMount() {
     Axios.get(`${serverURL()}/spotify/suggestions/`, tokenConfig())
     .then(res => {
-      console.log(res);
       this.setState(prevState => {
         return {
           items: res.data.s_users,
@@ -29,7 +28,6 @@ class Match extends React.Component {
       });
     })
     .catch(err => {
-      console.log(err.data);
     });
   }
 
@@ -101,7 +99,7 @@ class Match extends React.Component {
     }
     return (
       <div className="Homepage_load">
-        <div class="ui active centered inline text loader massive">Loading</div>
+        <div className="ui active centered inline text loader massive">Loading</div>
       </div>
     );
   }
