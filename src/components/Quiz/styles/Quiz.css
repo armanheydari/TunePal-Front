@@ -32,9 +32,9 @@
     width: 50%;
     flex-direction: row;
 }
-/* .ui.large.header{
-    color: white;
-} */
+.Quiz_question{
+    color: white !important;
+}
 
 .Quiz_image{
     width: 25%;
@@ -49,26 +49,27 @@
     justify-content: center;
     flex-direction: row;
 }
-/* .ui.inverted.white.button{
-    display: inline-block;
-    height: 7rem;
-    width: 12%;
-    margin-bottom: 1rem;
-    margin-right: 1%;
-    font-size: small;
-    border-radius: 0.5rem;
-} */
+.Quiz_choise{
+    display: inline-block !important;
+    height: 7rem !important;
+    width: 12% !important;
+    margin-bottom: 1rem !important;
+    margin-right: 1% !important;
+    font-size: small !important;
+    border-radius: 0.5rem !important;
+}
 
 .Quiz_next-button-container {
     flex-direction: row;
 }
 
-/* .ui.right.labeled.icon.button{
-    font-size: large;
-    color: whitesmoke;
-    background-color: green;
-    border-radius: 12px;
-} */
+.Quiz_next{
+    font-size: large !important;
+    color: whitesmoke !important;
+    background-color: green !important;
+    border-radius: 12px !important;
+    width: 13rem;
+}
 
 @media(max-width: 600px){
     .Quiz_score-time-container{
@@ -78,36 +79,39 @@
     .Quiz_header{
         font-size: large;
     }
-    /* .ui.large.header{
-        font-size: medium;
-    } */
+    .Quiz_question{
+        font-size: medium !important;
+    }
     .Quiz_button-row{
         display: grid;
     }
-    /* .ui.inverted.white.button{
-        display: block;
-        height: 4rem;
-        width: 20rem;
-        font-size: x-small;
-        margin-bottom: 2px;
-    } */
+    .Quiz_choise{
+        display: block !important;
+        height: 4rem !important;
+        width: 20rem !important;
+        font-size: x-small !important;
+        margin-bottom: 2px !important;
+    }
     .Quiz_image{
         width: 45%;
     }
-    /* .ui.right.labeled.icon.button{
-        width: 25%;
+    .Quiz_next{
+        font-size: medium !important;
+        border-radius: 10px !important;
+        width: 9rem;
+
     }
-    .ui.text{
-        font-size: large;
-    } */
+    .Quiz_finish-text{
+        font-size: large !important;
+    }
 }
 
-/* .ui.text{
-    color: wheat;
-    font-size: x-large;
-    margin-bottom: 10rem;
-    margin-top: 3rem;
-} */
+.Quiz_finish-text{
+    color: wheat !important;
+    font-size: x-large !important;
+    margin-bottom: 10rem !important;
+    margin-top: 3rem !important;
+}
 
 .Quiz_load{
     width: 100%;
