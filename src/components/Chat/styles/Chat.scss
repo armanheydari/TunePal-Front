@@ -24,7 +24,7 @@ $gray: #92959E;
 }
 
 .people-list {
-  background: #444753;
+  background: linear-gradient(to right, rgb(255, 65, 108), rgb(255, 75, 43));
   width:260px !important;
   
   .search {
@@ -87,7 +87,7 @@ $gray: #92959E;
 .chat {
   flex-grow: 1;
   width: 0%;
-  background: #F2F5F8;
+  background: rgb(240, 240, 240);
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   color: #434651;

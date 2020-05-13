@@ -46,6 +46,7 @@ class TopArtists extends React.Component {
             <div className="Profile_Carousel-artist">
                 <h3 className="Profile_Carousel-title">Top Artists</h3>
                 <CarouselList
+                    // style={background="linear-gradient(to left, rgb(192, 188, 204), rgb(250, 248, 252));"}
                     title=""
                     isLoading={this.state.isLoading}
                     isEmpty={this.state.isEmpty}
