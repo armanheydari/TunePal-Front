@@ -46,6 +46,33 @@ class Main extends React.Component {
                     };
                 });
             });
+            const authToken = localStorage.getItem('token');
+
+                document.cookie = 'Authorization:' + "Token " + authToken + '; path=/';
+                console.log(document.cookie);
+
+                const ws = new WebSocket(
+                    'ws://'
+                    + 'localhost:8002'
+                    + '/ws/chat/'
+                    + '1'
+                    + '/'
+                );
+                console.log(ws)
+                ws.onopen = () => {
+                    console.log('opened');
+                    ws.send(JSON.stringify({
+                        'message': "kosssss"
+                    }));
+                }
+
+                ws.onmessage = evt => {
+                    console.log(evt);
+                }
+
+                ws.onclose = () => {
+                    console.log('closed');
+                }
         }
         else {
             this.setState(() => {
