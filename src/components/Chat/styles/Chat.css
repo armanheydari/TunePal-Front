@@ -66,7 +66,7 @@
 }
 
 #Chat_list-overlay {
-    background: #444753;
+    background: linear-gradient(to right, rgb(255, 65, 108), rgb(255, 75, 43));
     width:100%;
     display: block;
 }
