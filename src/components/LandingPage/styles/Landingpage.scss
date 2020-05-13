@@ -1,201 +1,114 @@
-$spacer-height: 20vw;
-$section1-bg-color: #2d4059;
-$section2-bg-color: #ffd460;
-$section3-bg-color: #f0783d ;
-$section4-bg-color: #f9bf8f;
-$section5-bg-color: #ea5455;
-
-
-@mixin bubbles($bubbles-type, $color)
-{
-  @if $bubbles-type == a
-  {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='#{url-friendly-colour($color)}' viewBox='0 0 1185 248'><circle cx='76' cy='121.1' r='20' class='a'/><circle cx='870' cy='201.1' r='11' class='a'/><circle cx='814.5' cy='165.6' r='24.5' class='a'/><path d='M0 0v17.7c22.7 14.8 53 31.9 90.7 51.5 150.8 78 322 116.6 424.8 69.3 102.9-47.4 138-69.3 210.8-69.3s118.3 48.6 219.5 38.3 76.3-59.3 188.7-59.3c18.9 0 35.5 2.6 50.5 6.8V0H0z' class='a'/></svg>");
-  }
-
-  @else if $bubbles-type == b
-  {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1185 248'><path d='M50.5 199.8c112.4 0 87.5-49 188.7-59.3s146.7 38.3 219.5 38.3 107.9-21.9 210.8-69.3c102.8-47.3 274-8.7 424.8 69.3 37.7 19.5 68 36.7 90.7 51.5V0H0v193C15 197.2 31.6 199.8 50.5 199.8zM1109 106.9c11 0 20 9 20 20 0 11-9 20-20 20s-20-9-20-20C1089 115.9 1098 106.9 1109 106.9zM370.5 57.9c13.5 0 24.5 11 24.5 24.5 0 13.5-11 24.5-24.5 24.5S346 95.9 346 82.4C346 68.9 357 57.9 370.5 57.9zM315 35.9c6.1 0 11 4.9 11 11s-4.9 11-11 11 -11-4.9-11-11S308.9 35.9 315 35.9z' fill='#{url-friendly-colour($color)}'/></svg>");
-  }
-}
-
-@mixin section-bubble-with-colors($bubble-type, $currentcolor, $nextcolor)
-{
-  @extend .section-bubble;
-  background-color: $currentcolor;
-  
-  &:after
-  {
-    background-color: $nextcolor;
-    
-    @include bubbles($bubble-type, $currentcolor);
-  }
-}
-
-@function url-friendly-colour($colour) {
-    @return '%23' + str-slice('#{$colour}', 2, -1)
-}
-
-.section-bubble
-{
-  margin-bottom: $spacer-height;
-  position: relative;
-  
-  &:after
-  {
-    content: '';
-    
-    position: absolute;
-    bottom: 0;
-    
+.LandingPage {
     width: 100%;
-    height: $spacer-height;
-    background: url('http://localhost:3000/~rinu/rinu/wp-content/themes/siebzehn/static/images/bubbles.svg') green; // needs to be next sections background
-    background-size: 100%;
-    
-    transform: translate(0, 100%);
-  }
-}
+    height: 100%;
+    background-color: white;
+    position: absolute;
 
+    .sticky {
+        background-color: #fbfbfb;
+        box-shadow: 0 11px 27px rgba(0,0,0,.04);
+        padding: 18px 0;
 
+        a {
+            color: #777777;
+        }
+    }
 
-.section-bubble1
-{
-  @include section-bubble-with-colors(a, $section1-bg-color, $section2-bg-color);
+    > header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding-top: 40px;
+        z-index: 10;
+        transition: all .4s linear;
 
-  h1 
- { 
-    color:#e24b5c;
-    text-shadow: 2px 2px white;
-    margin-left: 500px;
-    
-    font-family:  monaco, Consolas, "Lucida Console", monospace;;
-    font-size: 60px;
-     font-Weight : bold;
-     font-style: italic; 
+        nav {
+            text-align: right;
+            width: 97%;
+            float: left;
+        }
 
-  }
-  
-   
-  h2
-  { 
-    color:wheat;
-    margin-left: 500px;
-    
-    font-family:  monaco, Consolas, "Lucida Console", monospace;;
-    font-size: 40px;
-     font-Weight : bold;
-     font-style: italic;
-   
-  }
-  p
-  {
-    color: #ffd460;
-    opacity: .8;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    margin-left: 500px;
-  }
-}
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
 
-.section-bubble2
-{
-  @include section-bubble-with-colors(b, $section2-bg-color, $section3-bg-color);
-   
-  h1
-  { 
-    color: #114b5f;
-    margin-left: 100px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 40px;
-  }
-  p
-  {
-    color: #114b5f;
-    opacity: .8;
-    margin-left: 70px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-  }
-}
+            li {
+                display: inline-block;
 
-.section-bubble3
-{
-  @include section-bubble-with-colors(a, $section3-bg-color, $section4-bg-color);
-  
-  h1
-  { 
-    color: white;
-    margin-left: 100px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 40px;
-  }
-  p
-  {
-    color: white;
-    opacity: .8;
-    margin-left: 70px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-  }
-}
+                a {
+                    text-transform: uppercase;
+                    color: white;
+                    font-size: 1.4rem;
+                    display: block;
+                    padding: 8px 0;
+                    margin: 0 17px;
+                    font-weight: 400;
+                    transition: all .4s linear;
+                    font-family: 'Poppins', sans-serif;;
+                }
 
-.section-bubble4
-{
-  @include section-bubble-with-colors(b, $section4-bg-color, $section5-bg-color);
-   
-  h1
-  { 
-    color: #eb3d45;
-    margin-left: 100px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 40px;
-  }
-  p
-  {
-    color: #eb3d45;
-    opacity: .8;
-    margin-left: 70px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-  }
-} 
+                a:hover {
+                    color: #F2504D;
+                }
+            }
+        }
+    }
 
-.section-bubble5
-{
-  background: $section5-bg-color;
-  color: #2b2024;
-  font-style: italic;
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
-  font-size: 20px;
-}
+    > section {
+        width: 100%;
+        position: relative;
+    }
 
+    > .one {
+        background-image: url('../../../assets/LandingPage/welcome-bg-0.jpg');
+        background-position: center center;
+        background-repeat: no-repeat;
+        height: 100%;
 
-//$bubbles-a: '<svg version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1185 248"><g fill="#FF8787"><circle cx="76" cy="121.1" r="20"/><circle cx="870" cy="201.1" r="11"/><circle cx="814.5" cy="165.6" r="24.5"/><path d="M0 0v17.7c22.7 14.8 53 31.9 90.7 51.5 150.8 78 322 116.6 424.8 69.3 102.9-47.4 138-69.3 210.8-69.3s118.3 48.6 219.5 38.3 76.3-59.3 188.7-59.3c18.9 0 35.5 2.6 50.5 6.8V0H0z"/></g></svg>';
-//$bubbles-b: '<svg xmlns="http://www.w3.org/2000/svg" baseProfile="tiny" version="1" viewBox="0 0 1185 248"><path fill="#0012B7" d="M51 200c112 0 87-49 188-59s147 38 220 38 108-22 211-69c102-48 274-9 424 69 38 19 68 37 91 51V0H0v193c15 4 32 7 51 7zm1058-93c11 0 20 9 20 20s-9 20-20 20-20-9-20-20 9-20 20-20zM371 58a25 25 0 1 1-1 49 25 25 0 0 1 1-49zm-56-22c6 0 11 5 11 11s-5 11-11 11-11-5-11-11 5-11 11-11z"/></svg>';
+        .introduce {
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
 
+            @media(max-width: 1200px) {
+                height: 630px;
+            }
 
+            @media(max-width: 768px) {
+                height: 430px;
+            }
 
-.section-bubble_type-a
-{
-  @extend .section-bubble;
-  
-  &:after
-  {
-    //background-image: url('http://localhost:3000/~rinu/rinu/wp-content/themes/siebzehn/static/images/bubbles.svg');
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='red' viewBox='0 0 1185 248'><circle cx='76' cy='121.1' r='20' class='a'/><circle cx='870' cy='201.1' r='11' class='a'/><circle cx='814.5' cy='165.6' r='24.5' class='a'/><path d='M0 0v17.7c22.7 14.8 53 31.9 90.7 51.5 150.8 78 322 116.6 424.8 69.3 102.9-47.4 138-69.3 210.8-69.3s118.3 48.6 219.5 38.3 76.3-59.3 188.7-59.3c18.9 0 35.5 2.6 50.5 6.8V0H0z' class='a'/></svg>");
-  }
-}
+            > .content {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                flex-grow: 0;
 
-.section-bubble_type-b
-{
-  @extend .section-bubble;
-  
-  &:after
-  {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1185 248'><path d='M50.5 199.8c112.4 0 87.5-49 188.7-59.3s146.7 38.3 219.5 38.3 107.9-21.9 210.8-69.3c102.8-47.3 274-8.7 424.8 69.3 37.7 19.5 68 36.7 90.7 51.5V0H0v193C15 197.2 31.6 199.8 50.5 199.8zM1109 106.9c11 0 20 9 20 20 0 11-9 20-20 20s-20-9-20-20C1089 115.9 1098 106.9 1109 106.9zM370.5 57.9c13.5 0 24.5 11 24.5 24.5 0 13.5-11 24.5-24.5 24.5S346 95.9 346 82.4C346 68.9 357 57.9 370.5 57.9zM315 35.9c6.1 0 11 4.9 11 11s-4.9 11-11 11 -11-4.9-11-11S308.9 35.9 315 35.9z' fill='red'/></svg>");
-    
-    
-  }
+                h1 {
+                    color: white;
+                    font-size: 4rem;
+                    line-height: 1.5;
+                    font-weight: 300;
+                    font-family: 'Poppins', sans-serif;
+                }
+            }
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+        }
+    }
+
+    > .two {
+        background-color: rgb(244, 244, 244);
+        height: 100%;
+    }
+
+    > .three {
+        background-color: blue;
+    }
 }
