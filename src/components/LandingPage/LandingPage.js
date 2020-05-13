@@ -1,19 +1,17 @@
 import React from 'react';
+import Join from './Join';
 
-window.onscroll = function() {
-    console.log(window.pageYOffset);
-    const nav = document.getElementById('header');
-    if ( window.pageYOffset > 100 ) {
-        nav.classList.add("sticky");
-    } else {
-        nav.classList.remove("sticky");
-    }
+const onClickJoin = () => {
+    const joinOverlay = document.getElementById("Join_overlay");
+    joinOverlay.style.display = "flex";
+    joinOverlay.style.alignItems = "center";
 }
 
 class LandingPage extends React.Component {
     render() {
         return (
             <div className="LandingPage">
+                <Join />
                 <header id="header">
                     <div className="container">
                         <div className="row">
@@ -55,7 +53,7 @@ class LandingPage extends React.Component {
                                             <br/>
                                             We Love
                                         </h1>
-                                        <div className="join">Join Us</div>
+                                        <div className="join" onClick={onClickJoin} on>Join Us</div>
                                     </div>
                                 </div>
                             </div>
