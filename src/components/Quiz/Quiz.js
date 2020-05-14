@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React from 'react';
-import QuestionPicture from '../../assets/question.png'
+import QuestionPicture from '../../assets/question.png';
+import serverURL from '../../utils/serverURL';
+
 class Quiz extends React.Component {
 
     state = {
@@ -29,7 +31,7 @@ class Quiz extends React.Component {
                 'Authorization': `Token ${localStorage.getItem('token')}`
             }
         }
-        axios.get('http://tunepal.pythonanywhere.com/quiz/score/', config)
+        axios.get(`${serverURL()}/quiz/score/`, config)
             .then((response) => {
                 this.setState(() => {
                     return {
@@ -139,7 +141,7 @@ class Quiz extends React.Component {
             answer: temp.toString()
         }
         const JsonToBack = JSON.stringify(quizAnswer);
-        axios.post("http://tunepal.pythonanywhere.com/quiz/checkanswer/", JsonToBack, config)
+        axios.post(`${serverURL()}/quiz/checkanswer/`, JsonToBack, config)
             .then((response) => {
                 this.setState(() => {
                     return {
@@ -161,7 +163,7 @@ class Quiz extends React.Component {
                 'Authorization': `Token ${localStorage.getItem('token')}`
             }
         }
-        axios.get("http://tunepal.pythonanywhere.com/quiz/quiz/", config)
+        axios.get(`${serverURL()}/quiz/quiz/`, config)
             .then(res => {
                 const q = res.data[0].question.split(',')
                 if (q[1] === " NO" || q[1] === " https://onesoftwaresolution.com/wp-content/uploads/2017/01/iStock-147246163-900x500.jpg") {

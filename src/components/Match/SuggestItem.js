@@ -3,6 +3,7 @@ import ProfilePicture from "../../assets/Default-Profile-Picture.jpg";
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import tokenConfig from '../../utils/tokenConfig';
+import serverURL from '../../utils/serverURL';
 
 class SuggestItem extends React.Component {
   render() {
@@ -40,7 +41,7 @@ class SuggestItem extends React.Component {
   }
 
   onClickRequest = () => {
-    Axios.get(`http://tunepal.pythonanywhere.com/spotify/friend_request/?username=${this.props.username}`, tokenConfig())
+    Axios.get(`${serverURL()}/spotify/friend_request/?username=${this.props.username}`, tokenConfig())
     .then(res => {
       this.props.updatePending(this.props.username);
     })

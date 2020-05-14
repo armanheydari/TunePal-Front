@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpotify } from '@fortawesome/free-brands-svg-icons';
+import serverURL from '../../utils/serverURL';
 
 class SpotifyResult extends React.Component {
     state = {
@@ -10,7 +11,7 @@ class SpotifyResult extends React.Component {
     }
     componentDidMount() {
         const code = window.location.href.split("spotifyresult/")[1];
-        const serverURL = `http://tunepal.pythonanywhere.com/spotify/get_url/${code}`;
+        const serverURL = `${serverURL()}/spotify/get_url/${code}`;
         const config = {
             headers: {
             'Content-Type': 'application/json',
