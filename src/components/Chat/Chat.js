@@ -11,7 +11,8 @@ class Chat extends React.Component {
         chatList: [],
         header: {},
         messages: [],
-        show: false
+        show: false,
+        wsConversation: undefined
     }
 
     componentDidMount() {
@@ -55,7 +56,7 @@ class Chat extends React.Component {
                 return (
                     <div className="chat-container clearfix">
                         <ChatSidebar chatID={this.state.header.conversationID} chatList={this.state.chatList} openChat={this.openChat} />
-                        <ChatBox header={this.state.header} messages={this.state.messages} send={this.sendMessage} removeChat={this.removeChat} />
+                        <ChatBox wsConversation={this.state.wsConversation} header={this.state.header} messages={this.state.messages} send={this.sendMessage} removeChat={this.removeChat} />
                     </div>
                 );
             }
@@ -75,7 +76,7 @@ class Chat extends React.Component {
     }
 
     openChat = (header) => {
-        this.getMessages(header.conversationID);
+        // this.getMessages(header.conversationID);
         this.setState(prevState => {
             const newChatList = prevState.chatList.map(item => {
                 if (item.conversationID === header.conversationID)
@@ -85,9 +86,17 @@ class Chat extends React.Component {
             return {
                 header,
                 messages: [],
-                chatList: newChatList
+                chatList: newChatList,
+                wsConversation: new WebSocket(
+                    'ws://'
+                    + '185.97.119.64:8000'
+                    + '/ws/chat/'
+                    + `${header.conversationID}`
+                    + '/'
+                )
             };
-        });
+        }, () => {console.log(this.state.wsConversation)}
+        );
     }
 
     removeChat = () => {
@@ -120,22 +129,23 @@ class Chat extends React.Component {
             text: message
         };
         const toBackJSON = JSON.stringify(toBack);
-        Axios.post(`${serverURL()}/chat/${conversationID}/`, toBackJSON, tokenConfig())
-        .then(res => {
-            const allMessages = res.data.messages;
-            let newMessages = [];
-            for (let i = latestMessageIndex + 1; i < allMessages.length; i++) {
-                newMessages.push(allMessages[i]);
-            }
-            this.setState(prevState => {
-                const messages = prevState.messages.concat(newMessages);
-                return {
-                    messages
-                };
-            });
-        })
-        .catch(err => {
-        });
+        this.state.wsConversation.send(toBack);
+        // Axios.post(`${serverURL()}/chat/${conversationID}/`, toBackJSON, tokenConfig())
+        // .then(res => {
+        //     const allMessages = res.data.messages;
+        //     let newMessages = [];
+        //     for (let i = latestMessageIndex + 1; i < allMessages.length; i++) {
+        //         newMessages.push(allMessages[i]);
+        //     }
+        //     this.setState(prevState => {
+        //         const messages = prevState.messages.concat(newMessages);
+        //         return {
+        //             messages
+        //         };
+        //     });
+        // })
+        // .catch(err => {
+        // });
     }
 }
 
