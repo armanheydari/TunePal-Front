@@ -53,7 +53,7 @@ class Main extends React.Component {
 
                 const ws = new WebSocket(
                     'ws://'
-                    + `${serverURL()}`
+                    + '185.97.119.64:8000'
                     + '/ws/chat/'
                     + '1'
                     + '/'
