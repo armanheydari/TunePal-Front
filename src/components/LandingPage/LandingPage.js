@@ -1,5 +1,10 @@
 import React from 'react';
 import Join from './Join';
+import FeaturePhone from '../../assets/LandingPage/feature-app-screenshort.png';
+import icon from '../../assets/LandingPage/Request.png';
+import logoWhite from '../../assets/app-logo.png';
+import logoBlack from '../../assets/app-logo2.png';
+import Particle from './Particle';
 
 const onClickJoin = () => {
     const joinOverlay = document.getElementById("Join_overlay");
@@ -7,16 +12,34 @@ const onClickJoin = () => {
     joinOverlay.style.alignItems = "center";
 }
 
+const onScrollLandingPage = () => {
+    if (document.getElementById('landing-page').scrollTop > 50) {
+        document.getElementById('header').classList.add('sticky');
+    }
+    else {
+        document.getElementById('header').classList.remove('sticky');
+    }
+}
+
 class LandingPage extends React.Component {
     render() {
         return (
-            <div className="LandingPage">
+            <div id="landing-page" className="LandingPage" onScroll={onScrollLandingPage}>
                 <Join />
                 <header id="header">
                     <div className="container">
                         <div className="row">
                             <div className="col-md-3 col-sm-3 col-xs-6">
-
+                                <div className="logo">
+                                    <a href="#home">
+                                        <img id="logo-white" src={logoWhite} alt="" />
+                                        <img id="logo-black" src={logoBlack} alt="" />
+                                        <h1>
+                                            <span className="white">Tune</span>
+                                            <span className="red">Pal</span>
+                                        </h1>
+                                    </a>
+                                </div>
                             </div>
                             <div className="col-md-9 col-sm-9 col-xs-6">
                                 <div>
@@ -24,13 +47,13 @@ class LandingPage extends React.Component {
                                     <nav>
                                         <ul>
                                             <li>
-                                                <a>Home</a>
+                                                <a href="#home">Home</a>
                                             </li>
                                             <li>
-                                                <a>Features</a>
+                                                <a href="#feature">Features</a>
                                             </li>
                                             <li>
-                                                <a>Team</a>
+                                                <a href="#team">Team</a>
                                             </li>
                                         </ul>
                                     </nav>
@@ -40,22 +63,17 @@ class LandingPage extends React.Component {
                     </div>
                 </header>
 
-                <section className="one">
+                <section id="home" className="home">
+                    <div className="particles">
+                        <Particle />
+                    </div>
                     <div className="container">
-                        <div className="row">
-                            <div className="col-md-6 col-sm-8 col-xs-12">
-                                <div className="introduce">
-                                    <div className="content">
-                                        <h1>
-                                            We Listen
-                                            <br/>
-                                            We Talk
-                                            <br/>
-                                            We Love
-                                        </h1>
-                                        <div className="join" onClick={onClickJoin} on>Join Us</div>
-                                    </div>
-                                </div>
+                        <div className="introduce">
+                            <div className="absolute">
+                                <h1>
+                                    Listen, Talk, Love
+                                </h1>
+                                <div className="join" onClick={onClickJoin}>Join Us</div>
                             </div>
                         </div>
                     </div>
@@ -67,12 +85,70 @@ class LandingPage extends React.Component {
                     </svg>
                 </section>
 
-                <section className="two">
-                    <h2>Features</h2>
+                <section id="feature" className="feature">
+                    <div className="container">
+                        <div className="heading">
+                            <h2>Features</h2>
+                        </div>
+                        <div className="row margin-top">
+                            <div className="col-md-6 col-sm-12 col-xs-12">
+                                <figure itemProp="associatedMedia" itemScope itemType="http://schema.org/ImageObject">
+                                    <img src={FeaturePhone} alt="" />
+                                    <span className="i1">
+                                        <img src={icon} alt="" />
+                                    </span>
+                                </figure>
+                            </div>
+                            <div className="col-md-6 col-sm-12 col-xs-12">
+                                <div className="content">
+                                    <div className="item">
+
+                                    </div>
+                                    <div className="item">
+
+                                    </div>
+                                    <div className="item">
+
+                                    </div>
+                                    <div className="item">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
-                <section className="three">
-                    <h2>Team</h2>
+                <section id="team" className="team">
+                    <div className="container">
+                        <div className="heading">
+                            <h2>Team</h2>
+                        </div>
+                        <div className="row margin-top">
+                            <div className="col-md-3 col-sm-3 col-xs-6 member">
+                                <div>
+                                    <figure>
+
+                                    </figure>
+                                    <div className="bio">
+                                        <h2>Masoud Golestaneh</h2>
+                                        <h5>
+
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-3 col-sm-3 col-xs-6 member">
+
+                            </div>
+                            <div className="col-md-3 col-sm-3 col-xs-6 member">
+
+                            </div>
+                            <div className="col-md-3 col-sm-3 col-xs-6 member">
+
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
                 <footer>
