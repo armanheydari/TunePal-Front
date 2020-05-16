@@ -50,29 +50,6 @@ class Main extends React.Component {
 
                 document.cookie = 'Authorization:' + "Token " + authToken + '; path=/';
                 console.log(document.cookie);
-
-                const ws = new WebSocket(
-                    'ws://'
-                    + '185.97.119.64:8000'
-                    + '/ws/chat/'
-                    + '1'
-                    + '/'
-                );
-                console.log(ws)
-                ws.onopen = () => {
-                    console.log('opened');
-                    ws.send(JSON.stringify({
-                        'message': "kosssss"
-                    }));
-                }
-
-                ws.onmessage = evt => {
-                    console.log(evt);
-                }
-
-                ws.onclose = () => {
-                    console.log('closed');
-                }
         }
         else {
             this.setState(() => {

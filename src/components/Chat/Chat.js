@@ -95,7 +95,7 @@ class Chat extends React.Component {
                     + '/'
                 )
             };
-        }, () => {console.log(this.state.wsConversation)}
+        }
         );
     }
 
@@ -123,13 +123,13 @@ class Chat extends React.Component {
     }
 
     sendMessage = (message) => {
-        const latestMessageIndex = this.state.messages.length - 1;
-        const conversationID = this.state.header.conversationID;
+        // const latestMessageIndex = this.state.messages.length - 1;
+        // const conversationID = this.state.header.conversationID;
         const toBack = {
             text: message
         };
         const toBackJSON = JSON.stringify(toBack);
-        this.state.wsConversation.send(toBack);
+        this.state.wsConversation.send(toBackJSON);
         // Axios.post(`${serverURL()}/chat/${conversationID}/`, toBackJSON, tokenConfig())
         // .then(res => {
         //     const allMessages = res.data.messages;
