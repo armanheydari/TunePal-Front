@@ -35,8 +35,6 @@ $gray: #92959E;
     border-radius: 3px;
     border: none;
     padding: 14px;
-    color: white;
-    background: #6A6C75;
     width: 90%;
     font-size: 14px;
   }
@@ -53,7 +51,7 @@ $gray: #92959E;
     }
 
     li:hover {
-      background-color: #505361;
+      background: linear-gradient(to right, #ff3764, #ff4322);
     }
   }
   

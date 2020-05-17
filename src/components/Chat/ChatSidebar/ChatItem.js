@@ -30,7 +30,7 @@ class ChatItem extends React.Component {
     styleChatListItem = () => {
         if (this.props.id === this.props.chatID) {
             return {
-                backgroundColor: "#c4c6ce"
+                background: "linear-gradient(to right, #ff2053, #ff310d)"
             };
         }
     }

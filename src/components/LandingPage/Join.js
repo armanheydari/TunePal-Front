@@ -13,7 +13,7 @@ class Join extends React.Component {
     render() {
         return (
             <div id="Join_overlay" className="Join_overlay" onClick={onClickDim}>
-                <LoginSignup />
+                <LoginSignup isOnAfterSignup={this.props.isOnAfterSignup} />
             </div>
         );
     }

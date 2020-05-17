@@ -16,6 +16,7 @@ class ChatSend extends React.Component {
                     value={this.state.messageToSend}
                     rows="1"
                     onChange={this.onChange}
+                    onKeyPress={this.handleEnter}
                 ></textarea>
                 <button onClick={this.handleSend}><FontAwesomeIcon icon={faPaperPlane} /></button>
             </div>
@@ -30,6 +31,20 @@ class ChatSend extends React.Component {
                 [field]: newValue
             };
         });
+    }
+
+    handleEnter = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            if (this.state.messageToSend.trim() !== '') {
+                this.props.send(this.state.messageToSend);
+                this.setState(prevState => {
+                    return {
+                        messageToSend: ""
+                    };
+                });
+            }
+        }
     }
 
     handleSend = () => {

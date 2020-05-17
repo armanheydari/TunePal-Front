@@ -33,7 +33,7 @@ class LandingPage extends React.Component {
     render() {
         return (
             <div id="landing-page" className="LandingPage" onScroll={onScrollLandingPage}>
-                <Join />
+                <Join isOnAfterSignup={this.props.isOnAfterSignup} />
                 <header id="header">
                     <div className="container">
                         <div className="row">

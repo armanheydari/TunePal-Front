@@ -70,7 +70,7 @@ class General extends React.Component {
         gender: this.props.gender,
         birthdate: this.props.birthdate,
         biography: this.props.biography,
-        favorites: this.props.favorites,
+
         uploading: false,
         showResult: false,
         isSucceed: undefined
@@ -138,16 +138,6 @@ class General extends React.Component {
                             maxLength={500}
                         />
                     </Form.Item>
-
-                    <Form.Item
-                        name="favorites"
-                        label="Favorites"
-                        onChange={this.onChange}
-                    >
-                        <TextArea
-                            autoSize
-                        />
-                    </Form.Item>
                     
                     <Form.Item {...tailFormItemLayout}>
                         <Button type="primary" htmlType="submit" disabled={isObjectEmpty(this.changes())} loading={this.state.uploading}>
@@ -181,14 +171,13 @@ class General extends React.Component {
     }
 
     formInitialValues = () => {
-        const {name, gender, biography, favorites} = this.props;
+        const {name, gender, biography} = this.props;
         const birthdate = moment(this.props.birthdate, 'YYYY-MM-DD');
         return {
             name,
             gender,
             birthdate,
-            biography,
-            favorites
+            biography
         }
     }
 
@@ -246,9 +235,6 @@ class General extends React.Component {
         }
         if (this.state.biography !== this.props.biography) {
             changes.biography = this.state.biography;
-        }
-        if (this.state.favorites !== this.props.favorites) {
-            changes.interests = this.state.favorites;
         }
         return changes;
     }
