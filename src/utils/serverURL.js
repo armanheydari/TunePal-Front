@@ -1,3 +1,3 @@
 export default function() {
-    return 'http://185.97.119.64:8000';
+    return 'https://mytunepal.ir';
 }
