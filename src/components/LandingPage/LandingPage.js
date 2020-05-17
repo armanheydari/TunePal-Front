@@ -7,6 +7,11 @@ import Quiz from '../../assets/LandingPage/test.png';
 import Music from '../../assets/LandingPage/music.png';
 import logoWhite from '../../assets/app-logo.png';
 import logoBlack from '../../assets/app-logo2.png';
+import Ali from '../../assets/LandingPage/ali.jpg';
+import Masoud from '../../assets/LandingPage/masoud.jpg';
+import Arman from '../../assets/LandingPage/arman.jpg';
+import Reza from '../../assets/LandingPage/reza.jpg';
+import Saba from '../../assets/LandingPage/saba.jpg';
 import Particle from './Particle';
 
 const onClickJoin = () => {
@@ -95,7 +100,7 @@ class LandingPage extends React.Component {
                         </div>
                         <div className="row margin-top">
                             <div className="col-md-6 col-sm-12 col-xs-12">
-                                <div style={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center"}}>    
+                                <div style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
                                     <figure itemProp="associatedMedia" itemScope itemType="http://schema.org/ImageObject">
                                         <img src={FeaturePhone} alt="" />
                                     </figure>
@@ -106,29 +111,29 @@ class LandingPage extends React.Component {
                                     <div className="item">
                                         <div className="in">
                                             <img className="icon" src={Match}></img>
-                                            <h3 style={{fontSize:"large",fontFamily:"'Poppins', sans-serif"}}>Music twins!</h3>
-                                            <p style={{fontSize:"small"}}>We match you to new people with same taste of music as you</p>
+                                            <h3 style={{ fontSize: "large", fontFamily: "'Poppins', sans-serif" }}>Music twins!</h3>
+                                            <p style={{ fontSize: "small" }}>We match you to new people with same taste of music as you</p>
                                         </div>
                                     </div>
                                     <div className="item">
                                         <div className="in">
-                                        <img className="icon" src={Chat}></img>
-                                        <h3 style={{fontSize:"large",fontFamily:"'Poppins', sans-serif"}}>Talk!</h3>
-                                        <p style={{fontSize:"small"}}>We provide a safe palce for you to freely talk with your new friends</p>
+                                            <img className="icon" src={Chat}></img>
+                                            <h3 style={{ fontSize: "large", fontFamily: "'Poppins', sans-serif" }}>Talk!</h3>
+                                            <p style={{ fontSize: "small" }}>We provide a safe palce for you to freely talk with your new friends</p>
                                         </div>
                                     </div>
                                     <div className="item">
                                         <div className="in">
-                                        <img className="icon" src={Music}></img>
-                                        <h3 style={{fontSize:"large",fontFamily:"'Poppins', sans-serif"}}>Explore!</h3>
-                                        <p style={{fontSize:"small"}}>Explore new music and listen to other's top charts</p>
+                                            <img className="icon" src={Music}></img>
+                                            <h3 style={{ fontSize: "large", fontFamily: "'Poppins', sans-serif" }}>Explore!</h3>
+                                            <p style={{ fontSize: "small" }}>Explore new music and listen to other's top charts</p>
                                         </div>
                                     </div>
                                     <div className="item">
                                         <div className="in">
-                                        <img className="icon" src={Quiz}></img>
-                                        <h3 style={{fontSize:"large",fontFamily:"'Poppins', sans-serif"}}>Take a test!</h3>
-                                        <p style={{fontSize:"small"}}>You can challange your knowledge of songs and artist and albums!</p>
+                                            <img className="icon" src={Quiz}></img>
+                                            <h3 style={{ fontSize: "large", fontFamily: "'Poppins', sans-serif" }}>Take a test!</h3>
+                                            <p style={{ fontSize: "small" }}>You can challange your knowledge of songs and artist and albums!</p>
                                         </div>
                                     </div>
                                 </div>
@@ -138,41 +143,72 @@ class LandingPage extends React.Component {
                 </section>
 
                 <section id="team" className="team">
-                    <div className="container">
                         <div className="heading">
                             <h2>Team</h2>
                         </div>
-                        <div className="row margin-top">
-                            <div className="col-md-3 col-sm-3 col-xs-6 member">
-                                <div class="apps-craft-single-team wow fadeIn" itemscope="" itemtype="http://schema.org/ImageGallery" style={{visibility: "visible", animationDelay: "400ms", animationName: "fadeIn"}}>
-                                    <figure>
-
-                                    </figure>
-                                    <div className="bio">
-                                        <h2>Masoud Golestaneh</h2>
-                                        <h5>
-
-                                        </h5>
+                        <div className="margin-top itemscenter">
+                            <div className="item">
+                                <figure className="figure">
+                                    <div className="devImage">
+                                        <img className="image" src={Ali} alt="" />
                                     </div>
+                                </figure>
+                                <div className="itemborder"></div>
+                                <div className="bio">
+                                    <h2>Ali Sedaghi</h2>
+                                    <h5>Front-end developer</h5>
                                 </div>
                             </div>
-                            <div className="col-md-3 col-sm-3 col-xs-6 member">
-
+                            <div className="item">
+                                <figure className="figure">
+                                    <div className="devImage">
+                                        <img className="image" src={Masoud} alt="" />
+                                    </div>
+                                </figure>
+                                <div className="itemborder"></div>
+                                <div className="bio">
+                                    <h2>Masoud Golestane</h2>
+                                    <h5>Back-end developer</h5>
+                                </div>
                             </div>
-                            <div className="col-md-3 col-sm-3 col-xs-6 member">
-
+                            <div className="item" >
+                                <figure className="figure">
+                                    <div className="devImage">
+                                        <img className="image" src={Arman} alt="" />
+                                    </div>
+                                </figure>
+                                <div className="itemborder"></div>
+                                <div className="bio">
+                                    <h2>Arman Heydari</h2>
+                                    <h5>Front-end developer</h5>
+                                </div>
                             </div>
-                            <div className="col-md-3 col-sm-3 col-xs-6 member">
-
+                            <div className="item">
+                                <figure className="figure">
+                                    <div className="devImage">
+                                        <img className="image" src={Reza} alt="" />
+                                    </div>
+                                </figure>
+                                <div className="itemborder"></div>
+                                <div className="bio">
+                                    <h2>Reza Mansourikhah</h2>
+                                    <h5>Back-end developer</h5>
+                                </div>
+                            </div>
+                            <div className="item">
+                                <figure className="figure">
+                                    <div className="devImage">
+                                        <img className="image" src={Saba} alt="" />
+                                    </div>
+                                </figure>
+                                <div className="itemborder"></div>
+                                <div className="bio">
+                                    <h2>Saba Roohandeh</h2>
+                                    <h5>Front-end developer</h5>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </section>
-
-                <footer>
-                    All Rights and ...
-                </footer>
-
             </div>
         );
     }
