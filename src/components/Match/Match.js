@@ -28,6 +28,11 @@ class Match extends React.Component {
       });
     })
     .catch(err => {
+      this.setState(prevState => {
+        return {
+          render: true
+        };
+      });
     });
   }
 
