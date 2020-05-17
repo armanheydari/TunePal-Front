@@ -38,7 +38,13 @@ class ChatHistory extends React.Component {
         }
 
         ws.onmessage = evt => {
-            console.log(evt);
+            const message = JSON.parse(evt.data);
+            console.log(message);
+            this.setState(prevState => {
+                return {
+                    messages: [...prevState.messages, message]
+                };
+            });
         }
 
         ws.onclose = () => {
@@ -48,6 +54,11 @@ class ChatHistory extends React.Component {
 
     componentDidUpdate() {
         this.scrollToBottum();
+    }
+
+    componentWillUnmount() {
+        console.log('inside component will unmount')
+        // this.props.wsConversation.close();
     }
 
     scrollToBottum = () => {
