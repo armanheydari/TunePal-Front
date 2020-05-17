@@ -127,7 +127,11 @@ class Main extends React.Component {
                         <Route
                             exact
                             path="/"
-                            component={LandingPage}
+                            component={() => {
+                                return (
+                                    <LandingPage isOnAfterSignup={this.isOnAfterSignup} />
+                                );
+                            }}
                         />
                         <Redirect from='*' to='/' />
                     </Switch>
@@ -136,7 +140,11 @@ class Main extends React.Component {
         }
 
         if (!this.state.show) {
-            return null;
+            return (
+                <div className="Homepage_load">
+                    <div className="ui active centered inline text loader massive">Loading</div>
+                </div>
+            );
         }
     }
 
