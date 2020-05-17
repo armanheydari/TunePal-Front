@@ -8,6 +8,7 @@ import Security from './Security';
 import Password from './Password';
 import tokenConfig from '../../utils/tokenConfig';
 import serverURL from '../../utils/serverURL';
+import Interest from './Interest';
 
 class Setting extends React.Component {
     state = {
@@ -50,11 +51,15 @@ class Setting extends React.Component {
                         gender={gender}
                         birthdate={birthdate}
                         biography={biography}
-                        favorites={favorites}
                         updateState={this.updateState}
+                    />
+                    <Interest
+                        favorites={favorites}
+                        updateFavorites={this.updateFavorites}
                     />
                     <Location
                         location={location}
+                        updateState={this.updateState}
                     />
                     <Spotify
     
@@ -113,6 +118,14 @@ class Setting extends React.Component {
 
     updateState = () => {
         this.getUserInfo();
+    }
+
+    updateFavorites = (favorites) => {
+        this.setState(prevState => {
+            return {
+                favorites
+            };
+        });
     }
 }
 
