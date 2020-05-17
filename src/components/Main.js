@@ -123,7 +123,11 @@ class Main extends React.Component {
                         <Route
                             exact
                             path="/"
-                            component={LandingPage}
+                            component={() => {
+                                return (
+                                    <LandingPage isOnAfterSignup={this.isOnAfterSignup} />
+                                );
+                            }}
                         />
                         <Redirect from='*' to='/' />
                     </Switch>

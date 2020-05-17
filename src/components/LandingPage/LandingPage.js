@@ -11,7 +11,7 @@ class LandingPage extends React.Component {
     render() {
         return (
             <div className="LandingPage">
-                <Join />
+                <Join isOnAfterSignup={this.props.isOnAfterSignup} />
                 <header id="header">
                     <div className="container">
                         <div className="row">
