@@ -90,7 +90,7 @@ class Chat extends React.Component {
                 chatList: newChatList,
                 wsConversation: new WebSocket(
                     'ws://'
-                    + '185.97.119.64:8000'
+                    + '185.97.119.64:8001'
                     + '/ws/chat/'
                     + `${header.conversationID}`
                     + '/'
