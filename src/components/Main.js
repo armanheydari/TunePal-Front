@@ -46,6 +46,10 @@ class Main extends React.Component {
                     };
                 });
             });
+            const authToken = localStorage.getItem('token');
+
+                document.cookie = 'Authorization:' + "Token " + authToken + '; path=/';
+                console.log(document.cookie);
         }
         else {
             this.setState(() => {

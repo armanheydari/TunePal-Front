@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import serverURL from '../../utils/serverURL';
 
 function legalAge() {
     const today = new Date();
@@ -58,7 +59,7 @@ class LoginSignup extends React.Component {
             username: this.state.signupUsername
         };
         const signupJSON = JSON.stringify(signup);
-        axios.post('http://tunepal.pythonanywhere.com/account/sign_up/',
+        axios.post(`${serverURL()}/account/sign_up/`,
             signupJSON, 
             config
             )
@@ -90,7 +91,7 @@ class LoginSignup extends React.Component {
             password: this.state.loginPassword
         };
         const loginJSON = JSON.stringify(login);
-        axios.post('http://tunepal.pythonanywhere.com/account/login/',
+        axios.post(`${serverURL()}/account/login/`,
             loginJSON,
             config
             )
@@ -103,7 +104,7 @@ class LoginSignup extends React.Component {
                     'Authorization': `Token ${localStorage.getItem('token')}`
                     }
                 };
-                axios.get('http://tunepal.pythonanywhere.com/account/get_user_info/', configGetUserInfo)
+                axios.get(`${serverURL()}/account/get_user_info/`, configGetUserInfo)
                 .then(res => {
                     window.location.reload(true);
                 })

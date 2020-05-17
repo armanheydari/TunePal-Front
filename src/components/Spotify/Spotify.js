@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import SpotifyPhoto from '../../assets/Spotify.png';
+import serverURL from '../../utils/serverURL';
 
 class Spotify extends React.Component {
 
@@ -11,7 +12,7 @@ class Spotify extends React.Component {
                 'Content-Type': 'application/json'
             }
         }
-        axios.get('http://tunepal.pythonanywhere.com/spotify/auth/', config)
+        axios.get(`${serverURL()}/spotify/auth/`, config)
         .then(res => {
             window.open(res.data.spotifyurl, '_self');
         })

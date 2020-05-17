@@ -10,8 +10,8 @@ class Chat extends React.Component {
     state = {
         chatList: [],
         header: {},
-        messages: [],
-        show: false
+        show: false,
+        wsConversation: undefined
     }
 
     componentDidMount() {
@@ -55,7 +55,7 @@ class Chat extends React.Component {
                 return (
                     <div className="chat-container clearfix">
                         <ChatSidebar chatID={this.state.header.conversationID} chatList={this.state.chatList} openChat={this.openChat} />
-                        <ChatBox header={this.state.header} messages={this.state.messages} send={this.sendMessage} removeChat={this.removeChat} />
+                        <ChatBox wsConversation={this.state.wsConversation} header={this.state.header} send={this.sendMessage} removeChat={this.removeChat} />
                     </div>
                 );
             }
@@ -75,7 +75,9 @@ class Chat extends React.Component {
     }
 
     openChat = (header) => {
-        this.getMessages(header.conversationID);
+        if (this.state.wsConversation) {
+            this.state.wsConversation.close();
+        }
         this.setState(prevState => {
             const newChatList = prevState.chatList.map(item => {
                 if (item.conversationID === header.conversationID)
@@ -85,12 +87,22 @@ class Chat extends React.Component {
             return {
                 header,
                 messages: [],
-                chatList: newChatList
+                chatList: newChatList,
+                wsConversation: new WebSocket(
+                    'ws://'
+                    + '185.97.119.64:8000'
+                    + '/ws/chat/'
+                    + `${header.conversationID}`
+                    + '/'
+                )
             };
         });
     }
 
     removeChat = () => {
+        if (this.state.wsConversation) {
+            this.state.wsConversation.close();
+        }
         this.setState(prevState => {
             return {
                 header: {},
@@ -99,43 +111,12 @@ class Chat extends React.Component {
         });
     }
 
-    getMessages = (conversationID) => {
-        Axios.get(`${serverURL()}/chat/${conversationID}/`, tokenConfig())
-        .then(res => {
-            const messages = res.data.messages;
-            this.setState(prevState => {
-                return {
-                    messages
-                };
-            });
-        })
-        .catch(err => {
-        });
-    }
-
     sendMessage = (message) => {
-        const latestMessageIndex = this.state.messages.length - 1;
-        const conversationID = this.state.header.conversationID;
         const toBack = {
             text: message
         };
         const toBackJSON = JSON.stringify(toBack);
-        Axios.post(`${serverURL()}/chat/${conversationID}/`, toBackJSON, tokenConfig())
-        .then(res => {
-            const allMessages = res.data.messages;
-            let newMessages = [];
-            for (let i = latestMessageIndex + 1; i < allMessages.length; i++) {
-                newMessages.push(allMessages[i]);
-            }
-            this.setState(prevState => {
-                const messages = prevState.messages.concat(newMessages);
-                return {
-                    messages
-                };
-            });
-        })
-        .catch(err => {
-        });
+        this.state.wsConversation.send(toBackJSON);
     }
 }
 

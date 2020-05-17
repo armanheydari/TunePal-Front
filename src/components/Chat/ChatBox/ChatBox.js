@@ -11,12 +11,11 @@ class ChatBox extends React.Component {
                     <ChatHeader
                         picture={this.props.header.picture}
                         name={this.props.header.name}
-                        description="Description"
                         removeChat={this.props.removeChat}
                         username={this.props.header.username}
                     />
-                    <ChatHistory messages={this.props.messages} />
-                    <ChatSend send={this.props.send} />
+                    <ChatHistory conversationID={this.props.header.conversationID} wsConversation={this.props.wsConversation} />
+                    <ChatSend send={this.props.send} wsConversation={this.props.wsConversation} />
                 </div>
             );
         }
