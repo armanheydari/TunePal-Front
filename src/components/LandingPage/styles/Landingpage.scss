@@ -190,10 +190,10 @@
 
     > .feature {
         background-color: #FEFEFE;
-        padding: 130px 0;
+        padding: 80px 0;
 
         .margin-top {
-            margin-top: 130px;
+            margin-top: 80px;
         }
 
         figure {
@@ -221,10 +221,53 @@
                 width: 93px;
             }
         }
+        .content{
+            display: block;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
+            box-sizing: border-box;
+            line-height: 1.5;
+            color: #666666;
+            -webkit-font-smoothing: antialiased;
+            .item{
+                display: block;
+                width: 50%;
+                float: left;
+                padding: 15px;
+                text-align: center;
+                line-height: 1.5;
+                color: rgb(240, 240, 240);
+                -webkit-font-smoothing: antialiased;
+                .in{
+                    display: block;
+                    box-shadow: 0 0 35px rgba(0,0,0,.08);
+                    padding: 20px 20px;
+                    position: relative;
+                    box-sizing: border-box;
+                    font-family: 'Poppins', sans-serif;
+                    background: linear-gradient(-106deg, #fa326f, #f2514c, #f2504d);
+                    .icon{
+                        color: #FFFFFF;
+                        background-color: #FFFFFF;
+                        font-size: 3.000em;
+                        width: 90px;
+                        height: 90px;
+                        border-radius: 100%;
+                        box-shadow: 0 18px 32px rgba(0,0,0,.28);
+                        line-height: 76px;
+                        display: inline-block;
+                        margin-bottom: 20px;
+                        -webkit-transition: background .4s linear;
+                        transition: background .4s linear;
+                    }
+                }
+            }
+        }
     }
 
     > .team {
-        padding: 130px 0;
+        padding: 80px 0;
         background: #F4F4F4;
         background-repeat: no-repeat;
         background-position: center center;
@@ -233,8 +276,9 @@
         height: 100%;
 
         .margin-top {
-            margin-top: 130px;
+            margin-top: 80px;
         }
+        
     }
 
     footer {

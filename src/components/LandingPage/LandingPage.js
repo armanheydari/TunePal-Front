@@ -1,7 +1,10 @@
 import React from 'react';
 import Join from './Join';
 import FeaturePhone from '../../assets/LandingPage/feature-app-screenshort.png';
-import icon from '../../assets/LandingPage/Request.png';
+import Match from '../../assets/LandingPage/matchlove.png';
+import Chat from '../../assets/LandingPage/talk.png';
+import Quiz from '../../assets/LandingPage/test.png';
+import Music from '../../assets/LandingPage/music.png';
 import logoWhite from '../../assets/app-logo.png';
 import logoBlack from '../../assets/app-logo2.png';
 import Particle from './Particle';
@@ -92,26 +95,41 @@ class LandingPage extends React.Component {
                         </div>
                         <div className="row margin-top">
                             <div className="col-md-6 col-sm-12 col-xs-12">
-                                <figure itemProp="associatedMedia" itemScope itemType="http://schema.org/ImageObject">
-                                    <img src={FeaturePhone} alt="" />
-                                    <span className="i1">
-                                        <img src={icon} alt="" />
-                                    </span>
-                                </figure>
+                                <div style={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center"}}>    
+                                    <figure itemProp="associatedMedia" itemScope itemType="http://schema.org/ImageObject">
+                                        <img src={FeaturePhone} alt="" />
+                                    </figure>
+                                </div>
                             </div>
                             <div className="col-md-6 col-sm-12 col-xs-12">
                                 <div className="content">
                                     <div className="item">
-
+                                        <div className="in">
+                                            <img className="icon" src={Match}></img>
+                                            <h3 style={{fontSize:"large",fontFamily:"'Poppins', sans-serif"}}>Music twins!</h3>
+                                            <p style={{fontSize:"small"}}>We match you to new people with same taste of music as you</p>
+                                        </div>
                                     </div>
                                     <div className="item">
-
+                                        <div className="in">
+                                        <img className="icon" src={Chat}></img>
+                                        <h3 style={{fontSize:"large",fontFamily:"'Poppins', sans-serif"}}>Talk!</h3>
+                                        <p style={{fontSize:"small"}}>We provide a safe palce for you to freely talk with your new friends</p>
+                                        </div>
                                     </div>
                                     <div className="item">
-
+                                        <div className="in">
+                                        <img className="icon" src={Music}></img>
+                                        <h3 style={{fontSize:"large",fontFamily:"'Poppins', sans-serif"}}>Explore!</h3>
+                                        <p style={{fontSize:"small"}}>Explore new music and listen to other's top charts</p>
+                                        </div>
                                     </div>
                                     <div className="item">
-
+                                        <div className="in">
+                                        <img className="icon" src={Quiz}></img>
+                                        <h3 style={{fontSize:"large",fontFamily:"'Poppins', sans-serif"}}>Take a test!</h3>
+                                        <p style={{fontSize:"small"}}>You can challange your knowledge of songs and artist and albums!</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +144,7 @@ class LandingPage extends React.Component {
                         </div>
                         <div className="row margin-top">
                             <div className="col-md-3 col-sm-3 col-xs-6 member">
-                                <div>
+                                <div class="apps-craft-single-team wow fadeIn" itemscope="" itemtype="http://schema.org/ImageGallery" style={{visibility: "visible", animationDelay: "400ms", animationName: "fadeIn"}}>
                                     <figure>
 
                                     </figure>
