@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 .LandingPage {
     width: 100%;
     height: 100%;
@@ -10,7 +11,7 @@
 
     .heading {
         text-align: center;
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
         h2 {
             background-clip: text;
@@ -222,31 +223,38 @@
             }
         }
         .content{
-            display: block;
             min-height: 1px;
-            padding-right: 15px;
-            padding-left: 15px;
+            // padding-right: 15px;
+            // padding-left: 15px;
             box-sizing: border-box;
             line-height: 1.5;
             color: #666666;
             -webkit-font-smoothing: antialiased;
             .item{
-                display: block;
-                width: 50%;
-                float: left;
                 padding: 15px;
                 text-align: center;
                 line-height: 1.5;
                 color: rgb(240, 240, 240);
                 -webkit-font-smoothing: antialiased;
                 .in{
-                    display: block;
+                    height: 300px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
                     box-shadow: 0 0 35px rgba(0,0,0,.08);
                     padding: 20px 20px;
                     position: relative;
                     box-sizing: border-box;
                     font-family: 'Poppins', sans-serif;
                     background: linear-gradient(-106deg, #fa326f, #f2514c, #f2504d);
+                    @media(max-width: 767px) {
+                        height: auto;
+                    }
+                    p{
+                        font-family: 'Montserrat', sans-serif !important;
+                        font-weight: 300 !important;
+                    }
                     .icon{
                         color: #FFFFFF;
                         background-color: #FFFFFF;

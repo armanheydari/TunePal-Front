@@ -95,40 +95,40 @@ class LandingPage extends React.Component {
                         </div>
                         <div className="row margin-top">
                             <div className="col-md-6 col-sm-12 col-xs-12">
-                                <div style={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center"}}>    
+                                <div style={{width:"100%", height:"100%", display:"flex",alignItems:"center",justifyContent:"center"}}>    
                                     <figure itemProp="associatedMedia" itemScope itemType="http://schema.org/ImageObject">
                                         <img src={FeaturePhone} alt="" />
                                     </figure>
                                 </div>
                             </div>
                             <div className="col-md-6 col-sm-12 col-xs-12">
-                                <div className="content">
-                                    <div className="item">
+                                <div className="row content">
+                                    <div className="col-md-6 col-sm-12 col-xs-12 item">
                                         <div className="in">
-                                            <img className="icon" src={Match}></img>
+                                            <img className="icon" src={Match} alt="" />
                                             <h3 style={{fontSize:"large",fontFamily:"'Poppins', sans-serif"}}>Music twins!</h3>
-                                            <p style={{fontSize:"small"}}>We match you to new people with same taste of music as you</p>
+                                            <p style={{fontSize:"small"}}>We match you to new people with similar taste of music</p>
                                         </div>
                                     </div>
-                                    <div className="item">
+                                    <div className="col-md-6 col-sm-12 col-xs-12 item">
                                         <div className="in">
-                                        <img className="icon" src={Chat}></img>
+                                        <img className="icon" src={Chat} alt="" />
                                         <h3 style={{fontSize:"large",fontFamily:"'Poppins', sans-serif"}}>Talk!</h3>
-                                        <p style={{fontSize:"small"}}>We provide a safe palce for you to freely talk with your new friends</p>
+                                        <p style={{fontSize:"small"}}>We provide a safe palce for you to talk with new friends</p>
                                         </div>
                                     </div>
-                                    <div className="item">
+                                    <div className="col-md-6 col-sm-12 col-xs-12 item">
                                         <div className="in">
-                                        <img className="icon" src={Music}></img>
+                                        <img className="icon" src={Music} alt="" />
                                         <h3 style={{fontSize:"large",fontFamily:"'Poppins', sans-serif"}}>Explore!</h3>
-                                        <p style={{fontSize:"small"}}>Explore new music and listen to other's top charts</p>
+                                        <p style={{fontSize:"small"}}>Explore new musics and listen to other people top songs</p>
                                         </div>
                                     </div>
-                                    <div className="item">
+                                    <div className="col-md-6 col-sm-12 col-xs-12 item">
                                         <div className="in">
-                                        <img className="icon" src={Quiz}></img>
+                                        <img className="icon" src={Quiz} alt="" />
                                         <h3 style={{fontSize:"large",fontFamily:"'Poppins', sans-serif"}}>Take a test!</h3>
-                                        <p style={{fontSize:"small"}}>You can challange your knowledge of songs and artist and albums!</p>
+                                        <p style={{fontSize:"small"}}>You can challange your knowledge of songs, artist ...!</p>
                                         </div>
                                     </div>
                                 </div>
