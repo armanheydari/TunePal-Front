@@ -352,4 +352,21 @@
     bottom: 0;
     background-color: rgba(0,0,0,0.7);
     z-index: 11;
+
+    .desktop {
+        margin: auto;
+
+        @media(max-width: 768px) {
+            display: none !important;
+        }
+    }
+
+    .mobile {
+        width: 100%;
+        // padding: auto;
+
+        @media(min-width: 768px) {
+            display: none !important;
+        }
+    }
 }
