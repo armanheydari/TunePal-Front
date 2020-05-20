@@ -67,7 +67,7 @@ class Quiz extends React.Component {
                                 disabled={this.state.isSubmitted}
                                 style={(this.state.choise1 === this.state.correctAnswer) ? TrueStyle : (this.state.choise1 === this.state.choisePushed) ? FalseStyle : {}}
                                 onClick={this.onSubmit}>
-                                {this.state.choise1.split('(')[0]}
+                                {(this.state.choise1.length > 22) ? this.state.choise1.slice(0,22)+"..." : this.state.choise1}
                             </button>
                             <button
                                 className="ui inverted white button Quiz_choise"
@@ -76,8 +76,7 @@ class Quiz extends React.Component {
                                 disabled={this.state.isSubmitted}
                                 style={(this.state.choise2 === this.state.correctAnswer) ? TrueStyle : (this.state.choise2 === this.state.choisePushed) ? FalseStyle : {}}
                                 onClick={this.onSubmit}>
-                                {this.state.choise2.split('(')[0]}
-                            </button>
+                                {(this.state.choise2.length > 22) ? this.state.choise2.slice(0,22)+"..." : this.state.choise2}                            </button>
                         </div>
                         <div className="Quiz_button-row">
                             <button
@@ -87,7 +86,7 @@ class Quiz extends React.Component {
                                 disabled={this.state.isSubmitted}
                                 style={(this.state.choise3 === this.state.correctAnswer) ? TrueStyle : (this.state.choise3 === this.state.choisePushed) ? FalseStyle : {}}
                                 onClick={this.onSubmit}>
-                                {this.state.choise3.split('(')[0]}
+                                {(this.state.choise3.length > 22) ? this.state.choise3.slice(0,22)+"..." : this.state.choise3}
                             </button>
                             <button
                                 className="ui inverted white button Quiz_choise"
@@ -96,7 +95,7 @@ class Quiz extends React.Component {
                                 disabled={this.state.isSubmitted}
                                 style={(this.state.choise4 === this.state.correctAnswer) ? TrueStyle : (this.state.choise4 === this.state.choisePushed) ? FalseStyle : {}}
                                 onClick={this.onSubmit}>
-                                {this.state.choise4.split('(')[0]}
+                                {(this.state.choise4.length > 22) ? this.state.choise4.slice(0,22)+"..." : this.state.choise4}
                             </button>
                         </div>
 
