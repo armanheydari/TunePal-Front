@@ -1,6 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import Header from './Layout/Header.js';
 import Footer from './Layout/Footer.js';
 import Sidebar from './Layout/Sidebar.js';
