@@ -2,7 +2,7 @@ import React from 'react';
 import Axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faHome, faHeart, faAddressCard, faUserCog, faPowerOff, faComments, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faHome, faHeart, faAddressCard, faUserCog, faPowerOff, faComments, faQuestion, faUsers } from '@fortawesome/free-solid-svg-icons';
 import tokenConfig from '../../utils/tokenConfig';
 import serverURL from '../../utils/serverURL';
 
@@ -30,7 +30,11 @@ class Sidebar extends React.Component {
                     <NavLink to="/chat" activeClassName="Sidebar_active" className="SidebarOverlay_item">
                         <FontAwesomeIcon icon={faComments} />
                         <span className="SidebarOverlay_item-name">Chat</span>
-                    </NavLink> 
+                    </NavLink>
+                    <NavLink to="/Group" activeClassName="Sidebar_active" className="SidebarOverlay_item">
+                        <FontAwesomeIcon icon={faUsers} />
+                        <span className="SidebarOverlay_item-name">Group</span>
+                    </NavLink>  
                     <NavLink to={`/profile/${this.props.username}`} activeClassName="Sidebar_active" className="SidebarOverlay_item">
                         <FontAwesomeIcon icon={faAddressCard} />
                         <span className="SidebarOverlay_item-name">Profile</span>

@@ -10,6 +10,7 @@ import Setting from './Setting/Setting.js';
 import Match from './Match/Match';
 import Quiz from './Quiz/Quiz.js';
 import Chat from './Chat/Chat';
+import Group from './GroupChat/Group'
 import SidebarOverlay from './Layout/SidebarOverlay';
 import LandingPage from './LandingPage/LandingPage.js';
 import Homepage from './Homepage/Homepage';
@@ -90,6 +91,10 @@ class Main extends React.Component {
                                 <Route
                                     path="/chat"
                                     component={Chat}
+                                />
+                                <Route
+                                    path="/Group"
+                                    component={Group}
                                 />
                                 <Route
                                     path="/profile/:username"
