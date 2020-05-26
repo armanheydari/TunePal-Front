@@ -1,3 +1,3 @@
 export default function() {
-    return 'https://mytunepal.ir';
+    return 'https://mytunepal.ir/api';
 }
