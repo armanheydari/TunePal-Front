@@ -28,7 +28,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const stringToArray = (string) => {
-    return string.split(' ');
+    if (string) {
+        return string.split(' ');
+    }
+    else {
+        return [];
+    }
 }
 
 const isObjectEmpty = (obj) => {
@@ -205,21 +210,23 @@ class Interest extends React.Component {
     }
 
     onItemClick = e => {
-        const itemName = e.target.id;
-        const favorites = this.state.favorites;
-        if (favorites.includes('#' + itemName)) {
-            this.setState(prevState => {
-                return {
-                    favorites: prevState.favorites.filter(item => item !== '#' + itemName)
-                };
-            });
-        }
-        else {
-            this.setState(prevState => {
-                return {
-                    favorites: prevState.favorites.concat('#' + itemName)
-                };
-            });
+        if (e.target.id) {
+            const itemName = e.target.id;
+            const favorites = this.state.favorites;
+            if (favorites.includes('#' + itemName)) {
+                this.setState(prevState => {
+                    return {
+                        favorites: prevState.favorites.filter(item => item !== '#' + itemName)
+                    };
+                });
+            }
+            else {
+                this.setState(prevState => {
+                    return {
+                        favorites: prevState.favorites.concat('#' + itemName)
+                    };
+                });
+            }
         }
     }
 
