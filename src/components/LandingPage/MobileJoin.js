@@ -1,7 +1,8 @@
 import React from 'react';
 import './styles/MobileJoin.scss';
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Select, DatePicker } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+const { Option } = Select;
 
 var UID = {
 	_current: 0,
@@ -17,7 +18,7 @@ var UID = {
     for (const id in this._props) {
       if (this._props.hasOwnProperty(id)) {
         const element = this._props[id];
-        if (element.prop == prop && element.value == value) {
+        if (element.prop === prop && element.value === value) {
           return id;
         }
       }
@@ -60,7 +61,7 @@ const onClickSignup = (e) => {
             signupContainer.classList.remove('slide-up');
             loginContainer.classList.add('slide-up');
             document.getElementById('join-mobile').style.background = "white";
-            loginContainer.pseudoStyle("before","background-color","red !important");
+            loginContainer.pseudoStyle("before","background","linear-gradient(to right, rgb(255, 65, 108), rgb(255, 75, 43)) !important");
         }
     });
 }
@@ -72,8 +73,8 @@ const onClickLogin = (e) => {
 		if (element === "slide-up") {
             signupContainer.classList.add('slide-up');
             loginContainer.classList.remove('slide-up');
-            document.getElementById('join-mobile').style.background = "red";
-            loginContainer.pseudoStyle("before","background-color","white !important");
+            document.getElementById('join-mobile').style.background = "linear-gradient(to right, rgb(255, 65, 108), rgb(255, 75, 43))";
+            loginContainer.pseudoStyle("before","background","white !important");
         }
 	});
 }
@@ -83,13 +84,53 @@ class MobileJoin extends React.Component {
         return (
             <div className="form-structor" id="join-mobile">
                 <div className="signup" id="signup-container">
-                    <h2 className="form-title" id="signup" onClick={onClickSignup}><span>or</span>Sign up</h2>
-                    <div className="form-holder">
-                        <input type="text" className="input" placeholder="Name" />
-                        <input type="email" className="input" placeholder="Email" />
-                        <input type="password" className="input" placeholder="Password" />
+                    <div className="center">
+                        <h2 className="form-title" id="signup" onClick={onClickSignup}><span>or</span>Sign up</h2>
+                        <div className="form-holder">
+                            <Form
+                                name="normal_login"
+                                className="login-form"
+                                initialValues={{
+                                    remember: true,
+                                }}
+                                // onFinish={onFinish}
+                            >
+
+                                <Form.Item
+                                    name="name"
+                                    rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your Username!',
+                                    },
+                                    ]}
+                                >
+                                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Name" />
+                                </Form.Item>
+
+                                <Form.Item
+                                    name="gender"
+                                    label="Gender"
+                                >
+                                    <Select onChange={this.onGenderChange}>
+                                        <Option value="Male">
+                                            Male
+                                        </Option>
+                                        <Option value="Female">
+                                            Female
+                                        </Option>
+                                    </Select>
+                                </Form.Item>
+
+                                <Form.Item>
+                                    <Button type="primary" htmlType="submit" className="LoginSignup_button">
+                                        Log in
+                                    </Button>
+                                </Form.Item>
+
+                            </Form>
+                        </div>
                     </div>
-                    <button className="submit-btn">Sign up</button>
                 </div>
                 <div className="login slide-up" id="login-container">
                     <div className="center">
