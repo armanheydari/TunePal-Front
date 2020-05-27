@@ -3,7 +3,6 @@ import LoginSignup from '../LoginSignup/LoginSignup';
 
 const onClickDim = (e) => {
     if (e.target.id === "Join_overlay") {
-        console.log(e.target)
         const joinOverlay = document.getElementById("Join_overlay");
         joinOverlay.style.display = "none";
     }
