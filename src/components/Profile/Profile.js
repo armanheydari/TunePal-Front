@@ -4,8 +4,8 @@ import General from './General';
 import About from './About';
 import TopArtists from './TopArtists';
 import TopSongs from './TopSongs';
-import ProfilePicture from '../../assets/Default-Profile-Picture.jpg';
 import serverURL from '../../utils/serverURL';
+import Picture from './Picture';
 
 const locationToString = (location) => {
     if (location) {
@@ -68,7 +68,7 @@ class Profile extends React.Component {
             return (
                 <div className="Profile">
                     <div className="Profile_left">
-                        <img src={imgURL || ProfilePicture} alt="" className="Profile_picture" />
+                        <Picture images={imgURL} />
                         <General
                             name={name}
                             gender={gender}
