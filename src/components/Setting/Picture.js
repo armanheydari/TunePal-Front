@@ -24,22 +24,27 @@ class Picture extends React.Component {
         fileList: [],
         uploading: false,
         showResult: false,
-        isSucceed: undefined
+        isSucceed: undefined,
+        removedFiles: [],
+        addeddFiles: []
     }
 
     componentDidMount() {
-        if (this.props.imgURL) {
-            const object = {
-                uid: '-1',
-                name: 'image.png',
-                status: 'done',
-                url: this.props.imgURL,
+        if (this.props.imgURL.length > 0) {
+            const tempFileList = []
+            for (let i = 0; i < this.props.imgURL.length; i++) {
+                tempFileList.push({
+                    uid: this.props.imgURL[i].id,
+                    name: `image${this.props.imgURL[i].id}.png`,
+                    status: 'done',
+                    url: this.props.imgURL[i].image,
+                });
             }
             this.setState(prevState => {
                 return {
-                    fileList: [object]
+                    fileList: tempFileList
                 };
-            })
+            });
         }
     }
 
@@ -80,6 +85,7 @@ class Picture extends React.Component {
                         type="primary"
                         loading={this.state.uploading}
                         className="Setting_Picture_btn"
+                        disabled={this.state.addeddFiles.length === 0 && this.state.removedFiles.length === 0}
                     >
                         Submit
                     </Button>
@@ -119,40 +125,65 @@ class Picture extends React.Component {
         });
     };
 
-    handleChange = ({ fileList }) => this.setState({ fileList });
+    handleChange = ({ fileList }) => {
+        this.setState({ fileList });
+    };
 
     onSubmit = () => {
-        if (this.state.fileList.length > 0) {
-            if (this.state.fileList[0].uid !== "-1") {
-                const formData = new FormData();
-                formData.append('user_avatar', this.state.fileList[0].originFileObj);
-                this.setState(prevState => {
-                    return {
-                        uploading: true,
-                        showResult: false
-                    };
-                });
-                Axios.put(`${serverURL()}/account/sign_up/`, formData, tokenConfig())
-                .then(res => {
-                    this.setState(prevState => {
-                        return {
-                            uploading: false,
-                            showResult: true,
-                            isSucceed: true
-                        };
-                    });
-                })
-                .catch(err => {
-                    this.setState(prevState => {
-                        return {
-                            uploading: false,
-                            showResult: true,
-                            isSucceed: false
-                        };
-                    });
-                });
-            }
-        }
+        const formData = new FormData();
+        this.setState(prevState => {
+            return {
+                uploading: true,
+                showResult: false
+            };
+        });
+        this.state.removedFiles.forEach(item => {
+            Axios.get(`${serverURL()}/account/removeimage/?id=${item.uid}`, tokenConfig());
+        });
+        this.state.addeddFiles.forEach(item => {
+            formData.append('user_avatar', item.originFileObj);
+            const a = Axios.put(`${serverURL()}/account/addimage/`, formData, tokenConfig());
+            console.log(a);
+        });
+        this.setState(prevState => {
+            return {
+                uploading: false,
+                showResult: true,
+                isSucceed: true
+            };
+        });
+
+        // if (this.state.fileList.length > 0) {
+        //     if (this.state.fileList[0].uid !== "-1") {
+        //         const formData = new FormData();
+        //         formData.append('user_avatar', this.state.fileList[0].originFileObj);
+        //         this.setState(prevState => {
+        //             return {
+        //                 uploading: true,
+        //                 showResult: false
+        //             };
+        //         });
+        //         Axios.put(`${serverURL()}/account/sign_up/`, formData, tokenConfig())
+        //         .then(res => {
+        //             this.setState(prevState => {
+        //                 return {
+        //                     uploading: false,
+        //                     showResult: true,
+        //                     isSucceed: true
+        //                 };
+        //             });
+        //         })
+        //         .catch(err => {
+        //             this.setState(prevState => {
+        //                 return {
+        //                     uploading: false,
+        //                     showResult: true,
+        //                     isSucceed: false
+        //                 };
+        //             });
+        //         });
+        //     }
+        // }
     }
 
     onRemove = (file) => {
@@ -164,13 +195,29 @@ class Picture extends React.Component {
                 fileList: newFileList,
             };
         });
+        if (typeof file.uid === 'string') {
+            this.setState(prevState => {
+                const newAddedFiles = prevState.addeddFiles.filter(item => item.uid !== file.uid)
+                return {
+                    addeddFiles: newAddedFiles
+                };
+            });
+        }
+        else {
+            this.setState(prevState => {
+                return {
+                    removedFiles: [...prevState.removedFiles, file]
+                };
+            });
+        }
     }
 
     beforeUpload = (file) => {
         this.setState(prevState => {
             return {
                 fileList: [...prevState.fileList, file],
-            }; 
+                addeddFiles: [...prevState.addeddFiles, file]
+            };
         });
         return false;
     }
