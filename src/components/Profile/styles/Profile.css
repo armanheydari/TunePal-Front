@@ -55,41 +55,41 @@
 
 .Profile_picture .ant-carousel .slick-dots {
     width: auto !important;
+    padding: 1rem;
 }
 
-.ant-carousel .slick-slide {
+.Profile_picture .img-container {
     text-align: center;
     overflow: hidden;
     height: 285px;
-    /* width: 100%; */
 }
 
 @media(max-width: 1200px) {
-    .ant-carousel .slick-slide {
+    .Profile_picture .img-container {
         height: 265px;
     }
 }
 
 @media(max-width: 992px) {
-    .ant-carousel .slick-slide {
+    .Profile_picture .img-container {
         height: 223px;
     }
 }
 
 @media(max-width: 768px) {
-    .ant-carousel .slick-slide {
+    .Profile_picture .img-container {
         height: 535px;
     }
 }
 
 @media(max-width: 600px) {
-    .ant-carousel .slick-slide {
+    .Profile_picture .img-container {
         height: 490px;
     }
 }
 
 @media(max-width: 480px) {
-    .ant-carousel .slick-slide {
+    .Profile_picture .img-container {
         height: 370px;
     }
 }

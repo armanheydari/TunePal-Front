@@ -9,8 +9,8 @@ class Picture extends React.Component {
                    {
                        this.props.images.map(image => {
                            return (
-                               <div key={image.id} >
-                                   <img alt="" src={image.image} />
+                               <div key={image.id} className="img-container">
+                                   <img alt="" src={image.image} style={{height: '100%', width: '100%'}} />
                                </div>
                            );
                        })
