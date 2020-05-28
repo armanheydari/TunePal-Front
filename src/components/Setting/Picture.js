@@ -130,7 +130,6 @@ class Picture extends React.Component {
     };
 
     onSubmit = () => {
-        const formData = new FormData();
         this.setState(prevState => {
             return {
                 uploading: true,
@@ -141,9 +140,9 @@ class Picture extends React.Component {
             Axios.get(`${serverURL()}/account/removeimage/?id=${item.uid}`, tokenConfig());
         });
         this.state.addeddFiles.forEach(item => {
-            formData.append('user_avatar', item.originFileObj);
-            const a = Axios.put(`${serverURL()}/account/addimage/`, formData, tokenConfig());
-            console.log(a);
+            const formData = new FormData();
+            formData.append('user_avatar', item);
+            Axios.put(`${serverURL()}/account/addimage/`, formData, tokenConfig());
         });
         this.setState(prevState => {
             return {
