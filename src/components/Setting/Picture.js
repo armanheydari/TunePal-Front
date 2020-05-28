@@ -61,6 +61,7 @@ class Picture extends React.Component {
                 <div className="Setting_section-title">Picture</div>
                 <div className="Setting_form-picture">
                     <Upload
+                        accept=".png, .jpg, .jpeg"
                         onRemove={this.onRemove}
                         beforeUpload={this.beforeUpload}
                         listType="picture-card"
@@ -103,7 +104,7 @@ class Picture extends React.Component {
                         (this.state.showResult && !this.state.isSucceed) && (
                             <div className="Setting_result-fail">
                                 <FontAwesomeIcon icon={faTimes} className="Setting_result-icon" />
-                                There was a problem updating your info.
+                                There was a problem updating some of your pictures.
                             </div>
                         )
                     }
@@ -136,53 +137,39 @@ class Picture extends React.Component {
                 showResult: false
             };
         });
+        const promises = [];
         this.state.removedFiles.forEach(item => {
-            Axios.get(`${serverURL()}/account/removeimage/?id=${item.uid}`, tokenConfig());
+            promises.push(
+                Axios.get(`${serverURL()}/account/removeimage/?id=${item.uid}`, tokenConfig())
+            );
         });
         this.state.addeddFiles.forEach(item => {
             const formData = new FormData();
             formData.append('user_avatar', item);
-            Axios.put(`${serverURL()}/account/addimage/`, formData, tokenConfig());
+            promises.push(
+                Axios.put(`${serverURL()}/account/addimage/`, formData, tokenConfig())
+            );
         });
-        this.setState(prevState => {
-            return {
-                uploading: false,
-                showResult: true,
-                isSucceed: true
-            };
+        Promise.all(promises).then(() => {
+            this.setState(prevState => {
+                return {
+                    uploading: false,
+                    showResult: true,
+                    isSucceed: true,
+                    removedFiles: [],
+                    addeddFiles: []
+                };
+            });
         });
-
-        // if (this.state.fileList.length > 0) {
-        //     if (this.state.fileList[0].uid !== "-1") {
-        //         const formData = new FormData();
-        //         formData.append('user_avatar', this.state.fileList[0].originFileObj);
-        //         this.setState(prevState => {
-        //             return {
-        //                 uploading: true,
-        //                 showResult: false
-        //             };
-        //         });
-        //         Axios.put(`${serverURL()}/account/sign_up/`, formData, tokenConfig())
-        //         .then(res => {
-        //             this.setState(prevState => {
-        //                 return {
-        //                     uploading: false,
-        //                     showResult: true,
-        //                     isSucceed: true
-        //                 };
-        //             });
-        //         })
-        //         .catch(err => {
-        //             this.setState(prevState => {
-        //                 return {
-        //                     uploading: false,
-        //                     showResult: true,
-        //                     isSucceed: false
-        //                 };
-        //             });
-        //         });
-        //     }
-        // }
+        Promise.all(promises).catch(() => {
+            this.setState(prevState => {
+                return {
+                    uploading: false,
+                    showResult: true,
+                    isSucceed: false
+                };
+            });
+        });
     }
 
     onRemove = (file) => {
