@@ -7,7 +7,7 @@ class Picture extends React.Component {
             <div className="Profile_picture">
                 <Carousel>
                    {
-                       this.props.images.map(image => {
+                       this.props.images.reverse().map(image => {
                            return (
                                <div key={image.id} className="img-container">
                                    <img alt="" src={image.image} style={{height: '100%', width: '100%'}} />
