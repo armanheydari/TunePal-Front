@@ -4,7 +4,7 @@
 .form-structor {
 	background-color: white;
 	border-radius: 15px;
-	height: 550px;
+	height: 600px;
 	width: 300px;
 	position: relative;
     overflow: hidden;
@@ -26,8 +26,8 @@
 			-webkit-transition: all .5s ease;
 		}
 		
-		&.slide-up .form-holder,
-		&.slide-up .submit-btn {
+		&.slide-up .center .form-holder,
+		&.slide-up .center .submit-btn {
 			opacity: 0;
 			visibility: hidden;
 		}
@@ -48,6 +48,7 @@
 		.center {
 			width: 80%;
 			margin: auto;
+			visibility: visible;
 
 			.form-title {
 				color: black;
@@ -67,7 +68,7 @@
 				width: 100%;
 				background-color: #fff;
 				overflow: hidden;
-				margin-top: 50px;
+				margin-top: 10px;
 				opacity: 1;
 				visibility: visible;
 				-webkit-transition: all .5s ease;
@@ -77,7 +78,6 @@
 					flex-direction: column;
 					justify-content: center;
 					width: 100%;
-					text-align: center;
 	
 					.ant-input {
 						background-color: #fff !important;
