@@ -168,21 +168,23 @@ class Interest extends React.Component {
     }
 
     onItemClick = e => {
-        const itemName = e.target.id;
-        const favorites = this.state.favorites;
-        if (favorites.includes(itemName)) {
-            this.setState(prevState => {
-                return {
-                    favorites: prevState.favorites.filter(item => item !== itemName)
-                };
-            });
-        }
-        else {
-            this.setState(prevState => {
-                return {
-                    favorites: prevState.favorites.concat(itemName)
-                };
-            });
+        if (e.target.id) {
+            const itemName = e.target.id;
+            const favorites = this.state.favorites;
+            if (favorites.includes(itemName)) {
+                this.setState(prevState => {
+                    return {
+                        favorites: prevState.favorites.filter(item => item !== itemName)
+                    };
+                });
+            }
+            else {
+                this.setState(prevState => {
+                    return {
+                        favorites: prevState.favorites.concat(itemName)
+                    };
+                });
+            }
         }
     }
 

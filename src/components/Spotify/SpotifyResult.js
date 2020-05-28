@@ -11,14 +11,14 @@ class SpotifyResult extends React.Component {
     }
     componentDidMount() {
         const code = window.location.href.split("spotifyresult/")[1];
-        const serverURL = `${serverURL()}/spotify/get_url/${code}`;
+        const requestURL = `${serverURL()}/spotify/get_url/${code}`;
         const config = {
             headers: {
             'Content-Type': 'application/json',
             'Authorization': `Token ${localStorage.getItem('token')}`
             }
         }
-        axios.get(serverURL, config)
+        axios.get(requestURL, config)
         .then(res => {
             this.setState(() => {
                 return {
