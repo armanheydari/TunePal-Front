@@ -13,7 +13,7 @@ import Interest from './Interest';
 class Setting extends React.Component {
     state = {
         show: false,
-        imgURL: null ,
+        imgURL: null,
         name: "",
         gender: "",
         birthdate: "",
@@ -43,9 +43,9 @@ class Setting extends React.Component {
             } = this.state;
             return (
                 <div className="Setting">
-                    <Picture
+                    {/* <Picture
                         imgURL={imgURL}
-                    />
+                    /> */}
                     <General
                         name={name}
                         gender={gender}
