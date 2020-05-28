@@ -2,7 +2,24 @@ import React from 'react';
 import './styles/MobileJoin.scss';
 import { Form, Input, Button, Select, DatePicker } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import moment from 'moment';
+
 const { Option } = Select;
+const dateFormat = 'YYYY-MM-DD';
+
+const maxBirthdate = () => {
+    const today = new Date();
+    const year = today.getFullYear() - 18;
+    let month = today.getMonth() + 1;
+    if (month < 10) {
+        month = "0" + month;
+    }
+    let day = today.getDate() - 1;
+    if (day < 10) {
+        day = "0" + day;
+    }
+    return year + "-" + month + "-" + day;
+}
 
 var UID = {
 	_current: 0,
@@ -90,10 +107,10 @@ class MobileJoin extends React.Component {
                             <Form
                                 name="normal_login"
                                 className="login-form"
-                                initialValues={{
-                                    remember: true,
-                                }}
                                 // onFinish={onFinish}
+                                initialValues={{
+                                    remember: false,
+                                }}
                             >
 
                                 <Form.Item
@@ -105,14 +122,13 @@ class MobileJoin extends React.Component {
                                     },
                                     ]}
                                 >
-                                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Name" />
+                                    <Input placeholder="Name" />
                                 </Form.Item>
 
                                 <Form.Item
                                     name="gender"
-                                    label="Gender"
                                 >
-                                    <Select onChange={this.onGenderChange}>
+                                    <Select onChange={this.onGenderChange} placeholder="Gender" menuItemSelectedIcon={<UserOutlined className="site-form-item-icon" />}>
                                         <Option value="Male">
                                             Male
                                         </Option>
@@ -122,9 +138,62 @@ class MobileJoin extends React.Component {
                                     </Select>
                                 </Form.Item>
 
+                                <Form.Item
+                                    name="birthdate"
+                                >
+                                    <DatePicker
+                                        placeholder="Birthday"
+                                        format={dateFormat}
+                                        allowClear={false}
+                                        onChange={this.onBirthdateChange}
+                                        disabledDate={d => !d || d.isAfter(maxBirthdate()) || d.isSameOrBefore("1900-00-00")}
+                                    />
+                                </Form.Item>
+
+                                <Form.Item
+                                    name="email"
+                                    onChange={this.onChange}
+                                    rules={[
+                                        {
+                                            type: "email",
+                                            message: "Email is not valid."
+                                        },
+                                        // {validator: this.validateEmail}
+                                    ]}
+                                >
+                                    <Input placeholder="Email" />
+                                </Form.Item>
+
+                                <Form.Item
+                                    name="username"
+                                    onChange={this.onChange}
+                                    rules={[
+                                        {validator: this.validateUsername}
+                                    ]}
+                                >
+                                    <Input placeholder="Username" />
+                                </Form.Item>
+
+                                <Form.Item
+                                    name="password"
+                                    onChange={this.onChange}
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input your password!',
+                                        },
+                                        {
+                                            min: 8,
+                                            message: "Password must be at least 8 characters."
+                                        }
+                                    ]}
+                                >
+                                    <Input.Password placeholder="Password" />
+                                </Form.Item>
+
                                 <Form.Item>
                                     <Button type="primary" htmlType="submit" className="LoginSignup_button">
-                                        Log in
+                                        Signup
                                     </Button>
                                 </Form.Item>
 
@@ -175,7 +244,7 @@ class MobileJoin extends React.Component {
 
                                 <Form.Item>
                                     <Button type="primary" htmlType="submit" className="LoginSignup_button">
-                                        Log in
+                                        Login
                                     </Button>
                                 </Form.Item>
 
