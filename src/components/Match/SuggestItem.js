@@ -55,15 +55,16 @@ class SuggestItem extends React.Component {
       return {
         isSending: true
       };
-    });
-    Axios.get(`${serverURL()}/spotify/friend_request/?username=${this.props.username}`, tokenConfig())
+    },
+    () => {
+      Axios.get(`${serverURL()}/spotify/friend_request/?username=${this.props.username}`, tokenConfig())
     .then(res => {
+      this.props.updatePending(this.props.username);
       this.setState(prevState => {
         return {
           isSending: false
         };
       });
-      this.props.updatePending(this.props.username);
     })
     .catch(err => {
       this.setState(prevState => {
@@ -72,6 +73,8 @@ class SuggestItem extends React.Component {
         };
       });
     });
+    }
+    );
   }
 
 }
