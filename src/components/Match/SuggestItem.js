@@ -4,7 +4,6 @@ import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import tokenConfig from '../../utils/tokenConfig';
 import serverURL from '../../utils/serverURL';
-import { Button } from 'antd';
 
 class SuggestItem extends React.Component {
   state = {
@@ -39,10 +38,13 @@ class SuggestItem extends React.Component {
         {
           pending 
           ? <div className="pending">Pending</div> 
-          // : <div onClick={this.onClickRequest} style={this.state.isSending ? {pointerEvents:'none'} : {pointerEvents:'none'}} className="matchList-firstList_list__request">Request</div>
-          : <Button loading={this.state.isSending} className="matchList-firstList_list__request" onClick={this.onClickRequest}>
-              Request
-          </Button>
+          : <div
+              onClick={this.onClickRequest}
+              style={this.state.isSending ? {pointerEvents:'none'} : {pointerEvents:'auto'}}
+              className="matchList-firstList_list__request"
+            >
+              {this.state.isSending ? <div className="ui active centered inline loader"></div> : 'Request'}
+            </div>
         }
       </li>
     );
