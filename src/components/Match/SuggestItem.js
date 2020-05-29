@@ -26,7 +26,7 @@ class SuggestItem extends React.Component {
           </p>
           <p>
             <span>Distance</span>
-            <span>{distance}</span>
+            <span>{distance ? distance : '?'}</span>
             <span>km</span>
           </p>
         </div>
