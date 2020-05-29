@@ -24,7 +24,7 @@ class GroupHistory extends React.Component {
         console.log(ws);
         ws.onopen = () => {
             console.log('open');
-            Axios.get(`${serverURL()}/Group/${this.props.conversationID}/`, tokenConfig())
+            Axios.get(`${serverURL()}/chat/${this.props.conversationID}/`, tokenConfig())
             .then(res => {
                 const messages = res.data.messages;
                 this.setState(prevState => {
