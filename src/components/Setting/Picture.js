@@ -145,7 +145,7 @@ class Picture extends React.Component {
         });
         this.state.addeddFiles.forEach(item => {
             const formData = new FormData();
-            formData.append('user_avatar', item);
+            formData.append('image', item);
             promises.push(
                 Axios.put(`${serverURL()}/account/addimage/`, formData, tokenConfig())
             );
