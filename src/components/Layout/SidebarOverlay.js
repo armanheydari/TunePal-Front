@@ -56,7 +56,7 @@ class Sidebar extends React.Component {
         Axios.get(`${serverURL()}/account/logout/`, tokenConfig())
         .then(res => {
             localStorage.clear();
-            window.location.reload(false);
+            window.location.reload(true);
         });
     }
 }

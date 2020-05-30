@@ -97,6 +97,7 @@ class LoginSignup extends React.Component {
             )
             .then(res => {
                 localStorage.setItem('token', res.data.data.token);
+                document.cookie = 'Authorization:' + "Token " + res.data.data.token + '; path=/';
                 const configGetUserInfo = {
                     mode: "cors",
                     headers: {

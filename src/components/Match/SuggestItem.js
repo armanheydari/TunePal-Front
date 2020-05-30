@@ -6,6 +6,10 @@ import tokenConfig from '../../utils/tokenConfig';
 import serverURL from '../../utils/serverURL';
 
 class SuggestItem extends React.Component {
+  state = {
+    isSending: undefined
+  }
+
   render() {
     const { name, age, distance, imgURL, pending } = this.props;
     return (
@@ -26,7 +30,7 @@ class SuggestItem extends React.Component {
           </p>
           <p>
             <span>Distance</span>
-            <span>{distance}</span>
+            <span>{distance ? distance : '?'}</span>
             <span>km</span>
           </p>
         </div>
@@ -34,19 +38,43 @@ class SuggestItem extends React.Component {
         {
           pending 
           ? <div className="pending">Pending</div> 
-          : <div onClick={this.onClickRequest} className="matchList-firstList_list__request">Request</div>
+          : <div
+              onClick={this.onClickRequest}
+              style={this.state.isSending ? {pointerEvents:'none'} : {pointerEvents:'auto'}}
+              className="matchList-firstList_list__request"
+            >
+              {this.state.isSending ? <div className="ui active centered inline loader"></div> : 'Request'}
+            </div>
         }
       </li>
     );
   }
 
   onClickRequest = () => {
-    Axios.get(`${serverURL()}/spotify/friend_request/?username=${this.props.username}`, tokenConfig())
+    this.setState(prevState => {
+      return {
+        isSending: true
+      };
+    },
+    () => {
+      Axios.get(`${serverURL()}/spotify/friend_request/?username=${this.props.username}`, tokenConfig())
     .then(res => {
       this.props.updatePending(this.props.username);
+      this.setState(prevState => {
+        return {
+          isSending: false
+        };
+      });
     })
     .catch(err => {
+      this.setState(prevState => {
+        return {
+          isSending: false
+        };
+      });
     });
+    }
+    );
   }
 
 }
