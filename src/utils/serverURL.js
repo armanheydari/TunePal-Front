@@ -1,3 +1,3 @@
 export default function() {
-    return 'https://www.mytunepal.ir/api';
+    return 'http://tunepal.pythonanywhere.com/api';
 }

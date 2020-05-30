@@ -2,19 +2,17 @@ import React from 'react';
 import Search from './Search';
 import GroupList from './GroupList';
 import FriendItem from './FriendItem';
-import Arman from '../../../assets/LandingPage/reza.jpg'
-import { Button, Header, Image, Modal } from 'semantic-ui-react'
-
+import { Button, Header, Image, Modal } from 'semantic-ui-react';
+import Axios from 'axios';
+import tokenConfig from '../../../utils/tokenConfig';
+import serverURL from '../../../utils/serverURL';
 
 class GroupSidebar extends React.Component {
     state = {
         searchField: '',
-        friendItem: {
-            name: 'Armawwn',
-            photo: Arman,
-            id:'1',
-            userName:''
-        }
+        friendItem: [],
+        selectedMembers: [],
+        showModal: false
     }
 
     render() {
@@ -22,77 +20,27 @@ class GroupSidebar extends React.Component {
             <React.Fragment>
                 <div id="Group_list-overlay" className="people-list">
                     <Search getFieldSearch={this.getFieldSearch} />
-                    <Modal trigger={<div className="Group-new">
-                        <button className="ui basic button Button">Create new group</button>
-                    </div>}>
-                        <Modal.Header>Select a Photo</Modal.Header>
-                        <Modal.Content image>
-                            <Modal.Description>
-                                <Header>Default Profile Image</Header>
-                                <p> We've found the following gravatar image associated with your e-mail address.</p>
-                                <p>Is it okay to use this photo?</p>
-                            </Modal.Description>
-                        </Modal.Content>
-                    </Modal>
                     <GroupList GroupList={this.props.GroupList} openGroup={this.props.openGroup} GroupID={this.props.GroupID} searchField={this.state.searchField} />
                 </div>
                 <div id="people-list" className="people-list">
                     <Search getFieldSearch={this.getFieldSearch} />
-                    <Modal onOpen={this.createClicked} className="Group-new-modal" trigger={<div className="Group-new" size="large">
-                        <button className="ui basic button Button">Create new group</button>
-                    </div>}>
+                    <div className="Group-new" size="large">
+                        <button className="ui basic button Button" onClick={this.newClicked}>Create new group</button>
+                    </div>
+                    <Modal className="Group-new-modal" open={this.state.showModal}>
                         <Modal.Header>New Group</Modal.Header>
                         <Modal.Content scrolling>
                             <div className="name-container" style={{ textAlign: "center" }}>
                                 <label className="name-label">Name:</label>
-                                <input className="name" type="text" placeholder="My Group" />
+                                <input className="name" type="text" id="GroupName" />
                             </div>
                             <ul className="list">
-                                <FriendItem friendItem={this.state.friendItem} />
-                                {/*<li className="item">
-                                    <img className="photo" src={Arman} alt="" />
-                                    <div className="name">Arman</div>
-                                </li>
-                                <li className="item">
-                                    <img className="photo" src={Arman} alt="" />
-                                    <div className="name">Arman</div>
-                                </li>
-                                <li className="item">
-                                    <img className="photo" src={Arman} alt="" />
-                                    <div className="name">Arman</div>
-                                </li>
-                                <li className="item">
-                                    <img className="photo" src={Arman} alt="" />
-                                    <div className="name">Arman</div>
-                                </li>
-                                <li className="item">
-                                    <img className="photo" src={Arman} alt="" />
-                                    <div className="name">Arman</div>
-                                </li>
-                                <li className="item">
-                                    <img className="photo" src={Arman} alt="" />
-                                    <div className="name">Arman</div>
-                                </li>
-                                <li className="item">
-                                    <img className="photo" src={Arman} alt="" />
-                                    <div className="name">Arman</div>
-                                </li>
-                                <li className="item">
-                                    <img className="photo" src={Arman} alt="" />
-                                    <div className="name">Arman</div>
-                                </li>
-                                <li className="item">
-                                    <img className="photo" src={Arman} alt="" />
-                                    <div className="name">Arman</div>
-                                </li>
-                                <li className="item">
-                                    <img className="photo" src={Arman} alt="" />
-                                    <div className="name">Arman</div>
-                                </li>*/}
+                                <FriendItem friendItem={this.state.friendItem} selectedMembers={this.state.selectedMembers} />
                             </ul>
                         </Modal.Content>
                         <Modal.Actions>
-                            <Button className="positive ui button" style={{fontSize:"1.5rem"}}>Create</Button>
+                            <Button className="negative ui button" style={{ fontSize: "1.5rem" }} onClick={this.CancelClicked}>Cancel</Button>
+                            <Button className="positive ui button" style={{ fontSize: "1.5rem" }} onClick={this.CreateClicked}>Create</Button>
                         </Modal.Actions>
                     </Modal>
                     <GroupList GroupList={this.props.GroupList} openGroup={this.props.openGroup} GroupID={this.props.GroupID} searchField={this.state.searchField} />
@@ -109,23 +57,42 @@ class GroupSidebar extends React.Component {
         })
     }
 
-    createClicked = () => {
-        console.log('heeey')
-        // Axios.get(`${serverURL()}/group/friendItem`, tokenConfig())
-        //     .then(res => {
-        //         const friends = res.data;
-        //         friends.forEach(friend => {
-        //             this.setState(prevState => {
-        //                 return {
-        //                     friendName=friend.name,
-        //                     friendPhoto=friend.imgURL,
-        //                     friendUserName=friend.userName
-        //                 };
-        //             });
-        //         });
-        //     })
-        //     .catch(err => {
-        //     });
+    newClicked = () => {
+        this.setState({ showModal: true, friendItem: [], selectedMembers: [] })
+        Axios.get(`${serverURL()}/chat/friendinfo/`, tokenConfig())
+            .then(res => {
+                let i = 0;
+                res.data.forEach(friend => {
+                    i = i + 1;
+                    this.setState(prevState => {
+                        return {
+                            friendItem: [...prevState.friendItem, { name: friend.nickname, photo: friend.user_avatar, userName: friend.username, id: 'friend' + i }]
+                        };
+                    });
+                });
+            })
+            .catch(err => {
+            });
+    }
+
+    CreateClicked = () => {
+        let result;
+        if (document.getElementById('GroupName').value === "") {
+            alert("Please choose a name")
+        }
+        if (this.state.selectedMembers.length === 0) {
+            alert("You should choose at least one member")
+        }
+        let temp = document.getElementById('GroupName').value, i;
+        for (i = 0; i < this.state.selectedMembers.length; i++) {
+            temp = temp.concat(',', this.state.selectedMembers[i]);
+        }
+        result = { name: temp };
+        Axios.post('http://tunepal.pythonanywhere.com/api/chat/makegroup/', JSON.stringify(result), tokenConfig());
+        this.setState({ showModal: false })
+    }
+    CancelClicked = () => {
+        this.setState({ showModal: false })
     }
 }
 
