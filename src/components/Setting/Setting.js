@@ -43,9 +43,9 @@ class Setting extends React.Component {
             } = this.state;
             return (
                 <div className="Setting">
-                    {/* <Picture
+                    <Picture
                         imgURL={imgURL}
-                    /> */}
+                    />
                     <General
                         name={name}
                         gender={gender}
