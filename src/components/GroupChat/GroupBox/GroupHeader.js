@@ -6,7 +6,6 @@ import Axios from 'axios';
 import ProfilePicture from '../../../assets/Default-Profile-Picture.jpg';
 import tokenConfig from '../../../utils/tokenConfig';
 import serverURL from '../../../utils/serverURL';
-import FriendItem from '../GroupSidebar/FriendItem';
 
 class GroupHeader extends React.Component {
     state = {
@@ -50,14 +49,14 @@ class GroupHeader extends React.Component {
                         </div>
                         <ul className="list">
                             <React.Fragment>
-                                {this.state.memberItem.map(friend =>
+                                {this.props.members.map(friend =>
                                     <li className="item" style={{ cursor: 'auto' }} key={friend.id}>
-                                        {friend.photo ?
-                                            <img className="photo" src={friend.photo.image} alt="" />
+                                        {friend.user_avatar ?
+                                            <img className="photo" src={friend.user_avatar} alt="" />
                                             :
                                             <img className="photo" src={ProfilePicture} alt="" />
                                         }
-                                        <div className="name">{friend.name}</div>
+                                        <div className="name">{friend.nickname}</div>
                                     </li>
                                 )}
                             </React.Fragment>
@@ -72,10 +71,22 @@ class GroupHeader extends React.Component {
                     <Modal.Header>Add members</Modal.Header>
                     <Modal.Content scrolling>
                         <ul className="list">
-                            <FriendItem friendItem={this.state.friendItem} selectedMembers={this.state.selectedMembers} />
+                            <React.Fragment>
+                                {this.state.friendItem.map(friend =>
+                                    <li className="item" key={friend.id} id={friend.userName} onClick={this.friendClicked}>
+                                        {friend.photo ?
+                                            <img className="photo" src={friend.photo} alt="" />
+                                            :
+                                            <img className="photo" src={ProfilePicture} alt="" />
+                                        }
+                                        <div className="name">{friend.name}</div>
+                                    </li>
+                                )}
+                            </React.Fragment>
                         </ul>
                     </Modal.Content>
                     <Modal.Actions>
+                        <Button className="negative ui button" style={{ fontSize: "1.5rem" }} onClick={this.CancelAddClicked}>Cancel</Button>
                         <Button className="positive ui button" style={{ fontSize: "1.5rem" }} onClick={this.confirmClicked}>Confirm</Button>
                     </Modal.Actions>
                 </Modal>
@@ -91,55 +102,73 @@ class GroupHeader extends React.Component {
 
     headerClicked = () => {
         this.setState({ showMainModal: true, memberItem: [] });
-        let i = 0;
-        Axios.get(`${serverURL()}/chat/friendinfo/`, tokenConfig())
-            .then(res => {
-                res.data.forEach(friend => {
-                    i = i + 1
-                    this.setState(prevState => {
-                        return {
-                            memberItem: [...prevState.memberItem, { name: friend.nickname, photo: friend.user_avatar, userName: friend.username, id: 'newFriend' + i }]
-                        };
-                    });
-                });
-            })
-            .catch(err => {
-            });
     }
 
     confirmClicked = () => {
-        //Axios.post(`${serverURL()}/chat/groupadd/`, tokenConfig())
+        let result;
+        let temp = '', i;
+        for (i = 0; i < this.state.selectedMembers.length; i++) {
+            temp = temp.concat(',', this.state.selectedMembers[i]);
+        }
+        if (temp.length > 0) {
+            temp = temp.slice(1, temp.length);
+            result = { id: this.props.conversationID, addedusers: temp };
+            Axios.post(`${serverURL()}/chat/addmember/`, JSON.stringify(result), tokenConfig());
+        }
         this.setState({ showAddModal: false })
     }
 
     addClicked = () => {
         let i = 0;
-        Axios.get(`${serverURL()}/chat/friendinfo/`, tokenConfig())
+        this.setState({ showAddModal: true, friendItem: [], selectedMembers: [] })
+        Axios.post(`${serverURL()}/chat/showfriends/`, JSON.stringify({ id: this.props.conversationID.toString() }), tokenConfig())
             .then(res => {
                 res.data.forEach(friend => {
-                    i = i + 1
+                    i = i + 1;
                     this.setState(prevState => {
                         return {
-                            friendItem: [...prevState.friendItem, { name: friend.nickname, photo: friend.user_avatar, id: 'member' + i }]
+                            friendItem: [...prevState.friendItem, { name: friend.nickname, photo: friend.user_avatar, userName: friend.username, id: 'newFriend' + i }]
                         };
                     });
                 });
             })
             .catch(err => {
             });
-        this.setState({ showAddModal: true })
+    }
+
+    friendClicked = (e) => {
+        const temp = document.getElementById(e.currentTarget.id).classList;
+        if (!temp.contains('Friend-sticky')) {
+            document.getElementById(e.currentTarget.id).classList.add('Friend-sticky');
+            this.state.selectedMembers.push(e.currentTarget.id);
+        }
+        else {
+            document.getElementById(e.currentTarget.id).classList.remove('Friend-sticky');
+            let i;
+            for (i = 0; i < this.state.selectedMembers.length; i++) {
+                if (this.state.selectedMembers[i] === e.currentTarget.id) {
+                    this.state.selectedMembers.splice(i, 1)
+                }
+            }
+        }
     }
 
     leftClicked = () => {
-        //Axios.post(`${serverURL()}/chat/groupleft/`, tokenConfig())
+        Axios.post(`${serverURL()}/chat/leavegroup/`, JSON.stringify({ id: this.props.conversationID }), tokenConfig());
+        this.setState({ showMainModal: false });
     }
 
     SaveClicked = () => {
 
-        this.setState({ showMainModal: false })
+        this.setState({ showMainModal: false });
     }
+
     CancelClicked = () => {
-        this.setState({ showMainModal: false })
+        this.setState({ showMainModal: false });
+    }
+
+    CancelAddClicked = () => {
+        this.setState({ showAddModal: false });
     }
 }
 

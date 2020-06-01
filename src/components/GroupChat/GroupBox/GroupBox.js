@@ -9,10 +9,10 @@ class GroupBox extends React.Component {
             return (
                 <div id="Group" className="Group">
                     <GroupHeader
-                        picture={this.props.header.picture}
                         name={this.props.header.name}
                         removeGroup={this.props.removeGroup}
-                        username={this.props.header.username}
+                        conversationID={this.props.header.conversationID}
+                        members={this.props.header.members}
                     />
                     <GroupHistory conversationID={this.props.header.conversationID} wsConversation={this.props.wsConversation} />
                     <GroupSend send={this.props.send} wsConversation={this.props.wsConversation} />
@@ -28,7 +28,7 @@ class GroupBox extends React.Component {
         );
     }
 
-    
+
 }
 
 export default GroupBox;

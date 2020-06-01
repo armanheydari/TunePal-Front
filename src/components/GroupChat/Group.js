@@ -15,38 +15,39 @@ class Group extends React.Component {
     }
 
     componentDidMount() {
-        Axios.get(`${serverURL()}/chat/`, tokenConfig())
-        .then(res => {
-            const conversations = res.data.conversations;
-            conversations.forEach(conversation => {
-                const conversationID = conversation.id;
-                const conversationMembers = conversation.members;
-                let conversationTemp = {};
-                let memberTemp = [];
-                conversationTemp.conversationID = conversationID;
-                conversationTemp.newMessages = conversation.new_messages;
-                conversationTemp.lastMessage = conversation.last_message;
-                conversationMembers.forEach(member => {
-                    if (member.to_show) {
-                        memberTemp.push(member);
-                    }
+        Axios.get(`${serverURL()}/chat/groupinfo/`, tokenConfig())
+            .then(res => {
+                const conversations = res.data.conversations;
+                conversations.forEach(conversation => {
+                    const conversationMembers = conversation.members;
+                    const conversationID = conversation.id;
+                    let conversationTemp = {};
+                    let memberTemp = [];
+                    conversationTemp.newMessages = conversation.new_messages;
+                    conversationTemp.lastMessage = conversation.last_message;
+                    conversationTemp.name = conversation.name;
+                    conversationTemp.conversationID = conversationID;
+                    conversationMembers.forEach(member => {
+                        if (member.to_show) {
+                            memberTemp.push(member);
+                        }
+                    });
+                    conversationTemp.members = memberTemp;
+                    this.setState(prevState => {
+                        const GroupList = prevState.GroupList.concat(conversationTemp);
+                        return {
+                            GroupList
+                        };
+                    });
                 });
-                conversationTemp.members = memberTemp;
                 this.setState(prevState => {
-                    const GroupList = prevState.GroupList.concat(conversationTemp);
                     return {
-                        GroupList
-                    };
-                });
-            });
-            this.setState(prevState => {
-                return {
-                    show: true
-                }
+                        show: true
+                    }
+                })
             })
-        })
-        .catch(err => {
-        });
+            .catch(err => {
+            });
     }
 
     render() {
@@ -81,7 +82,7 @@ class Group extends React.Component {
         this.setState(prevState => {
             const newGroupList = prevState.GroupList.map(item => {
                 if (item.conversationID === header.conversationID)
-                    return {...item, newMessages: 0};
+                    return { ...item, newMessages: 0 };
                 return item;
             });
             return {

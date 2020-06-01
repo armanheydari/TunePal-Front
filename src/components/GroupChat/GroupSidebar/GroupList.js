@@ -22,13 +22,10 @@ class GroupList extends React.Component {
                         return (
                             <GroupItem 
                                 key={item.conversationID}
-                                picture={item.members[0].user_avatar}
-                                name={item.members[0].nickname}
-                                status={item.members[0].status}
-                                id={item.conversationID}
+                                name={item.name}
+                                conversationID={item.conversationID}
                                 openGroup={this.props.openGroup}
-                                GroupID={this.props.GroupID}
-                                username={item.members[0].username}
+                                members={item.members}
                                 lastMessage={item.lastMessage}
                                 newMessages={item.newMessages}
                             />

@@ -76,19 +76,23 @@ class GroupSidebar extends React.Component {
     }
 
     CreateClicked = () => {
-        let result;
+        let result, flag = true;
         if (document.getElementById('GroupName').value === "") {
-            alert("Please choose a name")
+            alert("Please choose a name");
+            flag = false;
         }
         if (this.state.selectedMembers.length === 0) {
-            alert("You should choose at least one member")
+            alert("You should choose at least one member");
+            flag = false;
         }
         let temp = document.getElementById('GroupName').value, i;
         for (i = 0; i < this.state.selectedMembers.length; i++) {
             temp = temp.concat(',', this.state.selectedMembers[i]);
         }
         result = { name: temp };
-        Axios.post('http://tunepal.pythonanywhere.com/api/chat/makegroup/', JSON.stringify(result), tokenConfig());
+        if (flag) {
+            Axios.post(`${serverURL()}/chat/makegroup/`, JSON.stringify(result), tokenConfig());
+        }
         this.setState({ showModal: false })
     }
     CancelClicked = () => {

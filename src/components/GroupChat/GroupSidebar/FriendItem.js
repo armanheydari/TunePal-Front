@@ -8,7 +8,7 @@ class FriendItem extends React.Component {
                 {this.props.friendItem.map(friend =>
                     <li className="item" id={friend.userName} onClick={this.onFriendClicked} key={friend.id}>
                         {friend.photo ?
-                            <img className="photo" src={friend.photo.image} alt="" />
+                            <img className="photo" src={friend.photo} alt="" />
                             :
                             <img className="photo" src={ProfilePicture} alt="" />
                         }

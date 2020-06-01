@@ -5,7 +5,7 @@ import ProfilePicture from '../../../assets/Default-Profile-Picture.jpg';
 class GroupItem extends React.Component {
     render() {
         return (
-            <Link to={`/Group/${this.props.id}`} onClick={this.onClick}>
+            <Link to={`/Group/${this.props.conversationID}`} onClick={this.onClick}>
                 <li className="clearfix" style={this.styleGroupListItem()}>
                     <img
                         style={this.styleOnline()}
@@ -28,7 +28,7 @@ class GroupItem extends React.Component {
     }
 
     styleGroupListItem = () => {
-        if (this.props.id === this.props.GroupID) {
+        if (this.props.conversationID === this.props.GroupID) {
             return {
                 background: "linear-gradient(to right, #ff2053, #ff310d)"
             };
@@ -55,8 +55,8 @@ class GroupItem extends React.Component {
         const header = {
             picture: this.props.picture,
             name: this.props.name,
-            conversationID: this.props.id,
-            username: this.props.username
+            conversationID: this.props.conversationID,
+            members: this.props.members
         }
         this.props.openGroup(header);
         document.getElementById("Group_list-overlay").style.display = "none";
