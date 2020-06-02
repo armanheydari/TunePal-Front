@@ -2,9 +2,17 @@ import React from 'react';
 import './styles/MobileJoin.scss';
 import { Form, Input, Button, Select, DatePicker } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import moment from 'moment';
+import Axios from 'axios';
+import serverURL from '../../utils/serverURL';
+
+const config = {
+    headers: {
+        'Content-Type': 'application/json'
+    }
+};
 
 const { Option } = Select;
+
 const dateFormat = 'YYYY-MM-DD';
 
 const maxBirthdate = () => {
@@ -97,6 +105,26 @@ const onClickLogin = (e) => {
 }
 
 class MobileJoin extends React.Component {
+    state = {
+        loginUsername: '',
+        loginPassword: '',
+        isLogining: undefined,
+        isLoginFailed: undefined,
+
+        name: '',
+        gender: '',
+        birthday: '',
+        email: '',
+        signupUsername: '',
+        signupPassword: '',
+        isSignupLoading: false,
+        showSignupResult: false,
+        validEmail: false,
+        validUsername: false,
+        lastInvalidEmail: '',
+        lastInvalidUsername: ''
+    }
+
     render() {
         return (
             <div className="form-structor" id="join-mobile">
@@ -105,20 +133,17 @@ class MobileJoin extends React.Component {
                         <h2 className="form-title" id="signup" onClick={onClickSignup}><span>or</span>Sign up</h2>
                         <div className="form-holder">
                             <Form
-                                name="normal_login"
                                 className="login-form"
-                                // onFinish={onFinish}
-                                initialValues={{
-                                    remember: false,
-                                }}
+                                onFinish={this.onSubmitSignup}
                             >
 
                                 <Form.Item
                                     name="name"
+                                    onChange={this.onChange}
                                     rules={[
                                     {
                                         required: true,
-                                        message: 'Please input your Username!',
+                                        message: 'Please input your Name!',
                                     },
                                     ]}
                                 >
@@ -127,8 +152,14 @@ class MobileJoin extends React.Component {
 
                                 <Form.Item
                                     name="gender"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input your gender!',
+                                        },
+                                    ]}
                                 >
-                                    <Select onChange={this.onGenderChange} placeholder="Gender" menuItemSelectedIcon={<UserOutlined className="site-form-item-icon" />}>
+                                    <Select onChange={this.onGenderChange} placeholder="Gender">
                                         <Option value="Male">
                                             Male
                                         </Option>
@@ -139,7 +170,13 @@ class MobileJoin extends React.Component {
                                 </Form.Item>
 
                                 <Form.Item
-                                    name="birthdate"
+                                    name="birthday"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input your birthday!',
+                                        },
+                                    ]}
                                 >
                                     <DatePicker
                                         placeholder="Birthday"
@@ -158,24 +195,30 @@ class MobileJoin extends React.Component {
                                             type: "email",
                                             message: "Email is not valid."
                                         },
-                                        // {validator: this.validateEmail}
+                                        {
+                                            required: true,
+                                            message: 'Please input your Email!',
+                                        },
                                     ]}
                                 >
                                     <Input placeholder="Email" />
                                 </Form.Item>
 
                                 <Form.Item
-                                    name="username"
+                                    name="signupUsername"
                                     onChange={this.onChange}
                                     rules={[
-                                        {validator: this.validateUsername}
+                                        {
+                                            required: true,
+                                            message: 'Please input your Username!',
+                                        },
                                     ]}
                                 >
                                     <Input placeholder="Username" />
                                 </Form.Item>
 
                                 <Form.Item
-                                    name="password"
+                                    name="signupPassword"
                                     onChange={this.onChange}
                                     rules={[
                                         {
@@ -192,10 +235,18 @@ class MobileJoin extends React.Component {
                                 </Form.Item>
 
                                 <Form.Item>
-                                    <Button type="primary" htmlType="submit" className="LoginSignup_button">
+                                    <Button type="primary" htmlType="submit" className="btn" loading={this.state.isSignupLoading}>
                                         Signup
                                     </Button>
                                 </Form.Item>
+
+                                {
+                                    this.state.showSignupResult &&
+                                    <React.Fragment>
+                                        {!this.state.validEmail && <div style={{textAlign: 'center', color: '#ff4d4f'}}>Email already exist!</div>}
+                                        {!this.state.validUsername && <div style={{textAlign: 'center', color: '#ff4d4f'}}>Username already exist!</div>}
+                                    </React.Fragment>
+                                }
 
                             </Form>
                         </div>
@@ -206,34 +257,23 @@ class MobileJoin extends React.Component {
                         <h2 className="form-title" id="login" onClick={onClickLogin}><span>or</span>Log in</h2>
                         <div className="form-holder">
                             <Form
-                                name="normal_login"
                                 className="login-form"
                                 initialValues={{
                                     remember: true,
                                 }}
-                                // onFinish={onFinish}
+                                onFinish={this.onSubmitLogin}
                             >
 
                                 <Form.Item
-                                    name="username"
-                                    rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your Username!',
-                                    },
-                                    ]}
+                                    name="loginUsername"
+                                    onChange={this.onChange}
                                 >
                                     <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
                                 </Form.Item>
 
                                 <Form.Item
-                                    name="password"
-                                    rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your Password!',
-                                    },
-                                    ]}
+                                    name="loginPassword"
+                                    onChange={this.onChange}
                                 >
                                     <Input.Password
                                         prefix={<LockOutlined className="site-form-item-icon" />}
@@ -243,10 +283,12 @@ class MobileJoin extends React.Component {
                                 </Form.Item>
 
                                 <Form.Item>
-                                    <Button type="primary" htmlType="submit" className="LoginSignup_button">
+                                    <Button type="primary" htmlType="submit" className="btn" loading={this.state.isLogining}>
                                         Login
                                     </Button>
                                 </Form.Item>
+
+                                {this.state.isLoginFailed && <div style={{color: '#ff4d4f'}}>Username or Password is wrong!</div>}
 
                             </Form>
                         </div>
@@ -254,6 +296,109 @@ class MobileJoin extends React.Component {
                 </div>
             </div>
         );
+    }
+
+    onChange = (e) => {
+        const field = e.target.id;
+        const newValue = e.target.value;
+        this.setState(prevState => {
+            return {
+                [field]: newValue
+            }
+        });
+    }
+
+    onGenderChange = (e) => {
+        this.setState(prevState => {
+            return {
+                gender: e
+            };
+        });
+    }
+
+    onBirthdateChange = (date, dateString) => {
+        this.setState(
+            (prevState) => {
+                return {
+                    birthday: dateString
+                }
+            }
+        );
+    }
+
+    onSubmitSignup = () => {
+        this.setState(prevState => {
+            return {
+                isSignupLoading: true,
+                showSignupResult: false
+            };
+        });
+        const signup = {
+            birthdate: this.state.birthday,
+            email: this.state.email,
+            gender: this.state.gender,
+            nickname: this.state.name,
+            password: this.state.signupPassword,
+            username: this.state.signupUsername
+        };
+        Axios.post(`${serverURL()}/account/sign_up/`, JSON.stringify(signup), config)
+        .then(res => {
+            localStorage.setItem('token', res.data.data.token);
+            this.setState(prevState => {
+                return {
+                    isSignupLoading: false
+                };
+            });
+            this.props.isOnAfterSignup(true);
+        })
+        .catch(err => {
+            this.setState(prevState => {
+                return {
+                    isSignupLoading: false,
+                    showSignupResult: true
+                };
+            });
+            if (err.response.data.hasOwnProperty('email')) {
+                this.setState({validEmail: false});
+            }
+            else {
+                this.setState({validEmail: true});
+            }
+            if (err.response.data.hasOwnProperty('username')) {
+                this.setState({validUsername: false});
+            }
+            else {
+                this.setState({validUsername: true});
+            }
+        });
+    }
+
+    onSubmitLogin = () => {
+        const {loginUsername: username, loginPassword: password} = this.state;
+        if (username && password) {
+            this.setState(prevState => {
+                return {
+                    isLogining: true
+                };
+            });
+            const login = {
+                username: this.state.loginUsername,
+                password: this.state.loginPassword
+            };
+            Axios.post(`${serverURL()}/account/login/`, JSON.stringify(login), config)
+            .then(res => {
+                localStorage.setItem('token', res.data.data.token);
+                window.location.reload(true);
+            })
+            .catch(err => {
+                this.setState(prevState => {
+                    return {
+                        isLogining: false,
+                        isLoginFailed: true
+                    };
+                });
+            });
+        }
     }
 }
 
