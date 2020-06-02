@@ -24,6 +24,7 @@
 @media(max-width: 600px) {
 	.Main_row {
 		margin: 0;
+		min-height: 100%;
 	}
 }
 
