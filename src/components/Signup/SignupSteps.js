@@ -17,11 +17,15 @@ class SignupSteps extends React.Component {
 
         switch(this.props.stage) {
             case "location":
+                status.signup = "finish";
                 status.favorites = "finish";
                 status.location = "process";
+                status.spotify = "wait";
                 break;
 
             case "spotify":
+                status.signup = "finish";
+                status.favorites = "finish";
                 status.location = "finish";
                 status.spotify = "process";
                 break;
