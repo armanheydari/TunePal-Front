@@ -17,7 +17,7 @@ class Join extends React.Component {
                     <LoginSignup isOnAfterSignup={this.props.isOnAfterSignup} />
                 </div>
                 <div className="mobile">
-                    <MobileJoin />
+                    <MobileJoin isOnAfterSignup={this.props.isOnAfterSignup} />
                 </div>
             </div>
         );
