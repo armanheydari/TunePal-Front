@@ -174,11 +174,14 @@
                 .join {
                     background-color: white;
                     cursor: pointer;
-                    padding: 1rem 5rem;
+                    padding: 1rem 6rem;
                     background: linear-gradient(to right, rgb(255, 65, 108), rgb(255, 75, 43));
                     text-align: center;
                     border-radius: 10px;
                     display: inline;
+                    color: white;
+                    font-size: 2rem;
+                    text-transform: uppercase;
                 }
             }
         }
