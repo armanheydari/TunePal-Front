@@ -12,18 +12,22 @@
 	
 	.signup {
 		position: absolute;
-		top: 50%;
+		top: 250px;
 		left: 50%;
 		-webkit-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
 		width: 95%;
 		z-index: 5;
 		-webkit-transition: all .5s ease;
+		transition: all .5s ease;
 		
 		
 		&.slide-up {
 			top: 5%;
 			-webkit-transform: translate(-50%, 0%);
+			transform: translate(-50%, 0%);
 			-webkit-transition: all .5s ease;
+			transition: all .5s ease;
 		}
 		
 		&.slide-up .center .form-holder,
@@ -42,7 +46,8 @@
 			opacity: 1;
             visibility: visible;
             display: inline-block;
-            -webkit-transition: all .5s ease;   
+			-webkit-transition: all .5s ease;
+			transition: all .5s ease; 
 		}
 
 		.center {
@@ -60,6 +65,7 @@
 					opacity: 0;
 					visibility: hidden;
 					-webkit-transition: all .5s ease;
+					transition: all .5s ease;
 					display: none;
 				}
 			}
@@ -72,12 +78,28 @@
 				opacity: 1;
 				visibility: visible;
 				-webkit-transition: all .5s ease;
+				transition: all .5s ease;
 	
 				.login-form {
 					display: flex;
 					flex-direction: column;
 					justify-content: center;
 					width: 100%;
+
+					.btn {
+						border-radius: 20px;
+						border: 1px solid #FF4B2B;
+						background-color: #FF4B2B;
+						color: #FFFFFF;
+						font-size: 12px;
+						font-weight: bold;
+						padding: 0 30px;
+						letter-spacing: 1px;
+						text-transform: uppercase;
+						transition: transform 80ms ease-in;
+						margin: 0 auto 0 auto;
+						display: block;
+					}
 	
 					.ant-input {
 						background-color: #fff !important;
@@ -96,6 +118,7 @@
 		background-color: #fff;
 		z-index: 5;
 		-webkit-transition: all .5s ease;
+		transition: all .5s ease;
 		
 		&::before {
 			content: '';
@@ -103,12 +126,14 @@
 			left: 50%;
 			top: -20px;
 			-webkit-transform: translate(-50%, 0);
+			transform: translate(-50%, 0);
 			background: linear-gradient(to right, rgb(255, 65, 108), rgb(255, 75, 43));
 			width: 200%;
 			height: 250px;
 			border-radius: 50%;
 			z-index: 4;
 			-webkit-transition: all .5s ease;
+			transition: all .5s ease;
 		}
 		
 		.center {
@@ -116,8 +141,10 @@
 			top: calc(50% - 10%);
 			left: 50%;
 			-webkit-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
 			z-index: 5;
-            -webkit-transition: all .5s ease;
+			-webkit-transition: all .5s ease;
+			transition: all .5s ease;
             width: 80%;
 			
 			.form-title {
@@ -130,14 +157,16 @@
 					opacity: 0;
                     visibility: hidden;
                     display: none;
-                    -webkit-transition: all .5s ease;
+					-webkit-transition: all .5s ease;
+					transition: all .5s ease;
 				}
 			}
 
 			.form-holder {
 				margin-top: 30px;
 				opacity: 1;
-                -webkit-transition: all .5s ease;
+				-webkit-transition: all .5s ease;
+				transition: all .5s ease;
 
                 .login-form {
                     display: flex;
@@ -145,45 +174,41 @@
                     justify-content: center;
 					width: 100%;
 					text-align: center;
+					
+					.btn {
+						border-radius: 20px;
+						border: 1px solid #FF4B2B;
+						background-color: #FF4B2B;
+						color: #FFFFFF;
+						font-size: 12px;
+						font-weight: bold;
+						padding: 0 30px;
+						letter-spacing: 1px;
+						text-transform: uppercase;
+						transition: transform 80ms ease-in;
+						margin: 15px auto 0  auto;
+						display: block;
+					}
 
                     .ant-input {
                         background-color: #fff !important;
                     }
                 }
 			}
-
-			.submit-btn {
-				background-color: #6B92A4;
-				color: rgba(256,256,256,0.5);
-				border:0;
-				border-radius: 15px;
-				display: block;
-				margin: 15px auto; 
-				padding: 15px 45px;
-				width: 100%;
-				font-size: 13px;
-				font-weight: bold;
-				cursor: pointer;
-				opacity: 1;
-				visibility: visible;
-				-webkit-transition: all .5s ease;
-
-				&:hover {
-					transition: all .5s ease;
-					background-color: rgba(0,0,0,0.8);
-				}
-			}
 		}
 		
 		&.slide-up {
 			top: 90%;
 			-webkit-transition: all .5s ease;
+			transition: all .5s ease;
 		}
 		
 		&.slide-up .center {
 			top: 10%;
 			-webkit-transform: translate(-50%, 0%);
+			transform: translate(-50%, 0%);
 			-webkit-transition: all .5s ease;
+			transition: all .5s ease;
 		}
 		
 		&.slide-up .form-holder,
@@ -191,6 +216,7 @@
 			opacity: 0;
 			visibility: hidden;
 			-webkit-transition: all .5s ease;
+			transition: all .5s ease;
 		}
 		
 		&.slide-up .form-title {
@@ -199,6 +225,7 @@
 			padding: 0;
 			cursor: pointer;
 			-webkit-transition: all .5s ease;
+			transition: all .5s ease;
 		}
 		
 		&.slide-up .form-title span {
@@ -206,7 +233,8 @@
 			opacity: 1;
             visibility: visible;
             display: inline-block;
-            -webkit-transition: all .5s ease;
+			-webkit-transition: all .5s ease;
+			transition: all .5s ease;
 		}
 	}
 }
