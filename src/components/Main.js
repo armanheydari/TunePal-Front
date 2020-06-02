@@ -30,6 +30,7 @@ class Main extends React.Component {
         if (localStorage.getItem('token')) {
             Axios.get(`${serverURL()}/account/get_user_info/`, tokenConfig())
             .then(res => {
+                document.cookie = 'Authorization:' + "Token " + localStorage.getItem('token') + '; path=/';
                 this.setState(prevState => {
                     return {
                         username: res.data.username,
@@ -111,7 +112,7 @@ class Main extends React.Component {
                             </Switch>
                         </div>
                     </div>
-                    <Footer />
+                   
                 </Router>
             );
         }

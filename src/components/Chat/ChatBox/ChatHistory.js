@@ -54,6 +54,37 @@ class ChatHistory extends React.Component {
 
     componentDidUpdate() {
         this.scrollToBottum();
+        console.log(this.props.wsConversation);
+        const ws = this.props.wsConversation;
+        console.log(ws);
+        ws.onopen = () => {
+            console.log('open');
+            Axios.get(`${serverURL()}/chat/${this.props.conversationID}/`, tokenConfig())
+            .then(res => {
+                const messages = res.data.messages;
+                this.setState(prevState => {
+                    return {
+                        messages
+                    };
+                });
+            })
+            .catch(err => {
+            });
+        }
+
+        ws.onmessage = evt => {
+            const message = JSON.parse(evt.data);
+            console.log(message);
+            this.setState(prevState => {
+                return {
+                    messages: [...prevState.messages, message]
+                };
+            });
+        }
+
+        ws.onclose = () => {
+            console.log('closed');
+        }
     }
 
     componentWillUnmount() {

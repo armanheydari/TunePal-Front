@@ -89,7 +89,7 @@ class Chat extends React.Component {
                 messages: [],
                 chatList: newChatList,
                 wsConversation: new WebSocket(
-                    'ws://'
+                    'wss://'
                     + 'mytunepal.ir'
                     + '/ws/chat/'
                     + `${header.conversationID}`
