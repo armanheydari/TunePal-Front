@@ -70,10 +70,11 @@ $gray: #92959E;
     white-space: nowrap;
     overflow: hidden;
     width: 130px;
+    color: white;
   }
   
   .lastMessage {
-    color: $gray;
+    color: #e5e5e5;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
