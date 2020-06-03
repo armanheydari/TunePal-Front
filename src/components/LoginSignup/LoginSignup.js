@@ -97,17 +97,7 @@ class LoginSignup extends React.Component {
             )
             .then(res => {
                 localStorage.setItem('token', res.data.data.token);
-                const configGetUserInfo = {
-                    mode: "cors",
-                    headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Token ${localStorage.getItem('token')}`
-                    }
-                };
-                axios.get(`${serverURL()}/account/get_user_info/`, configGetUserInfo)
-                .then(res => {
-                    window.location.reload(true);
-                })
+                window.location.reload(true);
             })
             .catch(err => {
                 this.setState({showLoginResult: true});
