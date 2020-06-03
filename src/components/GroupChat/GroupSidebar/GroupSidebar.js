@@ -127,30 +127,9 @@ class GroupSidebar extends React.Component {
             console.log(result);
             Axios.post(`${serverURL()}/chat/makegroup/`, JSON.stringify(result), tokenConfig());
         }
-        this.setState({ showModal: false })
+        this.setState({ showModal: false });
+        window.location.reload(true);
     }
-
-    // CreateClicked1 = () => {
-    //     let result, flag = true;
-    //     if (document.getElementById('GroupName1').value === "") {
-    //         alert("Please choose a name");
-    //         flag = false;
-    //     }
-    //     if (this.state.selectedMembers.length === 0) {
-    //         alert("You should choose at least one member");
-    //         flag = false;
-    //     }
-    //     let temp = document.getElementById('GroupName').value, i;
-    //     for (i = 0; i < this.state.selectedMembers.length; i++) {
-    //         temp = temp.concat(',', this.state.selectedMembers[i]);
-    //     }
-    //     result = { name: temp };
-    //     if (flag) {
-    //         console.log(result)
-    //         Axios.post(`${serverURL()}/chat/makegroup/`, JSON.stringify(result), tokenConfig());
-    //     }
-    //     this.setState({ showModal: false })
-    // }
 
     CancelClicked = () => {
         this.setState({ showModal: false })

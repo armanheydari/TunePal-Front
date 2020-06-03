@@ -37,7 +37,7 @@ class GroupHeader extends React.Component {
                     <Modal.Content scrolling>
                         <div className="name-container">
                             <label className="name-label" style={{ margin: "0.5rem" }}>Name:</label>
-                            <input className="name" type="text" placeholder={this.props.name} style={{ margin: "0.5rem" }} />
+                            <input id="changeGroupName" className="name" type="text" placeholder={this.props.name} style={{ margin: "0.5rem" }} />
                         </div>
                         <div className="ui buttons" style={{ margin: "1rem" }}>
                             <button className="ui left green labeled icon button" style={{ fontSize: "1.3rem", borderRadius: "1rem" }} onClick={this.addClicked}>
@@ -49,14 +49,14 @@ class GroupHeader extends React.Component {
                         </div>
                         <ul className="list">
                             <React.Fragment>
-                                {this.props.members.map(friend =>
+                                {this.state.memberItem.map(friend =>
                                     <li className="item" style={{ cursor: 'auto' }} key={friend.id}>
-                                        {friend.user_avatar ?
-                                            <img className="photo" src={friend.user_avatar} alt="" />
+                                        {friend.photo ?
+                                            <img className="photo" src={friend.photo} alt="" />
                                             :
                                             <img className="photo" src={ProfilePicture} alt="" />
                                         }
-                                        <div className="name">{friend.nickname}</div>
+                                        <div className="name">{friend.name}</div>
                                     </li>
                                 )}
                             </React.Fragment>
@@ -102,6 +102,21 @@ class GroupHeader extends React.Component {
 
     headerClicked = () => {
         this.setState({ showMainModal: true, memberItem: [] });
+        let i = 0;
+        Axios.post(`${serverURL()}/chat/groupmember/`, JSON.stringify({ id: this.props.conversationID.toString() }), tokenConfig())
+            .then(res => {
+                console.log(res);
+                res.data.conversations.forEach(friend => {
+                    i = i + 1;
+                    this.setState(prevState => {
+                        return {
+                            memberItem: [...prevState.memberItem, { name: friend.nickname, photo: friend.user_avatar, userName: friend.username, id: 'member' + i }]
+                        };
+                    });
+                });
+            })
+            .catch(err => {
+            });
     }
 
     confirmClicked = () => {
@@ -114,8 +129,28 @@ class GroupHeader extends React.Component {
             temp = temp.slice(1, temp.length);
             result = { id: this.props.conversationID, addedusers: temp };
             Axios.post(`${serverURL()}/chat/addmember/`, JSON.stringify(result), tokenConfig());
+            this.headerClicked();
         }
-        this.setState({ showAddModal: false })
+        this.setState({ showAddModal: false });
+    }
+
+    leftClicked = () => {
+        Axios.post(`${serverURL()}/chat/leavegroup/`, JSON.stringify({ id: this.props.conversationID }), tokenConfig());
+        window.location.reload(true);
+    }
+
+    SaveClicked = () => {
+        Axios.post(`${serverURL()}/chat/updatename/`, JSON.stringify({ id: this.props.conversationID, name: document.getElementById('changeGroupName').value }), tokenConfig());
+        this.setState({ showMainModal: false });
+        window.location.reload(true);
+    }
+
+    CancelClicked = () => {
+        this.setState({ showMainModal: false });
+    }
+
+    CancelAddClicked = () => {
+        this.setState({ showAddModal: false });
     }
 
     addClicked = () => {
@@ -151,24 +186,6 @@ class GroupHeader extends React.Component {
                 }
             }
         }
-    }
-
-    leftClicked = () => {
-        Axios.post(`${serverURL()}/chat/leavegroup/`, JSON.stringify({ id: this.props.conversationID }), tokenConfig());
-        this.setState({ showMainModal: false });
-    }
-
-    SaveClicked = () => {
-
-        this.setState({ showMainModal: false });
-    }
-
-    CancelClicked = () => {
-        this.setState({ showMainModal: false });
-    }
-
-    CancelAddClicked = () => {
-        this.setState({ showAddModal: false });
     }
 }
 
