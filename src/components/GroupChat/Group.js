@@ -2,7 +2,6 @@ import React from 'react';
 import GroupSidebar from './GroupSidebar/GroupSidebar';
 import GroupBox from './GroupBox/GroupBox';
 import Axios from 'axios';
-import NoGroupSVG from '../../assets/sign.svg';
 import tokenConfig from '../../utils/tokenConfig';
 import serverURL from '../../utils/serverURL';
 
@@ -52,19 +51,10 @@ class Group extends React.Component {
 
     render() {
         if (this.state.show) {
-            if (this.state.GroupList.length !== 0) {
                 return (
-                    <div className="Group-container clearfix">
-                        <GroupSidebar GroupID={this.state.header.conversationID} GroupList={this.state.GroupList} openGroup={this.openGroup} />
-                        <GroupBox wsConversation={this.state.wsConversation} header={this.state.header} send={this.sendMessage} removeGroup={this.removeGroup} />
-                    </div>
-                );
-            }
-            return (
-                <div className="Group_noGroup">
-                    <img src={NoGroupSVG} alt="" />
-                    <p>You already don't have any Group.</p>
-                    <p>Try to make a new conversation in Match.</p>
+                <div className="Group-container clearfix">
+                    <GroupSidebar GroupID={this.state.header.conversationID} GroupList={this.state.GroupList} openGroup={this.openGroup} />
+                    <GroupBox wsConversation={this.state.wsConversation} header={this.state.header} send={this.sendMessage} removeGroup={this.removeGroup} />
                 </div>
             );
         }

@@ -10,8 +10,13 @@ $gray: #92959E;
   #people-list {
     display: none !important;
   }
+  .Group-new-modal{
+    width: 80% !important;
+  }
   .Group-new{
-    width: 80%;
+    .Button{
+    width: 60% !important;
+    }
   }
   .Group {
     display: none;
@@ -34,7 +39,6 @@ $gray: #92959E;
   width: 40% !important;
   height: auto !important;
   font-family: 'Poppins', sans-serif;
-  position: absolute !important;
   margin-left: auto !important;
   margin-right: auto !important;
   right: 0 !important;
