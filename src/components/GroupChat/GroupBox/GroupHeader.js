@@ -106,7 +106,7 @@ class GroupHeader extends React.Component {
         Axios.post(`${serverURL()}/chat/groupmember/`, JSON.stringify({ id: this.props.conversationID.toString() }), tokenConfig())
             .then(res => {
                 console.log(res);
-                res.data.conversations.forEach(friend => {
+                res.data.members.forEach(friend => {
                     i = i + 1;
                     this.setState(prevState => {
                         return {
