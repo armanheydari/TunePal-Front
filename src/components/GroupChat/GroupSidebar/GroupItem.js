@@ -7,13 +7,6 @@ class GroupItem extends React.Component {
         return (
             <Link to={`/Group/${this.props.conversationID}`} onClick={this.onClick}>
                 <li className="clearfix" style={this.styleGroupListItem()}>
-                    <img
-                        style={this.styleOnline()}
-                        src={this.props.picture || ProfilePicture}
-                        alt=""
-                        width="55px"
-                        height="55px"
-                    />
                     <div className="about">
                         <div className="name">{this.props.name}
                             {this.props.newMessages > 0 && <span className="Group_newMessages">{this.props.newMessages}</span>}
@@ -64,9 +57,12 @@ class GroupItem extends React.Component {
     }
 
     senderName = () => {
-        if (this.props.lastMessage.nickname !== this.props.name) {
-            return "You";
-        }
+        // this.props.members.forEach(member => {
+        //     if (this.props.lastMessage.nickname === member.nickname) {
+        //         return member.nickname;
+        //     }
+        // });
+        // return 'You';
         return this.props.lastMessage.nickname;
     }
 }
