@@ -46,6 +46,9 @@ $gray: #92959E;
   top:50% !important;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+  @media(max-width: 768px) {
+      width: 80% !important;
+  }
   .name-container{
     display:"flex";
     .name{
