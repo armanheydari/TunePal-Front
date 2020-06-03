@@ -34,7 +34,7 @@ class Chat extends React.Component {
                     lastNewMessage
                 };
             });
-            if (!parsedData.is_client && parsedData.conversation_id !== this.state.header.conversationID) {
+            if (!parsedData.is_client && parsedData.conversation_id !== this.state.header.conversationID && !parsedData.is_group) {
                 notification.info({
                     message: parsedData.sender_id.nickname,
                     description: parsedData.text,
