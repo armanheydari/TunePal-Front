@@ -131,11 +131,11 @@ $gray: #92959E;
     overflow-y: scroll;
 
     @media(max-width: 600px) {
-      height: 450px;
+      height: 530px;
     }
 
     @media(min-width: 601px) {
-      height: 570px;
+      height: 665px;
     }
     
     .message-data {
@@ -189,6 +189,7 @@ $gray: #92959E;
   
   .chat-message {
     position: relative;
+    // bottom: 0;
     display: flex;
     
     textarea {
@@ -198,7 +199,6 @@ $gray: #92959E;
       padding: 10px 20px;
       font: 14px/22px "Lato", Arial, sans-serif;
       resize: none;
-      
     }
     
     .fa-file-o, .fa-file-image-o {
