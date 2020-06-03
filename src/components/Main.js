@@ -63,7 +63,7 @@ class Main extends React.Component {
                 
                         this.state.ws.onmessage = evt => {
                             const parsedData = JSON.parse(evt.data);
-                            if (!parsedData.is_client) {
+                            if (!parsedData.is_client && !parsedData.is_group) {
                                 notification.info({
                                     message: parsedData.sender_id.nickname,
                                     description: parsedData.text,
@@ -144,7 +144,11 @@ class Main extends React.Component {
                                 />
                                 <Route
                                     path="/Group"
-                                    component={Group}
+                                    component={() => {
+                                        return (
+                                            <Group ws={this.state.ws} />
+                                        );
+                                    }}
                                 />
                                 <Route
                                     path="/profile/:username"
