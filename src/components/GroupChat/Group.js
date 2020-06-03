@@ -10,43 +10,51 @@ class Group extends React.Component {
         GroupList: [],
         header: {},
         show: false,
-        wsConversation: undefined
+        lastNewMessage: {}
     }
 
     componentDidMount() {
-        Axios.get(`${serverURL()}/chat/groupinfo/`, tokenConfig())
-            .then(res => {
-                const conversations = res.data.conversations;
-                conversations.forEach(conversation => {
-                    const conversationMembers = conversation.members;
-                    const conversationID = conversation.id;
-                    let conversationTemp = {};
-                    let memberTemp = [];
-                    conversationTemp.newMessages = conversation.new_messages;
-                    conversationTemp.lastMessage = conversation.last_message;
-                    conversationTemp.name = conversation.name;
-                    conversationTemp.conversationID = conversationID;
-                    conversationMembers.forEach(member => {
-                        if (member.to_show) {
-                            memberTemp.push(member);
-                        }
-                    });
-                    conversationTemp.members = memberTemp;
-                    this.setState(prevState => {
-                        const GroupList = prevState.GroupList.concat(conversationTemp);
-                        return {
-                            GroupList
-                        };
-                    });
-                });
-                this.setState(prevState => {
-                    return {
-                        show: true
-                    }
-                })
-            })
-            .catch(err => {
+        this.initGroupList();
+        this.props.ws.onmessage = evt => {
+            const parsedData = JSON.parse(evt.data);
+            const lastNewMessage = {
+                conversation_id: parsedData.conversation_id,
+                date: parsedData.date,
+                is_client: parsedData.is_client,
+                is_seen: true,
+                sender_id: {
+                    nickname: parsedData.sender_id.nickname
+                },
+                text: parsedData.text
+            }
+            this.setState(prevState => {
+                return {
+                    lastNewMessage
+                };
             });
+            this.setState(prevState => {
+                const chatListTemp = prevState.GroupList.map(item => {
+                    if (item.conversationID === parsedData.conversation_id) {
+                        let newMessages = 0;
+                        const temp = {
+                            conversationID: item.conversationID,
+                            lastMessage: {
+                                nickname: parsedData.sender_id.nickname,
+                                text: parsedData.text
+                            },
+                            members: item.members,
+                            newMessages: 0,
+                            name: item.name
+                        };
+                        return temp;
+                    }
+                    return item;
+                });
+                return {
+                    GroupList: chatListTemp
+                };
+            });
+        }
     }
 
     render() {
@@ -54,7 +62,12 @@ class Group extends React.Component {
                 return (
                 <div className="Group-container clearfix">
                     <GroupSidebar GroupID={this.state.header.conversationID} GroupList={this.state.GroupList} openGroup={this.openGroup} />
-                    <GroupBox wsConversation={this.state.wsConversation} header={this.state.header} send={this.sendMessage} removeGroup={this.removeGroup} />
+                    <GroupBox
+                        header={this.state.header}
+                        send={this.sendMessage}
+                        removeGroup={this.removeGroup}
+                        lastNewMessage={this.state.lastNewMessage}
+                    />
                 </div>
             );
         }
@@ -66,9 +79,6 @@ class Group extends React.Component {
     }
 
     openGroup = (header) => {
-        if (this.state.wsConversation) {
-            this.state.wsConversation.close();
-        }
         this.setState(prevState => {
             const newGroupList = prevState.GroupList.map(item => {
                 if (item.conversationID === header.conversationID)
@@ -79,21 +89,11 @@ class Group extends React.Component {
                 header,
                 messages: [],
                 GroupList: newGroupList,
-                wsConversation: new WebSocket(
-                    'wss://'
-                    + 'mytunepal.ir'
-                    + '/ws/chat/'
-                    + `${header.conversationID}`
-                    + '/'
-                )
             };
         });
     }
 
     removeGroup = () => {
-        if (this.state.wsConversation) {
-            this.state.wsConversation.close();
-        }
         this.setState(prevState => {
             return {
                 header: {},
@@ -104,10 +104,45 @@ class Group extends React.Component {
 
     sendMessage = (message) => {
         const toBack = {
-            text: message
+            text: message,
+            id: this.state.header.conversationID
         };
         const toBackJSON = JSON.stringify(toBack);
-        this.state.wsConversation.send(toBackJSON);
+        this.props.ws.send(toBackJSON);
+    }
+
+    initGroupList = () => {
+        Axios.get(`${serverURL()}/chat/groupinfo/`, tokenConfig())
+        .then(res => {
+            const conversations = res.data.conversations;
+            conversations.forEach(conversation => {
+                const conversationMembers = conversation.members;
+                const conversationID = conversation.id;
+                let conversationTemp = {};
+                let memberTemp = [];
+                conversationTemp.newMessages = conversation.new_messages;
+                conversationTemp.lastMessage = conversation.last_message;
+                conversationTemp.name = conversation.name;
+                conversationTemp.conversationID = conversationID;
+                conversationMembers.forEach(member => {
+                    if (member.to_show) {
+                        memberTemp.push(member);
+                    }
+                });
+                conversationTemp.members = memberTemp;
+                this.setState(prevState => {
+                    const GroupList = prevState.GroupList.concat(conversationTemp);
+                    return {
+                        GroupList
+                    };
+                });
+            });
+            this.setState(prevState => {
+                return {
+                    show: true
+                }
+            })
+        });
     }
 }
 
