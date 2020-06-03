@@ -8,6 +8,10 @@ import tokenConfig from '../../utils/tokenConfig';
 import serverURL from '../../utils/serverURL';
 
 class RequestItem extends React.Component {
+    state = {
+        isLoading: undefined
+    }
+
     render() {
         const { name, gender, age, distance, imgURL } = this.props;
         return (
@@ -38,30 +42,68 @@ class RequestItem extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="content ui buttons">
-                    <button className="ui positive button" style={{fontSize: '1.5rem', padding: '1.2rem 0'}} onClick={this.onClickAccept}>Accept</button>
-                    <div className="or" style={{fontSize: '1.5rem', padding: '1.2rem 0'}} ></div>
-                    <button className="ui button" style={{fontSize: '1.5rem', padding: '1.2rem 0'}} onClick={this.onClickReject}>Reject</button>
-                </div>
+                {
+                    !this.state.isLoading &&
+                    <div className="content ui buttons">
+                        <button className="ui positive button" style={{fontSize: '1.5rem', padding: '1.2rem 0'}} onClick={this.onClickAccept}>Accept</button>
+                        <div className="or" style={{fontSize: '1.5rem', padding: '1.2rem 0'}} ></div>
+                        <button className="ui button" style={{fontSize: '1.5rem', padding: '1.2rem 0'}} onClick={this.onClickReject}>Reject</button>
+                    </div>
+                }
+                {
+                    this.state.isLoading &&
+                    <div className="ui active centered inline text loader medium" style={{marginBottom: '2rem'}}></div>
+                }
+                
             </div>
         );
     }
 
     onClickAccept = () => {
+        this.setState(prevState => {
+            return {
+                isLoading: true
+            }
+        });
         Axios.get(`${serverURL()}/spotify/response/?verb=accept&username=${this.props.username}`, tokenConfig())
         .then(res => {
             this.props.updateItems(this.props.username);
+            this.setState(prevState => {
+                return {
+                    isLoading: false
+                }
+            });
         })
         .catch(err => {
+            this.setState(prevState => {
+                return {
+                    isLoading: false
+                }
+            });
         });
     }
 
     onClickReject = () => {
+        this.setState(prevState => {
+            return {
+                isLoading: true
+            }
+        });
         Axios.get(`${serverURL()}/spotify/response/?verb=decline&username=${this.props.username}`, tokenConfig())
         .then(res => {
             this.props.updateItems(this.props.username);
+            this.setState(prevState => {
+                return {
+                    isLoading: false
+                }
+            });
         })
         .catch(err => {
+            this.setState(prevState => {
+                return {
+                    isLoading: false
+                }
+            });
         });
     }
 }
