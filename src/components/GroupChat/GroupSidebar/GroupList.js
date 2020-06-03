@@ -40,7 +40,7 @@ class GroupList extends React.Component {
         if (this.props.searchField.trim(" ") === "") {
             return true;
         }
-        if (item.members[0].nickname.toLowerCase().includes(this.props.searchField.trim(" ").toLowerCase())) {
+        if (item.name.toLowerCase().includes(this.props.searchField.trim(" ").toLowerCase())) {
             return true;
         }
     }
