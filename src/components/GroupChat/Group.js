@@ -80,7 +80,7 @@ class Group extends React.Component {
                 messages: [],
                 GroupList: newGroupList,
                 wsConversation: new WebSocket(
-                    'ws://'
+                    'wss://'
                     + 'mytunepal.ir'
                     + '/ws/chat/'
                     + `${header.conversationID}`
