@@ -204,11 +204,11 @@ $gray: #92959E;
     overflow-y: scroll;
 
     @media(max-width: 600px) {
-      height: 450px;
+      height: 552px;
     }
 
-    @media(min-width: 600px) {
-      height: 570px;
+    @media(min-width: 601px) {
+      height: 695px;
     }
     
     .message-data {
