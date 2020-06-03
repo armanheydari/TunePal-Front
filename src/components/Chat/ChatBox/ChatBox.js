@@ -14,8 +14,11 @@ class ChatBox extends React.Component {
                         removeChat={this.props.removeChat}
                         username={this.props.header.username}
                     />
-                    <ChatHistory conversationID={this.props.header.conversationID} wsConversation={this.props.wsConversation} />
-                    <ChatSend send={this.props.send} wsConversation={this.props.wsConversation} />
+                    <ChatHistory
+                        conversationID={this.props.header.conversationID}
+                        lastNewMessage={this.props.lastNewMessage}
+                    />
+                    <ChatSend send={this.props.send} />
                 </div>
             );
         }
@@ -27,8 +30,6 @@ class ChatBox extends React.Component {
             </div>
         );
     }
-
-    
 }
 
 export default ChatBox;
