@@ -19,77 +19,49 @@ class ChatHistory extends React.Component {
 
     componentDidMount() {
         this.scrollToBottum();
-        console.log(this.props.wsConversation);
-        const ws = this.props.wsConversation;
-        console.log(ws);
-        ws.onopen = () => {
-            console.log('open');
-            Axios.get(`${serverURL()}/chat/${this.props.conversationID}/`, tokenConfig())
-            .then(res => {
-                const messages = res.data.messages;
-                this.setState(prevState => {
-                    return {
-                        messages
-                    };
-                });
-            })
-            .catch(err => {
-            });
-        }
-
-        ws.onmessage = evt => {
-            const message = JSON.parse(evt.data);
-            console.log(message);
+        Axios.get(`${serverURL()}/chat/${this.props.conversationID}/`, tokenConfig())
+        .then(res => {
+            const messages = res.data.messages;
             this.setState(prevState => {
                 return {
-                    messages: [...prevState.messages, message]
+                    messages
                 };
             });
-        }
-
-        ws.onclose = () => {
-            console.log('closed');
-        }
+        });
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
         this.scrollToBottum();
-        console.log(this.props.wsConversation);
-        const ws = this.props.wsConversation;
-        console.log(ws);
-        ws.onopen = () => {
-            console.log('open');
-            Axios.get(`${serverURL()}/chat/${this.props.conversationID}/`, tokenConfig())
-            .then(res => {
-                const messages = res.data.messages;
+        if (prevProps.conversationID !== this.props.conversationID) {
+            this.setState(
+                prevState => {
+                    return {
+                        messages: []
+                    }
+                },
+                () => {
+                    Axios.get(`${serverURL()}/chat/${this.props.conversationID}/`, tokenConfig())
+                    .then(res => {
+                        const messages = res.data.messages;
+                        this.setState(prevState => {
+                            return {
+                                messages
+                            };
+                        });
+                    });
+                }
+            );
+        }
+
+        if (prevProps.lastNewMessage !== this.props.lastNewMessage) {
+            if (this.props.conversationID === this.props.lastNewMessage.conversation_id) {
                 this.setState(prevState => {
                     return {
-                        messages
+                        messages: prevState.messages.concat(this.props.lastNewMessage)
                     };
                 });
-            })
-            .catch(err => {
-            });
+            }
         }
-
-        ws.onmessage = evt => {
-            const message = JSON.parse(evt.data);
-            console.log(message);
-            this.setState(prevState => {
-                return {
-                    messages: [...prevState.messages, message]
-                };
-            });
-        }
-
-        ws.onclose = () => {
-            console.log('closed');
-        }
-    }
-
-    componentWillUnmount() {
-        console.log('inside component will unmount')
-        // this.props.wsConversation.close();
     }
 
     scrollToBottum = () => {

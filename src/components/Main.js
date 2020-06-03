@@ -17,28 +17,73 @@ import Homepage from './Homepage/Homepage';
 import Signup from './Signup/Signup';
 import tokenConfig from '../utils/tokenConfig';
 import serverURL from '../utils/serverURL';
-
+import { notification  } from 'antd';
 
 class Main extends React.Component {
     state = {
         username: "",
         show: false,
         isLoggedIn: false,
-        onAfterSignup: false
+        onAfterSignup: false,
+        ws: undefined,
+        newMessages: undefined
     };
 
     componentDidMount() {
         if (localStorage.getItem('token')) {
             Axios.get(`${serverURL()}/account/get_user_info/`, tokenConfig())
             .then(res => {
-                document.cookie = 'Authorization:' + "Token " + localStorage.getItem('token') + '; path=/';
-                this.setState(prevState => {
-                    return {
-                        username: res.data.username,
-                        show: true,
-                        isLoggedIn: true
-                    };
-                });
+                document.cookie = 'Authorization:Token ' + localStorage.getItem('token') + '; path=/';
+                this.setState(
+                    prevState => {
+                        return {
+                            username: res.data.username,
+                            show: true,
+                            isLoggedIn: true,
+                            ws: new WebSocket(
+                                'wss://'
+                                + 'mytunepal.ir'
+                                + '/ws/chat/'
+                                + `${res.data.username}`
+                                + '/'
+                            )
+                        };
+                    },
+                    () => {
+                        this.state.ws.onopen = () => {
+                            Axios.get(`${serverURL()}/chat/inbox/`, tokenConfig())
+                            .then(res => {
+                                this.setState(prevState => {
+                                    return {
+                                        newMessages: res.data.new_messages
+                                    };
+                                });
+                            });
+                        }
+                
+                        this.state.ws.onmessage = evt => {
+                            const parsedData = JSON.parse(evt.data);
+                            if (!parsedData.is_client) {
+                                notification.info({
+                                    message: parsedData.sender_id.nickname,
+                                    description: parsedData.text,
+                                    placement: 'bottomRight'
+                                });
+                                Axios.get(`${serverURL()}/chat/inbox/`, tokenConfig())
+                                .then(res => {
+                                    this.setState(prevState => {
+                                        return {
+                                            newMessages: res.data.new_messages
+                                        };
+                                    });
+                                });
+                            }
+                        }
+                
+                        this.state.ws.onclose = () => {
+                        }
+                    }
+                );
             })
             .catch(err => {
                 this.setState(prevState => {
@@ -91,7 +136,11 @@ class Main extends React.Component {
                                 />
                                 <Route
                                     path="/chat"
-                                    component={Chat}
+                                    component={() => {
+                                        return (
+                                            <Chat ws={this.state.ws} />
+                                        );
+                                    }}
                                 />
                                 <Route
                                     path="/Group"
