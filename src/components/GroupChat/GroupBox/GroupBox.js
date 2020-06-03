@@ -14,8 +14,8 @@ class GroupBox extends React.Component {
                         conversationID={this.props.header.conversationID}
                         members={this.props.header.members}
                     />
-                    <GroupHistory conversationID={this.props.header.conversationID} wsConversation={this.props.wsConversation} />
-                    <GroupSend send={this.props.send} wsConversation={this.props.wsConversation} />
+                    <GroupHistory conversationID={this.props.header.conversationID} lastNewMessage={this.props.lastNewMessage} />
+                    <GroupSend send={this.props.send} />
                 </div>
             );
         }
