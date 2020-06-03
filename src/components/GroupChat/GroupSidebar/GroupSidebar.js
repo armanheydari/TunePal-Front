@@ -20,7 +20,7 @@ class GroupSidebar extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div id="Group_list-overlay" className="people-list-group">
+                <div id="Group_list-overlay" className="people-list">
                     <Search getFieldSearch={this.getFieldSearch} />
                     <div className="Group-new" size="large">
                         <button className="ui basic button Button" onClick={this.newClicked}>Create new group</button>
