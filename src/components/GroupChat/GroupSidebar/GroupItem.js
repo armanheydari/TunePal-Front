@@ -9,7 +9,6 @@ class GroupItem extends React.Component {
                 <li className="clearfix" style={this.styleGroupListItem()}>
                     <div className="about">
                         <div className="name">{this.props.name}
-                            {this.props.newMessages > 0 && <span className="Group_newMessages">{this.props.newMessages}</span>}
                         </div>
                         <div className="lastMessage">
                             {this.props.lastMessage.text ? `${this.senderName()}: ${this.props.lastMessage.text}` : "No messages yet"}
