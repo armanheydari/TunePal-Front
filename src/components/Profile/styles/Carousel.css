@@ -1,0 +1,17 @@
+.Profile_Carousel-artist {
+    margin: 4rem 3rem 4rem 3rem;
+}
+
+.Profile_Carousel-song {
+    margin: 4rem 3rem 4rem 3rem;
+}
+
+.Profile_Carousel-title {
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: #353c4e;
+    font-size: 2rem;
+    font-weight: 700;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 1rem;
+}

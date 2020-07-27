@@ -1,0 +1,22 @@
+.Profile_General > div {
+    display: flex !important;
+    margin: 5rem 0;
+    font-size: 2rem !important;
+}
+
+@media(max-width: 1200px) {
+    .Profile_General > div {
+        font-size: 1.6rem !important;
+    }
+}
+
+/* #ff304f */
+.Profile_General .ui.label {
+    background: linear-gradient(to right, rgb(255, 65, 108), rgb(255, 75, 43));
+}
+
+.Profile_General-name {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 3rem 0 5rem 0 !important;
+}
